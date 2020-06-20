@@ -1,6 +1,5 @@
 package io.cloud.gateway.common.evt;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.cloud.data.group.Save;
 import io.cloud.data.group.Update;
 import io.swagger.annotations.ApiModelProperty;

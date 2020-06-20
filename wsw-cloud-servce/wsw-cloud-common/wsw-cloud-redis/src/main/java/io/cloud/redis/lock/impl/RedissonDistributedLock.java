@@ -35,14 +35,17 @@ public class RedissonDistributedLock implements DistributedLock {
         lock.lock(leaseTime, unit);
         return lock;
     }
+
     @Override
     public RLock lock(String key, long leaseTime, TimeUnit unit) {
         return lock(key, leaseTime, unit, false);
     }
+
     @Override
     public RLock lock(String key, boolean isFair) {
         return lock(key, -1, null, isFair);
     }
+
     @Override
     public RLock lock(String key) {
         return lock(key, -1, null, false);
@@ -56,14 +59,17 @@ public class RedissonDistributedLock implements DistributedLock {
         }
         return null;
     }
+
     @Override
     public RLock tryLock(String key, long waitTime, long leaseTime, TimeUnit unit) throws InterruptedException {
         return tryLock(key, waitTime, leaseTime, unit, false);
     }
+
     @Override
     public RLock tryLock(String key, long waitTime, TimeUnit unit, boolean isFair) throws InterruptedException {
         return tryLock(key, waitTime, -1, unit, isFair);
     }
+
     @Override
     public RLock tryLock(String key, long waitTime, TimeUnit unit) throws InterruptedException {
         return tryLock(key, waitTime, -1, unit, false);
@@ -73,7 +79,7 @@ public class RedissonDistributedLock implements DistributedLock {
     public void unlock(Object lock) {
         if (lock != null) {
             if (lock instanceof RLock) {
-                RLock rLock = (RLock)lock;
+                RLock rLock = (RLock) lock;
                 if (rLock.isLocked()) {
                     rLock.unlock();
                 }

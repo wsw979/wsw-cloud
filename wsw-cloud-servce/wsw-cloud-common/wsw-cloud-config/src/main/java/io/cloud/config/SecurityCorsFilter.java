@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @des:    解决跨域
+ * @des: 解决跨域
  * @author: wsw
  * @email: 18683789594@163.com
  * @date: 2019/7/25 11:33
  */
 @Order(0)
 @Configuration
-@WebFilter(filterName="securityCorsFilter", urlPatterns="/*")
+@WebFilter(filterName = "securityCorsFilter", urlPatterns = "/*")
 public class SecurityCorsFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException { }
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -36,13 +37,14 @@ public class SecurityCorsFilter implements Filter {
         // 缓存
         response.setHeader("Cache-Control", "no-store");
 
-        if ("OPTIONS".equals(request.getMethod())){
+        if ("OPTIONS".equals(request.getMethod())) {
             response.setStatus(204);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 
 }

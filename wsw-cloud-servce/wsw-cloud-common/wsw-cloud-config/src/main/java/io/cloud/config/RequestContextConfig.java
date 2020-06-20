@@ -14,7 +14,7 @@ import org.springframework.web.context.request.RequestContextListener;
 public class RequestContextConfig {
 
     @Bean
-    public RequestContextListener requestContextListener(){
+    public RequestContextListener requestContextListener() {
         return new RequestContextListener();
     }
 

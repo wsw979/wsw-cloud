@@ -2,7 +2,6 @@ package io.cloud.gateway.common.dtl;
 
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ValidationException;
@@ -41,7 +40,7 @@ public class RouteDefinition {
             String[] args = StringUtils.tokenizeToStringArray(text.substring(eqIdx + 1), ",");
             this.setUri(URI.create(args[0]));
 
-            for(int i = 1; i < args.length; ++i) {
+            for (int i = 1; i < args.length; ++i) {
                 this.predicates.add(new PredicateDefinition(args[i]));
             }
 
@@ -53,7 +52,7 @@ public class RouteDefinition {
         if (this == o) {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
-            RouteDefinition routeDefinition = (RouteDefinition)o;
+            RouteDefinition routeDefinition = (RouteDefinition) o;
             return Objects.equals(this.id, routeDefinition.id) && Objects.equals(this.predicates, routeDefinition.predicates) && Objects.equals(this.order, routeDefinition.order) && Objects.equals(this.uri, routeDefinition.uri);
         } else {
             return false;

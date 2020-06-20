@@ -4,7 +4,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
  * @program: wsw-cloud-servce
- * @description:  * 负载均衡策略Holder
+ * @description: * 负载均衡策略Holder
  * @author: wsw
  * @create: 2020-06-05 16:24
  **/

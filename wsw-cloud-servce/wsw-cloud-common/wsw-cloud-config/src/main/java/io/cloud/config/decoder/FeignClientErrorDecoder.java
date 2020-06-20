@@ -27,7 +27,7 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             if (response.body() != null) {
                 String body = Util.toString(response.body().asReader());
                 Result result = JSON.parseObject(body.getBytes("UTF-8"), Result.class);
-                return new InternalException(result.getCode(),result.getMsg());
+                return new InternalException(result.getCode(), result.getMsg());
             }
         } catch (Exception var4) {
             log.error(var4.getMessage());

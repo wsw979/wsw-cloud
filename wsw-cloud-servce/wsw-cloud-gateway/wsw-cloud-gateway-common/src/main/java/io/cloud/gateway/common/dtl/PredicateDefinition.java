@@ -1,12 +1,9 @@
 package io.cloud.gateway.common.dtl;
 
 import io.cloud.gateway.common.util.NameUtil;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import org.springframework.util.StringUtils;
 
 import javax.validation.ValidationException;
-import javax.validation.constraints.NotNull;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -34,7 +31,7 @@ public class PredicateDefinition {
             this.setName(text.substring(0, eqIdx));
             String[] args = StringUtils.tokenizeToStringArray(text.substring(eqIdx + 1), ",");
 
-            for(int i = 0; i < args.length; ++i) {
+            for (int i = 0; i < args.length; ++i) {
                 this.args.put(NameUtil.generateName(i), args[i]);
             }
 
@@ -66,7 +63,7 @@ public class PredicateDefinition {
         if (this == o) {
             return true;
         } else if (o != null && this.getClass() == o.getClass()) {
-            PredicateDefinition that = (PredicateDefinition)o;
+            PredicateDefinition that = (PredicateDefinition) o;
             return Objects.equals(this.name, that.name) && Objects.equals(this.args, that.args);
         } else {
             return false;

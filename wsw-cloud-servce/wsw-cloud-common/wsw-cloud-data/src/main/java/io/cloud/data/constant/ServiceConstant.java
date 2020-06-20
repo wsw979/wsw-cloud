@@ -1,7 +1,5 @@
 package io.cloud.data.constant;
 
-import lombok.Getter;
-
 /**
  * @program: wsw-cloud-servce
  * @description:

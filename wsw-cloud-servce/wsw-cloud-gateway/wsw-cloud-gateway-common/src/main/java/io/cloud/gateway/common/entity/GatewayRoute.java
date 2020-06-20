@@ -21,7 +21,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("c_gateway_route")
-@ApiModel(value="GatewayRoute对象", description="动态路由")
+@ApiModel(value = "GatewayRoute对象", description = "动态路由")
 public class GatewayRoute extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

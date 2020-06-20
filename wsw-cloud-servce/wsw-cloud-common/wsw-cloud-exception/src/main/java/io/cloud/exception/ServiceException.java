@@ -44,7 +44,7 @@ public class ServiceException extends RuntimeException {
         this.isSuccess = true;
     }
 
-    public ServiceException(HttpStatus status,boolean isSuccess) {
+    public ServiceException(HttpStatus status, boolean isSuccess) {
         super(status.getMsg());
         this.code = status.getCode();
         this.msg = status.getMsg();

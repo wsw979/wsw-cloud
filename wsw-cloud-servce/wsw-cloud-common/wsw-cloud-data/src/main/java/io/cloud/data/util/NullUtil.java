@@ -10,6 +10,7 @@ public class NullUtil {
 
     /**
      * 等于 null
+     *
      * @param obj 任意参数
      * @return
      */
@@ -22,6 +23,7 @@ public class NullUtil {
 
     /**
      * 不等于 null
+     *
      * @param obj 任意参数
      * @return
      */

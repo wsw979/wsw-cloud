@@ -10,5 +10,5 @@ import org.springframework.context.annotation.Configuration;
  * @create: 2020-06-21 00:19
  **/
 @Configuration
-public class AsycTaskExecutorConfig extends DefaultAsycTaskConfig  {
+public class AsycTaskExecutorConfig extends DefaultAsycTaskConfig {
 }

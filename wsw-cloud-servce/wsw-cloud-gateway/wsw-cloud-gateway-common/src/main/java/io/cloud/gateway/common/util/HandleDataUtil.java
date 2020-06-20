@@ -9,9 +9,6 @@ import io.cloud.gateway.common.entity.GatewayRoute;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @program: wsw-cloud-servce
@@ -23,16 +20,17 @@ public class HandleDataUtil {
 
     /**
      * 路由数据转换公共方法
+     *
      * @param gatewayRoute
      * @return
      */
-    public static RouteDefinition handleData(GatewayRoute gatewayRoute){
+    public static RouteDefinition handleData(GatewayRoute gatewayRoute) {
         RouteDefinition definition = new RouteDefinition();
         URI uri = null;
-        if(gatewayRoute.getServiceUrl().startsWith(CommonConstant.URL_PREFIX_HTTP)){
+        if (gatewayRoute.getServiceUrl().startsWith(CommonConstant.URL_PREFIX_HTTP)) {
             //http地址
             uri = UriComponentsBuilder.fromHttpUrl(gatewayRoute.getServiceUrl()).build().toUri();
-        }else{
+        } else {
             //注册中心
             uri = UriComponentsBuilder.fromUriString(gatewayRoute.getServiceUrl()).build().toUri();
         }

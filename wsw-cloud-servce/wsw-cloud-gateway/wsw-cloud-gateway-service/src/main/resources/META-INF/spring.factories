@@ -10,6 +10,5 @@ io.cloud.config.DataSourceInitFunc,\
 io.cloud.config.RequestContextConfig,\
 io.cloud.config.FeignAutoConfig,\
 io.cloud.datasource.config.MybatisPlusConfig
-
 #¸ºÔØ¾ùºâ
 #io.cloud.gateway.config.RuleConfig

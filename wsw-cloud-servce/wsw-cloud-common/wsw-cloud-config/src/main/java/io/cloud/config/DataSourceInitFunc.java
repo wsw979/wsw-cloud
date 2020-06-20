@@ -1,12 +1,9 @@
 package io.cloud.config;
 
 import com.alibaba.cloud.sentinel.SentinelProperties;
-import com.alibaba.cloud.sentinel.datasource.RuleType;
 import com.alibaba.cloud.sentinel.datasource.config.NacosDataSourceProperties;
 import com.alibaba.csp.sentinel.datasource.ReadableDataSource;
 import com.alibaba.csp.sentinel.datasource.nacos.NacosDataSource;
-import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
-import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import com.alibaba.fastjson.JSON;
@@ -46,5 +43,5 @@ public class DataSourceInitFunc {
         });
         return new DataSourceInitFunc();
     }
-    
+
 }

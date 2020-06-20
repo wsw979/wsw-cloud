@@ -45,10 +45,10 @@ public class SwaggerAggProperties {
     public boolean isShow(String route) {
         int generateRoutesSize = generateRoutes.size();
         int ignoreRoutesSize = ignoreRoutes.size();
-        if(generateRoutesSize > 0 && !generateRoutes.contains(route)) {
+        if (generateRoutesSize > 0 && !generateRoutes.contains(route)) {
             return false;
         }
-        if(ignoreRoutesSize > 0 && ignoreRoutes.contains(route)) {
+        if (ignoreRoutesSize > 0 && ignoreRoutes.contains(route)) {
             return false;
         }
         return true;

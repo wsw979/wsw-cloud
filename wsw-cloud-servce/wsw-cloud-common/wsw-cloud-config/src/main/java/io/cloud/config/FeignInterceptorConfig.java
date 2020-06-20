@@ -2,18 +2,12 @@ package io.cloud.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import io.cloud.config.constant.ConfigConstant;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 /**
  * @program: wsw-cloud-servce
@@ -29,7 +23,7 @@ public class FeignInterceptorConfig implements RequestInterceptor {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
         if (attributes == null) {
-            return ;
+            return;
         }
         HttpServletRequest request = attributes.getRequest();
         Enumeration<String> headerNames = request.getHeaderNames();

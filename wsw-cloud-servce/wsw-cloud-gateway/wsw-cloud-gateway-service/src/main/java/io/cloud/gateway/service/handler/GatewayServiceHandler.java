@@ -9,7 +9,6 @@ import io.cloud.redis.constant.KeyConstant;
 import io.cloud.redis.util.RedisCommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.cloud.gateway.event.RefreshRoutesEvent;
@@ -24,7 +23,6 @@ import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @program: wsw-cloud-servce
@@ -50,6 +48,7 @@ public class GatewayServiceHandler implements ApplicationEventPublisherAware, Ap
     /**
      * ApplicationRunner
      * 初始化加载路由配置信息到redis
+     *
      * @param args
      * @throws Exception
      */
@@ -58,7 +57,7 @@ public class GatewayServiceHandler implements ApplicationEventPublisherAware, Ap
         redisCommonUtil.del(KeyConstant.GATEWAY_KEY_PREFIX);
         List<GatewayRoute> gatewayRouteList = gatewayRouteService.findList();
         gatewayRouteList.forEach(gatewayRoute -> {
-            RouteDefinition definition= this.handleData(gatewayRoute);
+            RouteDefinition definition = this.handleData(gatewayRoute);
             routeDefinitionWriter.save(Mono.just(definition)).subscribe();
         });
         this.publisher.publishEvent(new RefreshRoutesEvent(this));
@@ -71,16 +70,17 @@ public class GatewayServiceHandler implements ApplicationEventPublisherAware, Ap
 
     /**
      * 路由数据转换公共方法
+     *
      * @param gatewayRoute
      * @return
      */
-    private RouteDefinition handleData(GatewayRoute gatewayRoute){
+    private RouteDefinition handleData(GatewayRoute gatewayRoute) {
         RouteDefinition definition = new RouteDefinition();
         URI uri = null;
-        if(gatewayRoute.getServiceUrl().startsWith(CommonConstant.URL_PREFIX_HTTP)){
+        if (gatewayRoute.getServiceUrl().startsWith(CommonConstant.URL_PREFIX_HTTP)) {
             //http地址
             uri = UriComponentsBuilder.fromHttpUrl(gatewayRoute.getServiceUrl()).build().toUri();
-        }else{
+        } else {
             //注册中心
             uri = UriComponentsBuilder.fromUriString(gatewayRoute.getServiceUrl()).build().toUri();
         }

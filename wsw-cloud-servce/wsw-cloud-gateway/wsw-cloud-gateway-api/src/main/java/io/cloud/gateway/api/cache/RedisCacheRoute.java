@@ -21,16 +21,16 @@ public class RedisCacheRoute {
 
     private RedisHashUtil redisHashUtil;
 
-    public Mono<Void> saveRoute(Mono<RouteDefinition> route){
+    public Mono<Void> saveRoute(Mono<RouteDefinition> route) {
         return route
                 .flatMap(routeDefinition -> {
                     redisHashUtil.hset(KeyConstant.GATEWAY_KEY_PREFIX, routeDefinition.getId(),
-                        JSON.toJSONString(routeDefinition));
+                            JSON.toJSONString(routeDefinition));
                     return Mono.empty();
                 });
     }
 
-    public Mono<Void> deleteRoute(Mono<String> routeId){
+    public Mono<Void> deleteRoute(Mono<String> routeId) {
         return routeId
                 .flatMap(id -> {
                     if (redisHashUtil.hHasKey(KeyConstant.GATEWAY_KEY_PREFIX, id)) {

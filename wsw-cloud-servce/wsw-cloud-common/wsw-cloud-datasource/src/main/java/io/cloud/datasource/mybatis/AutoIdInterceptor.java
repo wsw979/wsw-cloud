@@ -79,7 +79,6 @@ public class AutoIdInterceptor implements Interceptor {
         Class handlerKey = object.getClass();
         List<Handler> handlerList = handlerMap.get(handlerKey);
 
-        //TODO 性能优化点，如果有两个都是user对象同时,那么只需有个进行反射处理属性就好了,另一个只需执行下面的for循环
         SYNC:
         if (handlerList == null) {
             synchronized (this) {

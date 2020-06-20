@@ -1,7 +1,6 @@
 package io.cloud.gateway.service.swagger;
 
 import com.alibaba.fastjson.JSON;
-import io.cloud.data.util.BeanUtil;
 import io.cloud.redis.constant.KeyConstant;
 import io.cloud.redis.util.RedisHashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +51,7 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
         routeLocator.getRoutes().subscribe(route -> routes.add(route.getId()));
         //获取缓存的节点，只获取有效的route节点
         List<Object> obejcts = redisHashUtil.hValues(KeyConstant.GATEWAY_KEY_PREFIX);
-        List<RouteDefinition> routeDefinitionList = JSON.parseArray(obejcts.toString(),RouteDefinition.class);
+        List<RouteDefinition> routeDefinitionList = JSON.parseArray(obejcts.toString(), RouteDefinition.class);
         routeDefinitionList.stream().filter(
                 routeDefinition -> (
                         routes.contains(routeDefinition.getId()) && swaggerAggProperties.isShow(routeDefinition.getId())
@@ -60,11 +59,11 @@ public class SwaggerProvider implements SwaggerResourcesProvider {
         ).forEach(routeDefinition -> routeDefinition.getPredicates().stream()
                 .filter(predicateDefinition -> ("Path").equalsIgnoreCase(predicateDefinition.getName()))
                 .forEach(predicateDefinition -> resources.add(
-                    swaggerResource(
-                            routeDefinition.getId(),
-                            predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0").replace("/**", swaggerAggProperties.getApiDocsPath())
+                        swaggerResource(
+                                routeDefinition.getId(),
+                                predicateDefinition.getArgs().get(NameUtils.GENERATED_NAME_PREFIX + "0").replace("/**", swaggerAggProperties.getApiDocsPath())
                         )
-                    )
+                        )
                 )
         );
         return resources;

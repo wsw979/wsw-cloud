@@ -39,7 +39,7 @@ public class RedisHashUtil {
     /**
      * hash 集合
      */
-    public List<Object> hValues(String key){
+    public List<Object> hValues(String key) {
         redisTemplate.indexdb.set(dataBase);
         return redisTemplate.opsForHash().values(key);
     }

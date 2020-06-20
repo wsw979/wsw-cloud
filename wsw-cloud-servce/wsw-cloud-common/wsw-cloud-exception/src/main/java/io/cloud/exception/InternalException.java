@@ -39,7 +39,7 @@ public class InternalException extends RuntimeException {
         this.msg = status.getMsg();
     }
 
-    public InternalException(HttpStatus status,boolean isSuccess) {
+    public InternalException(HttpStatus status, boolean isSuccess) {
         super(status.getMsg());
         this.code = status.getCode();
         this.msg = status.getMsg();

@@ -45,18 +45,18 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteMapper, Gat
         }
         GatewayRouteDtlVo vo = new GatewayRouteDtlVo();
         GatewayRoute gatewayRoute = this.getById(id);
-        BeanUtils.copyProperties(gatewayRoute,vo);
+        BeanUtils.copyProperties(gatewayRoute, vo);
         return R.success(vo);
     }
 
     @Override
     public GatewayRoute saveOrUpdate(GatewayRouteEvt evt) {
         GatewayRoute gatewayRoute = new GatewayRoute();
-        BeanUtils.copyProperties(evt,gatewayRoute);
+        BeanUtils.copyProperties(evt, gatewayRoute);
         LocalDateTime now = LocalDateTime.now();
-        if(NullUtil.isNull(gatewayRoute.getId())){
+        if (NullUtil.isNull(gatewayRoute.getId())) {
             gatewayRoute.setCreateTime(now);
-        }else {
+        } else {
             gatewayRoute.setUpdateTime(now);
         }
         return this.saveOrUpdate(gatewayRoute) ? gatewayRoute : null;

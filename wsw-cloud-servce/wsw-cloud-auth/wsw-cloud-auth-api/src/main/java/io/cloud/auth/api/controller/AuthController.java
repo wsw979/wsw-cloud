@@ -12,7 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -25,7 +28,7 @@ import javax.validation.Valid;
  **/
 @Slf4j
 @AllArgsConstructor
-@Api(tags = "权限鉴定" )
+@Api(tags = "权限鉴定")
 @WswRestController(path = "/checkAuth")
 public class AuthController {
 
@@ -46,34 +49,25 @@ public class AuthController {
     }
 
     @GetMapping("/select1")
-    public Result select1(){
-
-
+    public Result select1() {
         System.out.println("select1 -------------------");
-
-        throw new ServiceException(HttpStatus.FAIL,true);
+        throw new ServiceException(HttpStatus.FAIL, true);
     }
 
     @GetMapping("/select2")
-    public Result select2(){
-
+    public Result select2() {
         System.out.println("select2 -------------------");
-
         try {
             Thread.sleep(3500);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return R.success();
     }
 
     @GetMapping("/select3")
-    public Result select3(){
-
+    public Result select3() {
         System.out.println("select3 -------------------");
-
-        throw new ServiceException(HttpStatus.FAIL,true);
-
+        throw new ServiceException(HttpStatus.FAIL, true);
     }
 }

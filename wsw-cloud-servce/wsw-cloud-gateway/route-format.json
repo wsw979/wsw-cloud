@@ -1,11 +1,10 @@
-
 [
   {
-    "serviceId":"gateway",
-    "serviceUrl":"lb://wsw-cloud-gateway-api",
-    "order":"1",
-    "remarks":"网关管理服务",
-    "predicates":[
+    "serviceId": "gateway",
+    "serviceUrl": "lb://wsw-cloud-gateway-api",
+    "order": "1",
+    "remarks": "网关管理服务",
+    "predicates": [
       {
         "name": "Path",
         "args": {
@@ -13,7 +12,7 @@
         }
       }
     ],
-    "filters":[
+    "filters": [
       {
         "name": "StripPrefix",
         "args": {
@@ -21,17 +20,16 @@
         }
       },
       {
-        "name":"SwaggerHeaderFilter"
+        "name": "SwaggerHeaderFilter"
       }
     ]
   },
-
   {
-    "serviceId":"auth",
-    "serviceUrl":"lb://wsw-cloud-auth-api",
-    "order":"2",
-    "remarks":"权限服务",
-    "predicates":[
+    "serviceId": "auth",
+    "serviceUrl": "lb://wsw-cloud-auth-api",
+    "order": "2",
+    "remarks": "权限服务",
+    "predicates": [
       {
         "name": "Path",
         "args": {
@@ -39,7 +37,7 @@
         }
       }
     ],
-    "filters":[
+    "filters": [
       {
         "name": "StripPrefix",
         "args": {
@@ -47,17 +45,16 @@
         }
       },
       {
-        "name":"SwaggerHeaderFilter"
+        "name": "SwaggerHeaderFilter"
       }
     ]
   },
-
   {
-    "serviceId":"user",
-    "serviceUrl":"lb://wsw-cloud-user-api",
-    "order":"3",
-    "remarks":"用户服务",
-    "predicates":[
+    "serviceId": "user",
+    "serviceUrl": "lb://wsw-cloud-user-api",
+    "order": "3",
+    "remarks": "用户服务",
+    "predicates": [
       {
         "name": "Path",
         "args": {
@@ -65,7 +62,7 @@
         }
       }
     ],
-    "filters":[
+    "filters": [
       {
         "name": "StripPrefix",
         "args": {
@@ -73,9 +70,8 @@
         }
       },
       {
-        "name":"SwaggerHeaderFilter"
+        "name": "SwaggerHeaderFilter"
       }
     ]
   }
-
 ]

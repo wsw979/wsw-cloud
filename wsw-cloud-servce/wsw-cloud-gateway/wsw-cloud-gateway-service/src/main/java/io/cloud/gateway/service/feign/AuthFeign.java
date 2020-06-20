@@ -19,6 +19,7 @@ public interface AuthFeign {
 
     /**
      * 获取令牌
+     *
      * @param vo
      * @return
      */
@@ -27,10 +28,11 @@ public interface AuthFeign {
 
     /**
      * 效验令牌
+     *
      * @param token
      * @return
      */
     @GetMapping("/checkJwt")
-    public Result checkJwt(@RequestParam(value = "token",required = false) String token) throws ServiceException;
+    public Result checkJwt(@RequestParam(value = "token", required = false) String token) throws ServiceException;
 
 }

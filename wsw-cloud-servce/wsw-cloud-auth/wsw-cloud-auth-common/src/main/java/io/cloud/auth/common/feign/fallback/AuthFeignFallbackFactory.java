@@ -1,18 +1,14 @@
 package io.cloud.auth.common.feign.fallback;
 
 import com.netflix.client.ClientException;
-import feign.FeignException;
 import feign.Request;
 import feign.RetryableException;
 import feign.hystrix.FallbackFactory;
 import io.cloud.auth.common.feign.AuthFeign;
 import io.cloud.exception.InternalException;
-import io.cloud.exception.ServiceException;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
-import io.cloud.exception.util.R;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;

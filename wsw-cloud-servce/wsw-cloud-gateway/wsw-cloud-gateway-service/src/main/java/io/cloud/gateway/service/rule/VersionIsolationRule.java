@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class VersionIsolationRule extends RoundRobinRule {
 
     private final static String KEY_DEFAULT = "default";
+
     /**
      * 优先根据版本号取实例
      */

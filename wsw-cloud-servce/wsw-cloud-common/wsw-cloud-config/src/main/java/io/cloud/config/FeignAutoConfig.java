@@ -49,7 +49,7 @@ public class FeignAutoConfig {
     }
 
     public class PhpMappingJackson2HttpMessageConverter extends MappingJackson2HttpMessageConverter {
-        PhpMappingJackson2HttpMessageConverter(){
+        PhpMappingJackson2HttpMessageConverter() {
             List<MediaType> mediaTypes = new ArrayList<>();
             mediaTypes.add(MediaType.valueOf(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8")); //关键
             setSupportedMediaTypes(mediaTypes);

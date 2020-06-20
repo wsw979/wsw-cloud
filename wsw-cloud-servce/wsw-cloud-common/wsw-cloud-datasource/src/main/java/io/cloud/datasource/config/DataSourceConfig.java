@@ -75,12 +75,9 @@ public class DataSourceConfig {
         sqlSessionFactory.setTypeAliasesPackage(MybatisPlusEnum.TYPE_ALIASES_PACKAGE);
         //扫描XML
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        try
-        {
+        try {
             sqlSessionFactory.setMapperLocations(resolver.getResources(MybatisPlusEnum.MAPPER_LOCATIONS));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }

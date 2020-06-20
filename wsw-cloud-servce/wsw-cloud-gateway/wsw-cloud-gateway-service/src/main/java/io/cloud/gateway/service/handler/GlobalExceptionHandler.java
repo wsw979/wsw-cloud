@@ -140,7 +140,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
 
     }
 
-    private Map<String, Object> getResultMap(Throwable ex){
+    private Map<String, Object> getResultMap(Throwable ex) {
         //封装响应体,此body可修改为自己的jsonBody
         Map<String, Object> result = new HashMap<>(2, 1);
         // 按照异常类型进行处理

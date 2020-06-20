@@ -5,7 +5,6 @@ import io.cloud.data.constant.ServiceConstant;
 import io.cloud.exception.result.Result;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @program: wsw-cloud-servce

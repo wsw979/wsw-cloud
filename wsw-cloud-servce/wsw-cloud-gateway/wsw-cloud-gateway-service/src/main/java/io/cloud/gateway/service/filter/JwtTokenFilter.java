@@ -55,10 +55,10 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
         String url = request.getURI().getPath();
         //跳过不需要验证的路径
         if (null != urlsEntity.getUrls()) {
-            if(Arrays.asList(urlsEntity.getUrls()).contains(url)){
+            if (Arrays.asList(urlsEntity.getUrls()).contains(url)) {
                 return chain.filter(exchange);
             }
-            if(url.contains(swaggerAggProperties.getApiDocsPath())){
+            if (url.contains(swaggerAggProperties.getApiDocsPath())) {
                 return chain.filter(exchange);
             }
         }
@@ -67,14 +67,14 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
             throw new ServiceException(HttpStatus.TOKEN_ERROR);
         }
         Result result = authFeign.checkJwt(token);
-        if(!result.getCode().equals(HttpStatus.SUCCESS.getCode())){
+        if (!result.getCode().equals(HttpStatus.SUCCESS.getCode())) {
             throw new ServiceException(HttpStatus.TOKEN_ERROR);
         }
         //定义新的消息头
         HttpHeaders headers = new HttpHeaders();
         headers.putAll(exchange.getRequest().getHeaders());
         headers.remove(HEADER);
-        headers.set(HEADER,result.getMsg());
+        headers.set(HEADER, result.getMsg());
 
         request = new ServerHttpRequestDecorator(request) {
             @Override
@@ -84,7 +84,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
                 return httpHeaders;
             }
         };
-        response.getHeaders().add(HEADER,result.getData().toString());
+        response.getHeaders().add(HEADER, result.getData().toString());
         return chain.filter(exchange.mutate().request(request).build());
     }
 
