@@ -13,11 +13,11 @@
 
 import React from 'react';
 import './index.scss';
-import { getParams, request } from '../../globalLib';
-import { Button, ConfigProvider, Dialog, Field, Form, Select } from '@alifd/next';
+import {getParams, request} from '../../globalLib';
+import {Button, ConfigProvider, Dialog, Field, Form, Select} from '@alifd/next';
 
 const FormItem = Form.Item;
-const { AutoComplete: Combobox } = Select;
+const {AutoComplete: Combobox} = Select;
 
 /**
  * @deprecated
@@ -57,19 +57,19 @@ class CloneDialog extends React.Component {
   }
 
   componentDidMount() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.setState({
       policyLabel: locale.terminate,
       allPolicy: [
-        { value: 'abort', label: locale.terminate },
-        { value: 'skip', label: locale.skip },
-        { value: 'overwrite', label: locale.cover },
+        {value: 'abort', label: locale.terminate},
+        {value: 'skip', label: locale.skip},
+        {value: 'overwrite', label: locale.cover},
       ],
     });
   }
 
   openDialog(payload, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const serverId = getParams('serverId') || 'center';
     this.checkData = payload.checkData;
     this.callback = callback;
@@ -112,12 +112,12 @@ class CloneDialog extends React.Component {
   }
 
   closeDialog() {
-    this.setState({ visible: false });
+    this.setState({visible: false});
   }
 
   setTenantTo(value) {
     this.field.setValue(value);
-    this.setState({ tenantTo: value });
+    this.setState({tenantTo: value});
   }
 
   setPolicy(...value) {
@@ -128,7 +128,7 @@ class CloneDialog extends React.Component {
   }
 
   getQuery() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     if (this.state.records.length > 0) return locale.selectedEntry;
     if (
       this.state.dataId === '' &&
@@ -167,14 +167,14 @@ class CloneDialog extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     const footer = (
       <div>
         <Button
           type="primary"
           onClick={this.doClone.bind(this)}
-          {...{ disabled: this.state.total <= 0 }}
+          {...{disabled: this.state.total <= 0}}
         >
           {locale.startCloning}
         </Button>
@@ -187,7 +187,7 @@ class CloneDialog extends React.Component {
           visible={this.state.visible}
           footer={footer}
           footerAlign="center"
-          style={{ width: 555 }}
+          style={{width: 555}}
           onCancel={this.closeDialog.bind(this)}
           onClose={this.closeDialog.bind(this)}
           title={`${locale.configurationCloning + this.state.serverId}）`}
@@ -195,25 +195,25 @@ class CloneDialog extends React.Component {
           <Form field={this.field}>
             <FormItem label={locale.source} {...this.formItemLayout}>
               <p>
-                <span style={{ color: '#33cde5' }}>{this.state.tenantFrom.name}</span>
+                <span style={{color: '#33cde5'}}>{this.state.tenantFrom.name}</span>
                 {` | ${this.state.tenantFrom.id}`}
               </p>
             </FormItem>
             <FormItem label={locale.configurationNumber} {...this.formItemLayout}>
               <p>
-                <span style={{ color: '#33cde5' }}>{this.state.total}</span> {this.getQuery()}{' '}
+                <span style={{color: '#33cde5'}}>{this.state.total}</span> {this.getQuery()}{' '}
               </p>
             </FormItem>
             <FormItem label={locale.target} {...this.formItemLayout}>
               <Combobox
-                style={{ width: '80%' }}
+                style={{width: '80%'}}
                 size="medium"
                 hasArrow
                 placeholder={locale.selectNamespace}
                 dataSource={this.state.namespaces}
                 {...init('select', {
-                  props: { onChange: this.setTenantTo.bind(this) },
-                  rules: [{ required: true, message: locale.selectNamespace }],
+                  props: {onChange: this.setTenantTo.bind(this)},
+                  rules: [{required: true, message: locale.selectNamespace}],
                 })}
               />
             </FormItem>

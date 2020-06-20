@@ -213,7 +213,6 @@ public class UserController {
         User user = userDetailsService.getUserFromDatabase(username);
         String password = user.getPassword();
 
-        // TODO: throw out more fine grained exceptions
         try {
             if (PasswordEncoderUtil.matches(oldPassword, password)) {
                 userDetailsService.updateUserPassword(username, PasswordEncoderUtil.encode(newPassword));

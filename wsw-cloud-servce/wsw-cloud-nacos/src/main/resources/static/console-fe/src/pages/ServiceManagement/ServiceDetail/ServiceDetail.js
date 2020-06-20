@@ -13,20 +13,20 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { request } from '@/globalLib';
-import { Input, Button, Card, ConfigProvider, Form, Loading, Message } from '@alifd/next';
+import {request} from '@/globalLib';
+import {Button, Card, ConfigProvider, Form, Input, Loading, Message} from '@alifd/next';
 import EditServiceDialog from './EditServiceDialog';
 import EditClusterDialog from './EditClusterDialog';
 import InstanceTable from './InstanceTable';
-import { getParameter } from 'utils/nacosutil';
+import {getParameter} from 'utils/nacosutil';
 import MonacoEditor from 'components/MonacoEditor';
-import { MONACO_READONLY_OPTIONS, METADATA_ENTER } from './constant';
+import {MONACO_READONLY_OPTIONS} from './constant';
 import './ServiceDetail.scss';
 
 const FormItem = Form.Item;
 const pageFormLayout = {
-  labelCol: { fixedSpan: 10 },
-  wrapperCol: { span: 14 },
+  labelCol: {fixedSpan: 10},
+  wrapperCol: {span: 14},
 };
 
 @ConfigProvider.config
@@ -65,22 +65,22 @@ class ServiceDetail extends React.Component {
   }
 
   getServiceDetail() {
-    const { serviceName, groupName } = this.state;
+    const {serviceName, groupName} = this.state;
     request({
       url: `v1/ns/catalog/service?serviceName=${serviceName}&groupName=${groupName}`,
       beforeSend: () => this.openLoading(),
-      success: ({ clusters = [], service = {} }) => this.setState({ service, clusters }),
+      success: ({clusters = [], service = {}}) => this.setState({service, clusters}),
       error: e => Message.error(e.responseText || 'error'),
       complete: () => this.closeLoading(),
     });
   }
 
   openLoading() {
-    this.setState({ loading: true });
+    this.setState({loading: true});
   }
 
   closeLoading() {
-    this.setState({ loading: false });
+    this.setState({loading: false});
   }
 
   openEditServiceDialog() {
@@ -92,9 +92,9 @@ class ServiceDetail extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { serviceName, groupName, loading, service = {}, clusters } = this.state;
-    const { metadata = {}, selector = {} } = service;
+    const {locale = {}} = this.props;
+    const {serviceName, groupName, loading, service = {}, clusters} = this.state;
+    const {metadata = {}, selector = {}} = service;
     let metadataText = '';
     if (Object.keys(metadata).length) {
       metadataText = JSON.stringify(metadata, null, '\t');
@@ -133,13 +133,13 @@ class ServiceDetail extends React.Component {
 
           <Form {...pageFormLayout}>
             <FormItem label={`${locale.serviceName}:`}>
-              <Input value={service.name} readOnly />
+              <Input value={service.name} readOnly/>
             </FormItem>
             <FormItem label={`${locale.groupName}:`}>
-              <Input value={service.groupName} readOnly />
+              <Input value={service.groupName} readOnly/>
             </FormItem>
             <FormItem label={`${locale.protectThreshold}:`}>
-              <Input value={service.protectThreshold} readOnly />
+              <Input value={service.protectThreshold} readOnly/>
             </FormItem>
             <FormItem label={`${locale.metadata}:`}>
               <MonacoEditor
@@ -151,11 +151,11 @@ class ServiceDetail extends React.Component {
               />
             </FormItem>
             <FormItem label={`${locale.type}:`}>
-              <Input value={selector.type} readOnly />
+              <Input value={selector.type} readOnly/>
             </FormItem>
             {service.type === 'label' && (
               <FormItem label={`${locale.selector}:`}>
-                <Input value={selector.selector} readOnly />
+                <Input value={selector.selector} readOnly/>
               </FormItem>
             )}
           </Form>

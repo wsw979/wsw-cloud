@@ -27,7 +27,7 @@ console.log('\n\n> Start copying the dist directory...\n');
 
 function delDir(dest) {
   let paths = fs.readdirSync(dest);
-  paths.forEach(function(p) {
+  paths.forEach(function (p) {
     const target = path.join(dest, p);
     const st = fs.statSync(target);
     if (st.isFile()) {
@@ -47,7 +47,7 @@ function delDir(dest) {
 
 function copyDir(source, dest) {
   const paths = fs.readdirSync(source);
-  paths.forEach(function(p) {
+  paths.forEach(function (p) {
     const src = path.join(source, p);
     const target = path.join(dest, p);
     const st = fs.statSync(src);

@@ -12,15 +12,15 @@
  */
 
 import request from '../utils/request';
-import { GET_NAMESPACES } from '../constants';
+import {GET_NAMESPACES} from '../constants';
 
 const initialState = {
   namespaces: [],
 };
 
 const getNamespaces = params => dispatch =>
-  request.get('v1/console/namespaces', { params }).then(response => {
-    const { code, data } = response;
+  request.get('v1/console/namespaces', {params}).then(response => {
+    const {code, data} = response;
     dispatch({
       type: GET_NAMESPACES,
       data: code === 200 ? data : [],
@@ -30,10 +30,10 @@ const getNamespaces = params => dispatch =>
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_NAMESPACES:
-      return { ...state, namespaces: action.data };
+      return {...state, namespaces: action.data};
     default:
       return state;
   }
 };
 
-export { getNamespaces };
+export {getNamespaces};

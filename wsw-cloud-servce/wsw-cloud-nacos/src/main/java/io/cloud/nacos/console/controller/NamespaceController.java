@@ -61,7 +61,6 @@ public class NamespaceController {
     public RestResult<List<Namespace>> getNamespaces(HttpServletRequest request, HttpServletResponse response) {
         RestResult<List<Namespace>> rr = new RestResult<List<Namespace>>();
         rr.setCode(200);
-        // TODO 获取用kp
         List<TenantInfo> tenantInfos = persistService.findTenantByKp("1");
         Namespace namespace0 = new Namespace("", "public", 200, persistService.configInfoCount(""), 0);
         List<Namespace> namespaces = new ArrayList<Namespace>();
@@ -87,7 +86,6 @@ public class NamespaceController {
     @GetMapping(params = "show=all")
     public NamespaceAllInfo getNamespace(HttpServletRequest request, HttpServletResponse response,
                                          @RequestParam("namespaceId") String namespaceId) {
-        // TODO 获取用kp
         if (StringUtils.isBlank(namespaceId)) {
             return new NamespaceAllInfo(namespaceId, "Public", 200,
                     persistService.configInfoCount(""), 0, "Public Namespace");
@@ -114,7 +112,6 @@ public class NamespaceController {
                                    @RequestParam("customNamespaceId") String namespaceId,
                                    @RequestParam("namespaceName") String namespaceName,
                                    @RequestParam(value = "namespaceDesc", required = false) String namespaceDesc) {
-        // TODO 获取用kp
         if (StringUtils.isBlank(namespaceId)) {
             namespaceId = UUID.randomUUID().toString();
         } else {
@@ -162,7 +159,6 @@ public class NamespaceController {
     public Boolean editNamespace(@RequestParam("namespace") String namespace,
                                  @RequestParam("namespaceShowName") String namespaceShowName,
                                  @RequestParam(value = "namespaceDesc", required = false) String namespaceDesc) {
-        // TODO 获取用kp
         persistService.updateTenantNameAtomic("1", namespace, namespaceShowName, namespaceDesc);
         return true;
     }

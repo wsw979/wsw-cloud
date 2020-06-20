@@ -13,9 +13,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getParams, request } from '../../../globalLib';
-import { generateUrl } from '../../../utils/nacosutil';
-import { Button, ConfigProvider, Dialog, Field, Form, Input } from '@alifd/next';
+import {getParams, request} from '../../../globalLib';
+import {generateUrl} from '../../../utils/nacosutil';
+import {Button, ConfigProvider, Dialog, Field, Form, Input} from '@alifd/next';
 
 import './index.scss';
 
@@ -46,7 +46,7 @@ class ConfigRollback extends React.Component {
   };
 
   componentDidMount() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.typeMap = {
       // 操作映射提示
       U: 'publish',
@@ -98,14 +98,14 @@ class ConfigRollback extends React.Component {
 
   goList() {
     const namespace = getParams('namespace');
-    const { serverId, dataId, group } = this;
+    const {serverId, dataId, group} = this;
     this.props.history.push(
-      generateUrl('/historyRollback', { serverId, dataId, group, namespace })
+      generateUrl('/historyRollback', {serverId, dataId, group, namespace})
     );
   }
 
   onOpenConfirm() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     let type = 'post';
     if (this.opType.trim() === 'I') {
@@ -114,17 +114,17 @@ class ConfigRollback extends React.Component {
     Dialog.confirm({
       title: locale.rollBack,
       content: (
-        <div style={{ marginTop: '-20px' }}>
+        <div style={{marginTop: '-20px'}}>
           <h3>
             {locale.determine} {locale.followingConfiguration}
           </h3>
           <p>
-            <span style={{ color: '#999', marginRight: 5 }}>Data ID:</span>
-            <span style={{ color: '#c7254e' }}>{self.field.getValue('dataId')}</span>
+            <span style={{color: '#999', marginRight: 5}}>Data ID:</span>
+            <span style={{color: '#c7254e'}}>{self.field.getValue('dataId')}</span>
           </p>
           <p>
-            <span style={{ color: '#999', marginRight: 5 }}>Group:</span>
-            <span style={{ color: '#c7254e' }}>{self.field.getValue('group')}</span>
+            <span style={{color: '#999', marginRight: 5}}>Group:</span>
+            <span style={{color: '#c7254e'}}>{self.field.getValue('group')}</span>
           </p>
         </div>
       ),
@@ -155,7 +155,7 @@ class ConfigRollback extends React.Component {
           data: postData,
           success(data) {
             if (data === true) {
-              Dialog.alert({ content: locale.rollbackSuccessful });
+              Dialog.alert({content: locale.rollbackSuccessful});
             }
           },
         });
@@ -164,8 +164,8 @@ class ConfigRollback extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     const formItemLayout = {
       labelCol: {
         fixedSpan: 6,
@@ -175,18 +175,18 @@ class ConfigRollback extends React.Component {
       },
     };
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{padding: 10}}>
         <h1>{locale.configurationRollback}</h1>
         <Form field={this.field}>
           <FormItem label="Data ID:" required {...formItemLayout}>
             <Input htmlType="text" readOnly {...init('dataId')} />
-            <div style={{ marginTop: 10 }}>
-              <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
+            <div style={{marginTop: 10}}>
+              <a style={{fontSize: '12px'}} onClick={this.toggleMore.bind(this)}>
                 {this.state.showmore ? locale.collapse : locale.more}
               </a>
             </div>
           </FormItem>
-          <div style={{ overflow: 'hidden', height: this.state.showmore ? 'auto' : '0' }}>
+          <div style={{overflow: 'hidden', height: this.state.showmore ? 'auto' : '0'}}>
             <FormItem label="Group:" required {...formItemLayout}>
               <Input htmlType="text" readOnly {...init('group')} />
             </FormItem>
@@ -206,7 +206,7 @@ class ConfigRollback extends React.Component {
           <FormItem label=" " {...formItemLayout}>
             <Button
               type="primary"
-              style={{ marginRight: 10 }}
+              style={{marginRight: 10}}
               onClick={this.onOpenConfirm.bind(this)}
             >
               {locale.rollBack}

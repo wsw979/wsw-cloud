@@ -13,11 +13,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ConfigProvider, Dialog, Grid } from '@alifd/next';
+import {Button, ConfigProvider, Dialog, Grid} from '@alifd/next';
 
 import './index.scss';
 
-const { Row, Col } = Grid;
+const {Row, Col} = Grid;
 
 @ConfigProvider.config
 class DiffEditorDialog extends React.Component {
@@ -77,7 +77,7 @@ class DiffEditorDialog extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const footer = (
       <div>
         {' '}
@@ -90,19 +90,19 @@ class DiffEditorDialog extends React.Component {
       <div>
         <Dialog
           title={locale.contents}
-          style={{ width: '80%' }}
+          style={{width: '80%'}}
           visible={this.state.dialogvisible}
           footer={footer}
           onClose={this.closeDialog.bind(this)}
         >
-          <div style={{ height: 400 }}>
+          <div style={{height: 400}}>
             <div>
               <Row>
-                <Col style={{ textAlign: 'center' }}>{locale.currentArea}</Col>
-                <Col style={{ textAlign: 'center' }}>{locale.originalValue}</Col>
+                <Col style={{textAlign: 'center'}}>{locale.currentArea}</Col>
+                <Col style={{textAlign: 'center'}}>{locale.originalValue}</Col>
               </Row>
             </div>
-            <div style={{ clear: 'both', height: 480 }} ref={this.diffeditor} />
+            <div style={{clear: 'both', height: 480}} ref={this.diffeditor}/>
           </div>
         </Dialog>
       </div>

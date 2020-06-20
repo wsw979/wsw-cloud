@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
-import { isParentEdas } from '@/lib';
-import { Balloon, Button, ConfigProvider, Dialog, Form, Icon, Select, Upload } from '@alifd/next';
+import {isParentEdas} from '@/lib';
+import {Balloon, Button, ConfigProvider, Dialog, Form, Icon, Select, Upload} from '@alifd/next';
 
 import './index.scss';
 
@@ -48,13 +48,13 @@ class ImportDialog extends React.Component {
   }
 
   componentDidMount() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.setState({
       policyLabel: locale.terminate,
       allPolicy: [
-        { value: 'abort', label: locale.terminate },
-        { value: 'skip', label: locale.skip },
-        { value: 'overwrite', label: locale.overwrite },
+        {value: 'abort', label: locale.terminate},
+        {value: 'skip', label: locale.skip},
+        {value: 'overwrite', label: locale.overwrite},
       ],
     });
   }
@@ -99,7 +99,7 @@ class ImportDialog extends React.Component {
   };
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     let uploadLink = `/diamond-ops/batch/import/serverId/${this.state.serverId}/tenant/${
       this.state.tenant.id
     }?policy=${this.state.policy}`;
@@ -115,12 +115,12 @@ class ImportDialog extends React.Component {
             <Icon
               type="help"
               size="small"
-              style={{ color: '#1DC11D', marginRight: 5, verticalAlign: 'middle' }}
+              style={{color: '#1DC11D', marginRight: 5, verticalAlign: 'middle'}}
             />
           </span>
         }
         align="t"
-        style={{ marginRight: 5 }}
+        style={{marginRight: 5}}
         triggerType="hover"
       >
         <a href={window._getLink && window._getLink('knowDataid')} target="_blank">
@@ -144,7 +144,7 @@ class ImportDialog extends React.Component {
             this.closeDialog();
           }}
           formatter={this.formatter}
-          headers={{ poweredBy: 'simpleMVC', projectName: 'nacos' }}
+          headers={{poweredBy: 'simpleMVC', projectName: 'nacos'}}
         >
           <Button type={'primary'}>{locale.uploadFile}</Button>
         </Upload>
@@ -157,7 +157,7 @@ class ImportDialog extends React.Component {
           visible={this.state.visible}
           footer={footer}
           footerAlign="center"
-          style={{ width: 480 }}
+          style={{width: 480}}
           onCancel={this.closeDialog}
           onClose={this.closeDialog}
           title={`${locale.importLabel + this.state.serverId}）`}
@@ -165,7 +165,7 @@ class ImportDialog extends React.Component {
           <Form>
             <FormItem label={locale.target} {...this.formItemLayout}>
               <p>
-                <span style={{ color: '#33cde5' }}>{this.state.tenant.name}</span>
+                <span style={{color: '#33cde5'}}>{this.state.tenant.name}</span>
                 {` | ${this.state.tenant.id}`}
               </p>
             </FormItem>
@@ -180,10 +180,10 @@ class ImportDialog extends React.Component {
             </FormItem>
           </Form>
 
-          <div style={{ textAlign: 'center' }}>
+          <div style={{textAlign: 'center'}}>
             <Icon
               type={'warning'}
-              style={{ color: '#ff8a00', marginRight: 5, verticalAlign: 'middle' }}
+              style={{color: '#ff8a00', marginRight: 5, verticalAlign: 'middle'}}
             />
             {locale.beSureExerciseCaution}
             {helpTip}

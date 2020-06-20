@@ -16,17 +16,17 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import {routerReducer} from 'react-router-redux';
 import thunk from 'redux-thunk';
-import { Provider, connect } from 'react-redux';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { ConfigProvider, Loading } from '@alifd/next';
+import {connect, Provider} from 'react-redux';
+import {HashRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {ConfigProvider, Loading} from '@alifd/next';
 
 import './lib';
 
 import Layout from './layouts/MainLayout';
-import { LANGUAGE_KEY, REDUX_DEVTOOLS } from './constants';
+import {LANGUAGE_KEY, REDUX_DEVTOOLS} from './constants';
 
 import Login from './pages/Login';
 import Namespace from './pages/NameSpace';
@@ -49,7 +49,7 @@ import RolesManagement from './pages/AuthorityControl/RolesManagement';
 import Welcome from './pages/Welcome/Welcome';
 
 import reducers from './reducers';
-import { changeLanguage } from './reducers/locale';
+import {changeLanguage} from './reducers/locale';
 
 import './index.scss';
 import PropTypes from 'prop-types';
@@ -71,28 +71,28 @@ const store = createStore(
 );
 
 const MENU = [
-  { path: '/', exact: true, render: () => <Redirect to="/welcome" /> },
-  { path: '/welcome', component: Welcome },
-  { path: '/namespace', component: Namespace },
-  { path: '/newconfig', component: Newconfig },
-  { path: '/configsync', component: Configsync },
-  { path: '/configdetail', component: Configdetail },
-  { path: '/configeditor', component: Configeditor },
-  { path: '/historyDetail', component: HistoryDetail },
-  { path: '/configRollback', component: ConfigRollback },
-  { path: '/historyRollback', component: HistoryRollback },
-  { path: '/listeningToQuery', component: ListeningToQuery },
-  { path: '/configurationManagement', component: ConfigurationManagement },
-  { path: '/serviceManagement', component: ServiceList },
-  { path: '/serviceDetail', component: ServiceDetail },
-  { path: '/subscriberList', component: SubscriberList },
-  { path: '/clusterManagement', component: ClusterNodeList },
-  { path: '/userManagement', component: UserManagement },
-  { path: '/rolesManagement', component: RolesManagement },
-  { path: '/permissionsManagement', component: PermissionsManagement },
+  {path: '/', exact: true, render: () => <Redirect to="/welcome"/>},
+  {path: '/welcome', component: Welcome},
+  {path: '/namespace', component: Namespace},
+  {path: '/newconfig', component: Newconfig},
+  {path: '/configsync', component: Configsync},
+  {path: '/configdetail', component: Configdetail},
+  {path: '/configeditor', component: Configeditor},
+  {path: '/historyDetail', component: HistoryDetail},
+  {path: '/configRollback', component: ConfigRollback},
+  {path: '/historyRollback', component: HistoryRollback},
+  {path: '/listeningToQuery', component: ListeningToQuery},
+  {path: '/configurationManagement', component: ConfigurationManagement},
+  {path: '/serviceManagement', component: ServiceList},
+  {path: '/serviceDetail', component: ServiceDetail},
+  {path: '/subscriberList', component: SubscriberList},
+  {path: '/clusterManagement', component: ClusterNodeList},
+  {path: '/userManagement', component: UserManagement},
+  {path: '/rolesManagement', component: RolesManagement},
+  {path: '/permissionsManagement', component: PermissionsManagement},
 ];
 
-@connect(state => ({ ...state.locale }), { changeLanguage })
+@connect(state => ({...state.locale}), {changeLanguage})
 class App extends React.Component {
   static propTypes = {
     locale: PropTypes.object,
@@ -117,7 +117,7 @@ class App extends React.Component {
     return (
       <HashRouter>
         <Switch>
-          <Route path="/login" component={Login} />
+          <Route path="/login" component={Login}/>
           <Layout>
             {MENU.map(item => (
               <Route key={item.path} {...item} />
@@ -129,7 +129,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { locale } = this.props;
+    const {locale} = this.props;
     return (
       <Loading
         className="nacos-loading"
@@ -147,7 +147,7 @@ class App extends React.Component {
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App/>
   </Provider>,
   document.getElementById('root')
 );

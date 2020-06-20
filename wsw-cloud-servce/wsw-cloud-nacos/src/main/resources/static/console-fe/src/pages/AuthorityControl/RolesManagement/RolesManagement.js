@@ -13,15 +13,15 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Dialog, Pagination, Table, ConfigProvider } from '@alifd/next';
-import { connect } from 'react-redux';
-import { getRoles, createRole, deleteRole } from '../../../reducers/authority';
+import {Button, ConfigProvider, Dialog, Pagination, Table} from '@alifd/next';
+import {connect} from 'react-redux';
+import {createRole, deleteRole, getRoles} from '../../../reducers/authority';
 import RegionGroup from '../../../components/RegionGroup';
 import NewRole from './NewRole';
 
 import './RolesManagement.scss';
 
-@connect(state => ({ roles: state.authority.roles }), { getRoles })
+@connect(state => ({roles: state.authority.roles}), {getRoles})
 @ConfigProvider.config
 class RolesManagement extends React.Component {
   static displayName = 'RolesManagement';
@@ -46,35 +46,35 @@ class RolesManagement extends React.Component {
   }
 
   getRoles() {
-    const { pageNo, pageSize } = this.state;
+    const {pageNo, pageSize} = this.state;
     this.props
-      .getRoles({ pageNo, pageSize })
+      .getRoles({pageNo, pageSize})
       .then(() => {
         if (this.state.loading) {
-          this.setState({ loading: false });
+          this.setState({loading: false});
         }
       })
-      .catch(() => this.setState({ loading: false }));
+      .catch(() => this.setState({loading: false}));
   }
 
   colseCreateRole() {
-    this.setState({ createRoleVisible: false });
+    this.setState({createRoleVisible: false});
   }
 
   render() {
-    const { roles, locale } = this.props;
-    const { loading, pageSize, pageNo, createRoleVisible, passwordResetUser } = this.state;
+    const {roles, locale} = this.props;
+    const {loading, pageSize, pageNo, createRoleVisible, passwordResetUser} = this.state;
     return (
       <>
-        <RegionGroup left={locale.roleManagement} />
+        <RegionGroup left={locale.roleManagement}/>
         <div className="filter-panel">
-          <Button type="primary" onClick={() => this.setState({ createRoleVisible: true })}>
+          <Button type="primary" onClick={() => this.setState({createRoleVisible: true})}>
             {locale.bindingRoles}
           </Button>
         </div>
         <Table dataSource={roles.pageItems} loading={loading} maxBodyHeight={476} fixedHeader>
-          <Table.Column title={locale.role} dataIndex="role" />
-          <Table.Column title={locale.username} dataIndex="username" />
+          <Table.Column title={locale.role} dataIndex="role"/>
+          <Table.Column title={locale.username} dataIndex="username"/>
           <Table.Column
             title={locale.operation}
             dataIndex="role"
@@ -92,7 +92,7 @@ class RolesManagement extends React.Component {
                       content: locale.deleteRoleTip,
                       onOk: () =>
                         deleteRole(record).then(() => {
-                          this.setState({ pageNo: 1 }, () => this.getRoles());
+                          this.setState({pageNo: 1}, () => this.getRoles());
                         }),
                     })
                   }
@@ -109,7 +109,7 @@ class RolesManagement extends React.Component {
             current={pageNo}
             total={roles.totalCount}
             pageSize={pageSize}
-            onChange={pageNo => this.setState({ pageNo }, () => this.getRoles())}
+            onChange={pageNo => this.setState({pageNo}, () => this.getRoles())}
           />
         )}
         <NewRole

@@ -12,8 +12,8 @@
  */
 
 export const DIALOG_FORM_LAYOUT = {
-  labelCol: { fixedSpan: 6 },
-  wrapperCol: { span: 18 },
+  labelCol: {fixedSpan: 6},
+  wrapperCol: {span: 18},
 };
 
 export const HEALTHY_COLOR_MAPPING = {

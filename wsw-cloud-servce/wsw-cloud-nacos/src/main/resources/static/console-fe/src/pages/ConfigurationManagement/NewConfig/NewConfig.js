@@ -15,11 +15,12 @@ import $ from 'jquery';
 import React from 'react';
 import PropTypes from 'prop-types';
 import SuccessDialog from '../../../components/SuccessDialog';
-import { getParams, setParams, request, aliwareIntl } from '../../../globalLib';
-import { generateUrl } from '../../../utils/nacosutil';
+import {aliwareIntl, getParams, request, setParams} from '../../../globalLib';
+import {generateUrl} from '../../../utils/nacosutil';
 import {
   Balloon,
   Button,
+  ConfigProvider,
   Dialog,
   Field,
   Form,
@@ -27,17 +28,16 @@ import {
   Input,
   Loading,
   Message,
-  Select,
   Radio,
-  ConfigProvider,
+  Select,
 } from '@alifd/next';
 import validateContent from 'utils/validateContent';
 
 import './index.scss';
 
 const FormItem = Form.Item;
-const { Group: RadioGroup } = Radio;
-const { AutoComplete: Combobox } = Select;
+const {Group: RadioGroup} = Radio;
+const {AutoComplete: Combobox} = Select;
 
 @ConfigProvider.config
 class NewConfig extends React.Component {
@@ -146,9 +146,9 @@ class NewConfig extends React.Component {
   }
 
   tagSearch(value) {
-    const { tagLst } = this.state;
+    const {tagLst} = this.state;
     if (!tagLst.includes(value)) {
-      this.setState({ tagLst: [value, ...tagLst] });
+      this.setState({tagLst: [value, ...tagLst]});
     }
   }
 
@@ -172,7 +172,7 @@ class NewConfig extends React.Component {
       clearTimeout(this.inputtimmer);
     }
     this.inputtimmer = setTimeout(() => {
-      const { tagLst } = this.state;
+      const {tagLst} = this.state;
 
       let hastag = false;
       tagLst.forEach((v, i) => {
@@ -187,7 +187,7 @@ class NewConfig extends React.Component {
           time: Math.random(),
         });
       }
-      this.setState({ tagLst });
+      this.setState({tagLst});
     }, 500);
   }
 
@@ -237,12 +237,12 @@ class NewConfig extends React.Component {
   }
 
   publishConfig() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) {
         return;
       }
-      let { configType } = this.state;
+      let {configType} = this.state;
       let content = '';
       const self = this;
       if (this.monacoEditor) {
@@ -258,7 +258,7 @@ class NewConfig extends React.Component {
         return;
       }
 
-      if (validateContent.validate({ content, type: configType })) {
+      if (validateContent.validate({content, type: configType})) {
         this.publicConfigBeforeCheck(content);
       } else {
         Dialog.confirm({
@@ -276,8 +276,8 @@ class NewConfig extends React.Component {
    * 因为后端接口没有做是否存在配置逻辑 会覆盖原先配置 所以提交前先判断是否存在
    */
   publicConfigBeforeCheck = content => {
-    const { locale = {} } = this.props;
-    const { addonBefore } = this.state;
+    const {locale = {}} = this.props;
+    const {addonBefore} = this.state;
     request({
       url: 'v1/cs/configs',
       data: {
@@ -302,8 +302,8 @@ class NewConfig extends React.Component {
 
   _publishConfig = content => {
     const self = this;
-    const { locale = {} } = this.props;
-    let { addonBefore, config_tags, configType } = this.state;
+    const {locale = {}} = this.props;
+    let {addonBefore, config_tags, configType} = this.state;
     this.tenant = getParams('namespace') || '';
     const payload = {
       dataId: addonBefore + this.field.getValue('dataId'),
@@ -335,7 +335,7 @@ class NewConfig extends React.Component {
         if (res === true) {
           self.group = payload.group;
           self.dataId = payload.dataId;
-          setParams({ group: payload.group, dataId: payload.dataId }); // 设置参数
+          setParams({group: payload.group, dataId: payload.dataId}); // 设置参数
           _payload.isok = true;
         } else {
           _payload.isok = false;
@@ -376,7 +376,7 @@ class NewConfig extends React.Component {
   }
 
   validateChart(rule, value, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const chartReg = /[@#\$%\^&\*\s]+/g;
 
     if (chartReg.test(value)) {
@@ -387,8 +387,8 @@ class NewConfig extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     const formItemLayout = {
       labelCol: {
         span: 2,
@@ -436,11 +436,11 @@ class NewConfig extends React.Component {
     ];
 
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{padding: 10}}>
         <Loading
           shape={'flower'}
           tip={'Loading...'}
-          style={{ width: '100%', position: 'relative' }}
+          style={{width: '100%', position: 'relative'}}
           visible={this.state.loading}
           color={'#333'}
         >
@@ -454,20 +454,20 @@ class NewConfig extends React.Component {
                       required: true,
                       message: locale.newConfig,
                     },
-                    { validator: this.validateChart.bind(this) },
+                    {validator: this.validateChart.bind(this)},
                   ],
                 })}
                 maxLength={255}
                 addonTextBefore={
                   this.state.addonBefore ? (
-                    <div style={{ minWidth: 100, color: '#373D41' }}>{this.state.addonBefore}</div>
+                    <div style={{minWidth: 100, color: '#373D41'}}>{this.state.addonBefore}</div>
                   ) : null
                 }
               />
             </FormItem>
             <FormItem label={'Group:'} required>
               <Combobox
-                style={{ width: '100%' }}
+                style={{width: '100%'}}
                 size={'large'}
                 hasArrow
                 dataSource={this.state.groups}
@@ -483,7 +483,7 @@ class NewConfig extends React.Component {
                       maxLength: 127,
                       message: locale.groupNotEmpty,
                     },
-                    { validator: this.validateChart.bind(this) },
+                    {validator: this.validateChart.bind(this)},
                   ],
                 })}
                 onChange={this.setGroup.bind(this)}
@@ -492,7 +492,7 @@ class NewConfig extends React.Component {
             </FormItem>
             <FormItem
               label={' '}
-              style={{ display: this.state.showGroupWarning ? 'block' : 'none' }}
+              style={{display: this.state.showGroupWarning ? 'block' : 'none'}}
             >
               <Message type={'warning'} size={'medium'} animation={false}>
                 {locale.annotation}
@@ -507,7 +507,7 @@ class NewConfig extends React.Component {
                 size={'medium'}
                 showSearch
                 hasArrow
-                style={{ width: '100%', height: '100%!important' }}
+                style={{width: '100%', height: '100%!important'}}
                 autoWidth
                 multiple
                 mode="tag"
@@ -525,11 +525,11 @@ class NewConfig extends React.Component {
               label={locale.groupIdCannotBeLonger}
               className={`more-item${!this.state.showmore ? ' hide' : ''}`}
             >
-              <Input {...init('appName')} readOnly={this.inApp} />
+              <Input {...init('appName')} readOnly={this.inApp}/>
             </FormItem>
             <FormItem label=" ">
               <div className="more-container">
-                <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
+                <a style={{fontSize: '12px'}} onClick={this.toggleMore.bind(this)}>
                   {this.state.showmore ? locale.dataIdLength : locale.collapse}
                 </a>
               </div>
@@ -563,7 +563,7 @@ class NewConfig extends React.Component {
                       />
                     }
                     align={'t'}
-                    style={{ marginRight: 5 }}
+                    style={{marginRight: 5}}
                     triggerType={'hover'}
                   >
                     <p>{locale.configureContentsOf}</p>
@@ -574,14 +574,14 @@ class NewConfig extends React.Component {
               }
               required
             >
-              <div id={'container'} style={{ width: '100%', height: 300 }} />
+              <div id={'container'} style={{width: '100%', height: 300}}/>
             </FormItem>
 
             <FormItem label=" ">
-              <div style={{ textAlign: 'right' }}>
+              <div style={{textAlign: 'right'}}>
                 <Button
                   type={'primary'}
-                  style={{ marginRight: 10 }}
+                  style={{marginRight: 10}}
                   onClick={this.publishConfig.bind(this)}
                 >
                   {locale.escExit}
@@ -593,7 +593,7 @@ class NewConfig extends React.Component {
               </div>
             </FormItem>
           </Form>
-          <SuccessDialog ref={this.successDialog} />
+          <SuccessDialog ref={this.successDialog}/>
         </Loading>
       </div>
     );

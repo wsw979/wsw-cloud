@@ -37,7 +37,6 @@ public class NacosUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO: get authorities
         return AuthorityUtils.commaSeparatedStringToAuthorityList("");
     }
 

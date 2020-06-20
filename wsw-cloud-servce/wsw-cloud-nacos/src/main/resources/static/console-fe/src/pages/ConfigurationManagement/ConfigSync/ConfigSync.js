@@ -13,10 +13,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Checkbox, ConfigProvider, Dialog, Field, Form, Input, Loading } from '@alifd/next';
+import {Button, Checkbox, ConfigProvider, Dialog, Field, Form, Input, Loading} from '@alifd/next';
 import SuccessDialog from '../../../components/SuccessDialog';
-import { getParams, request } from '../../../globalLib';
-import { generateUrl } from '../../../utils/nacosutil';
+import {getParams, request} from '../../../globalLib';
+import {generateUrl} from '../../../utils/nacosutil';
 
 import './index.scss';
 
@@ -77,7 +77,7 @@ class ConfigSync extends React.Component {
       url: '/diamond-ops/env/domain',
       success(data) {
         if (data.code === 200) {
-          const { envGroups } = data.data;
+          const {envGroups} = data.data;
 
           self.setState({
             envGroups,
@@ -89,7 +89,7 @@ class ConfigSync extends React.Component {
 
   getDataDetail() {
     const self = this;
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.tenant = getParams('namespace') || '';
     this.serverId = getParams('serverId') || 'center';
     let url = `/diamond-ops/configList/detail/serverId/${this.serverId}/dataId/${this.dataId}/group/${this.group}/tenant/${this.tenant}?id=`;
@@ -103,7 +103,7 @@ class ConfigSync extends React.Component {
       },
       success(result) {
         if (result.code === 200) {
-          const { data = {} } = result;
+          const {data = {}} = result;
 
           self.field.setValue('dataId', data.dataId);
           // self.field.setValue('content', data.content);
@@ -153,7 +153,7 @@ class ConfigSync extends React.Component {
 
   sync() {
     const self = this;
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const payload = {
       dataId: this.field.getValue('dataId'),
       appName: this.field.getValue('appName'),
@@ -188,7 +188,7 @@ class ConfigSync extends React.Component {
     const dataId = this.field.getValue('dataId');
     const gruop = this.field.getValue('group');
     this.props.history.push(
-      generateUrl('/diamond-ops/static/pages/config-sync/index.html', { dataId, gruop })
+      generateUrl('/diamond-ops/static/pages/config-sync/index.html', {dataId, gruop})
     );
   }
 
@@ -204,8 +204,8 @@ class ConfigSync extends React.Component {
   }
 
   goResult() {
-    const { serverId, dataId, group } = this;
-    this.props.history.push(generateUrl('/consistencyEfficacy', { serverId, dataId, group }));
+    const {serverId, dataId, group} = this;
+    this.props.history.push(generateUrl('/consistencyEfficacy', {serverId, dataId, group}));
   }
 
   openLoading() {
@@ -221,8 +221,8 @@ class ConfigSync extends React.Component {
   }
 
   render() {
-    const { init } = this.field;
-    const { locale = {} } = this.props;
+    const {init} = this.field;
+    const {locale = {}} = this.props;
     const formItemLayout = {
       labelCol: {
         span: 2,
@@ -233,10 +233,10 @@ class ConfigSync extends React.Component {
     };
 
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{padding: 10}}>
         <Loading
           shape="flower"
-          style={{ position: 'relative', width: '100%' }}
+          style={{position: 'relative', width: '100%'}}
           visible={this.state.loading}
           tip="Loading..."
           color="#333"
@@ -245,13 +245,13 @@ class ConfigSync extends React.Component {
           <Form field={this.field}>
             <Form.Item label="Data ID:" required {...formItemLayout}>
               <Input htmlType="text" disabled={'disabled'} {...init('dataId')} />
-              <div style={{ marginTop: 10 }}>
-                <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
+              <div style={{marginTop: 10}}>
+                <a style={{fontSize: '12px'}} onClick={this.toggleMore.bind(this)}>
                   {this.state.showmore ? locale.collapse : locale.advancedOptions}
                 </a>
               </div>
             </Form.Item>
-            <div style={{ overflow: 'hidden', height: this.state.showmore ? 'auto' : '0' }}>
+            <div style={{overflow: 'hidden', height: this.state.showmore ? 'auto' : '0'}}>
               <Form.Item label="Group ID:" required {...formItemLayout}>
                 <Input htmlType="text" disabled={'disabled'} {...init('group')} />
               </Form.Item>
@@ -282,8 +282,8 @@ class ConfigSync extends React.Component {
               </div>
             </Form.Item>
             <Form.Item label=" " {...formItemLayout}>
-              <div style={{ textAlign: 'right' }}>
-                <Button type="primary" onClick={this.sync.bind(this)} style={{ marginRight: 10 }}>
+              <div style={{textAlign: 'right'}}>
+                <Button type="primary" onClick={this.sync.bind(this)} style={{marginRight: 10}}>
                   {locale.sync}
                 </Button>
                 {}
@@ -293,7 +293,7 @@ class ConfigSync extends React.Component {
               </div>
             </Form.Item>
           </Form>
-          <SuccessDialog ref={this.successDialog} />
+          <SuccessDialog ref={this.successDialog}/>
         </Loading>
       </div>
     );

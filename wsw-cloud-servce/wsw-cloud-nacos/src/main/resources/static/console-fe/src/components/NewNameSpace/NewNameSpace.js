@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
-import { request } from '../../globalLib';
-import { Button, ConfigProvider, Dialog, Field, Form, Input, Loading } from '@alifd/next';
+import {request} from '../../globalLib';
+import {Button, ConfigProvider, Dialog, Field, Form, Input, Loading} from '@alifd/next';
 
 import './index.scss';
 import PropTypes from 'prop-types';
@@ -21,8 +21,8 @@ import PropTypes from 'prop-types';
 const FormItem = Form.Item;
 
 const formItemLayout = {
-  labelCol: { fixedSpan: 6 },
-  wrapperCol: { span: 18 },
+  labelCol: {fixedSpan: 6},
+  wrapperCol: {span: 18},
 };
 
 @ConfigProvider.config
@@ -95,21 +95,21 @@ class NewNameSpace extends React.Component {
   }
 
   handleSubmit() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) return;
       const flag = this.state.dataSource.every(
         val => val.namespaceShowName !== values.namespaceShowName
       );
       if (!flag) {
-        Dialog.alert({ content: locale.norepeat });
+        Dialog.alert({content: locale.norepeat});
         return;
       }
       this.disabled = true;
       this.setState({
         disabled: true,
       });
-      let { customNamespaceId } = values;
+      let {customNamespaceId} = values;
       if (!customNamespaceId) {
         customNamespaceId = '';
       }
@@ -182,7 +182,7 @@ class NewNameSpace extends React.Component {
   }
 
   validateChart(rule, value, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const chartReg = /[@#\$%\^&\*]+/g;
 
     if (chartReg.test(value)) {
@@ -196,7 +196,7 @@ class NewNameSpace extends React.Component {
     if (!value || value.trim() === '') {
       callback();
     } else {
-      const { locale = {} } = this.props;
+      const {locale = {}} = this.props;
       if (value.length > 128) {
         callback(locale.namespaceIdTooLong);
       }
@@ -219,13 +219,13 @@ class NewNameSpace extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const footer = (
       <div>
         <Button type="primary" onClick={this.handleSubmit.bind(this)} disabled={this.disabled}>
           {locale.ok}
         </Button>
-        <Button type="normal" onClick={this.closeDialog.bind(this)} style={{ marginLeft: 5 }}>
+        <Button type="normal" onClick={this.closeDialog.bind(this)} style={{marginLeft: 5}}>
           {locale.cancel}
         </Button>
       </div>
@@ -234,7 +234,7 @@ class NewNameSpace extends React.Component {
       <div>
         <Dialog
           title={locale.newnamespce}
-          style={{ width: '50%' }}
+          style={{width: '50%'}}
           visible={this.state.dialogvisible}
           onOk={this.handleSubmit.bind(this)}
           onCancel={this.closeDialog.bind(this)}
@@ -244,15 +244,15 @@ class NewNameSpace extends React.Component {
           <Form field={this.field}>
             <Loading
               tip={locale.loading}
-              style={{ width: '100%', position: 'relative' }}
+              style={{width: '100%', position: 'relative'}}
               visible={this.state.loading}
             >
               <FormItem label={locale.namespaceId} {...formItemLayout}>
                 <Input
                   {...this.field.init('customNamespaceId', {
-                    rules: [{ validator: this.validateNamespzecId.bind(this) }],
+                    rules: [{validator: this.validateNamespzecId.bind(this)}],
                   })}
-                  style={{ width: '100%' }}
+                  style={{width: '100%'}}
                 />
               </FormItem>
               <FormItem label={locale.name} required {...formItemLayout}>
@@ -263,10 +263,10 @@ class NewNameSpace extends React.Component {
                         required: true,
                         message: locale.namespacenotnull,
                       },
-                      { validator: this.validateChart.bind(this) },
+                      {validator: this.validateChart.bind(this)},
                     ],
                   })}
-                  style={{ width: '100%' }}
+                  style={{width: '100%'}}
                 />
               </FormItem>
               <FormItem label={locale.description} required {...formItemLayout}>
@@ -277,10 +277,10 @@ class NewNameSpace extends React.Component {
                         required: true,
                         message: locale.namespacedescnotnull,
                       },
-                      { validator: this.validateChart.bind(this) },
+                      {validator: this.validateChart.bind(this)},
                     ],
                   })}
-                  style={{ width: '100%' }}
+                  style={{width: '100%'}}
                 />
               </FormItem>
             </Loading>

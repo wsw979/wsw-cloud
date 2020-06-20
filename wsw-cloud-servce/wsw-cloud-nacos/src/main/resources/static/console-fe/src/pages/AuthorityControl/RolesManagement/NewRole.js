@@ -13,13 +13,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, Form, Input, Dialog, ConfigProvider } from '@alifd/next';
+import {ConfigProvider, Dialog, Field, Form, Input} from '@alifd/next';
 
 const FormItem = Form.Item;
 
 const formItemLayout = {
-  labelCol: { fixedSpan: 4 },
-  wrapperCol: { span: 19 },
+  labelCol: {fixedSpan: 4},
+  wrapperCol: {span: 19},
 };
 
 @ConfigProvider.config
@@ -36,7 +36,7 @@ class NewRole extends React.Component {
   };
 
   check() {
-    const { locale } = this.props;
+    const {locale} = this.props;
     const errors = {
       role: locale.roleError,
       username: locale.usernameError,
@@ -55,9 +55,9 @@ class NewRole extends React.Component {
   }
 
   render() {
-    const { locale } = this.props;
-    const { getError } = this.field;
-    const { visible, onOk, onCancel } = this.props;
+    const {locale} = this.props;
+    const {getError} = this.field;
+    const {visible, onOk, onCancel} = this.props;
     return (
       <>
         <Dialog
@@ -73,12 +73,12 @@ class NewRole extends React.Component {
           onCancel={onCancel}
           afterClose={() => this.field.reset()}
         >
-          <Form style={{ width: 400 }} {...formItemLayout} field={this.field}>
+          <Form style={{width: 400}} {...formItemLayout} field={this.field}>
             <FormItem label={locale.role} required help={getError('role')}>
-              <Input name="role" trim placeholder={locale.rolePlaceholder} />
+              <Input name="role" trim placeholder={locale.rolePlaceholder}/>
             </FormItem>
             <FormItem label={locale.username} required help={getError('username')}>
-              <Input name="username" placeholder={locale.usernamePlaceholder} />
+              <Input name="username" placeholder={locale.usernamePlaceholder}/>
             </FormItem>
           </Form>
         </Dialog>

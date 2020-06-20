@@ -12,19 +12,19 @@
  */
 
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { ConfigProvider, Dropdown, Menu } from '@alifd/next';
+import {connect} from 'react-redux';
+import {ConfigProvider, Dropdown, Menu} from '@alifd/next';
 import siteConfig from '../config';
-import { changeLanguage } from '@/reducers/locale';
+import {changeLanguage} from '@/reducers/locale';
 import PasswordReset from '../pages/AuthorityControl/UserManagement/PasswordReset';
-import { passwordReset } from '../reducers/authority';
+import {passwordReset} from '../reducers/authority';
 
 import './index.scss';
 
 @withRouter
-@connect(state => ({ ...state.locale }), { changeLanguage })
+@connect(state => ({...state.locale}), {changeLanguage})
 @ConfigProvider.config
 class Header extends React.Component {
   static displayName = 'Header';
@@ -37,10 +37,10 @@ class Header extends React.Component {
     changeLanguage: PropTypes.func,
   };
 
-  state = { passwordResetUser: '' };
+  state = {passwordResetUser: ''};
 
   switchLang = () => {
-    const { language = 'en-US', changeLanguage } = this.props;
+    const {language = 'en-US', changeLanguage} = this.props;
     const currentLanguage = language === 'en-US' ? 'zh-CN' : 'en-US';
     changeLanguage(currentLanguage);
   };
@@ -76,16 +76,16 @@ class Header extends React.Component {
     const {
       locale = {},
       language = 'en-us',
-      location: { pathname },
+      location: {pathname},
     } = this.props;
-    const { home, docs, blog, community, languageSwitchButton } = locale;
-    const { passwordResetUser = '' } = this.state;
+    const {home, docs, blog, community, languageSwitchButton} = locale;
+    const {passwordResetUser = ''} = this.state;
     const BASE_URL = `https://nacos.io/${language.toLocaleLowerCase()}/`;
     const NAV_MENU = [
-      { id: 1, title: home, link: BASE_URL },
-      { id: 2, title: docs, link: `${BASE_URL}docs/what-is-nacos.html` },
-      { id: 3, title: blog, link: `${BASE_URL}blog/index.html` },
-      { id: 4, title: community, link: `${BASE_URL}community/index.html` },
+      {id: 1, title: home, link: BASE_URL},
+      {id: 2, title: docs, link: `${BASE_URL}docs/what-is-nacos.html`},
+      {id: 3, title: blog, link: `${BASE_URL}blog/index.html`},
+      {id: 4, title: community, link: `${BASE_URL}community/index.html`},
     ];
     return (
       <>
@@ -135,7 +135,7 @@ class Header extends React.Component {
               return res;
             })
           }
-          onCancel={() => this.setState({ passwordResetUser: undefined })}
+          onCancel={() => this.setState({passwordResetUser: undefined})}
         />
       </>
     );

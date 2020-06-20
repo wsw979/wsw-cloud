@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, ConfigProvider, Field, Form, Input } from '@alifd/next';
-import { getParams, request } from '@/globalLib';
+import {Button, ConfigProvider, Field, Form, Input} from '@alifd/next';
+import {getParams, request} from '@/globalLib';
 
 import './index.scss';
 
@@ -55,7 +55,7 @@ class HistoryDetail extends React.Component {
   }
 
   getDataDetail() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     const typeMap = {
       U: locale.update,
@@ -86,8 +86,8 @@ class HistoryDetail extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     const formItemLayout = {
       labelCol: {
         fixedSpan: 6,
@@ -97,18 +97,18 @@ class HistoryDetail extends React.Component {
       },
     };
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{padding: 10}}>
         <h1>{locale.historyDetails}</h1>
         <Form field={this.field}>
           <Form.Item label="Data ID:" required {...formItemLayout}>
             <Input htmlType="text" readOnly {...init('dataId')} />
-            <div style={{ marginTop: 10 }}>
-              <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
+            <div style={{marginTop: 10}}>
+              <a style={{fontSize: '12px'}} onClick={this.toggleMore.bind(this)}>
                 {this.state.showmore ? locale.recipientFrom : locale.moreAdvancedOptions}
               </a>
             </div>
           </Form.Item>
-          <div style={{ overflow: 'hidden', height: this.state.showmore ? 'auto' : '0' }}>
+          <div style={{overflow: 'hidden', height: this.state.showmore ? 'auto' : '0'}}>
             <Form.Item label="Group:" required {...formItemLayout}>
               <Input htmlType="text" readOnly {...init('group')} />
             </Form.Item>

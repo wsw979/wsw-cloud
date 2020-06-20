@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { getParams, request, aliwareIntl } from './globalLib';
+import {aliwareIntl, getParams, request} from './globalLib';
 
 let hasAlert = false;
 
@@ -25,13 +25,13 @@ window.globalConfig = {
 
 request.middleWare((_config = {}) => {
   let config = _config;
-  let { url = '' } = config;
+  let {url = ''} = config;
 
   const namespace = localStorage.getItem('namespace') ? localStorage.getItem('namespace') : '';
   // 如果url中已经有 namespaceId, 不在data中添加namespaceId
   config.data =
     url.indexOf('namespaceId=') === -1
-      ? Object.assign({}, config.data, { namespaceId: namespace })
+      ? Object.assign({}, config.data, {namespaceId: namespace})
       : config.data;
 
   let tenant = window.nownamespace || getParams('namespace') || '';
@@ -48,7 +48,7 @@ request.middleWare((_config = {}) => {
   const preSucess = config.success;
   const preErorr = config.error;
 
-  config.success = function(res) {
+  config.success = function (res) {
     if (res.code === 'ConsoleNeedLogin' && window.location.host.indexOf('acm') !== -1) {
       window.location.reload();
     }
@@ -56,7 +56,7 @@ request.middleWare((_config = {}) => {
       hasAlert = true;
       window.Dialog.alert({
         language: aliwareIntl.currentLanguageCode || 'zh-cn',
-        style: { width: 400 },
+        style: {width: 400},
         content: res.message,
         onOk: () => {
           hasAlert = false;
@@ -73,13 +73,13 @@ request.middleWare((_config = {}) => {
     }
   };
 
-  config.error = function(res) {
+  config.error = function (res) {
     if (res.status === 403 && !hasAlert) {
       hasAlert = true;
 
       window.Dialog.alert({
         language: aliwareIntl.currentLanguageCode || 'zh-cn',
-        style: { width: 400 },
+        style: {width: 400},
         content: aliwareIntl.get('com.alibaba.nacos.pubshow'), // '子账号没有权限，请联系主账号负责人RAM上授权',
         onOk: () => {
           hasAlert = false;
@@ -103,7 +103,7 @@ request.middleWare((_config = {}) => {
  * 配置 monaco
  */
 window.require.config({
-  paths: { vs: process.env.NODE_ENV === 'production' ? 'console-fe/public/js/vs' : 'js/vs' },
+  paths: {vs: process.env.NODE_ENV === 'production' ? 'console-fe/public/js/vs' : 'js/vs'},
 });
 window.require.config({
   'vs/nls': {
@@ -115,7 +115,7 @@ window.require.config({
 
 window.require(['vs/editor/editor.main'], () => {
   // Register a new language
-  window.monaco.languages.register({ id: 'properties' });
+  window.monaco.languages.register({id: 'properties'});
 
   // Register a tokens provider for the language
   window.monaco.languages.setMonarchTokensProvider('properties', {
@@ -129,9 +129,9 @@ window.require(['vs/editor/editor.main'], () => {
     base: 'vs',
     inherit: false,
     rules: [
-      { token: 'key', foreground: '009968' },
-      { token: 'value', foreground: '009968' },
-      { token: 'comment', foreground: '666666' },
+      {token: 'key', foreground: '009968'},
+      {token: 'value', foreground: '009968'},
+      {token: 'comment', foreground: '666666'},
     ],
   });
 
@@ -169,7 +169,7 @@ window.importEditor = callback => {
 
 // 同步获取命名空间地址
 
-window._getLink = (function() {
+window._getLink = (function () {
   const _linkObj = {};
   // request({
   //     url: "com.alibaba.nacos.service.getLinks",
@@ -181,7 +181,7 @@ window._getLink = (function() {
   //         }
   //     }
   // });
-  return function(linkName) {
+  return function (linkName) {
     return _linkObj[linkName] || '';
   };
 })(window);
@@ -196,11 +196,12 @@ window.addEventListener('resize', () => {
       height = height > 800 ? height : 800;
       window.parent.adjustHeight && window.parent.adjustHeight(height);
     }, 500);
-  } catch (e) {}
+  } catch (e) {
+  }
 });
 // 判断是否是国际站国际用户
-window.isIntel = function() {
-  const { host } = window.location;
+window.isIntel = function () {
+  const {host} = window.location;
   return host.indexOf('alibabacloud.com') !== -1;
 };
 

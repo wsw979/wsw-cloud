@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { Button, ConfigProvider, Dialog, Form } from '@alifd/next';
+import {Button, ConfigProvider, Dialog, Form} from '@alifd/next';
 
 import './index.scss';
 
@@ -39,12 +39,13 @@ class ExportDialog extends React.Component {
       total: 0,
     };
     this.formItemLayout = {
-      labelCol: { fixedSpan: 4 },
-      wrapperCol: { span: 20 },
+      labelCol: {fixedSpan: 4},
+      wrapperCol: {span: 20},
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   openDialog(payload) {
     this.setState({
@@ -67,7 +68,7 @@ class ExportDialog extends React.Component {
   };
 
   getQuery() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     if (this.state.records.length > 0) return locale.selectedEntry;
     if (
       this.state.dataId === '' &&
@@ -103,7 +104,7 @@ class ExportDialog extends React.Component {
   getLink() {
     const data = [];
     this.state.records.forEach(record => {
-      data.push({ dataId: record.dataId, group: record.group });
+      data.push({dataId: record.dataId, group: record.group});
     });
     const query = `?dataId=${this.state.dataId}&group=${this.state.group}&appName=${
       this.state.appName
@@ -118,11 +119,11 @@ class ExportDialog extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const footer = (
       <div>
         {/* <a id="downloadLink" style={{ display: "none" }} href={this.getLink()} /> */}
-        <Button type="primary" onClick={this.doExport} {...{ disabled: this.state.total <= 0 }}>
+        <Button type="primary" onClick={this.doExport} {...{disabled: this.state.total <= 0}}>
           {locale.exportBtn}
         </Button>
       </div>
@@ -134,7 +135,7 @@ class ExportDialog extends React.Component {
           visible={this.state.visible}
           footer={footer}
           footerAlign="center"
-          style={{ width: 480 }}
+          style={{width: 480}}
           onCancel={this.closeDialog}
           onClose={this.closeDialog}
           title={`${locale.exportConfiguration + this.state.serverId}）`}
@@ -142,13 +143,13 @@ class ExportDialog extends React.Component {
           <Form>
             <FormItem label={locale.source} {...this.formItemLayout}>
               <p>
-                <span style={{ color: '#33cde5' }}>{this.state.tenant.name}</span>
+                <span style={{color: '#33cde5'}}>{this.state.tenant.name}</span>
                 {` | ${this.state.tenant.id}`}
               </p>
             </FormItem>
             <FormItem label={locale.items} {...this.formItemLayout}>
               <p>
-                <span style={{ color: '#33cde5' }}>{this.state.total}</span> {this.getQuery()}{' '}
+                <span style={{color: '#33cde5'}}>{this.state.total}</span> {this.getQuery()}{' '}
               </p>
             </FormItem>
           </Form>

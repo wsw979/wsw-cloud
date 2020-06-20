@@ -12,7 +12,7 @@
  */
 
 import request from '../utils/request';
-import { GET_STATE } from '../constants';
+import {GET_STATE} from '../constants';
 
 const initialState = {
   version: null,
@@ -52,10 +52,10 @@ const getState = () => dispatch =>
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_STATE:
-      return { ...state, ...action.data };
+      return {...state, ...action.data};
     default:
       return state;
   }
 };
 
-export { getState, login };
+export {getState, login};

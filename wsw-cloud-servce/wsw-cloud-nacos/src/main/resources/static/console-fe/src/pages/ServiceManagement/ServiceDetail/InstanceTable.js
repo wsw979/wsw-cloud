@@ -13,9 +13,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { request } from '../../../globalLib';
-import { Button, ConfigProvider, Message, Pagination, Table } from '@alifd/next';
-import { HEALTHY_COLOR_MAPPING } from './constant';
+import {request} from '../../../globalLib';
+import {Button, ConfigProvider, Message, Pagination, Table} from '@alifd/next';
+import {HEALTHY_COLOR_MAPPING} from './constant';
 import EditInstanceDialog from './EditInstanceDialog';
 
 @ConfigProvider.config
@@ -34,7 +34,7 @@ class InstanceTable extends React.Component {
     this.editInstanceDialog = React.createRef();
     this.state = {
       loading: false,
-      instance: { count: 0, list: [] },
+      instance: {count: 0, list: []},
       pageNum: 1,
       pageSize: 10,
     };
@@ -45,17 +45,17 @@ class InstanceTable extends React.Component {
   }
 
   openLoading() {
-    this.setState({ loading: true });
+    this.setState({loading: true});
   }
 
   closeLoading() {
-    this.setState({ loading: false });
+    this.setState({loading: false});
   }
 
   getInstanceList() {
-    const { clusterName, serviceName, groupName } = this.props;
+    const {clusterName, serviceName, groupName} = this.props;
     if (!clusterName) return;
-    const { pageSize, pageNum } = this.state;
+    const {pageSize, pageNum} = this.state;
     request({
       url: 'v1/ns/catalog/instances',
       data: {
@@ -66,7 +66,7 @@ class InstanceTable extends React.Component {
         pageNo: pageNum,
       },
       beforeSend: () => this.openLoading(),
-      success: instance => this.setState({ instance }),
+      success: instance => this.setState({instance}),
       complete: () => this.closeLoading(),
     });
   }
@@ -76,9 +76,9 @@ class InstanceTable extends React.Component {
   }
 
   switchState(index, record) {
-    const { instance } = this.state;
-    const { ip, port, ephemeral, weight, enabled, metadata } = record;
-    const { clusterName, serviceName } = this.props;
+    const {instance} = this.state;
+    const {ip, port, ephemeral, weight, enabled, metadata} = record;
+    const {clusterName, serviceName} = this.props;
     request({
       method: 'PUT',
       url: 'v1/ns/instance',
@@ -97,7 +97,7 @@ class InstanceTable extends React.Component {
       success: () => {
         const newVal = Object.assign({}, instance);
         newVal.list[index].enabled = !enabled;
-        this.setState({ instance: newVal });
+        this.setState({instance: newVal});
       },
       error: e => Message.error(e.responseText || 'error'),
       complete: () => this.closeLoading(),
@@ -105,27 +105,27 @@ class InstanceTable extends React.Component {
   }
 
   onChangePage(pageNum) {
-    this.setState({ pageNum }, () => this.getInstanceList());
+    this.setState({pageNum}, () => this.getInstanceList());
   }
 
-  rowColor = ({ healthy }) => ({ className: `row-bg-${HEALTHY_COLOR_MAPPING[`${healthy}`]}` });
+  rowColor = ({healthy}) => ({className: `row-bg-${HEALTHY_COLOR_MAPPING[`${healthy}`]}`});
 
   render() {
-    const { locale = {} } = this.props;
-    const { clusterName, serviceName } = this.props;
-    const { instance, pageSize, loading } = this.state;
+    const {locale = {}} = this.props;
+    const {clusterName, serviceName} = this.props;
+    const {instance, pageSize, loading} = this.state;
     return instance.count ? (
       <div>
         <Table dataSource={instance.list} loading={loading} getRowProps={this.rowColor}>
-          <Table.Column width={138} title="IP" dataIndex="ip" />
-          <Table.Column width={100} title={locale.port} dataIndex="port" />
+          <Table.Column width={138} title="IP" dataIndex="ip"/>
+          <Table.Column width={100} title={locale.port} dataIndex="port"/>
           <Table.Column
             width={100}
             title={locale.ephemeral}
             dataIndex="ephemeral"
             cell={val => `${val}`}
           />
-          <Table.Column width={100} title={locale.weight} dataIndex="weight" />
+          <Table.Column width={100} title={locale.weight} dataIndex="weight"/>
           <Table.Column
             width={100}
             title={locale.healthy}

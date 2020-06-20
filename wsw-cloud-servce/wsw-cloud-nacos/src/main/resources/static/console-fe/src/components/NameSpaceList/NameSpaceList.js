@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConfigProvider, Dialog } from '@alifd/next';
-import { getParams, setParams, request } from '../../globalLib';
+import {ConfigProvider, Dialog} from '@alifd/next';
+import {getParams, request, setParams} from '../../globalLib';
 
 import './index.scss';
 
@@ -101,7 +101,7 @@ class NameSpaceList extends React.Component {
   }
 
   getNameSpaces() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     if (window.namespaceList && window.namespaceList.length) {
       this.handleNameSpaces(window.namespaceList);
     } else {
@@ -135,7 +135,7 @@ class NameSpaceList extends React.Component {
     let namespaceShowName = '';
     for (let i = 0; i < data.length; i++) {
       if (data[i].namespace === nownamespace) {
-        ({ namespaceShowName } = data[i]);
+        ({namespaceShowName} = data[i]);
         break;
       }
     }
@@ -158,15 +158,15 @@ class NameSpaceList extends React.Component {
   }
 
   rendernamespace(namespaceList) {
-    const { nownamespace } = this.state; // 获得当前namespace
+    const {nownamespace} = this.state; // 获得当前namespace
     const namespacesBtn = namespaceList.map((obj, index) => {
       const style =
         obj.namespace === nownamespace
-          ? { color: '#00C1DE', marginRight: 10, border: 'none', fontSize: 12 }
-          : { color: '#666', marginRight: 10, border: 'none', fontSize: 12 };
+          ? {color: '#00C1DE', marginRight: 10, border: 'none', fontSize: 12}
+          : {color: '#666', marginRight: 10, border: 'none', fontSize: 12};
       return (
-        <div key={index} style={{ float: 'left', cursor: 'pointer' }}>
-          {index === 0 ? '' : <span style={{ marginRight: 5, marginLeft: 5 }}>|</span>}
+        <div key={index} style={{float: 'left', cursor: 'pointer'}}>
+          {index === 0 ? '' : <span style={{marginRight: 5, marginLeft: 5}}>|</span>}
           <span
             type={'light'}
             style={style}
@@ -178,7 +178,7 @@ class NameSpaceList extends React.Component {
         </div>
       );
     });
-    return <div style={{ paddingTop: 9 }}>{namespacesBtn}</div>;
+    return <div style={{paddingTop: 9}}>{namespacesBtn}</div>;
   }
 
   render() {
@@ -215,7 +215,7 @@ class NameSpaceList extends React.Component {
         ) : (
           ''
         )}
-        <div style={{ float: 'left' }}>{this.rendernamespace(namespaceList)}</div>
+        <div style={{float: 'left'}}>{this.rendernamespace(namespaceList)}</div>
       </div>
     );
   }

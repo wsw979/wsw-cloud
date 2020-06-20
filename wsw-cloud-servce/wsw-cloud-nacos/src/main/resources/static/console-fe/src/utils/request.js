@@ -1,8 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
-import { Message } from '@alifd/next';
-import { browserHistory } from 'react-router';
-import { isPlainObject } from './nacosutil';
+import {Message} from '@alifd/next';
+import {isPlainObject} from './nacosutil';
 // import { SUCCESS_RESULT_CODE } from '../constants';
 
 const API_GENERAL_ERROR_MESSAGE = 'Request error, please try again later!';
@@ -19,7 +18,7 @@ const request = () => {
 
   instance.interceptors.request.use(
     config => {
-      const { url, params, data, method, headers } = config;
+      const {url, params, data, method, headers} = config;
       if (!params) {
         config.params = {};
       }
@@ -31,9 +30,9 @@ const request = () => {
           console.log(e);
           goLogin();
         }
-        const { accessToken = '' } = token;
+        const {accessToken = ''} = token;
         config.params.accessToken = accessToken;
-        config.headers = Object.assign({}, headers, { accessToken });
+        config.headers = Object.assign({}, headers, {accessToken});
       }
       if (data && isPlainObject(data) && ['post', 'put'].includes(method)) {
         config.data = qs.stringify(data);
@@ -49,7 +48,7 @@ const request = () => {
 
   instance.interceptors.response.use(
     response => {
-      const { success, resultCode, resultMessage = API_GENERAL_ERROR_MESSAGE } = response.data;
+      const {success, resultCode, resultMessage = API_GENERAL_ERROR_MESSAGE} = response.data;
       // if (!success && resultCode !== SUCCESS_RESULT_CODE) {
       //   Message.error(resultMessage);
       //   return Promise.reject(new Error(resultMessage));
@@ -58,7 +57,7 @@ const request = () => {
     },
     error => {
       if (error.response) {
-        const { data = {}, status } = error.response;
+        const {data = {}, status} = error.response;
         let message = `HTTP ERROR: ${status}`;
         if (typeof data === 'string') {
           message = data;

@@ -13,16 +13,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Dialog, Pagination, Table, ConfigProvider } from '@alifd/next';
-import { connect } from 'react-redux';
-import { getUsers, createUser, deleteUser, passwordReset } from '../../../reducers/authority';
+import {Button, ConfigProvider, Dialog, Pagination, Table} from '@alifd/next';
+import {connect} from 'react-redux';
+import {createUser, deleteUser, getUsers, passwordReset} from '../../../reducers/authority';
 import RegionGroup from '../../../components/RegionGroup';
 import NewUser from './NewUser';
 import PasswordReset from './PasswordReset';
 
 import './UserManagement.scss';
 
-@connect(state => ({ users: state.authority.users }), { getUsers })
+@connect(state => ({users: state.authority.users}), {getUsers})
 @ConfigProvider.config
 class UserManagement extends React.Component {
   static displayName = 'UserManagement';
@@ -48,34 +48,34 @@ class UserManagement extends React.Component {
   }
 
   getUsers() {
-    const { pageNo, pageSize } = this.state;
+    const {pageNo, pageSize} = this.state;
     this.props
-      .getUsers({ pageNo, pageSize })
+      .getUsers({pageNo, pageSize})
       .then(() => {
         if (this.state.loading) {
-          this.setState({ loading: false });
+          this.setState({loading: false});
         }
       })
-      .catch(() => this.setState({ loading: false }));
+      .catch(() => this.setState({loading: false}));
   }
 
   colseCreateUser() {
-    this.setState({ createUserVisible: false });
+    this.setState({createUserVisible: false});
   }
 
   render() {
-    const { users, locale } = this.props;
-    const { loading, pageSize, pageNo, createUserVisible, passwordResetUser } = this.state;
+    const {users, locale} = this.props;
+    const {loading, pageSize, pageNo, createUserVisible, passwordResetUser} = this.state;
     return (
       <>
-        <RegionGroup left={locale.userManagement} />
+        <RegionGroup left={locale.userManagement}/>
         <div className="filter-panel">
-          <Button type="primary" onClick={() => this.setState({ createUserVisible: true })}>
+          <Button type="primary" onClick={() => this.setState({createUserVisible: true})}>
             {locale.createUser}
           </Button>
         </div>
         <Table dataSource={users.pageItems} loading={loading} maxBodyHeight={476} fixedHeader>
-          <Table.Column title={locale.username} dataIndex="username" />
+          <Table.Column title={locale.username} dataIndex="username"/>
           <Table.Column
             title={locale.password}
             dataIndex="password"
@@ -88,7 +88,7 @@ class UserManagement extends React.Component {
               <>
                 <Button
                   type="primary"
-                  onClick={() => this.setState({ passwordResetUser: username })}
+                  onClick={() => this.setState({passwordResetUser: username})}
                 >
                   {locale.resetPassword}
                 </Button>
@@ -102,7 +102,7 @@ class UserManagement extends React.Component {
                       content: locale.deleteUserTip,
                       onOk: () =>
                         deleteUser(username).then(() => {
-                          this.setState({ pageNo: 1 }, () => this.getUsers());
+                          this.setState({pageNo: 1}, () => this.getUsers());
                         }),
                     })
                   }
@@ -119,14 +119,14 @@ class UserManagement extends React.Component {
             current={pageNo}
             total={users.totalCount}
             pageSize={pageSize}
-            onChange={pageNo => this.setState({ pageNo }, () => this.getUsers())}
+            onChange={pageNo => this.setState({pageNo}, () => this.getUsers())}
           />
         )}
         <NewUser
           visible={createUserVisible}
           onOk={user =>
             createUser(user).then(res => {
-              this.setState({ pageNo: 1 }, () => this.getUsers());
+              this.setState({pageNo: 1}, () => this.getUsers());
               return res;
             })
           }
@@ -140,7 +140,7 @@ class UserManagement extends React.Component {
               return res;
             })
           }
-          onCancel={() => this.setState({ passwordResetUser: undefined })}
+          onCancel={() => this.setState({passwordResetUser: undefined})}
         />
       </>
     );

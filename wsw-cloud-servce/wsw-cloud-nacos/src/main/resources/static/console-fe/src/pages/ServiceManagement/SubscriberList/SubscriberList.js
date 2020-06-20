@@ -13,31 +13,18 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  Field,
-  Form,
-  Grid,
-  Input,
-  Loading,
-  Pagination,
-  Table,
-  Dialog,
-  Message,
-  ConfigProvider,
-} from '@alifd/next';
-import { connect } from 'react-redux';
-import { getSubscribers, removeSubscribers } from '../../../reducers/subscribers';
-import { request } from '../../../globalLib';
+import {Button, ConfigProvider, Field, Form, Grid, Input, Loading, Message, Pagination, Table,} from '@alifd/next';
+import {connect} from 'react-redux';
+import {getSubscribers, removeSubscribers} from '../../../reducers/subscribers';
 import RegionGroup from '../../../components/RegionGroup';
 
 import './SubscriberList.scss';
 
 const FormItem = Form.Item;
-const { Row, Col } = Grid;
-const { Column } = Table;
+const {Row, Col} = Grid;
+const {Column} = Table;
 
-@connect(state => ({ subscriberData: state.subscribers }), { getSubscribers, removeSubscribers })
+@connect(state => ({subscriberData: state.subscribers}), {getSubscribers, removeSubscribers})
 @ConfigProvider.config
 class SubscriberList extends React.Component {
   static displayName = 'SubscriberList';
@@ -65,16 +52,16 @@ class SubscriberList extends React.Component {
   }
 
   openLoading() {
-    this.setState({ loading: true });
+    this.setState({loading: true});
   }
 
   closeLoading() {
-    this.setState({ loading: false });
+    this.setState({loading: false});
   }
 
   querySubscriberList() {
-    const { searchServiceNamePrompt } = this.props.locale;
-    const { search, pageSize, pageNo, nowNamespaceId = '' } = this.state;
+    const {searchServiceNamePrompt} = this.props.locale;
+    const {search, pageSize, pageNo, nowNamespaceId = ''} = this.state;
     if (!search.serviceName) {
       Message.error(searchServiceNamePrompt);
       return;
@@ -88,7 +75,7 @@ class SubscriberList extends React.Component {
   }
 
   switchNamespace = () => {
-    this.setState({ search: { serviceName: '', groupName: '' } });
+    this.setState({search: {serviceName: '', groupName: ''}});
     this.props.removeSubscribers();
   };
 
@@ -99,8 +86,8 @@ class SubscriberList extends React.Component {
     });
 
   render() {
-    const { locale = {}, subscriberData = {} } = this.props;
-    const { count = 0, subscribers = [] } = subscriberData;
+    const {locale = {}, subscriberData = {}} = this.props;
+    const {count = 0, subscribers = []} = subscriberData;
     const {
       pubNoData,
       subscriberList,
@@ -110,8 +97,8 @@ class SubscriberList extends React.Component {
       groupNamePlaceholder,
       query,
     } = locale;
-    const { search, nowNamespaceName, nowNamespaceId } = this.state;
-    const { init, getValue } = this.field;
+    const {search, nowNamespaceName, nowNamespaceId} = this.state;
+    const {init, getValue} = this.field;
     this.init = init;
     this.getValue = getValue;
     return (
@@ -126,7 +113,7 @@ class SubscriberList extends React.Component {
           tip="Loading..."
           color="#333"
         >
-          <div style={{ marginTop: -15 }}>
+          <div style={{marginTop: -15}}>
             <RegionGroup
               setNowNameSpace={this.setNowNameSpace}
               namespaceCallBack={this.switchNamespace}
@@ -150,30 +137,30 @@ class SubscriberList extends React.Component {
                 <FormItem label={serviceName}>
                   <Input
                     placeholder={serviceNamePlaceholder}
-                    style={{ width: 200 }}
+                    style={{width: 200}}
                     value={search.serviceName}
-                    onChange={serviceName => this.setState({ search: { ...search, serviceName } })}
+                    onChange={serviceName => this.setState({search: {...search, serviceName}})}
                     onPressEnter={() =>
-                      this.setState({ pageNo: 1 }, () => this.querySubscriberList())
+                      this.setState({pageNo: 1}, () => this.querySubscriberList())
                     }
                   />
                 </FormItem>
                 <FormItem label={groupName}>
                   <Input
                     placeholder={groupNamePlaceholder}
-                    style={{ width: 200 }}
+                    style={{width: 200}}
                     value={search.groupName}
-                    onChange={groupName => this.setState({ search: { ...search, groupName } })}
+                    onChange={groupName => this.setState({search: {...search, groupName}})}
                     onPressEnter={() =>
-                      this.setState({ pageNo: 1 }, () => this.querySubscriberList())
+                      this.setState({pageNo: 1}, () => this.querySubscriberList())
                     }
                   />
                 </FormItem>
                 <FormItem label="">
                   <Button
                     type="primary"
-                    onClick={() => this.setState({ pageNo: 1 }, () => this.querySubscriberList())}
-                    style={{ marginRight: 10 }}
+                    onClick={() => this.setState({pageNo: 1}, () => this.querySubscriberList())}
+                    style={{marginRight: 10}}
                   >
                     {query}
                   </Button>
@@ -181,12 +168,12 @@ class SubscriberList extends React.Component {
               </Form>
             </Col>
           </Row>
-          <Row style={{ padding: 0 }}>
-            <Col span="24" style={{ padding: 0 }}>
-              <Table dataSource={subscribers} locale={{ empty: pubNoData }}>
-                <Column title={locale.address} dataIndex="addrStr" />
-                <Column title={locale.clientVersion} dataIndex="agent" />
-                <Column title={locale.appName} dataIndex="app" />
+          <Row style={{padding: 0}}>
+            <Col span="24" style={{padding: 0}}>
+              <Table dataSource={subscribers} locale={{empty: pubNoData}}>
+                <Column title={locale.address} dataIndex="addrStr"/>
+                <Column title={locale.clientVersion} dataIndex="agent"/>
+                <Column title={locale.appName} dataIndex="app"/>
               </Table>
             </Col>
           </Row>
@@ -201,7 +188,7 @@ class SubscriberList extends React.Component {
                 current={this.state.pageNo}
                 total={count}
                 pageSize={this.state.pageSize}
-                onChange={pageNo => this.setState({ pageNo }, () => this.querySubscriberList())}
+                onChange={pageNo => this.setState({pageNo}, () => this.querySubscriberList())}
               />
             </div>
           )}

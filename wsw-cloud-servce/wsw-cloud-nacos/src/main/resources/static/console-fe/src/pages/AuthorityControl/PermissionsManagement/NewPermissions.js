@@ -13,19 +13,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, Form, Input, Select, Dialog, ConfigProvider } from '@alifd/next';
-import { connect } from 'react-redux';
-import { getNamespaces } from '../../../reducers/namespace';
+import {ConfigProvider, Dialog, Field, Form, Input, Select} from '@alifd/next';
+import {connect} from 'react-redux';
+import {getNamespaces} from '../../../reducers/namespace';
 
 const FormItem = Form.Item;
-const { Option } = Select;
+const {Option} = Select;
 
 const formItemLayout = {
-  labelCol: { fixedSpan: 4 },
-  wrapperCol: { span: 19 },
+  labelCol: {fixedSpan: 4},
+  wrapperCol: {span: 19},
 };
 
-@connect(state => ({ namespaces: state.namespace.namespaces }), { getNamespaces })
+@connect(state => ({namespaces: state.namespace.namespaces}), {getNamespaces})
 @ConfigProvider.config
 class NewPermissions extends React.Component {
   static displayName = 'NewPermissions';
@@ -46,7 +46,7 @@ class NewPermissions extends React.Component {
   }
 
   check() {
-    const { locale } = this.props;
+    const {locale} = this.props;
     const errors = {
       role: locale.roleError,
       resource: locale.resourceError,
@@ -66,8 +66,8 @@ class NewPermissions extends React.Component {
   }
 
   render() {
-    const { getError } = this.field;
-    const { visible, onOk, onCancel, locale, namespaces } = this.props;
+    const {getError} = this.field;
+    const {visible, onOk, onCancel, locale, namespaces} = this.props;
     return (
       <>
         <Dialog
@@ -83,17 +83,17 @@ class NewPermissions extends React.Component {
           onCancel={onCancel}
           afterClose={() => this.field.reset()}
         >
-          <Form style={{ width: 400 }} {...formItemLayout} field={this.field}>
+          <Form style={{width: 400}} {...formItemLayout} field={this.field}>
             <FormItem label={locale.role} required help={getError('role')}>
-              <Input name="role" trim placeholder={locale.rolePlaceholder} />
+              <Input name="role" trim placeholder={locale.rolePlaceholder}/>
             </FormItem>
             <FormItem label={locale.resource} required help={getError('resource')}>
               <Select
                 name="resource"
                 placeholder={locale.resourcePlaceholder}
-                style={{ width: '100%' }}
+                style={{width: '100%'}}
               >
-                {namespaces.map(({ namespace, namespaceShowName }) => (
+                {namespaces.map(({namespace, namespaceShowName}) => (
                   <Option value={`${namespace}:*:*`}>
                     {namespaceShowName} {namespace ? `(${namespace})` : ''}
                   </Option>
@@ -104,7 +104,7 @@ class NewPermissions extends React.Component {
               <Select
                 name="action"
                 placeholder={locale.actionPlaceholder}
-                style={{ width: '100%' }}
+                style={{width: '100%'}}
               >
                 <Option value="r">{locale.readOnly}(r)</Option>
                 <Option value="w">{locale.writeOnly}(w)</Option>

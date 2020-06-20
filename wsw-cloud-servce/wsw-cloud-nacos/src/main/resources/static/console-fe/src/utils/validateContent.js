@@ -59,7 +59,7 @@ export default {
   /**
    * 根据类型验证类型
    */
-  validate({ content, type }) {
+  validate({content, type}) {
     let validateObj = {
       json: this.validateJson,
       xml: this.validateXml,

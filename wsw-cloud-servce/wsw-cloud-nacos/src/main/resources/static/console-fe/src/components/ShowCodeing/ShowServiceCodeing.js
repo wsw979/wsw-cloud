@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getParams } from '../../globalLib';
-import { ConfigProvider, Dialog, Loading, Tab } from '@alifd/next';
+import {getParams} from '../../globalLib';
+import {ConfigProvider, Dialog, Loading, Tab} from '@alifd/next';
 
 import './index.scss';
 
@@ -206,7 +206,7 @@ public class DiscoveryController {
 /* Refer to document:  https://github.com/nacos-group/nacos-examples/blob/master/nacos-spring-boot-example/nacos-spring-boot-discovery-example/src/main/resources
 * application.properties
    nacos.discovery.server-addr=127.0.0.1:8848
-*/    
+*/
 // Refer to document: https://github.com/nacos-group/nacos-examples/blob/master/nacos-spring-boot-example/nacos-spring-boot-discovery-example/src/main/java/com/alibaba/nacos/example/spring/boot/controller
 
 package com.alibaba.nacos.example.spring.boot.controller;
@@ -241,7 +241,7 @@ public class DiscoveryController {
 
   getSpringCloudCode(data) {
     return `/* Refer to document: https://github.com/nacos-group/nacos-examples/blob/master/nacos-spring-cloud-example/nacos-spring-cloud-discovery-example/
-*  pom.xml 
+*  pom.xml
     <dependency>
        <groupId>org.springframework.cloud</groupId>
        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -256,7 +256,7 @@ public class DiscoveryController {
 server.port=18080
 spring.application.name=${this.record.name}
 spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
-*/    
+*/
 
 // Refer to document: https://github.com/nacos-group/nacos-examples/tree/master/nacos-spring-cloud-example/nacos-spring-cloud-discovery-example/nacos-spring-cloud-provider-example/src/main/java/com/alibaba/nacos/example/spring/cloud
 package com.alibaba.nacos.example.spring.cloud;
@@ -273,7 +273,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author xiaojing
  */
 @SpringBootApplication
-@EnableDiscoveryClient 
+@EnableDiscoveryClient
 public class NacosProviderApplication {
 
   public static void main(String[] args) {
@@ -295,7 +295,7 @@ public class NacosProviderApplication {
 * application.properties
 spring.application.name=micro-service-oauth2
 spring.cloud.nacos.discovery.server-addr=127.0.0.1:8848
-*/    
+*/
 
 // Refer to document: https://github.com/nacos-group/nacos-examples/tree/master/nacos-spring-cloud-example/nacos-spring-cloud-discovery-example/nacos-spring-cloud-consumer-example/src/main/java/com/alibaba/nacos/example/spring/cloud
 package com.alibaba.nacos.example.spring.cloud;
@@ -418,20 +418,20 @@ public class NacosConsumerApplication {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const footer = <div />;
+    const {locale = {}} = this.props;
+    const footer = <div/>;
     return (
       <div>
         <Dialog
           title={locale.sampleCode}
-          style={{ width: '80%' }}
+          style={{width: '80%'}}
           visible={this.state.dialogvisible}
           footer={footer}
           onClose={this.closeDialog.bind(this)}
         >
-          <div style={{ height: 500 }}>
-            <Loading tip={locale.loading} style={{ width: '100%' }} visible={this.state.loading}>
-              <Tab shape={'text'} style={{ height: 40, paddingBottom: 10 }}>
+          <div style={{height: 500}}>
+            <Loading tip={locale.loading} style={{width: '100%'}} visible={this.state.loading}>
+              <Tab shape={'text'} style={{height: 40, paddingBottom: 10}}>
                 <TabPane
                   title={'Java'}
                   key={0}
@@ -479,7 +479,7 @@ public class NacosConsumerApplication {
                 />
                 {}
               </Tab>
-              <div ref={'codepreview'} />
+              <div ref={'codepreview'}/>
             </Loading>
           </div>
         </Dialog>

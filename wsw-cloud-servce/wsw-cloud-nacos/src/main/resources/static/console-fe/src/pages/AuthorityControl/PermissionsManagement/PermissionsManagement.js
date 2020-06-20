@@ -13,10 +13,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Dialog, Pagination, Table, ConfigProvider } from '@alifd/next';
-import { connect } from 'react-redux';
-import { getPermissions, createPermission, deletePermission } from '../../../reducers/authority';
-import { getNamespaces } from '../../../reducers/namespace';
+import {Button, ConfigProvider, Dialog, Pagination, Table} from '@alifd/next';
+import {connect} from 'react-redux';
+import {createPermission, deletePermission, getPermissions} from '../../../reducers/authority';
+import {getNamespaces} from '../../../reducers/namespace';
 import RegionGroup from '../../../components/RegionGroup';
 import NewPermissions from './NewPermissions';
 
@@ -27,7 +27,7 @@ import './PermissionsManagement.scss';
     permissions: state.authority.permissions,
     namespaces: state.namespace.namespaces,
   }),
-  { getPermissions, getNamespaces }
+  {getPermissions, getNamespaces}
 )
 @ConfigProvider.config
 class PermissionsManagement extends React.Component {
@@ -57,23 +57,23 @@ class PermissionsManagement extends React.Component {
   }
 
   getPermissions() {
-    const { pageNo, pageSize } = this.state;
+    const {pageNo, pageSize} = this.state;
     this.props
-      .getPermissions({ pageNo, pageSize })
+      .getPermissions({pageNo, pageSize})
       .then(() => {
         if (this.state.loading) {
-          this.setState({ loading: false });
+          this.setState({loading: false});
         }
       })
-      .catch(() => this.setState({ loading: false }));
+      .catch(() => this.setState({loading: false}));
   }
 
   colseCreatePermission() {
-    this.setState({ createPermissionVisible: false });
+    this.setState({createPermissionVisible: false});
   }
 
   getActionText(action) {
-    const { locale } = this.props;
+    const {locale} = this.props;
     return {
       r: `${locale.readOnly} (r)`,
       w: `${locale.writeOnly} (w)`,
@@ -82,27 +82,27 @@ class PermissionsManagement extends React.Component {
   }
 
   render() {
-    const { permissions, namespaces = [], locale } = this.props;
-    const { loading, pageSize, pageNo, createPermissionVisible } = this.state;
+    const {permissions, namespaces = [], locale} = this.props;
+    const {loading, pageSize, pageNo, createPermissionVisible} = this.state;
     return (
       <>
-        <RegionGroup left={locale.privilegeManagement} />
+        <RegionGroup left={locale.privilegeManagement}/>
         <div className="filter-panel">
-          <Button type="primary" onClick={() => this.setState({ createPermissionVisible: true })}>
+          <Button type="primary" onClick={() => this.setState({createPermissionVisible: true})}>
             {locale.addPermission}
           </Button>
         </div>
         <Table dataSource={permissions.pageItems} loading={loading} maxBodyHeight={476} fixedHeader>
-          <Table.Column title={locale.role} dataIndex="role" />
+          <Table.Column title={locale.role} dataIndex="role"/>
           <Table.Column
             title={locale.resource}
             dataIndex="resource"
             cell={value => {
-              const [item = {}] = namespaces.filter(({ namespace }) => {
+              const [item = {}] = namespaces.filter(({namespace}) => {
                 const [itemNamespace] = value.split(':');
                 return itemNamespace === namespace;
               });
-              const { namespaceShowName = '', namespace = '' } = item;
+              const {namespaceShowName = '', namespace = ''} = item;
               return namespaceShowName + (namespace ? ` (${namespace})` : '');
             }}
           />
@@ -124,7 +124,7 @@ class PermissionsManagement extends React.Component {
                       content: locale.deletePermissionTip,
                       onOk: () =>
                         deletePermission(record).then(() => {
-                          this.setState({ pageNo: 1 }, () => this.getPermissions());
+                          this.setState({pageNo: 1}, () => this.getPermissions());
                         }),
                     })
                   }
@@ -141,14 +141,14 @@ class PermissionsManagement extends React.Component {
             current={pageNo}
             total={permissions.totalCount}
             pageSize={pageSize}
-            onChange={pageNo => this.setState({ pageNo }, () => this.getPermissions())}
+            onChange={pageNo => this.setState({pageNo}, () => this.getPermissions())}
           />
         )}
         <NewPermissions
           visible={createPermissionVisible}
           onOk={permission =>
             createPermission(permission).then(res => {
-              this.setState({ pageNo: 1 }, () => this.getPermissions());
+              this.setState({pageNo: 1}, () => this.getPermissions());
               return res;
             })
           }

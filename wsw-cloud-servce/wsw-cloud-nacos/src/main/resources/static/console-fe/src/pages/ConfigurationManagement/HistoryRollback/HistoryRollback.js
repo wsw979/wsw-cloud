@@ -13,9 +13,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConfigProvider, Field, Form, Input, Loading, Pagination, Table } from '@alifd/next';
+import {ConfigProvider, Field, Form, Input, Loading, Pagination, Table} from '@alifd/next';
 import RegionGroup from 'components/RegionGroup';
-import { getParams, setParams, request } from '@/globalLib';
+import {getParams, request, setParams} from '@/globalLib';
 
 import './index.scss';
 
@@ -125,14 +125,14 @@ class HistoryRollback extends React.Component {
   }
 
   renderCol(value, index, record) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     return (
       <div>
-        <a onClick={this.goDetail.bind(this, record)} style={{ marginRight: 5 }}>
+        <a onClick={this.goDetail.bind(this, record)} style={{marginRight: 5}}>
           {locale.details}
         </a>
-        <span style={{ marginRight: 5 }}>|</span>
-        <a style={{ marginRight: 5 }} onClick={this.goRollBack.bind(this, record)}>
+        <span style={{marginRight: 5}}>|</span>
+        <a style={{marginRight: 5}} onClick={this.goRollBack.bind(this, record)}>
           {locale.rollback}
         </a>
       </div>
@@ -186,7 +186,8 @@ class HistoryRollback extends React.Component {
     });
   }
 
-  chooseEnv(value) {}
+  chooseEnv(value) {
+  }
 
   goDetail(record) {
     this.serverId = getParams('serverId') || 'center';
@@ -209,14 +210,14 @@ class HistoryRollback extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     this.init = init;
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{padding: 10}}>
         <Loading
           shape="flower"
-          style={{ position: 'relative', width: '100%' }}
+          style={{position: 'relative', width: '100%'}}
           visible={this.state.loading}
           tip="Loading..."
           color="#333"
@@ -230,7 +231,7 @@ class HistoryRollback extends React.Component {
               <Form.Item label="Data ID:" required>
                 <Input
                   placeholder={locale.dataId}
-                  style={{ width: 200 }}
+                  style={{width: 200}}
                   {...this.init('dataId', {
                     rules: [
                       {
@@ -244,7 +245,7 @@ class HistoryRollback extends React.Component {
               <Form.Item label="Group:" required>
                 <Input
                   placeholder={locale.group}
-                  style={{ width: 200 }}
+                  style={{width: 200}}
                   {...this.init('group', {
                     rules: [
                       {
@@ -261,14 +262,14 @@ class HistoryRollback extends React.Component {
                   validate
                   type="primary"
                   onClick={this.selectAll.bind(this)}
-                  style={{ marginRight: 10 }}
+                  style={{marginRight: 10}}
                 >
                   {locale.query}
                 </Form.Submit>
               </Form.Item>
             </Form>
           </div>
-          <div style={{ position: 'relative', width: '100%', overflow: 'hidden', height: '40px' }}>
+          <div style={{position: 'relative', width: '100%', overflow: 'hidden', height: '40px'}}>
             <h3
               style={{
                 height: 30,
@@ -282,14 +283,14 @@ class HistoryRollback extends React.Component {
               }}
             >
               {locale.queryResult}
-              <strong style={{ fontWeight: 'bold' }}> {this.state.total} </strong>
+              <strong style={{fontWeight: 'bold'}}> {this.state.total} </strong>
               {locale.articleMeet}
             </h3>
           </div>
           <div>
-            <Table dataSource={this.state.dataSource} locale={{ empty: locale.pubNoData }}>
-              <Table.Column title="Data ID" dataIndex="dataId" />
-              <Table.Column title="Group" dataIndex="group" />
+            <Table dataSource={this.state.dataSource} locale={{empty: locale.pubNoData}}>
+              <Table.Column title="Data ID" dataIndex="dataId"/>
+              <Table.Column title="Group" dataIndex="group"/>
               <Table.Column
                 title={locale.lastUpdateTime}
                 dataIndex="lastModifiedTime"
@@ -305,10 +306,10 @@ class HistoryRollback extends React.Component {
                   }
                 }}
               />
-              <Table.Column title={locale.operation} cell={this.renderCol.bind(this)} />
+              <Table.Column title={locale.operation} cell={this.renderCol.bind(this)}/>
             </Table>
           </div>
-          <div style={{ marginTop: 10, textAlign: 'right' }}>
+          <div style={{marginTop: 10, textAlign: 'right'}}>
             <Pagination
               current={this.state.currentPage}
               total={this.state.total}

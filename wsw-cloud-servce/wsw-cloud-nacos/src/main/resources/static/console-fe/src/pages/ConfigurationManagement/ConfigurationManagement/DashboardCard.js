@@ -13,7 +13,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConfigProvider, Slider } from '@alifd/next';
+import {ConfigProvider, Slider} from '@alifd/next';
 
 @ConfigProvider.config
 class DashboardCard extends React.Component {
@@ -26,29 +26,29 @@ class DashboardCard extends React.Component {
   };
 
   render() {
-    const { data = {}, height, locale = {} } = this.props;
+    const {data = {}, height, locale = {}} = this.props;
     return (
       <div>
         {data.modeType === 'notice' ? (
           <div data-spm-click={'gostr=/aliyun;locaid=notice'}>
-            <Slider style={{ marginBottom: data.modeList.length > 1 ? 20 : 10 }} arrows={false}>
+            <Slider style={{marginBottom: data.modeList.length > 1 ? 20 : 10}} arrows={false}>
               {data.modeList.map((item, index) => (
                 <div key={index} className={'slider-img-wrapper'}>
                   <div
                     className={'alert alert-success'}
-                    style={{ minHeight: 120, backgroundColor: '#e9feff' }}
+                    style={{minHeight: 120, backgroundColor: '#e9feff'}}
                   >
-                    <div className={'alert-success-text'} style={{ fontWeight: 'bold' }}>
+                    <div className={'alert-success-text'} style={{fontWeight: 'bold'}}>
                       {locale.importantReminder0}
                     </div>
-                    <strong style={{ color: '#777a7e' }}>
+                    <strong style={{color: '#777a7e'}}>
                       <span>{item.title}</span>
                     </strong>
                     <strong>
                       <span>
                         {/* eslint-disable */}
                         <a
-                          style={{ marginLeft: 10, color: '#33cde5' }}
+                          style={{marginLeft: 10, color: '#33cde5'}}
                           href={item.url}
                           target="_blank"
                         >
@@ -64,37 +64,37 @@ class DashboardCard extends React.Component {
         ) : (
           <div
             className={'dash-card-contentwrappers'}
-            style={{ height: height || 'auto' }}
+            style={{height: height || 'auto'}}
             data-spm-click={`gostr=/aliyun;locaid=${data.modeType}`}
           >
             <h3 className={'dash-card-title'}>{data.modeName}</h3>
             <div className={'dash-card-contentlist'}>
               {data.modeList
                 ? data.modeList.map(item => (
-                    <div className={'dash-card-contentitem'}>
-                      <a href={item.url} target={'_blank'}>
-                        {item.title}
-                      </a>
-                      {item.tag === 'new' ? (
-                        <img
-                          style={{ width: 28, marginLeft: 2, verticalAlign: 'text-bottom' }}
-                          src={'//img.alicdn.com/tps/TB1pS2YMVXXXXcCaXXXXXXXXXXX-56-24.png'}
-                          alt=""
-                        />
-                      ) : (
-                        ''
-                      )}
-                      {item.tag === 'hot' ? (
-                        <img
-                          style={{ width: 28, marginLeft: 2, verticalAlign: 'text-bottom' }}
-                          src={'//img.alicdn.com/tps/TB1nusxPXXXXXb0aXXXXXXXXXXX-56-24.png'}
-                          alt=""
-                        />
-                      ) : (
-                        ''
-                      )}
-                    </div>
-                  ))
+                  <div className={'dash-card-contentitem'}>
+                    <a href={item.url} target={'_blank'}>
+                      {item.title}
+                    </a>
+                    {item.tag === 'new' ? (
+                      <img
+                        style={{width: 28, marginLeft: 2, verticalAlign: 'text-bottom'}}
+                        src={'//img.alicdn.com/tps/TB1pS2YMVXXXXcCaXXXXXXXXXXX-56-24.png'}
+                        alt=""
+                      />
+                    ) : (
+                      ''
+                    )}
+                    {item.tag === 'hot' ? (
+                      <img
+                        style={{width: 28, marginLeft: 2, verticalAlign: 'text-bottom'}}
+                        src={'//img.alicdn.com/tps/TB1nusxPXXXXXb0aXXXXXXXXXXX-56-24.png'}
+                        alt=""
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                ))
                 : ''}
             </div>
           </div>

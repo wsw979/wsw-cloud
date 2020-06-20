@@ -18,4 +18,4 @@ import authority from './authority';
 import namespace from './namespace';
 import configuration from './configuration';
 
-export default { locale, base, subscribers, authority, namespace, configuration };
+export default {locale, base, subscribers, authority, namespace, configuration};

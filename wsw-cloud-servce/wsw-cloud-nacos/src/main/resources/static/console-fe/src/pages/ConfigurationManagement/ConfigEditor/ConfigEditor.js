@@ -14,31 +14,31 @@
 import $ from 'jquery';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getParams, request } from '../../../globalLib';
+import {getParams, request} from '../../../globalLib';
 import DiffEditorDialog from '../../../components/DiffEditorDialog';
 import SuccessDialog from '../../../components/SuccessDialog';
 import validateContent from 'utils/validateContent';
 import {
   Balloon,
   Button,
+  ConfigProvider,
   Dialog,
   Field,
   Form,
   Icon,
   Input,
   Loading,
+  Message,
   Radio,
   Select,
   Tab,
-  Message,
-  ConfigProvider,
 } from '@alifd/next';
 
 import './index.scss';
 
 const TabPane = Tab.Item;
 const FormItem = Form.Item;
-const { Group: RadioGroup } = Radio;
+const {Group: RadioGroup} = Radio;
 
 @ConfigProvider.config
 class ConfigEditor extends React.Component {
@@ -94,7 +94,7 @@ class ConfigEditor extends React.Component {
   }
 
   initData() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.setState({
       tag: [
         {
@@ -104,7 +104,7 @@ class ConfigEditor extends React.Component {
       ],
     });
     if (this.dataId.startsWith('cipher-')) {
-      this.setState({ switchEncrypt: true });
+      this.setState({switchEncrypt: true});
     }
   }
 
@@ -177,7 +177,7 @@ class ConfigEditor extends React.Component {
   }
 
   getDataDetail() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     this.tenant = getParams('namespace') || '';
     this.serverId = getParams('serverId') || 'center';
@@ -220,7 +220,7 @@ class ConfigEditor extends React.Component {
           self.serverId = env.serverId;
           self.targetEnvs = envvalues;
         } else {
-          Dialog.alert({ title: locale.wrong, content: result.message });
+          Dialog.alert({title: locale.wrong, content: result.message});
         }
       },
       complete() {
@@ -323,13 +323,13 @@ class ConfigEditor extends React.Component {
   }
 
   publishConfig() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) {
         return;
       }
       let content = '';
-      let { configType } = this.state;
+      let {configType} = this.state;
 
       if (this.monacoEditor) {
         content = this.monacoEditor.getValue();
@@ -343,7 +343,7 @@ class ConfigEditor extends React.Component {
         });
         return;
       }
-      if (validateContent.validate({ content, type: configType })) {
+      if (validateContent.validate({content, type: configType})) {
         this._publishConfig(content);
       } else {
         Dialog.confirm({
@@ -357,7 +357,7 @@ class ConfigEditor extends React.Component {
   }
 
   _publishConfig = content => {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     this.codeValue = content;
     this.tenant = getParams('namespace') || '';
@@ -395,8 +395,8 @@ class ConfigEditor extends React.Component {
             const sufex = new Date().getTime();
             self.setState({
               tag: [
-                { title: locale.official, key: `normal-${sufex}` },
-                { title: 'BETA', key: `beta-${sufex}` },
+                {title: locale.official, key: `normal-${sufex}`},
+                {title: 'BETA', key: `beta-${sufex}`},
               ],
               hasbeta: true,
               activeKey: `beta-${sufex}`,
@@ -419,12 +419,13 @@ class ConfigEditor extends React.Component {
         }
         self.successDialog.current.getInstance().openDialog(_payload);
       },
-      error() {},
+      error() {
+      },
     });
   };
 
   validateChart(rule, value, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const chartReg = /[@#\$%\^&\*]+/g;
     if (chartReg.test(value)) {
       callback(locale.vdchart);
@@ -477,7 +478,7 @@ class ConfigEditor extends React.Component {
       clearTimeout(this.inputtimmer);
     }
     this.inputtimmer = setTimeout(() => {
-      const { tagLst } = this.state;
+      const {tagLst} = this.state;
 
       let hastag = false;
       tagLst.forEach((v, i) => {
@@ -492,7 +493,7 @@ class ConfigEditor extends React.Component {
           time: Math.random(),
         });
       }
-      this.setState({ tagLst });
+      this.setState({tagLst});
     }, 500);
   }
 
@@ -555,11 +556,11 @@ class ConfigEditor extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     const formItemLayout = {
-      labelCol: { span: 2 },
-      wrapperCol: { span: 22 },
+      labelCol: {span: 2},
+      wrapperCol: {span: 22},
     };
 
     // const list = [{
@@ -573,29 +574,29 @@ class ConfigEditor extends React.Component {
     //     label: 'XML'
     // }];
     const list = [
-      { value: 'text', label: 'TEXT' },
-      { value: 'json', label: 'JSON' },
-      { value: 'xml', label: 'XML' },
-      { value: 'yaml', label: 'YAML' },
-      { value: 'html', label: 'HTML' },
-      { value: 'properties', label: 'Properties' },
+      {value: 'text', label: 'TEXT'},
+      {value: 'json', label: 'JSON'},
+      {value: 'xml', label: 'XML'},
+      {value: 'yaml', label: 'YAML'},
+      {value: 'html', label: 'HTML'},
+      {value: 'properties', label: 'Properties'},
     ];
     const activeKey = this.state.activeKey.split('-')[0];
 
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{padding: 10}}>
         <Loading
           shape="flower"
-          style={{ position: 'relative', width: '100%' }}
+          style={{position: 'relative', width: '100%'}}
           visible={this.state.loading}
           tip="Loading..."
           color="#333"
         >
-          <h1 style={{ overflow: 'hidden', height: 50, width: '100%' }}>
+          <h1 style={{overflow: 'hidden', height: 50, width: '100%'}}>
             <div>{locale.toedit}</div>
           </h1>
           {this.state.hasbeta ? (
-            <div style={{ display: 'inline-block', height: 40, width: '80%', overflow: 'hidden' }}>
+            <div style={{display: 'inline-block', height: 40, width: '80%', overflow: 'hidden'}}>
               <Tab
                 shape={'wrapped'}
                 onChange={this.changeTab.bind(this)}
@@ -603,7 +604,7 @@ class ConfigEditor extends React.Component {
                 activeKey={this.state.activeKey}
               >
                 {this.state.tag.map(tab => (
-                  <TabPane title={tab.title} key={tab.key} />
+                  <TabPane title={tab.title} key={tab.key}/>
                 ))}
               </Tab>
             </div>
@@ -617,8 +618,8 @@ class ConfigEditor extends React.Component {
                 disabled
                 {...init('dataId', {
                   rules: [
-                    { required: true, message: locale.recipientFrom },
-                    { validator: this.validateChart.bind(this) },
+                    {required: true, message: locale.recipientFrom},
+                    {validator: this.validateChart.bind(this)},
                   ],
                 })}
               />
@@ -628,25 +629,25 @@ class ConfigEditor extends React.Component {
                 disabled
                 {...init('group', {
                   rules: [
-                    { required: true, message: locale.homeApplication },
-                    { validator: this.validateChart.bind(this) },
+                    {required: true, message: locale.homeApplication},
+                    {validator: this.validateChart.bind(this)},
                   ],
                 })}
               />
             </FormItem>
             <FormItem label="" {...formItemLayout}>
               <div>
-                <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
+                <a style={{fontSize: '12px'}} onClick={this.toggleMore.bind(this)}>
                   {this.state.showmore ? locale.collapse : locale.groupNotEmpty}
                 </a>
               </div>
             </FormItem>
-            <div style={{ height: this.state.showmore ? 'auto' : '0', overflow: 'hidden' }}>
+            <div style={{height: this.state.showmore ? 'auto' : '0', overflow: 'hidden'}}>
               <FormItem label={locale.tags} {...formItemLayout}>
                 <Select
                   size="medium"
                   hasArrow
-                  style={{ width: '100%' }}
+                  style={{width: '100%'}}
                   autoWidth
                   mode="tag"
                   filterLocal
@@ -659,7 +660,7 @@ class ConfigEditor extends React.Component {
               </FormItem>
 
               <FormItem label={locale.targetEnvironment} {...formItemLayout}>
-                <Input {...init('appName')} readOnly={!!this.inApp} />
+                <Input {...init('appName')} readOnly={!!this.inApp}/>
               </FormItem>
             </div>
 
@@ -675,7 +676,7 @@ class ConfigEditor extends React.Component {
             </FormItem>
             <FormItem
               label={
-                <span style={{ marginRight: 5 }}>
+                <span style={{marginRight: 5}}>
                   {locale.configcontent}
                   <Balloon
                     trigger={
@@ -691,7 +692,7 @@ class ConfigEditor extends React.Component {
                       />
                     }
                     align="t"
-                    style={{ marginRight: 5 }}
+                    style={{marginRight: 5}}
                     triggerType="hover"
                   >
                     <p>{locale.escExit}</p>
@@ -702,13 +703,13 @@ class ConfigEditor extends React.Component {
               }
               {...formItemLayout}
             >
-              <div style={{ clear: 'both', height: 300 }} id="container" />
+              <div style={{clear: 'both', height: 300}} id="container"/>
             </FormItem>
             <FormItem {...formItemLayout} label="">
-              <div style={{ textAlign: 'right' }}>
+              <div style={{textAlign: 'right'}}>
                 {activeKey === 'beta' ? (
                   <Button
-                    style={{ marginRight: 10 }}
+                    style={{marginRight: 10}}
                     type="primary"
                     onClick={this.openDiff.bind(this, true)}
                   >
@@ -721,7 +722,7 @@ class ConfigEditor extends React.Component {
                   <Button
                     type="primary"
                     disabled={this.state.hasbeta}
-                    style={{ marginRight: 10 }}
+                    style={{marginRight: 10}}
                     onClick={this.openDiff.bind(this, this.state.checkedBeta)}
                   >
                     {this.state.checkedBeta ? locale.release : locale.publish}
@@ -729,7 +730,7 @@ class ConfigEditor extends React.Component {
                 ) : (
                   <Button
                     type="primary"
-                    style={{ marginRight: 10 }}
+                    style={{marginRight: 10}}
                     onClick={this.openDiff.bind(this, false)}
                   >
                     {locale.publish}
@@ -746,7 +747,7 @@ class ConfigEditor extends React.Component {
             ref={this.diffEditorDialog}
             publishConfig={this.publishConfig.bind(this)}
           />
-          <SuccessDialog ref={this.successDialog} />
+          <SuccessDialog ref={this.successDialog}/>
         </Loading>
       </div>
     );

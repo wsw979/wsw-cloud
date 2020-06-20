@@ -15,20 +15,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
+  ConfigProvider,
+  Dialog,
   Field,
   Form,
   Grid,
   Input,
   Loading,
-  Pagination,
-  Table,
-  Dialog,
   Message,
-  ConfigProvider,
+  Pagination,
   Switch,
+  Table,
 } from '@alifd/next';
-import { request } from '../../../globalLib';
-import { generateUrl } from '../../../utils/nacosutil';
+import {request} from '../../../globalLib';
+import {generateUrl} from '../../../utils/nacosutil';
 import RegionGroup from '../../../components/RegionGroup';
 import EditServiceDialog from '../ServiceDetail/EditServiceDialog';
 import ShowServiceCodeing from 'components/ShowCodeing/ShowServiceCodeing';
@@ -36,8 +36,8 @@ import ShowServiceCodeing from 'components/ShowCodeing/ShowServiceCodeing';
 import './ServiceList.scss';
 
 const FormItem = Form.Item;
-const { Row, Col } = Grid;
-const { Column } = Table;
+const {Row, Col} = Grid;
+const {Column} = Table;
 
 @ConfigProvider.config
 class ServiceList extends React.Component {
@@ -68,21 +68,22 @@ class ServiceList extends React.Component {
   }
 
   openLoading() {
-    this.setState({ loading: true });
+    this.setState({loading: true});
   }
 
   closeLoading() {
-    this.setState({ loading: false });
+    this.setState({loading: false});
   }
 
   openEditServiceDialog() {
     try {
       this.editServiceDialog.current.getInstance().show(this.state.service);
-    } catch (error) {}
+    } catch (error) {
+    }
   }
 
   queryServiceList() {
-    const { currentPage, pageSize, search, withInstances = false, hasIpCount } = this.state;
+    const {currentPage, pageSize, search, withInstances = false, hasIpCount} = this.state;
     const parameter = [
       `hasIpCount=${hasIpCount}`,
       `withInstances=${withInstances}`,
@@ -93,7 +94,7 @@ class ServiceList extends React.Component {
     ];
     request({
       url: `v1/ns/catalog/services?${parameter.join('&')}`,
-      success: ({ count = 0, serviceList = [] } = {}) => {
+      success: ({count = 0, serviceList = []} = {}) => {
         this.setState({
           dataSource: serviceList,
           total: count,
@@ -127,8 +128,8 @@ class ServiceList extends React.Component {
   }
 
   deleteService(service) {
-    const { locale = {} } = this.props;
-    const { prompt, promptDelete } = locale;
+    const {locale = {}} = this.props;
+    const {prompt, promptDelete} = locale;
     Dialog.confirm({
       title: prompt,
       content: promptDelete,
@@ -158,10 +159,10 @@ class ServiceList extends React.Component {
       nowNamespaceId,
     });
 
-  rowColor = row => ({ className: !row.healthyInstanceCount ? 'row-bg-red' : '' });
+  rowColor = row => ({className: !row.healthyInstanceCount ? 'row-bg-red' : ''});
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const {
       pubNoData,
       serviceList,
@@ -177,8 +178,8 @@ class ServiceList extends React.Component {
       sampleCode,
       deleteAction,
     } = locale;
-    const { search, nowNamespaceName, nowNamespaceId, hasIpCount } = this.state;
-    const { init, getValue } = this.field;
+    const {search, nowNamespaceName, nowNamespaceId, hasIpCount} = this.state;
+    const {init, getValue} = this.field;
     this.init = init;
     this.getValue = getValue;
 
@@ -194,7 +195,7 @@ class ServiceList extends React.Component {
           tip="Loading..."
           color="#333"
         >
-          <div style={{ marginTop: -15 }}>
+          <div style={{marginTop: -15}}>
             <RegionGroup
               setNowNameSpace={this.setNowNameSpace}
               namespaceCallBack={this.getQueryLater}
@@ -218,22 +219,22 @@ class ServiceList extends React.Component {
                 <FormItem label={serviceName}>
                   <Input
                     placeholder={serviceNamePlaceholder}
-                    style={{ width: 200 }}
+                    style={{width: 200}}
                     value={search.serviceName}
-                    onChange={serviceName => this.setState({ search: { ...search, serviceName } })}
+                    onChange={serviceName => this.setState({search: {...search, serviceName}})}
                     onPressEnter={() =>
-                      this.setState({ currentPage: 1 }, () => this.queryServiceList())
+                      this.setState({currentPage: 1}, () => this.queryServiceList())
                     }
                   />
                 </FormItem>
                 <FormItem label={groupName}>
                   <Input
                     placeholder={groupNamePlaceholder}
-                    style={{ width: 200 }}
+                    style={{width: 200}}
                     value={search.groupName}
-                    onChange={groupName => this.setState({ search: { ...search, groupName } })}
+                    onChange={groupName => this.setState({search: {...search, groupName}})}
                     onPressEnter={() =>
-                      this.setState({ currentPage: 1 }, () => this.queryServiceList())
+                      this.setState({currentPage: 1}, () => this.queryServiceList())
                     }
                   />
                 </FormItem>
@@ -241,7 +242,7 @@ class ServiceList extends React.Component {
                   <Switch
                     checked={hasIpCount}
                     onChange={hasIpCount =>
-                      this.setState({ hasIpCount, currentPage: 1 }, () => {
+                      this.setState({hasIpCount, currentPage: 1}, () => {
                         localStorage.setItem('hasIpCount', hasIpCount);
                         this.queryServiceList();
                       })
@@ -251,13 +252,13 @@ class ServiceList extends React.Component {
                 <FormItem label="">
                   <Button
                     type="primary"
-                    onClick={() => this.setState({ currentPage: 1 }, () => this.queryServiceList())}
-                    style={{ marginRight: 10 }}
+                    onClick={() => this.setState({currentPage: 1}, () => this.queryServiceList())}
+                    style={{marginRight: 10}}
                   >
                     {query}
                   </Button>
                 </FormItem>
-                <FormItem label="" style={{ float: 'right' }}>
+                <FormItem label="" style={{float: 'right'}}>
                   <Button type="secondary" onClick={() => this.openEditServiceDialog()}>
                     {create}
                   </Button>
@@ -265,22 +266,22 @@ class ServiceList extends React.Component {
               </Form>
             </Col>
           </Row>
-          <Row style={{ padding: 0 }}>
-            <Col span="24" style={{ padding: 0 }}>
+          <Row style={{padding: 0}}>
+            <Col span="24" style={{padding: 0}}>
               <Table
                 dataSource={this.state.dataSource}
-                locale={{ empty: pubNoData }}
+                locale={{empty: pubNoData}}
                 getRowProps={row => this.rowColor(row)}
               >
-                <Column title={locale.columnServiceName} dataIndex="name" />
-                <Column title={locale.groupName} dataIndex="groupName" />
-                <Column title={locale.columnClusterCount} dataIndex="clusterCount" />
-                <Column title={locale.columnIpCount} dataIndex="ipCount" />
+                <Column title={locale.columnServiceName} dataIndex="name"/>
+                <Column title={locale.groupName} dataIndex="groupName"/>
+                <Column title={locale.columnClusterCount} dataIndex="clusterCount"/>
+                <Column title={locale.columnIpCount} dataIndex="ipCount"/>
                 <Column
                   title={locale.columnHealthyInstanceCount}
                   dataIndex="healthyInstanceCount"
                 />
-                <Column title={locale.columnTriggerFlag} dataIndex="triggerFlag" />
+                <Column title={locale.columnTriggerFlag} dataIndex="triggerFlag"/>
                 <Column
                   title={operation}
                   align="center"
@@ -293,21 +294,21 @@ class ServiceList extends React.Component {
                     <div>
                       <a
                         onClick={() => {
-                          const { name, groupName } = record;
+                          const {name, groupName} = record;
                           this.props.history.push(
-                            generateUrl('/serviceDetail', { name, groupName })
+                            generateUrl('/serviceDetail', {name, groupName})
                           );
                         }}
-                        style={{ marginRight: 5 }}
+                        style={{marginRight: 5}}
                       >
                         {detail}
                       </a>
-                      <span style={{ marginRight: 5 }}>|</span>
-                      <a style={{ marginRight: 5 }} onClick={() => this.showSampleCode(record)}>
+                      <span style={{marginRight: 5}}>|</span>
+                      <a style={{marginRight: 5}} onClick={() => this.showSampleCode(record)}>
                         {sampleCode}
                       </a>
-                      <span style={{ marginRight: 5 }}>|</span>
-                      <a onClick={() => this.deleteService(record)} style={{ marginRight: 5 }}>
+                      <span style={{marginRight: 5}}>|</span>
+                      <a onClick={() => this.deleteService(record)} style={{marginRight: 5}}>
                         {deleteAction}
                       </a>
                     </div>
@@ -328,18 +329,18 @@ class ServiceList extends React.Component {
                 total={this.state.total}
                 pageSize={this.state.pageSize}
                 onChange={currentPage =>
-                  this.setState({ currentPage }, () => this.queryServiceList())
+                  this.setState({currentPage}, () => this.queryServiceList())
                 }
               />
             </div>
           )}
         </Loading>
-        <ShowServiceCodeing ref={this.showcode} />
+        <ShowServiceCodeing ref={this.showcode}/>
         <EditServiceDialog
           ref={this.editServiceDialog}
           openLoading={() => this.openLoading()}
           closeLoading={() => this.closeLoading()}
-          queryServiceList={() => this.setState({ currentPage: 1 }, () => this.queryServiceList())}
+          queryServiceList={() => this.setState({currentPage: 1}, () => this.queryServiceList())}
         />
       </div>
     );

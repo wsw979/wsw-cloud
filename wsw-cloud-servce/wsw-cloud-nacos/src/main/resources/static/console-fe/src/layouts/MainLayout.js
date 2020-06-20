@@ -12,18 +12,18 @@
  */
 
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import { ConfigProvider, Icon, Menu } from '@alifd/next';
+import {ConfigProvider, Icon, Menu} from '@alifd/next';
 import Header from './Header';
-import { getState } from '../reducers/base';
+import {getState} from '../reducers/base';
 import getMenuData from './menu';
 
-const { SubMenu, Item } = Menu;
+const {SubMenu, Item} = Menu;
 
 @withRouter
-@connect(state => ({ ...state.locale, ...state.base }), { getState })
+@connect(state => ({...state.locale, ...state.base}), {getState})
 @ConfigProvider.config
 class MainLayout extends React.Component {
   static displayName = 'MainLayout';
@@ -47,20 +47,20 @@ class MainLayout extends React.Component {
   }
 
   navTo(url) {
-    const { search } = this.props.location;
+    const {search} = this.props.location;
     this.props.history.push([url, search].join(''));
   }
 
   isCurrentPath(url) {
-    const { location } = this.props;
+    const {location} = this.props;
     return url === location.pathname ? 'current-path' : undefined;
   }
 
   defaultOpenKeys() {
     const MenuData = getMenuData(this.props.functionMode);
     for (let i = 0, len = MenuData.length; i < len; i++) {
-      const { children } = MenuData[i];
-      if (children && children.filter(({ url }) => url === this.props.location.pathname).length) {
+      const {children} = MenuData[i];
+      if (children && children.filter(({url}) => url === this.props.location.pathname).length) {
         return String(i);
       }
     }
@@ -71,22 +71,22 @@ class MainLayout extends React.Component {
     const MenuData = getMenuData(this.props.functionMode);
     MenuData.forEach(item => {
       if (item.url) urls.push(item.url);
-      if (item.children) item.children.forEach(({ url }) => urls.push(url));
+      if (item.children) item.children.forEach(({url}) => urls.push(url));
     });
     return !urls.includes(this.props.location.pathname);
   }
 
   render() {
-    const { locale = {}, version, functionMode } = this.props;
+    const {locale = {}, version, functionMode} = this.props;
     const MenuData = getMenuData(functionMode);
     return (
       <>
-        <Header />
+        <Header/>
         <div className="main-container">
           <div className="left-panel">
             {this.isShowGoBack() ? (
               <div className="go-back" onClick={() => this.goBack()}>
-                <Icon type="arrow-left" />
+                <Icon type="arrow-left"/>
               </div>
             ) : (
               <>

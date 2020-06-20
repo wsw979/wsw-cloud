@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dialog, Pagination, Transfer } from '@alifd/next';
-import { request } from '../../globalLib';
+import {Dialog, Pagination, Transfer} from '@alifd/next';
+import {request} from '../../globalLib';
 import './index.scss';
 
 class BatchHandle extends React.Component {
@@ -37,7 +37,8 @@ class BatchHandle extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   openDialog(dataSource) {
     this.setState(
@@ -48,7 +49,7 @@ class BatchHandle extends React.Component {
       },
       () => {
         this.getData();
-        this.transfer._instance.filterCheckedValue = function(left, right, dataSource) {
+        this.transfer._instance.filterCheckedValue = function (left, right, dataSource) {
           const result = {
             left,
             right,
@@ -67,7 +68,7 @@ class BatchHandle extends React.Component {
   }
 
   getData() {
-    const { dataSource } = this.state;
+    const {dataSource} = this.state;
     request({
       url: `/diamond-ops/configList/serverId/${dataSource.serverId}?dataId=${
         dataSource.dataId
@@ -118,7 +119,7 @@ class BatchHandle extends React.Component {
     return (
       <Dialog
         visible={this.state.visible}
-        style={{ width: '500px' }}
+        style={{width: '500px'}}
         onCancel={this.closeDialog.bind(this)}
         onClose={this.closeDialog.bind(this)}
         onOk={this.onSubmit.bind(this)}
@@ -127,13 +128,13 @@ class BatchHandle extends React.Component {
         <div>
           <Transfer
             ref={ref => (this.transfer = ref)}
-            listStyle={{ height: 350 }}
+            listStyle={{height: 350}}
             dataSource={this.state.dataSourceList || []}
             value={this.state.valueList}
             onChange={this.onChange.bind(this)}
           />
           <Pagination
-            style={{ marginTop: 10 }}
+            style={{marginTop: 10}}
             current={this.state.currentPage}
             total={this.state.total}
             pageSize={this.state.pageSize}

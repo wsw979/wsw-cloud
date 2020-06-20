@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getParams } from '../../../globalLib';
-import { generateUrl } from '../../../utils/nacosutil';
+import {getParams} from '../../../globalLib';
+import {generateUrl} from '../../../utils/nacosutil';
 import request from '../../../utils/request';
 import validateContent from 'utils/validateContent';
 import SuccessDialog from '../../../components/SuccessDialog';
@@ -23,32 +23,29 @@ import './index.scss';
 import {
   Balloon,
   Button,
-  Dialog,
-  Field,
-  Form,
   Checkbox,
+  ConfigProvider,
+  Dialog,
+  Form,
+  Grid,
   Icon,
   Input,
   Loading,
+  Message,
   Radio,
-  Switch,
   Select,
   Tab,
-  Message,
-  Grid,
-  ConfigProvider,
 } from '@alifd/next';
-import { resolve } from 'url';
 
-const { Row, Col } = Grid;
+const {Row, Col} = Grid;
 
 const LANGUAGE_LIST = [
-  { value: 'text', label: 'TEXT' },
-  { value: 'json', label: 'JSON' },
-  { value: 'xml', label: 'XML' },
-  { value: 'yaml', label: 'YAML' },
-  { value: 'html', label: 'HTML' },
-  { value: 'properties', label: 'Properties' },
+  {value: 'text', label: 'TEXT'},
+  {value: 'json', label: 'JSON'},
+  {value: 'xml', label: 'XML'},
+  {value: 'yaml', label: 'YAML'},
+  {value: 'html', label: 'HTML'},
+  {value: 'properties', label: 'Properties'},
 ];
 
 const TAB_LIST = ['production', 'beta'];
@@ -90,7 +87,7 @@ class ConfigEditor extends React.Component {
   componentDidMount() {
     const isNewConfig = !getParams('dataId');
     const group = getParams('group').trim();
-    this.setState({ isNewConfig }, () => {
+    this.setState({isNewConfig}, () => {
       if (!isNewConfig) {
         this.changeForm(
           {
@@ -113,7 +110,7 @@ class ConfigEditor extends React.Component {
         );
       } else {
         if (group) {
-          this.setState({ group });
+          this.setState({group});
         }
         this.initMoacoEditor('text', '');
       }
@@ -175,12 +172,12 @@ class ConfigEditor extends React.Component {
   }
 
   clickTab(tabActiveKey) {
-    this.setState({ tabActiveKey }, () => this.getConfig(tabActiveKey === 'beta'));
+    this.setState({tabActiveKey}, () => this.getConfig(tabActiveKey === 'beta'));
   }
 
   getCodeVal() {
-    const { locale = {} } = this.props;
-    const { type, content } = this.state.form;
+    const {locale = {}} = this.props;
+    const {type, content} = this.state.form;
     const codeVal = this.monacoEditor ? this.monacoEditor.getValue() : content;
     if (!codeVal) {
       Message.error({
@@ -193,8 +190,8 @@ class ConfigEditor extends React.Component {
   }
 
   publish() {
-    const { locale = {} } = this.props;
-    const { type } = this.state.form;
+    const {locale = {}} = this.props;
+    const {type} = this.state.form;
     if (this.state.isNewConfig) {
       this.validation();
     }
@@ -202,7 +199,7 @@ class ConfigEditor extends React.Component {
     if (!content) {
       return;
     }
-    if (validateContent.validate({ content, type })) {
+    if (validateContent.validate({content, type})) {
       return this._publishConfig();
     } else {
       return new Promise((resolve, reject) => {
@@ -216,12 +213,12 @@ class ConfigEditor extends React.Component {
   }
 
   _publishConfig(beta = false) {
-    const { betaIps, isNewConfig } = this.state;
-    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+    const {betaIps, isNewConfig} = this.state;
+    const headers = {'Content-Type': 'application/x-www-form-urlencoded'};
     if (beta) {
       headers.betaIps = betaIps;
     }
-    const form = { ...this.state.form, content: this.getCodeVal() };
+    const form = {...this.state.form, content: this.getCodeVal()};
     const data = new FormData();
     Object.keys(form).forEach(key => {
       data.append(key, form[key]);
@@ -234,7 +231,7 @@ class ConfigEditor extends React.Component {
     }).then(res => {
       if (res) {
         if (isNewConfig) {
-          this.setState({ isNewConfig: false });
+          this.setState({isNewConfig: false});
         }
         this.getConfig(beta);
       }
@@ -255,8 +252,8 @@ class ConfigEditor extends React.Component {
   }
 
   stopBeta() {
-    const { locale } = this.props;
-    const { dataId, group } = this.state.form;
+    const {locale} = this.props;
+    const {dataId, group} = this.state.form;
     const tenant = getParams('namespace');
     return request
       .delete('v1/cs/configs', {
@@ -283,8 +280,8 @@ class ConfigEditor extends React.Component {
   }
 
   changeForm(item, cb) {
-    const { form } = this.state;
-    this.setState({ form: { ...form, ...item } }, () => {
+    const {form} = this.state;
+    this.setState({form: {...form, ...item}}, () => {
       if (cb) {
         cb();
       }
@@ -292,10 +289,10 @@ class ConfigEditor extends React.Component {
   }
 
   setConfigTags(tags) {
-    const { tagDataSource } = this.state;
+    const {tagDataSource} = this.state;
     const lastTag = tags[tags.length - 1];
     if (tagDataSource.indexOf(lastTag) < 0) {
-      this.setState({ tagDataSource: [...tagDataSource, lastTag] });
+      this.setState({tagDataSource: [...tagDataSource, lastTag]});
     }
     if (tags.length > 5) {
       tags.pop();
@@ -305,7 +302,7 @@ class ConfigEditor extends React.Component {
         tags.splice(i, 1);
       }
     });
-    this.changeForm({ config_tags: tags });
+    this.changeForm({config_tags: tags});
   }
 
   goBack() {
@@ -314,13 +311,13 @@ class ConfigEditor extends React.Component {
     const group = getParams('searchGroup') || '';
     const dataId = getParams('searchDataId') || '';
     this.props.history.push(
-      generateUrl('/configurationManagement', { serverId, group, dataId, namespace })
+      generateUrl('/configurationManagement', {serverId, group, dataId, namespace})
     );
   }
 
   getConfig(beta = false, decide = false) {
     const namespace = getParams('namespace');
-    const { dataId, group } = this.state.form;
+    const {dataId, group} = this.state.form;
     const params = {
       dataId,
       group,
@@ -333,12 +330,12 @@ class ConfigEditor extends React.Component {
     if (!beta) {
       params.show = 'all';
     }
-    return request.get('v1/cs/configs', { params }).then(res => {
+    return request.get('v1/cs/configs', {params}).then(res => {
       const form = beta ? res.data : res;
       if (!form) return false;
-      const { type, content, configTags, betaIps } = form;
-      this.setState({ betaIps });
-      this.changeForm({ ...form, config_tags: configTags ? configTags.split(',') : [] });
+      const {type, content, configTags, betaIps} = form;
+      this.setState({betaIps});
+      this.changeForm({...form, config_tags: configTags ? configTags.split(',') : []});
       this.initMoacoEditor(type, content);
       this.codeVal = content;
       return res;
@@ -346,9 +343,9 @@ class ConfigEditor extends React.Component {
   }
 
   validation() {
-    const { locale } = this.props;
-    const { form } = this.state;
-    const { dataId, group } = form;
+    const {locale} = this.props;
+    const {form} = this.state;
+    const {dataId, group} = form;
     if (!dataId) {
       this.setState({
         dataIdError: {
@@ -384,13 +381,13 @@ class ConfigEditor extends React.Component {
       dataIdError = {},
       groupError = {},
     } = this.state;
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
 
     return (
       <div className="config-editor">
         <Loading
           shape="flower"
-          style={{ position: 'relative', width: '100%' }}
+          style={{position: 'relative', width: '100%'}}
           visible={loading}
           tip="Loading..."
           color="#333"
@@ -412,7 +409,7 @@ class ConfigEditor extends React.Component {
               <Input
                 value={form.dataId}
                 onChange={dataId =>
-                  this.changeForm({ dataId }, () => this.setState({ dataIdError: {} }))
+                  this.changeForm({dataId}, () => this.setState({dataIdError: {}}))
                 }
                 disabled={!isNewConfig}
               />
@@ -421,7 +418,7 @@ class ConfigEditor extends React.Component {
               <Input
                 value={form.group}
                 onChange={group =>
-                  this.changeForm({ group }, () => this.setState({ groupError: {} }))
+                  this.changeForm({group}, () => this.setState({groupError: {}}))
                 }
                 disabled={!isNewConfig}
               />
@@ -429,7 +426,7 @@ class ConfigEditor extends React.Component {
             <Form.Item label=" ">
               <div
                 className="switch"
-                onClick={() => this.setState({ openAdvancedSettings: !openAdvancedSettings })}
+                onClick={() => this.setState({openAdvancedSettings: !openAdvancedSettings})}
               >
                 {openAdvancedSettings ? locale.collapse : locale.groupNotEmpty}
               </div>
@@ -450,7 +447,7 @@ class ConfigEditor extends React.Component {
                   />
                 </Form.Item>
                 <Form.Item label={locale.targetEnvironment}>
-                  <Input value={form.appName} onChange={appName => this.changeForm({ appName })} />
+                  <Input value={form.appName} onChange={appName => this.changeForm({appName})}/>
                 </Form.Item>
               </>
             )}
@@ -458,13 +455,13 @@ class ConfigEditor extends React.Component {
               <Input.TextArea
                 value={form.desc}
                 aria-label="TextArea"
-                onChange={desc => this.changeForm({ desc })}
+                onChange={desc => this.changeForm({desc})}
               />
             </Form.Item>
             {!isNewConfig && tabActiveKey !== 'production' && (
               <Form.Item label={locale.betaPublish}>
                 {!betaPublishSuccess && (
-                  <Checkbox checked={isBeta} onChange={isBeta => this.setState({ isBeta })}>
+                  <Checkbox checked={isBeta} onChange={isBeta => this.setState({isBeta})}>
                     {locale.betaSwitchPrompt}
                   </Checkbox>
                 )}
@@ -473,7 +470,7 @@ class ConfigEditor extends React.Component {
                     aria-label="TextArea"
                     placeholder="127.0.0.1,127.0.0.2"
                     value={betaIps}
-                    onChange={betaIps => this.setState({ betaIps })}
+                    onChange={betaIps => this.setState({betaIps})}
                   />
                 )}
               </Form.Item>
@@ -484,7 +481,7 @@ class ConfigEditor extends React.Component {
                 value={form.type}
                 onChange={type => {
                   this.initMoacoEditor(type, form.content);
-                  this.changeForm({ type });
+                  this.changeForm({type});
                 }}
               >
                 {LANGUAGE_LIST.map(item => (
@@ -499,9 +496,9 @@ class ConfigEditor extends React.Component {
                 <div className="help-label">
                   <span>{locale.configcontent}</span>
                   <Balloon
-                    trigger={<Icon type="help" size="small" />}
+                    trigger={<Icon type="help" size="small"/>}
                     align="t"
-                    style={{ marginRight: 5 }}
+                    style={{marginRight: 5}}
                     triggerType="hover"
                   >
                     <p>{locale.escExit}</p>
@@ -511,7 +508,7 @@ class ConfigEditor extends React.Component {
                 </div>
               }
             >
-              <div style={{ clear: 'both', height: 300 }} id="container" />
+              <div style={{clear: 'both', height: 300}} id="container"/>
             </Form.Item>
           </Form>
           <Row>
@@ -583,7 +580,7 @@ class ConfigEditor extends React.Component {
               });
             }}
           />
-          <SuccessDialog ref={this.successDialog} />
+          <SuccessDialog ref={this.successDialog}/>
         </Loading>
       </div>
     );

@@ -13,14 +13,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, Form, Input, Dialog, ConfigProvider } from '@alifd/next';
+import {ConfigProvider, Dialog, Field, Form, Input} from '@alifd/next';
 import './UserManagement.scss';
 
 const FormItem = Form.Item;
 
 const formItemLayout = {
-  labelCol: { fixedSpan: 4 },
-  wrapperCol: { span: 19 },
+  labelCol: {fixedSpan: 4},
+  wrapperCol: {span: 19},
 };
 
 @ConfigProvider.config
@@ -38,7 +38,7 @@ class PasswordReset extends React.Component {
   };
 
   check() {
-    const { locale } = this.props;
+    const {locale} = this.props;
     const errors = {
       password: locale.passwordError,
       rePassword: locale.rePasswordError,
@@ -62,9 +62,9 @@ class PasswordReset extends React.Component {
   }
 
   render() {
-    const { locale } = this.props;
-    const { getError } = this.field;
-    const { username, onOk, onCancel } = this.props;
+    const {locale} = this.props;
+    const {getError} = this.field;
+    const {username, onOk, onCancel} = this.props;
     return (
       <>
         <Dialog
@@ -80,12 +80,12 @@ class PasswordReset extends React.Component {
           onCancel={onCancel}
           afterClose={() => this.field.reset()}
         >
-          <Form style={{ width: 400 }} {...formItemLayout} field={this.field}>
+          <Form style={{width: 400}} {...formItemLayout} field={this.field}>
             <FormItem label={locale.username} required>
               <p>{username}</p>
             </FormItem>
             <FormItem label={locale.password} required help={getError('password')}>
-              <Input name="password" htmlType="password" placeholder={locale.passwordPlaceholder} />
+              <Input name="password" htmlType="password" placeholder={locale.passwordPlaceholder}/>
             </FormItem>
             <FormItem label={locale.rePassword} required help={getError('rePassword')}>
               <Input

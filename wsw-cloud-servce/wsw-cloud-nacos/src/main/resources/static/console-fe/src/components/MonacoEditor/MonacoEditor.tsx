@@ -12,7 +12,7 @@
  */
 
 import * as React from 'react';
-import { MONACO_OPTIONS } from './constant';
+import {MONACO_OPTIONS} from './constant';
 import './index.scss';
 
 interface PropsType {
@@ -24,7 +24,9 @@ interface PropsType {
   height: number;
   onChange: (value: string) => void;
 }
-interface StateType {}
+
+interface StateType {
+}
 
 class MonacoEditor extends React.Component<PropsType, StateType> {
   static displayName = 'MonacoEditor';
@@ -43,7 +45,7 @@ class MonacoEditor extends React.Component<PropsType, StateType> {
       return;
     }
 
-    const { value = '', language = 'js', width, height, options = {} } = this.props;
+    const {value = '', language = 'js', width, height, options = {}} = this.props;
 
     if (value !== nextProps.value) {
       this.monacoEditor.setValue(nextProps.value || '');
@@ -56,16 +58,16 @@ class MonacoEditor extends React.Component<PropsType, StateType> {
       this.monacoEditor.layout();
     }
     if (this.monacoEditor && nextProps.options && options !== nextProps.options) {
-      this.monacoEditor.updateOptions({ ...MONACO_OPTIONS, ...nextProps.options });
+      this.monacoEditor.updateOptions({...MONACO_OPTIONS, ...nextProps.options});
     }
   }
 
   componentDidMount(): void {
     if (!window.monaco) {
       window.importEditor &&
-        window.importEditor(() => {
-          this.initMoacoEditor();
-        });
+      window.importEditor(() => {
+        this.initMoacoEditor();
+      });
     } else {
       this.initMoacoEditor();
     }
@@ -77,7 +79,7 @@ class MonacoEditor extends React.Component<PropsType, StateType> {
   }
 
   initMoacoEditor(): void {
-    const { options = {}, language = 'js', value = '' } = this.props;
+    const {options = {}, language = 'js', value = ''} = this.props;
     try {
       this.monacoEditor = window.monaco.editor.create(this.nodeRef && this.nodeRef.current, {
         ...MONACO_OPTIONS,
@@ -86,11 +88,12 @@ class MonacoEditor extends React.Component<PropsType, StateType> {
         value,
       });
       this.editorDidMount(this.monacoEditor);
-    } catch (error) {}
+    } catch (error) {
+    }
   }
 
   editorDidMount(editor: any) {
-    const { onChange } = this.props;
+    const {onChange} = this.props;
     editor.onDidChangeModelContent(event => {
       const value = editor.getValue();
 
@@ -99,12 +102,12 @@ class MonacoEditor extends React.Component<PropsType, StateType> {
   }
 
   render(): HTMLElement {
-    const { width = '100%', height = 0 } = this.props;
+    const {width = '100%', height = 0} = this.props;
     const style = {
       width,
       height,
     };
-    return <div ref={this.nodeRef} style={style} />;
+    return <div ref={this.nodeRef} style={style}/>;
   }
 }
 

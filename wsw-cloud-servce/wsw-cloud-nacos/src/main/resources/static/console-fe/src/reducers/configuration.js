@@ -12,7 +12,7 @@
  */
 
 import request from '../utils/request';
-import { GET_CONFIGURATION } from '../constants';
+import {GET_CONFIGURATION} from '../constants';
 
 const initialState = {
   configurations: [],
@@ -20,16 +20,16 @@ const initialState = {
 
 const getConfigs = params => dispatch =>
   request
-    .get('v1/cs/configs', { params })
-    .then(data => dispatch({ type: GET_CONFIGURATION, data }));
+    .get('v1/cs/configs', {params})
+    .then(data => dispatch({type: GET_CONFIGURATION, data}));
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case GET_CONFIGURATION:
-      return { ...state, configurations: action.data };
+      return {...state, configurations: action.data};
     default:
       return state;
   }
 };
 
-export { getConfigs };
+export {getConfigs};
