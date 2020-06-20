@@ -27,6 +27,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -61,7 +62,7 @@ public class GatewayRouteController {
 
     @PostMapping("/save")
     @ApiOperation(value = "新增", notes = "动态路由新增")
-    public Result save(@ApiParam("实体") @Validated(Save.class) @RequestBody GatewayRouteEvt evt) {
+    public Result save(@ApiParam("实体") @Valid  @Validated(Save.class) @RequestBody GatewayRouteEvt evt) {
         GatewayRoute gatewayRoute = gatewayRouteService.saveOrUpdate(evt);
         if (NullUtil.isNull(gatewayRoute)) {
             throw new ServiceException(HttpStatus.FAIL);

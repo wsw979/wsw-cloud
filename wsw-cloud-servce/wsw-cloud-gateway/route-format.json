@@ -1,24 +1,27 @@
 
 [
   {
-    "serviceId": "gateway",
-    "serviceUrl": "lb://wsw-cloud-gateway-api",
-    "order": "1",
-    "remarks": "网关管理服务",
-    "predicates": [
+    "serviceId":"gateway",
+    "serviceUrl":"lb://wsw-cloud-gateway-api",
+    "order":"1",
+    "remarks":"网关管理服务",
+    "predicates":[
       {
         "name": "Path",
         "args": {
-          "pattern": "/config/api/**"
+          "_genkey_0": "/config/api/**"
         }
       }
     ],
-    "filters": [
+    "filters":[
       {
         "name": "StripPrefix",
         "args": {
           "_genkey_0": "1"
         }
+      },
+      {
+        "name":"SwaggerHeaderFilter"
       }
     ]
   },
@@ -32,7 +35,7 @@
       {
         "name": "Path",
         "args": {
-          "pattern": "/app/api/auth/**"
+          "_genkey_0": "/app/api/auth/**"
         }
       }
     ],
@@ -42,6 +45,35 @@
         "args": {
           "_genkey_0": "1"
         }
+      },
+      {
+        "name":"SwaggerHeaderFilter"
+      }
+    ]
+  },
+
+  {
+    "serviceId":"user",
+    "serviceUrl":"lb://wsw-cloud-user-api",
+    "order":"3",
+    "remarks":"用户服务",
+    "predicates":[
+      {
+        "name": "Path",
+        "args": {
+          "_genkey_0": "/app/api/user/**"
+        }
+      }
+    ],
+    "filters":[
+      {
+        "name": "StripPrefix",
+        "args": {
+          "_genkey_0": "1"
+        }
+      },
+      {
+        "name":"SwaggerHeaderFilter"
       }
     ]
   }

@@ -9,7 +9,6 @@ io.cloud.redis.util.RedisHashUtil,\
 io.cloud.config.DataSourceInitFunc,\
 io.cloud.config.RequestContextConfig,\
 io.cloud.config.FeignAutoConfig,\
-io.cloud.config.strategy.FeignHystrixConcurrencyStrategy,\
 io.cloud.datasource.config.MybatisPlusConfig
 
 #¸ºÔØ¾ùºâ

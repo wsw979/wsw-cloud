@@ -1,22 +1,14 @@
-package io.cloud.config;
+package io.cloud.config.decoder;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.netflix.hystrix.exception.HystrixBadRequestException;
 import feign.FeignException;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
-import io.cloud.exception.ExceptionInfo;
 import io.cloud.exception.InternalException;
-import io.cloud.exception.ServiceException;
 import io.cloud.exception.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-
-import java.io.IOException;
 
 /**
  * @program: wsw-cloud-servce
