@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.cloud</groupId>
+    <artifactId>wsw-cloud-servce</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>wsw-cloud-nacos</module>
+        <module>wsw-cloud-gateway</module>
+        <module>wsw-cloud-common</module>
+        <module>wsw-cloud-auth</module>
+        <module>wsw-cloud-sentinel</module>
+    </modules>
+
+    <properties>
+        <spring.boot.maven.plugin.version>2.1.6.RELEASE</spring.boot.maven.plugin.version>
+        <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+        <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
+        <spring.cloud.version>Greenwich.RELEASE</spring.cloud.version>
+        <spring.cloud.alibaba.version>2.1.2.RELEASE</spring.cloud.alibaba.version>
+    </properties>
+
+    <!-- 依赖管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Import dependency Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Import dependency Spring Cloud alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 多环境打包 -->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <build.profile.id>dev</build.profile.id>
+                <spring.profiles.active>dev</spring.profiles.active>
+                <spring.group.active>DEV_GROUP</spring.group.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <build.profile.id>test</build.profile.id>
+                <spring.profiles.active>test</spring.profiles.active>
+                <spring.group.active>TEST_GROUP</spring.group.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <build.profile.id>prod</build.profile.id>
+                <spring.profiles.active>prod</spring.profiles.active>
+                <spring.group.active>PROD_GROUP</spring.group.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- 仓库 -->
+    <repositories>
+        <repository>
+            <id>aliyun-repos</id>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>releases Repository</name>
+            <url>http://192.168.28.138:8081/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://192.168.28.138:8081/repository/maven-snapshots/</url>
+            <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

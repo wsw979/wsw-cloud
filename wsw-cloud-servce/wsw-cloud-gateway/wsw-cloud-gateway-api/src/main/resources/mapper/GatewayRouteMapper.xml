@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.cloud.gateway.api.mapper.GatewayRouteMapper">
+
+    <resultMap id="BaseResultMap" type="io.cloud.gateway.common.entity.GatewayRoute">
+        <id column="id" property="id"/>
+        <result column="service_id" property="serviceId"/>
+        <result column="service_url" property="serviceUrl"/>
+        <result column="predicates" property="predicates"/>
+        <result column="filters" property="filters"/>
+        <result column="order" property="order"/>
+        <result column="remarks" property="remarks"/>
+        <result column="create_id" property="createId"/>
+        <result column="update_id" property="updateId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,service_id,service_url,predicates,
+        filters,`order`,
+        remarks,create_id,update_id,
+        create_time,update_time,is_valid
+    </sql>
+
+    <select id="findPageList" resultType="io.cloud.gateway.common.vo.GatewayRouteListVo">
+        select
+        id,service_id,service_url,predicates,filters,`order`,remarks
+        from c_gateway_route
+        where is_valid = 1
+        <if test="serviceId != null and serviceId != ''">
+            and service_id like CONCAT('%',#{serviceId,jdbcType=VARCHAR},'%')
+        </if>
+        order by create_time desc
+    </select>
+
+</mapper>

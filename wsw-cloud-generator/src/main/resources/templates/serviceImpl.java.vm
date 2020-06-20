@@ -1,0 +1,23 @@
+package ${package.ServiceImpl};
+
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.AllArgsConstructor;
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+import ${package.Service}.${table.serviceName};
+import org.springframework.stereotype.Service;
+
+/**
+  * <p>
+   * $!{table.comment} Mapper 接口
+  * </p>
+  *
+  * @author ${author}
+  * @since ${date}
+*/
+@AllArgsConstructor
+@Service
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName}{
+
+
+}

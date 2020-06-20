@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.cloud</groupId>
+        <artifactId>wsw-cloud-common</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>wsw-cloud-jar</artifactId>
+
+    <properties>
+        <spring.boot.maven.plugin.version>2.1.6.RELEASE</spring.boot.maven.plugin.version>
+        <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
+        <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+    </properties>
+
+    <dependencies>
+        <!-- 服务必要依赖 start  -->
+        <!-- swagger -->
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-swagger</artifactId>
+        </dependency>
+        <!-- datasource -->
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-datasource</artifactId>
+        </dependency>
+        <!-- log -->
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-log</artifactId>
+        </dependency>
+        <!-- redis -->
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-redis</artifactId>
+        </dependency>
+        <!-- data -->
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-exception</artifactId>
+        </dependency>
+        <!-- openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- nacos-discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos-config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- configuration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- 自动装配 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 服务必要依赖 end  -->
+    </dependencies>
+
+</project>

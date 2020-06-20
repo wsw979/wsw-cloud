@@ -1,0 +1,49 @@
+
+[
+  {
+    "serviceId": "gateway",
+    "serviceUrl": "lb://wsw-cloud-gateway-api",
+    "order": "1",
+    "remarks": "网关管理服务",
+    "predicates": [
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/config/api/**"
+        }
+      }
+    ],
+    "filters": [
+      {
+        "name": "StripPrefix",
+        "args": {
+          "_genkey_0": "1"
+        }
+      }
+    ]
+  },
+
+  {
+    "serviceId":"auth",
+    "serviceUrl":"lb://wsw-cloud-auth-api",
+    "order":"2",
+    "remarks":"权限服务",
+    "predicates":[
+      {
+        "name": "Path",
+        "args": {
+          "pattern": "/app/api/auth/**"
+        }
+      }
+    ],
+    "filters":[
+      {
+        "name": "StripPrefix",
+        "args": {
+          "_genkey_0": "1"
+        }
+      }
+    ]
+  }
+
+]

@@ -1,0 +1,31 @@
+server:
+  port: 8888
+  servlet:
+    session:
+      cookie:
+        name: sentinel_dashboard_cookie
+nacos:
+  server:
+    address: localhost:8848
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+sentinel:
+  dashboard:
+    version: ${project.version}
+logging:
+  level:
+    org:
+      springframework:
+        web: INFO
+  file: ${user.home}/logs/csp/sentinel-dashboard:log
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+auth:
+  username: 979
+  password: 979
+  filter:
+    exclude-urls: /,/auth/login,/auth/logout,/registry/machine,/version
+    exclude-url-suffixes: htm,html,js,css,map,ico,ttf,woff,png

@@ -1,0 +1,23 @@
+server:
+  port: 1010
+
+spring:
+  application:
+    name: @artifactId@
+  profiles:
+    active: @spring.profiles.active@
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    nacos:
+      config:
+        server-addr: ${spring.cloud.client.ip-address}:8848
+        file-extension: yml
+        group: @spring.group.active@
+        shared-configs: application.${spring.cloud.nacos.config.file-extension},
+                        redis-config.${spring.cloud.nacos.config.file-extension},
+                        datasource-config.${spring.cloud.nacos.config.file-extension},
+                        mybatis-plus.${spring.cloud.nacos.config.file-extension},
+                        jwt-config.${spring.cloud.nacos.config.file-extension}
+      discovery:
+        server-addr: ${spring.cloud.client.ip-address}:8848
