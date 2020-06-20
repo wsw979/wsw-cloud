@@ -45,17 +45,17 @@ public class ClusterAssignController {
     @PostMapping("/all_server/{app}")
     public Result<ClusterAppAssignResultVO> apiAssignAllClusterServersOfApp(@PathVariable String app,
                                                                             @RequestBody
-                                                                                ClusterAppFullAssignRequest assignRequest) {
+                                                                                    ClusterAppFullAssignRequest assignRequest) {
         if (StringUtil.isEmpty(app)) {
             return Result.ofFail(-1, "app cannot be null or empty");
         }
         if (assignRequest == null || assignRequest.getClusterMap() == null
-            || assignRequest.getRemainingList() == null) {
+                || assignRequest.getRemainingList() == null) {
             return Result.ofFail(-1, "bad request body");
         }
         try {
             return Result.ofSuccess(clusterAssignService.applyAssignToApp(app, assignRequest.getClusterMap(),
-                assignRequest.getRemainingList()));
+                    assignRequest.getRemainingList()));
         } catch (Throwable throwable) {
             logger.error("Error when assigning full cluster servers for app: " + app, throwable);
             return Result.ofFail(-1, throwable.getMessage());
@@ -73,7 +73,7 @@ public class ClusterAssignController {
         }
         try {
             return Result.ofSuccess(clusterAssignService.applyAssignToApp(app, Collections.singletonList(assignRequest.getClusterMap()),
-                assignRequest.getRemainingList()));
+                    assignRequest.getRemainingList()));
         } catch (Throwable throwable) {
             logger.error("Error when assigning single cluster servers for app: " + app, throwable);
             return Result.ofFail(-1, throwable.getMessage());

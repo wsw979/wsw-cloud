@@ -48,12 +48,12 @@ public final class VersionUtils {
             String[] arr = postArr[0].split("\\.");
             if (arr.length == 2) {
                 version.setMajorVersion(Integer.valueOf(arr[0]))
-                    .setMinorVersion(Integer.valueOf(arr[1]))
-                    .setFixVersion(0);
+                        .setMinorVersion(Integer.valueOf(arr[1]))
+                        .setFixVersion(0);
             } else if (arr.length == 3) {
                 version.setMajorVersion(Integer.valueOf(arr[0]))
-                    .setMinorVersion(Integer.valueOf(arr[1]))
-                    .setFixVersion(Integer.valueOf(arr[2]));
+                        .setMinorVersion(Integer.valueOf(arr[1]))
+                        .setFixVersion(Integer.valueOf(arr[2]));
             } else {
                 // Wrong format, return empty.
                 return Optional.empty();
@@ -65,5 +65,6 @@ public final class VersionUtils {
         }
     }
 
-    private VersionUtils() {}
+    private VersionUtils() {
+    }
 }

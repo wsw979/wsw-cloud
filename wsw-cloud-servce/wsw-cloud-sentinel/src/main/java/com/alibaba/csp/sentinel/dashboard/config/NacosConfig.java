@@ -33,9 +33,9 @@ import java.util.List;
  */
 @Configuration
 public class NacosConfig {
-	
-	@Value("${nacos.server.address}")
-	private String nacosAddress;
+
+    @Value("${nacos.server.address}")
+    private String nacosAddress;
 
     @Bean
     public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
@@ -46,7 +46,7 @@ public class NacosConfig {
     public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
         return s -> JSON.parseArray(s, FlowRuleEntity.class);
     }
-    
+
     @Bean
     public Converter<List<DegradeRuleEntity>, String> degradeRuleEntityEncoder() {
         return JSON::toJSONString;

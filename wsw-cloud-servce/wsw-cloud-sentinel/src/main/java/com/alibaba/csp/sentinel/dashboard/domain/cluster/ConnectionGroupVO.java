@@ -41,7 +41,7 @@ public class ConnectionGroupVO {
     }
 
     public ConnectionGroupVO setConnectionSet(
-        List<ConnectionDescriptorVO> connectionSet) {
+            List<ConnectionDescriptorVO> connectionSet) {
         this.connectionSet = connectionSet;
         return this;
     }
@@ -58,9 +58,9 @@ public class ConnectionGroupVO {
     @Override
     public String toString() {
         return "ConnectionGroupVO{" +
-            "namespace='" + namespace + '\'' +
-            ", connectionSet=" + connectionSet +
-            ", connectedCount=" + connectedCount +
-            '}';
+                "namespace='" + namespace + '\'' +
+                ", connectionSet=" + connectionSet +
+                ", connectedCount=" + connectedCount +
+                '}';
     }
 }

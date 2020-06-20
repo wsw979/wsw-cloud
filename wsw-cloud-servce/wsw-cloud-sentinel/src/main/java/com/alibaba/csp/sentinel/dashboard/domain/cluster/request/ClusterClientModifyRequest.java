@@ -75,7 +75,7 @@ public class ClusterClientModifyRequest implements ClusterModifyRequest {
     }
 
     public ClusterClientModifyRequest setClientConfig(
-        ClusterClientConfig clientConfig) {
+            ClusterClientConfig clientConfig) {
         this.clientConfig = clientConfig;
         return this;
     }

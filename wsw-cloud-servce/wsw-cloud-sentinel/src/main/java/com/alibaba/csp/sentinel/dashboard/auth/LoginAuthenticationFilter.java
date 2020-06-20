@@ -37,7 +37,7 @@ import java.util.List;
  * <li>machine registry: {@code /registry/machine}</li>
  * <li>static resources</li>
  * </ul>
- *
+ * <p>
  * The excluded urls and urlSuffixes could be configured in {@code application.properties} file.
  *
  * @author cdfive
@@ -73,7 +73,7 @@ public class LoginAuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-        throws IOException, ServletException {
+            throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
         String servletPath = httpRequest.getServletPath();

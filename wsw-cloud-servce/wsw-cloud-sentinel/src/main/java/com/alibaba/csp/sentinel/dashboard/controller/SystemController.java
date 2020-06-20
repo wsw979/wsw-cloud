@@ -103,7 +103,7 @@ public class SystemController {
         int notNullCount = countNotNullAndNotNegtive(avgLoad, avgRt, maxThread, qps);
         if (notNullCount != 1) {
             return Result.ofFail(-1, "only one of [avgLoad, avgRt, maxThread, qps] "
-                + "value must be set >= 0, but " + notNullCount + " values get");
+                    + "value must be set >= 0, but " + notNullCount + " values get");
         }
         SystemRuleEntity entity = new SystemRuleEntity();
         entity.setApp(app.trim());

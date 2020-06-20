@@ -80,7 +80,7 @@ public class ClusterServerModifyRequest implements ClusterModifyRequest {
     }
 
     public ClusterServerModifyRequest setFlowConfig(
-        ServerFlowConfig flowConfig) {
+            ServerFlowConfig flowConfig) {
         this.flowConfig = flowConfig;
         return this;
     }
@@ -90,7 +90,7 @@ public class ClusterServerModifyRequest implements ClusterModifyRequest {
     }
 
     public ClusterServerModifyRequest setTransportConfig(
-        ServerTransportConfig transportConfig) {
+            ServerTransportConfig transportConfig) {
         this.transportConfig = transportConfig;
         return this;
     }
@@ -107,13 +107,13 @@ public class ClusterServerModifyRequest implements ClusterModifyRequest {
     @Override
     public String toString() {
         return "ClusterServerModifyRequest{" +
-            "app='" + app + '\'' +
-            ", ip='" + ip + '\'' +
-            ", port=" + port +
-            ", mode=" + mode +
-            ", flowConfig=" + flowConfig +
-            ", transportConfig=" + transportConfig +
-            ", namespaceSet=" + namespaceSet +
-            '}';
+                "app='" + app + '\'' +
+                ", ip='" + ip + '\'' +
+                ", port=" + port +
+                ", mode=" + mode +
+                ", flowConfig=" + flowConfig +
+                ", transportConfig=" + transportConfig +
+                ", namespaceSet=" + namespaceSet +
+                '}';
     }
 }

@@ -54,11 +54,11 @@ public class FlowControllerV1 {
     private InMemoryRuleRepositoryAdapter<FlowRuleEntity> repository;
     @Autowired
     private AuthService<HttpServletRequest> authService;
-    
+
     @Autowired
     @Qualifier("flowRuleNacosProvider")
     private DynamicRuleProvider<List<FlowRuleEntity>> provider;
-    
+
     @Autowired
     @Qualifier("flowRuleNacosPublisher")
     private DynamicRulePublisher<List<FlowRuleEntity>> publisher;
@@ -273,14 +273,14 @@ public class FlowControllerV1 {
     private boolean publishRules(String app, String ip, Integer port) {
         List<FlowRuleEntity> rules = repository.findAllByMachine(MachineInfo.of(app, ip, port));
         try {
-			publisher.publish(app, rules);
-			logger.info("添加限流规则成功{}", JSON.toJSONString(rules.stream().map(FlowRuleEntity::toFlowRule).collect(Collectors.toList())));
-			return true;
-		} catch (Exception e) {
-			logger.info("添加限流规则失败{}", JSON.toJSONString(rules.stream().map(FlowRuleEntity::toFlowRule).collect(Collectors.toList())));
-			e.printStackTrace();
-			return false;
-		}
+            publisher.publish(app, rules);
+            logger.info("添加限流规则成功{}", JSON.toJSONString(rules.stream().map(FlowRuleEntity::toFlowRule).collect(Collectors.toList())));
+            return true;
+        } catch (Exception e) {
+            logger.info("添加限流规则失败{}", JSON.toJSONString(rules.stream().map(FlowRuleEntity::toFlowRule).collect(Collectors.toList())));
+            e.printStackTrace();
+            return false;
+        }
 //        return sentinelApiClient.setFlowRuleOfMachine(app, ip, port, rules);
     }
 }

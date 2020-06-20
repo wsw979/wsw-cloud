@@ -65,7 +65,7 @@ public class DashboardConfig {
     public static final String CONFIG_AUTO_REMOVE_MACHINE_MILLIS = "sentinel.dashboard.autoRemoveMachineMillis";
 
     private static final ConcurrentMap<String, Object> cacheMap = new ConcurrentHashMap<>();
-    
+
     @NonNull
     private static String getConfig(String name) {
         // env
@@ -80,10 +80,10 @@ public class DashboardConfig {
         }
         return "";
     }
-    
+
     protected static int getConfigInt(String name, int defaultVal, int minVal) {
         if (cacheMap.containsKey(name)) {
-            return (int)cacheMap.get(name);
+            return (int) cacheMap.get(name);
         }
         int val = NumberUtils.toInt(getConfig(name));
         if (val == 0) {
@@ -94,23 +94,23 @@ public class DashboardConfig {
         cacheMap.put(name, val);
         return val;
     }
-    
+
     public static int getHideAppNoMachineMillis() {
         return getConfigInt(CONFIG_HIDE_APP_NO_MACHINE_MILLIS, 0, 60000);
     }
-    
+
     public static int getRemoveAppNoMachineMillis() {
         return getConfigInt(CONFIG_REMOVE_APP_NO_MACHINE_MILLIS, 0, 120000);
     }
-    
+
     public static int getAutoRemoveMachineMillis() {
         return getConfigInt(CONFIG_AUTO_REMOVE_MACHINE_MILLIS, 0, 300000);
     }
-    
+
     public static int getUnhealthyMachineMillis() {
         return getConfigInt(CONFIG_UNHEALTHY_MACHINE_MILLIS, DEFAULT_MACHINE_HEALTHY_TIMEOUT_MS, 30000);
     }
-    
+
     public static void clearCache() {
         cacheMap.clear();
     }

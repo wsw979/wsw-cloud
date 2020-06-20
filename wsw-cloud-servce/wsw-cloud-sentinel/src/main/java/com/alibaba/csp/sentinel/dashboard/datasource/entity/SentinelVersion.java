@@ -67,8 +67,8 @@ public class SentinelVersion {
             return true;
         }
         return this.majorVersion > version.majorVersion
-            || this.minorVersion > version.minorVersion
-            || this.fixVersion > version.fixVersion;
+                || this.minorVersion > version.minorVersion
+                || this.fixVersion > version.fixVersion;
     }
 
     public boolean greaterOrEqual(SentinelVersion version) {
@@ -76,20 +76,30 @@ public class SentinelVersion {
             return true;
         }
         return this.majorVersion >= version.majorVersion
-            || this.minorVersion >= version.minorVersion
-            || this.fixVersion >= version.fixVersion;
+                || this.minorVersion >= version.minorVersion
+                || this.fixVersion >= version.fixVersion;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) { return true; }
-        if (o == null || getClass() != o.getClass()) { return false; }
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
-        SentinelVersion that = (SentinelVersion)o;
+        SentinelVersion that = (SentinelVersion) o;
 
-        if (majorVersion != that.majorVersion) { return false; }
-        if (minorVersion != that.minorVersion) { return false; }
-        if (fixVersion != that.fixVersion) { return false; }
+        if (majorVersion != that.majorVersion) {
+            return false;
+        }
+        if (minorVersion != that.minorVersion) {
+            return false;
+        }
+        if (fixVersion != that.fixVersion) {
+            return false;
+        }
         return postfix != null ? postfix.equals(that.postfix) : that.postfix == null;
     }
 
@@ -105,10 +115,10 @@ public class SentinelVersion {
     @Override
     public String toString() {
         return "SentinelVersion{" +
-            "majorVersion=" + majorVersion +
-            ", minorVersion=" + minorVersion +
-            ", fixVersion=" + fixVersion +
-            ", postfix='" + postfix + '\'' +
-            '}';
+                "majorVersion=" + majorVersion +
+                ", minorVersion=" + minorVersion +
+                ", fixVersion=" + fixVersion +
+                ", postfix='" + postfix + '\'' +
+                '}';
     }
 }

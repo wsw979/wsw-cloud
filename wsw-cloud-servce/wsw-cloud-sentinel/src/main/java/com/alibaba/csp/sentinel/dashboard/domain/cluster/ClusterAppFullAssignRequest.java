@@ -34,7 +34,7 @@ public class ClusterAppFullAssignRequest {
     }
 
     public ClusterAppFullAssignRequest setClusterMap(
-        List<ClusterAppAssignMap> clusterMap) {
+            List<ClusterAppAssignMap> clusterMap) {
         this.clusterMap = clusterMap;
         return this;
     }
@@ -51,8 +51,8 @@ public class ClusterAppFullAssignRequest {
     @Override
     public String toString() {
         return "ClusterAppFullAssignRequest{" +
-            "clusterMap=" + clusterMap +
-            ", remainingList=" + remainingList +
-            '}';
+                "clusterMap=" + clusterMap +
+                ", remainingList=" + remainingList +
+                '}';
     }
 }

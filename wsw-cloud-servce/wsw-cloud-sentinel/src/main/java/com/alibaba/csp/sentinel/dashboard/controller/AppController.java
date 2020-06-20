@@ -71,7 +71,7 @@ public class AppController {
         });
         return Result.ofSuccess(MachineInfoVo.fromMachineInfoList(list));
     }
-    
+
     @RequestMapping(value = "/{app}/machine/remove.json")
     public Result<String> removeMachineById(
             @PathVariable("app") String app,

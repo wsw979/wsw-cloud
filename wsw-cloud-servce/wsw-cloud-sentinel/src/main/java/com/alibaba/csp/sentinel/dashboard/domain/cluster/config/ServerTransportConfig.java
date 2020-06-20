@@ -57,8 +57,8 @@ public class ServerTransportConfig {
     @Override
     public String toString() {
         return "ServerTransportConfig{" +
-            "port=" + port +
-            ", idleSeconds=" + idleSeconds +
-            '}';
+                "port=" + port +
+                ", idleSeconds=" + idleSeconds +
+                '}';
     }
 }

@@ -55,5 +55,6 @@ public final class MachineUtils {
         }
     }
 
-    private MachineUtils() {}
+    private MachineUtils() {
+    }
 }

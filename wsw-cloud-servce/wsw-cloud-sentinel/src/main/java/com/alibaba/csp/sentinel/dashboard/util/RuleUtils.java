@@ -92,5 +92,6 @@ public final class RuleUtils {
         }
     }
 
-    private RuleUtils() {}
+    private RuleUtils() {
+    }
 }
