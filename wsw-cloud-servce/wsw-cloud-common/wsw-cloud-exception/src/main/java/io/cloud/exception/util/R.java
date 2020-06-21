@@ -1,6 +1,5 @@
 package io.cloud.exception.util;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.cloud.exception.constant.ExceptionConstant;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
@@ -44,11 +43,11 @@ public class R {
      *
      * @return
      */
-    public static <T> Result<List<T>> page(IPage<T> page) {
+    public static <T> Result<List<T>> page(List<T> list) {
         Result<List<T>> result = new Result();
         result.setCode(HttpStatus.SUCCESS.getCode());
         result.setMsg(HttpStatus.SUCCESS.getMsg());
-        result.setData(page.getRecords());
+        result.setData(list);
         return result;
     }
 

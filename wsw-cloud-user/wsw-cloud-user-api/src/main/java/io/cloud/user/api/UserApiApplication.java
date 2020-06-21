@@ -1,7 +1,7 @@
 package io.cloud.user.api;
 
 import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
-import io.cloud.config.annotation.EnableFeignInterceptor;
+import io.cloud.core.annotation.EnableFeignInterceptor;
 import io.cloud.data.annotation.WswSpringCloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

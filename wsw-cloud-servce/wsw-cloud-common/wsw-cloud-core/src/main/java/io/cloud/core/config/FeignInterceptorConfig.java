@@ -1,4 +1,4 @@
-package io.cloud.config;
+package io.cloud.core.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

@@ -20,6 +20,18 @@
         </dependency>
         <dependency>
             <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-data</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-gateway-common</artifactId>
             <version>${project.version}</version>
         </dependency>

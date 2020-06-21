@@ -1,4 +1,4 @@
-package io.cloud.config.handler;
+package io.cloud.core.handler;
 
 import com.alibaba.csp.sentinel.adapter.servlet.callback.UrlBlockHandler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;

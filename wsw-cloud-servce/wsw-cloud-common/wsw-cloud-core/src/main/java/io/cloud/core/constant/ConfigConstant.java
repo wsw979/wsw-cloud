@@ -1,4 +1,4 @@
-package io.cloud.config.constant;
+package io.cloud.core.constant;
 
 /**
  * @program: wsw-cloud-servce

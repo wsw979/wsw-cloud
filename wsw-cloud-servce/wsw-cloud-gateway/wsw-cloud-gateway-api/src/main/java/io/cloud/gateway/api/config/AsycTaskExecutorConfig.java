@@ -1,6 +1,6 @@
 package io.cloud.gateway.api.config;
 
-import io.cloud.config.DefaultAsycTaskConfig;
+import io.cloud.core.config.DefaultAsycTaskConfig;
 import org.springframework.context.annotation.Configuration;
 
 /**

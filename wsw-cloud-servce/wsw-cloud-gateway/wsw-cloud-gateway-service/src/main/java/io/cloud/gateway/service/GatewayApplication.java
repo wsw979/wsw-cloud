@@ -1,12 +1,12 @@
 package io.cloud.gateway.service;
 
-import io.cloud.config.annotation.EnableFeignInterceptor;
+import io.cloud.core.annotation.EnableFeignInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients
+@EnableFeignClients(basePackages = { "io.cloud.**" })
 @EnableFeignInterceptor
 @EnableAutoConfiguration
 @SpringCloudApplication

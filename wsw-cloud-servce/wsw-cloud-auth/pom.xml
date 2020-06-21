@@ -24,17 +24,14 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- openfeign -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-exception</artifactId>
         </dependency>
-        <!-- data -->
         <dependency>
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-data</artifactId>
         </dependency>
-        <!-- swagger -->
         <dependency>
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-swagger</artifactId>

@@ -1,4 +1,4 @@
-package io.cloud.config.decoder;
+package io.cloud.core.decoder;
 
 import com.alibaba.fastjson.JSON;
 import feign.FeignException;

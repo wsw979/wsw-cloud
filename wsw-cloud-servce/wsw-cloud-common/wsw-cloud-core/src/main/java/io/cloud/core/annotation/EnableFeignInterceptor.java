@@ -1,6 +1,6 @@
-package io.cloud.config.annotation;
+package io.cloud.core.annotation;
 
-import io.cloud.config.FeignInterceptorConfig;
+import io.cloud.core.config.FeignInterceptorConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.ElementType;

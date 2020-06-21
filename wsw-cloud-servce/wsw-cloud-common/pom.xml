@@ -19,7 +19,7 @@
         <module>wsw-cloud-redis</module>
         <module>wsw-cloud-data</module>
         <module>wsw-cloud-jar</module>
-        <module>wsw-cloud-config</module>
+        <module>wsw-cloud-core</module>
         <module>wsw-cloud-exception</module>
     </modules>
 
@@ -88,7 +88,7 @@
             </dependency>
             <dependency>
                 <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-config</artifactId>
+                <artifactId>wsw-cloud-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

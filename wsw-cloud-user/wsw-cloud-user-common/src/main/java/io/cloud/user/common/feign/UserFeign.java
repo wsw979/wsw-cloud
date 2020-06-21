@@ -25,7 +25,7 @@ public interface UserFeign {
      * @param id
      * @return
      */
-    @GetMapping("/api/user/select")
-    Result<ApiUserVo> select(@RequestParam(value = "id") Long id) throws ServiceException;
+    @GetMapping("/api/user/getUserInfo")
+    Result<ApiUserVo> getUserInfo(@RequestParam(value = "id") Long id) throws ServiceException;
 
 }

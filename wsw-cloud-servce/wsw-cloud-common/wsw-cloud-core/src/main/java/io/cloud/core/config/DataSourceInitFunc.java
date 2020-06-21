@@ -1,4 +1,4 @@
-package io.cloud.config;
+package io.cloud.core.config;
 
 import com.alibaba.cloud.sentinel.SentinelProperties;
 import com.alibaba.cloud.sentinel.datasource.config.NacosDataSourceProperties;

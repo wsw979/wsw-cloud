@@ -1,4 +1,4 @@
-package io.cloud.config.strategy;
+package io.cloud.core.strategy;
 
 import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;

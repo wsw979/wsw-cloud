@@ -1,6 +1,6 @@
-package io.cloud.config;
+package io.cloud.core.config;
 
-import io.cloud.config.executor.CustomThreadPoolTaskExecutor;
+import io.cloud.core.executor.CustomThreadPoolTaskExecutor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

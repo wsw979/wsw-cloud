@@ -17,7 +17,7 @@
         <!-- 基础依赖 -->
         <dependency>
             <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-config</artifactId>
+            <artifactId>wsw-cloud-core</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>

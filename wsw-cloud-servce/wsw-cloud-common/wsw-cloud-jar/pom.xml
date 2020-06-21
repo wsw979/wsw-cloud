@@ -19,11 +19,6 @@
 
     <dependencies>
         <!-- 服务必要依赖 start  -->
-        <!-- swagger -->
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-swagger</artifactId>
-        </dependency>
         <!-- datasource -->
         <dependency>
             <groupId>io.cloud</groupId>
@@ -39,18 +34,9 @@
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-redis</artifactId>
         </dependency>
-        <!-- data -->
         <dependency>
             <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-data</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-config</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-exception</artifactId>
+            <artifactId>wsw-cloud-core</artifactId>
         </dependency>
         <!-- openfeign -->
         <dependency>

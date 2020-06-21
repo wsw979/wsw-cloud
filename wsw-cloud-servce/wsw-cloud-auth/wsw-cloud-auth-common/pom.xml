@@ -13,14 +13,4 @@
     <artifactId>wsw-cloud-auth-common</artifactId>
     <packaging>jar</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-exception</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.ribbon</groupId>
-            <artifactId>ribbon-core</artifactId>
-        </dependency>
-    </dependencies>
 </project>

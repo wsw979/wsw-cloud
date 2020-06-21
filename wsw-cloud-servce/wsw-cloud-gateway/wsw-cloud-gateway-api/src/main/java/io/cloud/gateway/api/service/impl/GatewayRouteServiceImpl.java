@@ -35,7 +35,7 @@ public class GatewayRouteServiceImpl extends ServiceImpl<GatewayRouteMapper, Gat
     public Result<List<GatewayRouteListVo>> findPageList(GatewayRouteListEvt evt) {
         Page<GatewayRoute> page = new Page<>(evt.getPageIndex(), evt.getPageSize());
         IPage<GatewayRouteListVo> pageList = this.baseMapper.findPageList(page, evt.getServiceId());
-        return R.page(pageList);
+        return R.page(pageList.getRecords());
     }
 
     @Override

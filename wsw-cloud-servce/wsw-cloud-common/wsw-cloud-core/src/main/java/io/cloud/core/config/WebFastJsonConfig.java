@@ -1,4 +1,4 @@
-package io.cloud.config;
+package io.cloud.core.config;
 
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import com.alibaba.fastjson.serializer.SerializerFeature;

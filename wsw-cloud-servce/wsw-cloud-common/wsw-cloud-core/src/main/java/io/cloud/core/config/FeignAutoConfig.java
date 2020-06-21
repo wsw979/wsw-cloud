@@ -1,4 +1,4 @@
-package io.cloud.config;
+package io.cloud.core.config;
 
 import feign.Logger;
 import feign.codec.Decoder;

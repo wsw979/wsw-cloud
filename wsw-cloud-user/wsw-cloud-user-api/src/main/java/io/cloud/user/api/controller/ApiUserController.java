@@ -9,6 +9,7 @@ import io.cloud.user.api.service.IApiRoleService;
 import io.cloud.user.api.service.IApiUserService;
 import io.cloud.user.common.entity.ApiRole;
 import io.cloud.user.common.entity.ApiUser;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @AllArgsConstructor
-@WswRestController(path = "/api/user", api = "用户", tags = "用户")
+@Api(tags = "用户")
+@WswRestController(path = "/api/user")
 public class ApiUserController {
 
     @Autowired
