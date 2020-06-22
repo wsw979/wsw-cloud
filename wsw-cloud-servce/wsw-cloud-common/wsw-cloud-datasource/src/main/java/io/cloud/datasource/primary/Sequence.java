@@ -1,4 +1,4 @@
-package io.cloud.data.primary;
+package io.cloud.datasource.primary;
 
 import cn.hutool.core.date.SystemClock;
 import cn.hutool.core.lang.Assert;

@@ -6,6 +6,7 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowException;
 import com.netflix.client.ClientException;
 import com.netflix.hystrix.exception.HystrixRuntimeException;
 import feign.FeignException;
+import io.cloud.exception.HytrixException;
 import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import org.springframework.web.reactive.result.view.ViewResolver;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -152,6 +154,10 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         } else if (ex.getCause() instanceof ClientException) {
             code = HttpStatus.SERVICE_ERROR.getCode();
             body = HttpStatus.SERVICE_ERROR.getMsg();
+        } else if (ex instanceof HytrixException) {
+            HytrixException hytrixException = (HytrixException) ex;
+            code = HttpStatus.FAIL.getCode();
+            body = hytrixException.getMessage();
         } else if (ex instanceof ServiceException) {
             ServiceException serviceException = (ServiceException) ex;
             code = serviceException.getCode();
@@ -160,6 +166,9 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
             code = HttpStatus.SERVICE_ERROR.getCode();
             body = HttpStatus.SERVICE_ERROR.getMsg();
         } else if (ex instanceof FeignException) {
+            code = HttpStatus.SERVICE_ERROR.getCode();
+            body = HttpStatus.SERVICE_ERROR.getMsg();
+        } else if (ex instanceof ResponseStatusException) {
             code = HttpStatus.SERVICE_ERROR.getCode();
             body = HttpStatus.SERVICE_ERROR.getMsg();
         } else if (ex instanceof FlowException) {

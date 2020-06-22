@@ -16,7 +16,7 @@ import java.util.List;
 public class R {
 
     /**
-     * 返回成功，传入返回体具体出參
+     * 自定义成功信息
      *
      * @param object
      * @return
@@ -29,18 +29,14 @@ public class R {
         return result;
     }
 
-    /**
-     * 提供给部分不需要出參的接口
-     *
-     * @return
-     */
     public static Result success() {
         return success(null);
     }
 
     /**
-     * 提供给部分不需要出參的接口
-     *
+     * 泛型
+     * @param list
+     * @param <T>
      * @return
      */
     public static <T> Result<List<T>> page(List<T> list) {
@@ -51,11 +47,6 @@ public class R {
         return result;
     }
 
-    /**
-     * 提供给部分不需要出參的接口
-     *
-     * @return
-     */
     public static <T> Result<T> returnData(T data) {
         Result<T> result = new Result();
         result.setCode(HttpStatus.SUCCESS.getCode());
@@ -65,30 +56,30 @@ public class R {
     }
 
     /**
-     * 返回异常信息，在已知的范围内
+     * 自定义错误信息
      *
-     * @param httpStatus
+     * @param msg
      * @return
      */
-    public static Result error(HttpStatus httpStatus) {
-        return error(httpStatus.getCode(), httpStatus.getMsg());
+    public static Result error(String msg) {
+        return error(HttpStatus.ERROR.getCode(),msg);
     }
 
-    /**
-     * 返回异常信息，在已知的范围内
-     *
-     * @return
-     */
+    public static Result error(Integer code, String msg) {
+        Result result = new Result();
+        result.setCode(code);
+        result.setMsg(msg);
+        return result;
+    }
+
+    public static Result error(HttpStatus h) {
+        return error(h.getCode(), h.getMsg());
+    }
+
     public static Result error() {
         return error(HttpStatus.FAIL);
     }
 
-    /**
-     * 返回异常信息，在已知的范围内
-     *
-     * @param obj
-     * @return
-     */
     public static Result error(Object obj) {
         Class<?> aClass = obj.getClass();
         Field[] fields = aClass.getFields();
@@ -112,32 +103,5 @@ public class R {
             return error(code, msg);
         }
         return error(HttpStatus.ERROR);
-    }
-
-    /**
-     * 自定义错误信息
-     *
-     * @param code
-     * @param msg
-     * @return
-     */
-    public static Result error(Integer code, String msg) {
-        Result result = new Result();
-        result.setCode(code);
-        result.setMsg(msg);
-        return result;
-    }
-
-    /**
-     * 自定义错误信息
-     *
-     * @param msg
-     * @return
-     */
-    public static Result error(String msg) {
-        Result result = new Result();
-        result.setCode(HttpStatus.FAIL.getCode());
-        result.setMsg(msg);
-        return result;
     }
 }

@@ -12,4 +12,5 @@ public interface ExceptionConstant {
 
     String MSG = "msg";
 
+    String NULL = "资源不存在";
 }

@@ -1,21 +1,29 @@
 package io.cloud.exception.advice;
 
+import io.cloud.exception.HytrixException;
 import io.cloud.exception.InternalException;
 import io.cloud.exception.ServiceException;
+import io.cloud.exception.constant.ExceptionConstant;
 import io.cloud.exception.result.Result;
-import io.cloud.exception.status.HttpStatus;
 import io.cloud.exception.util.R;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.util.NestedServletException;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 /**
@@ -35,75 +43,125 @@ public class CloudExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = Exception.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(Exception e) {
         log.error("系统异常{}", e);
         return R.error(e.getMessage());
     }
 
-    /**
-     * 业务
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = ServiceException.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.OK)
+    @ExceptionHandler(value = NullPointerException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(NullPointerException e) {
+        log.error("系统异常{}", e);
+        return R.error(ExceptionConstant.NULL);
+    }
+
+    @ExceptionHandler(ServiceException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(ServiceException e) {
         log.error("业务异常{}", e);
         return R.error(e.getCode(), e.getMsg());
     }
 
-    /**
-     * Feign 链路异常
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = NestedServletException.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR)
-    public Result exceptionHandle(NestedServletException e) {
-        InternalException internalException = (InternalException) e.getCause().getCause();
+    @ExceptionHandler(InternalException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(InternalException e) {
         log.error("服务异常{}", e);
-        return R.error(internalException.getCode(), internalException.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
     }
 
-    /**
-     * 参数异常
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = MissingServletRequestParameterException.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HytrixException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(HytrixException e) {
+        log.error("服务异常{}", e);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+    }
+
+    @ExceptionHandler(NestedServletException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(NestedServletException e) {
+        log.error("服务异常{}", e);
+        Throwable rootCause = e.getRootCause();
+        Throwable cause = e.getCause().getCause();
+        if(cause instanceof HytrixException){
+            HytrixException hytrix = (HytrixException) cause;
+            return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), hytrix.getMessage());
+        }
+        if (cause instanceof InternalException) {
+            InternalException internal = (InternalException) cause;
+            return R.error(internal.getCode(), internal.getMsg());
+        }
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Throwable.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(Throwable e) {
+        log.error("服务异常{}", e);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result exceptionHandle(IllegalArgumentException e) {
+        log.error("参数异常{}", e);
+        return R.error(HttpStatus.BAD_REQUEST.value(),e.getMessage());
+
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result exceptionHandle(MissingServletRequestParameterException e) {
         log.error("参数异常{}", e);
-        return R.error(HttpStatus.PARAM_ERROR.getCode(), HttpStatus.PARAM_ERROR.getMsg());
+        return R.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result exceptionHandle(MethodArgumentTypeMismatchException e) {
+        log.error("参数异常{}", e);
+        return R.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result exceptionHandle(ConstraintViolationException e) {
+        log.error("参数异常{}", e);
+        return R.error(HttpStatus.BAD_REQUEST.value(),e.getMessage());
     }
 
 
-    /**
-     * 404
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(ClassNotFoundException.class)
-    @ResponseStatus(org.springframework.http.HttpStatus.NOT_FOUND)
-    public Result exceptionHandler(ClassNotFoundException e) {
-        log.error("业务异常: {}", e);
-        return R.error(HttpStatus.NOT_FOUND.getCode(), HttpStatus.NOT_FOUND.getMsg());
+    @ExceptionHandler(NoHandlerFoundException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(NoHandlerFoundException e) {
+        log.error("系统异常{}", e);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
     }
 
-    /**
-     * valid 入参校验
-     *
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class, BindException.class})
-    @ResponseStatus(org.springframework.http.HttpStatus.BAD_REQUEST)
-    public Result exceptionHandler(MethodArgumentNotValidException e) {
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(HttpMessageNotReadableException e) {
+        log.error("系统异常{}", e);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    public Result exceptionHandle(HttpRequestMethodNotSupportedException e) {
+        log.error("系统异常{}", e);
+        return R.error(HttpStatus.METHOD_NOT_ALLOWED.value(),e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+    public Result exceptionHandle(HttpMediaTypeNotSupportedException e) {
+        log.error("系统异常{}", e);
+        return R.error(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(),e.getMessage());
+    }
+
+    @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Result exceptionHandle(MethodArgumentNotValidException e) {
         //打印校验住的所有的错误信息
         StringBuilder sb = new StringBuilder("参数错误：");
         BindingResult result = e.getBindingResult();
@@ -115,6 +173,6 @@ public class CloudExceptionHandler {
         }
         sb.deleteCharAt(sb.length() - 1);
         log.error(sb.toString());
-        return R.error(HttpStatus.PARAM_ERROR.getCode(), sb.toString());
+        return R.error(HttpStatus.BAD_REQUEST.value(), sb.toString());
     }
 }

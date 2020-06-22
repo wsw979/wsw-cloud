@@ -13,34 +13,47 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 所有必要依赖 start -->
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-jar</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-exception</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-data</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-swagger</artifactId>
-        </dependency>
         <dependency>
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-gateway-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- 所有必要依赖 end -->
         <dependency>
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-auth-common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <!-- openfeign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!-- nacos-discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos-config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- configuration -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- 自动装配 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!-- 服务必要依赖 end  -->
     </dependencies>
 
     <build>

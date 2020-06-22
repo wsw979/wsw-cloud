@@ -28,6 +28,7 @@
         <commons.io.version>2.4</commons.io.version>
         <commons.fileupload.version>1.2.2</commons.fileupload.version>
         <lombock.version>1.18.0</lombock.version>
+        <security-oauth2.version>2.3.6.RELEASE</security-oauth2.version>
         <swagger2.version>2.9.2</swagger2.version>
         <swagger2.models.version>1.5.21</swagger2.models.version>
         <swagger.bootstrap.ui.version>1.9.2</swagger.bootstrap.ui.version>
@@ -97,7 +98,12 @@
                 <version>${project.version}</version>
             </dependency>
             <!-- 服务必要依赖 end  -->
-
+            <!-- oauth2 -->
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
+            </dependency>
             <!-- swagger2 -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -140,6 +146,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis.plus.spring.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
                 <version>${mybatis.plus.spring.boot.version}</version>
             </dependency>
             <!-- 在Redis基础上的一个Java实用工具包 -->

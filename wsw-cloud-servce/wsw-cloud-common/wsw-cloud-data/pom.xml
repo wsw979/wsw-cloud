@@ -17,19 +17,13 @@
     </properties>
 
     <dependencies>
-        <!--mybatis plus -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-        </dependency>
-        <!--swagger2 -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
         <!-- 所有项目依赖 -->
         <!-- Import dependency Spring Cloud Commons -->
@@ -84,16 +78,5 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>*/*.*</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
 
 </project>

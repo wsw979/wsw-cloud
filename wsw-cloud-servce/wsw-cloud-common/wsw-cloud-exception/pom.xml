@@ -12,6 +12,10 @@
     <artifactId>wsw-cloud-exception</artifactId>
     <packaging>jar</packaging>
 
+    <properties>
+        <hystrix.core.version>1.5.18</hystrix.core.version>
+    </properties>
+
     <dependencies>
         <!-- web -->
         <dependency>
@@ -24,15 +28,18 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- openfeign -->
+        <!-- hystrix -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>com.netflix.hystrix</groupId>
+            <artifactId>hystrix-core</artifactId>
+            <version>${hystrix.core.version}</version>
         </dependency>
+        <!-- commons -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <!-- ribbon -->
         <dependency>
             <groupId>com.netflix.ribbon</groupId>
             <artifactId>ribbon-core</artifactId>

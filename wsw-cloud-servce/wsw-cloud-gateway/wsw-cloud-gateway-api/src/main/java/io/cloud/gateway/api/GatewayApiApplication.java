@@ -3,6 +3,8 @@ package io.cloud.gateway.api;
 import io.cloud.core.annotation.EnableFeignInterceptor;
 import io.cloud.data.annotation.WswSpringCloud;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.SpringCloudApplication;
 
 /**

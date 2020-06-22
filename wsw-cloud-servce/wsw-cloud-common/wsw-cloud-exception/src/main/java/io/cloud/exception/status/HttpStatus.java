@@ -16,7 +16,7 @@ public enum HttpStatus {
     SUCCESS(200, "操作成功"),
     FAIL(100, "操作失败"),
     NOT_FOUND(404, "资源不存在"),
-    SERVICE_ERROR(404, "服务开小差了！"),
+    SERVICE_ERROR(404, "连接超时，稍后重试"),
     SERVICE_TIME_ERROR(300, "服务异常，请稍后重试！"),
     FLOW(429, "访问次数过多"),
     PARAM_ERROR(308, "参数异常"),

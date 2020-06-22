@@ -15,8 +15,6 @@ public class Result<T> {
 
     private String msg;
 
-    private boolean isSuccess;
-
     private T data;
 
 }

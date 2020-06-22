@@ -1,4 +1,4 @@
-package io.cloud.core.config;
+package io.cloud.core.filter;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -16,7 +16,6 @@ import java.io.IOException;
  * @date: 2019/7/25 11:33
  */
 @Order(0)
-@Configuration
 @WebFilter(filterName = "securityCorsFilter", urlPatterns = "/*")
 public class SecurityCorsFilter implements Filter {
 

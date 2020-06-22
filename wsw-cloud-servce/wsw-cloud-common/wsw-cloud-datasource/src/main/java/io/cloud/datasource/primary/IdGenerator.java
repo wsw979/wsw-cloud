@@ -1,4 +1,4 @@
-package io.cloud.data.primary;
+package io.cloud.datasource.primary;
 
 import com.baomidou.mybatisplus.core.toolkit.Sequence;
 

@@ -1,13 +1,13 @@
 package io.cloud.data.annotation;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.annotation.AliasFor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.lang.annotation.*;
 
@@ -21,8 +21,8 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@EnableTransactionManagement
 @EnableAutoConfiguration
+@EnableConfigurationProperties
 @EnableAspectJAutoProxy
 @EnableFeignClients
 @EnableScheduling

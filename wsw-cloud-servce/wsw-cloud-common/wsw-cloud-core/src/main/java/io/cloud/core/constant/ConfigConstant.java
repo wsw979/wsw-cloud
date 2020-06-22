@@ -48,18 +48,4 @@ public interface ConfigConstant {
      */
     String CONFIG_RIBBON_ISOLATION_ENABLED = "wsw.ribbon.isolation.enabled";
 
-    /**
-     * nacos ip
-     */
-    String NSCOS_IP = "127.0.0.1:8848";
-
-    /**
-     * nacos data_id
-     */
-    String DATA_ID = "dynamic_routes.json";
-
-    /**
-     * nacos group_id
-     */
-    String GROUP_ID = "DEV_GROUP";
 }

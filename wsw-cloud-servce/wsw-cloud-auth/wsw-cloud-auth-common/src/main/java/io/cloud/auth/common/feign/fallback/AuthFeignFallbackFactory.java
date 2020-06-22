@@ -4,12 +4,15 @@ import com.netflix.client.ClientException;
 import feign.Request;
 import feign.RetryableException;
 import feign.hystrix.FallbackFactory;
+import io.cloud.auth.common.evt.JwtUserEvt;
 import io.cloud.auth.common.feign.AuthFeign;
 import io.cloud.auth.common.vo.JwtUserVo;
+import io.cloud.exception.HytrixException;
 import io.cloud.exception.InternalException;
 import io.cloud.exception.ServiceException;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
+import io.cloud.exception.util.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -29,15 +32,13 @@ public class AuthFeignFallbackFactory implements FallbackFactory<AuthFeign> {
     public AuthFeign create(Throwable throwable) {
         return new AuthFeign() {
             @Override
-            public Result select1() {
-                log.error("服务降级{}", throwable);
+            public Result select1(JwtUserEvt evt) {
+                log.error("对象{}服务降级{}", evt,throwable);
                 if (throwable instanceof InternalException) {
                     InternalException exception = (InternalException) throwable;
                     throw new InternalException(exception.getCode(), exception.getMsg());
-                } else if (throwable instanceof RetryableException) {
-                    throw new RetryableException(throwable.getMessage(), Request.HttpMethod.GET, throwable, new Date());
-                } else {
-                    throw new RuntimeException(throwable.getMessage());
+                }  else {
+                    throw new HytrixException(HttpStatus.SERVICE_ERROR.getMsg());
                 }
             }
 
@@ -47,12 +48,8 @@ public class AuthFeignFallbackFactory implements FallbackFactory<AuthFeign> {
                 if (throwable instanceof InternalException) {
                     InternalException exception = (InternalException) throwable;
                     throw new InternalException(exception.getCode(), exception.getMsg());
-                } else if (throwable instanceof RetryableException) {
-                    throw new InternalException(HttpStatus.SERVICE_ERROR);
-                } else if (throwable.getCause() instanceof ClientException) {
-                    throw new InternalException(HttpStatus.SERVICE_ERROR);
-                } else {
-                    throw new InternalException(HttpStatus.ERROR);
+                }  else {
+                    throw new HytrixException(HttpStatus.SERVICE_ERROR.getMsg());
                 }
             }
 
@@ -62,10 +59,8 @@ public class AuthFeignFallbackFactory implements FallbackFactory<AuthFeign> {
                 if (throwable instanceof InternalException) {
                     InternalException exception = (InternalException) throwable;
                     throw new InternalException(exception.getCode(), exception.getMsg());
-                } else if (throwable instanceof RetryableException) {
-                    throw new RetryableException(throwable.getMessage(), Request.HttpMethod.GET, throwable, new Date());
-                } else {
-                    throw new RuntimeException(throwable.getMessage());
+                }  else {
+                    throw new HytrixException(HttpStatus.SERVICE_ERROR.getMsg());
                 }
             }
         };

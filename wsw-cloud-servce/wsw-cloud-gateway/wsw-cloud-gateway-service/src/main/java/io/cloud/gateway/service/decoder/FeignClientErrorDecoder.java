@@ -1,9 +1,12 @@
-package io.cloud.core.decoder;
+package io.cloud.gateway.service.decoder;
 
+import feign.FeignException;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
+import io.cloud.exception.HytrixException;
 import io.cloud.exception.InternalException;
+import io.cloud.exception.ServiceException;
 import io.cloud.exception.constant.ExceptionConstant;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
@@ -28,7 +31,7 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
 
     @Override
     public Exception decode(String methodKey, Response response) {
-        Exception exception = new InternalException(HttpStatus.ERROR);
+        Exception exception = null;
         ObjectMapper mapper = new ObjectMapper();
         //空属性处理
         mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_EMPTY);
@@ -42,8 +45,17 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             if (StringUtils.isNotEmpty(json)) {
                 if(json.contains(ExceptionConstant.CODE) && json.contains(ExceptionConstant.MSG)){
                     Result result = mapper.readValue(json, Result.class);
-                    exception = new InternalException(result.getMsg());
+                    // 业务异常包装成自定义异常类HytrixException
+                    if (!result.getCode().equals(HttpStatus.ERROR.getCode())) {
+                        exception = new ServiceException(result.getCode(),result.getMsg());
+                    }else{
+                        exception = FeignException.errorStatus(methodKey, response);
+                    }
+                }else{
+                    exception = new InternalException(HttpStatus.ERROR);
                 }
+            }else{
+                exception = FeignException.errorStatus(methodKey, response);
             }
         } catch (IOException ex) {
             log.error(ex.getMessage(), ex);

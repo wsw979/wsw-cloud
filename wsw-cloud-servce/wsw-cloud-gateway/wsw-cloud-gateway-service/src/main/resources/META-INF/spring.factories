@@ -9,6 +9,7 @@ io.cloud.redis.util.RedisCommonUtil,\
 io.cloud.redis.util.RedisHashUtil,\
 io.cloud.core.config.DataSourceInitFunc,\
 io.cloud.core.config.RequestContextConfig,\
-io.cloud.core.config.FeignAutoConfig
+io.cloud.core.config.FeignAutoConfig,\
+io.cloud.core.filter.SecurityCorsFilter
 #¸ºÔØ¾ùºâ
 #io.cloud.gateway.config.RuleConfig

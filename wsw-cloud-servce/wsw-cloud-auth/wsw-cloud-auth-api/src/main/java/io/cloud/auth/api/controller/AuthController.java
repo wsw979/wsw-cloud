@@ -1,6 +1,7 @@
 package io.cloud.auth.api.controller;
 
 import io.cloud.auth.api.service.AuthService;
+import io.cloud.auth.common.evt.JwtUserEvt;
 import io.cloud.auth.common.vo.JwtUserVo;
 import io.cloud.data.annotation.WswRestController;
 import io.cloud.exception.ServiceException;
@@ -48,17 +49,19 @@ public class AuthController {
         return authService.checkJwt(token);
     }
 
-    @GetMapping("/select1")
-    public Result select1() {
+    @PostMapping("/select1")
+    public Result select1(@Valid @RequestBody JwtUserEvt evt) {
         System.out.println("select1 -------------------");
-        throw new ServiceException(HttpStatus.FAIL, true);
+        String f = null;
+        f.length();
+        return R.success();
     }
 
     @GetMapping("/select2")
     public Result select2() {
         System.out.println("select2 -------------------");
         try {
-            Thread.sleep(3500);
+            Thread.sleep(4000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,6 +71,6 @@ public class AuthController {
     @GetMapping("/select3")
     public Result select3() {
         System.out.println("select3 -------------------");
-        throw new ServiceException(HttpStatus.FAIL, true);
+        throw new ServiceException(HttpStatus.FAIL);
     }
 }
