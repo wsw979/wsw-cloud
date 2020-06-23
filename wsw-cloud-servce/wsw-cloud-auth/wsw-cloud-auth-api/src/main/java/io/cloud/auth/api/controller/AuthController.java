@@ -71,6 +71,7 @@ public class AuthController {
     @GetMapping("/select3")
     public Result select3() {
         System.out.println("select3 -------------------");
-        throw new ServiceException(HttpStatus.FAIL);
+        Integer t = 1 / 0;
+        return R.success();
     }
 }

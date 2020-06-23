@@ -10,6 +10,7 @@ io.cloud.redis.util.RedisHashUtil,\
 io.cloud.core.config.DataSourceInitFunc,\
 io.cloud.core.config.RequestContextConfig,\
 io.cloud.core.config.FeignAutoConfig,\
+io.cloud.core.decoder.FeignClientErrorDecoder,\
 io.cloud.core.filter.SecurityCorsFilter
 #¸ºÔØ¾ùºâ
 #io.cloud.gateway.config.RuleConfig

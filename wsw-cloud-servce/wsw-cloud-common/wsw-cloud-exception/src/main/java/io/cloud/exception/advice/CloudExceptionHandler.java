@@ -46,14 +46,14 @@ public class CloudExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(Exception e) {
         log.error("系统异常{}", e);
-        return R.error(e.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
     }
 
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(NullPointerException e) {
         log.error("系统异常{}", e);
-        return R.error(ExceptionConstant.NULL);
+        return R.error(HttpStatus.NOT_FOUND.value(),ExceptionConstant.NULL);
     }
 
     @ExceptionHandler(ServiceException.class)
@@ -91,7 +91,7 @@ public class CloudExceptionHandler {
             InternalException internal = (InternalException) cause;
             return R.error(internal.getCode(), internal.getMsg());
         }
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),"");
     }
 
     @ExceptionHandler(Throwable.class)

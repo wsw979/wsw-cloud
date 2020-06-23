@@ -1,5 +1,6 @@
 package io.cloud.core.config;
 
+import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
 import io.cloud.core.interceptor.RestTemplateInterceptor;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -25,6 +26,7 @@ public class RestTemplateConfig {
 
     @Bean
     @LoadBalanced
+    @SentinelRestTemplate
     public RestTemplate restTemplate() {
         //长连接
         PoolingHttpClientConnectionManager pollingConnectionManager = new PoolingHttpClientConnectionManager();

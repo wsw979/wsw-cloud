@@ -24,8 +24,8 @@ logging:
   pattern:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 auth:
-  username: 979
-  password: 979
+  username: ap-sentinel
+  password: 9eba0b482d2640ce966f0c3b1bfeeeb0
   filter:
     exclude-urls: /,/auth/login,/auth/logout,/registry/machine,/version
     exclude-url-suffixes: htm,html,js,css,map,ico,ttf,woff,png

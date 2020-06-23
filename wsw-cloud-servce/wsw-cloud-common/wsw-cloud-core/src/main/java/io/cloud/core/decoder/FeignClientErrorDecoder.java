@@ -42,7 +42,7 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             if (StringUtils.isNotEmpty(json)) {
                 if(json.contains(ExceptionConstant.CODE) && json.contains(ExceptionConstant.MSG)){
                     Result result = mapper.readValue(json, Result.class);
-                    exception = new InternalException(result.getMsg());
+                    exception = new InternalException(result.getCode(),result.getMsg());
                 }
             }
         } catch (IOException ex) {

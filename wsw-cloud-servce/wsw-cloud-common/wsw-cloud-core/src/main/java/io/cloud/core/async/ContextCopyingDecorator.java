@@ -29,7 +29,7 @@ public class ContextCopyingDecorator implements TaskDecorator {
 			    	}else{
 			    		MDC.setContextMap(previous);
 			    	}
-			    	
+
 			        RequestContextHolder.setRequestAttributes(context);
 			        SecurityContextHolder.setContext(securityContext);// 2
 			        runnable.run();

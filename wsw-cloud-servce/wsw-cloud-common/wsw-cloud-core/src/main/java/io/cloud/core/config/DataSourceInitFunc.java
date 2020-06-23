@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: nacos读取 阿里哨兵规则
  * @author: wsw
  * @create: 2020-06-11 20:35
  **/
