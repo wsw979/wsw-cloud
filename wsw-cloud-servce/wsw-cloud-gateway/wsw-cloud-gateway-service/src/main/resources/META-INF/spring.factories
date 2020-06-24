@@ -7,7 +7,6 @@ io.cloud.redis.util.RedisStringUtil,\
 io.cloud.redis.util.RedisListUtil,\
 io.cloud.redis.util.RedisCommonUtil,\
 io.cloud.redis.util.RedisHashUtil,\
-io.cloud.core.config.DataSourceInitFunc,\
 io.cloud.core.config.RequestContextConfig,\
 io.cloud.core.config.FeignAutoConfig,\
 io.cloud.core.decoder.FeignClientErrorDecoder,\

@@ -10,7 +10,6 @@ import com.alibaba.csp.sentinel.slots.system.SystemBlockException;
 import com.alibaba.fastjson.JSON;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.util.R;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,6 @@ import java.io.IOException;
  * @author: wsw
  * @create: 2020-06-12 15:53
  **/
-@Configuration
 public class SentinelUrlBlockHandler implements UrlBlockHandler {
 
     @Override

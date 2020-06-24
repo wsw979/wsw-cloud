@@ -6,7 +6,7 @@ server:
         name: sentinel_dashboard_cookie
 nacos:
   server:
-    address: localhost:8848
+    address: nacos3-1-service.ns-118.svc.cluster.local:8848
   http:
     encoding:
       force: true

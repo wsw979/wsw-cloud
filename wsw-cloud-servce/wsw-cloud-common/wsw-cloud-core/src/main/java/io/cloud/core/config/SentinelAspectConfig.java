@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 /**
  * @program: wsw-cloud-servce
  * @description: 哨兵AOP ， 使用自定义资源使用注解
@@ -17,4 +18,5 @@ public class SentinelAspectConfig {
     public SentinelResourceAspect sentinelResourceAspect() {
         return new SentinelResourceAspect();
     }
+
 }

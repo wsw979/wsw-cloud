@@ -1,6 +1,5 @@
 package io.cloud.gateway.api.controller;
 
-import io.cloud.auth.common.evt.JwtUserEvt;
 import io.cloud.auth.common.feign.AuthFeign;
 import io.cloud.data.annotation.WswRestController;
 import io.cloud.data.group.Save;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -97,45 +95,5 @@ public class GatewayRouteController {
         RouteDefinition definition = HandleDataUtil.handleData(gateway);
         redisCacheRoute.deleteRoute(Mono.just(definition.getId())).subscribe();
         return R.success();
-    }
-
-    @PostMapping("/test1")
-    public Result test1(@Valid @RequestBody GatewayRouteEvt evt) {
-
-        System.out.println("test1 ----------------------");
-
-        JwtUserEvt evt2 = new JwtUserEvt();
-        evt2.setId(234444L);
-        evt2.setMobile("2222");
-        evt2.setLoginTime(LocalDateTime.now());
-        Result result = authFeign.select1(evt2);
-
-        return R.success();
-    }
-
-    @GetMapping("/test2")
-    public Result test2() {
-
-        System.out.println("test1 ----------------------");
-
-        Result result = authFeign.select2();
-
-        return R.success();
-    }
-
-    @GetMapping("/test3")
-    public Result test3() {
-
-        System.out.println("test3 ----------------------");
-        Result result = authFeign.select3();
-
-        return R.success();
-    }
-
-    @GetMapping("/test4")
-    public Result test4() {
-
-        System.out.println("test4 ----------------------");
-        throw new ServiceException(HttpStatus.FAIL);
     }
 }
