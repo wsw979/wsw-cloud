@@ -4,6 +4,7 @@ server:
     session:
       cookie:
         name: sentinel_dashboard_cookie
+#    context-path: /sentinel-dashboard
 nacos:
   server:
     address: nacos3-1-service.ns-118.svc.cluster.local:8848

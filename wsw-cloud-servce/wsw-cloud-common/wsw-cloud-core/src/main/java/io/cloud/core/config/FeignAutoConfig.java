@@ -1,14 +1,21 @@
 package io.cloud.core.config;
 
+import com.alibaba.csp.sentinel.SphU;
+import feign.Feign;
 import feign.Logger;
 import feign.codec.Decoder;
+import io.cloud.core.fallback.FunSentinelFeign;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
@@ -29,8 +36,16 @@ public class FeignAutoConfig {
      */
     @Bean
     Logger.Level feignLoggerLevel() {
-
         return Logger.Level.FULL;
+    }
+
+    @Bean
+    @Scope("prototype")
+    @ConditionalOnClass({SphU.class, Feign.class})
+    @ConditionalOnProperty(name = "feign.sentinel.enabled")
+    @Primary
+    public Feign.Builder feignSentinelBuilder() {
+        return FunSentinelFeign.builder();
     }
 
     @Bean
