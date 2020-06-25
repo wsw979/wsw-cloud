@@ -86,17 +86,32 @@ public class FunSentinelFeign {
                                     FallbackFactory.class);
                     constructor.setAccessible(true);
                     if (void.class != fallback) {
-                        fallbackFactoryInstance =
-                                (FallbackFactory) getFromContext(
+                        fallbackInstance = getFromContext(
                                         name,
-                                        "fallbackFactory",
-                                        fallbackFactory,
-                                        FallbackFactory.class);
+                                        "fallback",
+                                        fallback,
+                                        target.type());
+                        return constructor.newInstance(
+                                target, dispatch,
+                                new FallbackFactory.Default<>(fallbackInstance));
                     }
+                    if (void.class != fallbackFactory) {
+                        fallbackFactoryInstance = (FallbackFactory) getFromContext(
+                                name,
+                                "fallbackFactory",
+                                fallbackFactory,
+                                FallbackFactory.class);
+                        return constructor.newInstance(
+                                target, dispatch,
+                                fallbackFactoryInstance);
+                    }
+
+                    //默认的FallbackFactory
                     FunFallbackFactory funFallbackFactory = new FunFallbackFactory(target);
                     return constructor.newInstance(target,dispatch,funFallbackFactory);
                 }
 
+                @SuppressWarnings({"rawtypes", "unchecked"})
                 private Object getFromContext(String name, String type,
                                               Class fallbackType, Class targetType){
                     Object fallbackInstance = feignContext.getInstance(name, fallbackType);
