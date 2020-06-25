@@ -8,7 +8,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
  * @author: wsw
  * @create: 2020-06-22 09:17
  **/
-public class HytrixException extends HystrixBadRequestException  {
+public class HytrixException extends HystrixBadRequestException {
 
     private static final long serialVersionUID = -8410969487701925482L;
 
@@ -16,7 +16,7 @@ public class HytrixException extends HystrixBadRequestException  {
         super(msg);
     }
 
-    public HytrixException(Exception e){
+    public HytrixException(Exception e) {
         this(e.getMessage());
     }
 }

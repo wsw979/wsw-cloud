@@ -18,7 +18,7 @@ public class SentinelUrlBlockConfig {
 
     @PostConstruct
     @Bean
-    public void init(){
+    public void init() {
         WebCallbackManager.setUrlBlockHandler(new SentinelUrlBlockHandler());
     }
 

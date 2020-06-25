@@ -13,9 +13,6 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @program: wsw-cloud-servce
  * @description:
@@ -33,7 +30,7 @@ public class HystrixFallbackHandler implements HandlerFunction<ServerResponse> {
         serverRequest.attribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR)
                 .ifPresent(originalUrls -> log.error("网关执行请求:{}失败,hystrix服务降级处理", originalUrls));
 
-        Result error = R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),"服务异常");
+        Result error = R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), "服务异常");
         return ServerResponse
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON_UTF8)

@@ -96,4 +96,25 @@ public class GatewayRouteController {
         redisCacheRoute.deleteRoute(Mono.just(definition.getId())).subscribe();
         return R.success();
     }
+
+    @GetMapping("/test1")
+    public Result test1() {
+        System.out.println("------------------------------------");
+        Result result = authFeign.test1();
+        return R.success();
+    }
+
+    @GetMapping("/test2")
+    public Result test2() {
+        System.out.println("------------------------------------");
+        Result result = authFeign.test2();
+        return R.success();
+    }
+
+    @GetMapping("/test3")
+    public Result test3() {
+        System.out.println("------------------------------------");
+        Result result = authFeign.test3();
+        return R.success();
+    }
 }

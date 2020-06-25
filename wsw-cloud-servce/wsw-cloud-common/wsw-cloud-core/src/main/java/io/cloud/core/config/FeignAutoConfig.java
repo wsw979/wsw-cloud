@@ -42,7 +42,7 @@ public class FeignAutoConfig {
     @Bean
     @Scope("prototype")
     @ConditionalOnClass({SphU.class, Feign.class})
-    @ConditionalOnProperty(name = "feign.sentinel.enabled")
+    @ConditionalOnProperty(name = "feign.sentinel.enabled", havingValue = "true")
     @Primary
     public Feign.Builder feignSentinelBuilder() {
         return FunSentinelFeign.builder();

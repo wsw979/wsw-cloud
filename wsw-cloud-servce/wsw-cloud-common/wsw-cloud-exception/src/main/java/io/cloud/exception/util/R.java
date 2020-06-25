@@ -35,6 +35,7 @@ public class R {
 
     /**
      * 泛型
+     *
      * @param list
      * @param <T>
      * @return
@@ -62,7 +63,7 @@ public class R {
      * @return
      */
     public static Result error(String msg) {
-        return error(HttpStatus.ERROR.getCode(),msg);
+        return error(HttpStatus.ERROR.getCode(), msg);
     }
 
     public static Result error(Integer code, String msg) {

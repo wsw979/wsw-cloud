@@ -1,5 +1,6 @@
 package io.cloud.exception.advice;
 
+import feign.RetryableException;
 import io.cloud.exception.HytrixException;
 import io.cloud.exception.InternalException;
 import io.cloud.exception.ServiceException;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.util.NestedServletException;
 
 import javax.validation.ConstraintViolationException;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.List;
 
 /**
@@ -46,14 +48,14 @@ public class CloudExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(Exception e) {
         log.error("系统异常{}", e);
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(NullPointerException e) {
         log.error("系统异常{}", e);
-        return R.error(HttpStatus.NOT_FOUND.value(),ExceptionConstant.NULL);
+        return R.error(HttpStatus.NOT_FOUND.value(), ExceptionConstant.NULL);
     }
 
     @ExceptionHandler(ServiceException.class)
@@ -67,23 +69,55 @@ public class CloudExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(InternalException e) {
         log.error("服务异常{}", e);
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     @ExceptionHandler(HytrixException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(HytrixException e) {
         log.error("服务异常{}", e);
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
+    /**
+     * 重试异常
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(RetryableException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(RetryableException e) {
+        log.error("服务异常{}", e);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionConstant.FAIL);
+    }
+
+    /**
+     * 下游服务异常，sentinel抛出的熔断
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(UndeclaredThrowableException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result exceptionHandle(UndeclaredThrowableException e) {
+        log.error("服务异常{}", e);
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionConstant.TIME);
+    }
+
+    /**
+     * feign 配置了 FallbackFactory 熔断后抛出的包装异常
+     *
+     * @param e
+     * @return
+     */
     @ExceptionHandler(NestedServletException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(NestedServletException e) {
         log.error("服务异常{}", e);
         Throwable rootCause = e.getRootCause();
         Throwable cause = e.getCause().getCause();
-        if(cause instanceof HytrixException){
+        if (cause instanceof HytrixException) {
             HytrixException hytrix = (HytrixException) cause;
             return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), hytrix.getMessage());
         }
@@ -91,7 +125,7 @@ public class CloudExceptionHandler {
             InternalException internal = (InternalException) cause;
             return R.error(internal.getCode(), internal.getMsg());
         }
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),"");
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), ExceptionConstant.ERROR);
     }
 
     @ExceptionHandler(Throwable.class)
@@ -105,7 +139,7 @@ public class CloudExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result exceptionHandle(IllegalArgumentException e) {
         log.error("参数异常{}", e);
-        return R.error(HttpStatus.BAD_REQUEST.value(),e.getMessage());
+        return R.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
 
     }
 
@@ -127,7 +161,7 @@ public class CloudExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result exceptionHandle(ConstraintViolationException e) {
         log.error("参数异常{}", e);
-        return R.error(HttpStatus.BAD_REQUEST.value(),e.getMessage());
+        return R.error(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
 
@@ -135,28 +169,28 @@ public class CloudExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(NoHandlerFoundException e) {
         log.error("系统异常{}", e);
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Result exceptionHandle(HttpMessageNotReadableException e) {
         log.error("系统异常{}", e);
-        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(),e.getMessage());
+        return R.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public Result exceptionHandle(HttpRequestMethodNotSupportedException e) {
         log.error("系统异常{}", e);
-        return R.error(HttpStatus.METHOD_NOT_ALLOWED.value(),e.getMessage());
+        return R.error(HttpStatus.METHOD_NOT_ALLOWED.value(), e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     public Result exceptionHandle(HttpMediaTypeNotSupportedException e) {
         log.error("系统异常{}", e);
-        return R.error(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(),e.getMessage());
+        return R.error(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(), e.getMessage());
     }
 
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class})

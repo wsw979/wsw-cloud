@@ -3,7 +3,10 @@ package io.cloud.auth.api.controller;
 import io.cloud.auth.api.service.AuthService;
 import io.cloud.auth.common.vo.JwtUserVo;
 import io.cloud.data.annotation.WswRestController;
+import io.cloud.exception.ServiceException;
 import io.cloud.exception.result.Result;
+import io.cloud.exception.status.HttpStatus;
+import io.cloud.exception.util.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -41,7 +44,32 @@ public class AuthController {
     @GetMapping("/checkJwt")
     public Result checkJwt(@RequestParam String token, HttpServletRequest request) {
         String authorization = request.getHeader("Authorization");
-        System.out.println(authorization);
+        System.out.println("Authorization：" + authorization);
         return authService.checkJwt(token);
+    }
+
+    @GetMapping("/test1")
+    public Result test1(HttpServletRequest request) {
+        System.out.println("------------------------------------");
+        String authorization = request.getHeader("Authorization");
+        System.out.println("Authorization：" + authorization);
+        int i = 1 / 0;
+        return R.success();
+    }
+
+    @GetMapping("/test2")
+    public Result test2() {
+        System.out.println("------------------------------------");
+        try {
+            Thread.sleep(5000);
+        } catch (Exception e) {
+        }
+        return R.success();
+    }
+
+    @GetMapping("/test3")
+    public Result test3() {
+        System.out.println("------------------------------------");
+        throw new ServiceException(HttpStatus.FAIL);
     }
 }

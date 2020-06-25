@@ -40,9 +40,9 @@ public class FeignClientErrorDecoder implements ErrorDecoder {
             String json = Util.toString(response.body().asReader());
             //非业务异常包装成自定义异常类ServiceException
             if (StringUtils.isNotEmpty(json)) {
-                if(json.contains(ExceptionConstant.CODE) && json.contains(ExceptionConstant.MSG)){
+                if (json.contains(ExceptionConstant.CODE) && json.contains(ExceptionConstant.MSG)) {
                     Result result = mapper.readValue(json, Result.class);
-                    exception = new InternalException(result.getCode(),result.getMsg());
+                    exception = new InternalException(result.getCode(), result.getMsg());
                 }
             }
         } catch (IOException ex) {

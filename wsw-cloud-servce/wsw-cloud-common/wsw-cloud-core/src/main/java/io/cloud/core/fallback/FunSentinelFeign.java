@@ -21,7 +21,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @program: wsw-cloud-servce
@@ -87,10 +86,10 @@ public class FunSentinelFeign {
                     constructor.setAccessible(true);
                     if (void.class != fallback) {
                         fallbackInstance = getFromContext(
-                                        name,
-                                        "fallback",
-                                        fallback,
-                                        target.type());
+                                name,
+                                "fallback",
+                                fallback,
+                                target.type());
                         return constructor.newInstance(
                                 target, dispatch,
                                 new FallbackFactory.Default<>(fallbackInstance));
@@ -108,19 +107,19 @@ public class FunSentinelFeign {
 
                     //默认的FallbackFactory
                     FunFallbackFactory funFallbackFactory = new FunFallbackFactory(target);
-                    return constructor.newInstance(target,dispatch,funFallbackFactory);
+                    return constructor.newInstance(target, dispatch, funFallbackFactory);
                 }
 
                 @SuppressWarnings({"rawtypes", "unchecked"})
                 private Object getFromContext(String name, String type,
-                                              Class fallbackType, Class targetType){
+                                              Class fallbackType, Class targetType) {
                     Object fallbackInstance = feignContext.getInstance(name, fallbackType);
-                    if(fallbackInstance == null){
+                    if (fallbackInstance == null) {
                         throw new IllegalStateException(String.format(
                                 "No %s instance of type %s found for feign client %s",
                                 type, fallbackType, name));
                     }
-                    if(!targetType.isAssignableFrom(fallbackType)){
+                    if (!targetType.isAssignableFrom(fallbackType)) {
                         throw new IllegalStateException(String.format(
                                 "Incompatible %s instance. Fallback/fallbackFactory of the %s is not assignable",
                                 type, fallbackType, targetType, name));

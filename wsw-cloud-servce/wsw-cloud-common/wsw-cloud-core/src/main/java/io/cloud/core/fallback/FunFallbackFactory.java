@@ -2,7 +2,6 @@ package io.cloud.core.fallback;
 
 import feign.Target;
 import feign.hystrix.FallbackFactory;
-import io.cloud.core.fallback.FunFeignFallback;
 import lombok.AllArgsConstructor;
 import org.springframework.cglib.proxy.Enhancer;
 

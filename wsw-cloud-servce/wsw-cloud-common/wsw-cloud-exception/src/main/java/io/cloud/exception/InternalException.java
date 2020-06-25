@@ -18,11 +18,11 @@ public class InternalException extends BaseException {
     }
 
     public InternalException(Integer code, String msg) {
-        super(code,msg);
+        super(code, msg);
     }
 
     public InternalException(HttpStatus status) {
-        super(status.getCode(),status.getMsg());
+        super(status.getCode(), status.getMsg());
     }
 
 }

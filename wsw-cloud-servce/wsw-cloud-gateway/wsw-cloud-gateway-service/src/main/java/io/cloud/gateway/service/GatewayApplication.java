@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@EnableFeignClients(basePackages = { "io.cloud.**" })
+@EnableFeignClients(basePackages = {"io.cloud.**"})
 @EnableFeignInterceptor
 @EnableAutoConfiguration
 @SpringCloudApplication

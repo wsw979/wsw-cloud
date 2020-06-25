@@ -1,5 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.cloud.datasource.config.MybatisPlusConfig,\
 io.cloud.redis.data.RedisProperty,\
 io.cloud.redis.data.RedisDataBase,\
 io.cloud.redis.config.RedisConfig,\
@@ -7,7 +6,7 @@ io.cloud.redis.util.RedisStringUtil,\
 io.cloud.redis.util.RedisListUtil,\
 io.cloud.redis.util.RedisCommonUtil,\
 io.cloud.redis.util.RedisHashUtil,\
-io.cloud.core.config.RequestContextConfig,\
+io.cloud.datasource.config.MybatisPlusConfig,\
 io.cloud.core.config.FeignAutoConfig,\
 io.cloud.core.decoder.FeignClientErrorDecoder,\
 io.cloud.core.filter.SecurityCorsFilter

@@ -14,11 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @create: 2020-06-08 09:18
  **/
 @Configuration
-@SuppressWarnings("all") 
+@SuppressWarnings("all")
 @ConditionalOnClass(WebMvcConfigurer.class)
 public class TraceFilterConfig {
-	
-	@Bean
+
+    @Bean
     public FilterRegistrationBean requestContextRepositoryFilterRegistrationBean() {
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new TraceContextFilter());

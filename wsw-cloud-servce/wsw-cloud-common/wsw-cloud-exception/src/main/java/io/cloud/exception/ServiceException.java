@@ -18,11 +18,11 @@ public class ServiceException extends BaseException {
     }
 
     public ServiceException(Integer code, String msg) {
-        super(code,msg);
+        super(code, msg);
     }
 
     public ServiceException(HttpStatus status) {
-        super(status.getCode(),status.getMsg());
+        super(status.getCode(), status.getMsg());
     }
 
 }

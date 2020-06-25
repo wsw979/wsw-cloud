@@ -22,7 +22,6 @@ public class FeignInterceptorConfig implements RequestInterceptor {
     public void apply(RequestTemplate requestTemplate) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
-        log.info("FeignInterceptorConfig：" + attributes);
         if (attributes == null) {
             return;
         }

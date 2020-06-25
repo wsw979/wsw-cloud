@@ -19,34 +19,34 @@ public class ContextCopyingDecorator implements TaskDecorator {
     @Override
     public Runnable decorate(Runnable runnable) {
         try {
-			RequestAttributes context = RequestContextHolder.currentRequestAttributes();
-			Map<String,String> previous = MDC.getCopyOfContextMap();
-			SecurityContext securityContext = SecurityContextHolder.getContext();// 1
-			return () -> {
-			    try {
-			    	if(previous==null){
-			    		MDC.clear();
-			    	}else{
-			    		MDC.setContextMap(previous);
-			    	}
+            RequestAttributes context = RequestContextHolder.currentRequestAttributes();
+            Map<String, String> previous = MDC.getCopyOfContextMap();
+            SecurityContext securityContext = SecurityContextHolder.getContext();// 1
+            return () -> {
+                try {
+                    if (previous == null) {
+                        MDC.clear();
+                    } else {
+                        MDC.setContextMap(previous);
+                    }
 
-			        RequestContextHolder.setRequestAttributes(context);
-			        SecurityContextHolder.setContext(securityContext);// 2
-			        runnable.run();
-			    } finally {
-			        RequestContextHolder.resetRequestAttributes();
-			        // 清除操作
-			        SecurityContextHolder.clearContext();// 3
+                    RequestContextHolder.setRequestAttributes(context);
+                    SecurityContextHolder.setContext(securityContext);// 2
+                    runnable.run();
+                } finally {
+                    RequestContextHolder.resetRequestAttributes();
+                    // 清除操作
+                    SecurityContextHolder.clearContext();// 3
 
-			        if(previous==null){
-			    		MDC.clear();
-			    	}else{
-			    		MDC.setContextMap(previous);
-			    	}
-			    }
-			};
-		} catch (IllegalStateException e) {
-			return runnable;
-		}
+                    if (previous == null) {
+                        MDC.clear();
+                    } else {
+                        MDC.setContextMap(previous);
+                    }
+                }
+            };
+        } catch (IllegalStateException e) {
+            return runnable;
+        }
     }
 }

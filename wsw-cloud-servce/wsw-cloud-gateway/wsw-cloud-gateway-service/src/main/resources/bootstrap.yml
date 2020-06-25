@@ -19,6 +19,7 @@ spring:
           sentinel-config.${spring.cloud.nacos.config.file-extension},
           mybatis-plus.${spring.cloud.nacos.config.file-extension},
           swagger-config.${spring.cloud.nacos.config.file-extension}
+        refresh-enabled: true
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
 

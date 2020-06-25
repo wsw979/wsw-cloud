@@ -6,7 +6,6 @@ import io.cloud.gateway.service.handler.SwaggerSecurityHandler;
 import io.cloud.gateway.service.handler.SwaggerUiHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

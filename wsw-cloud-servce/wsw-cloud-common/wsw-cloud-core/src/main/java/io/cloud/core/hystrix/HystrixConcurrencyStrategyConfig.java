@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class HystrixConcurrencyStrategyConfig {
- 
-	@Bean
-	public RequestAttributeHystrixConcurrencyStrategy requestAttributeHystrixConcurrencyStrategy() {
-		return new RequestAttributeHystrixConcurrencyStrategy();
-	}
-	
+
+    @Bean
+    public RequestAttributeHystrixConcurrencyStrategy requestAttributeHystrixConcurrencyStrategy() {
+        return new RequestAttributeHystrixConcurrencyStrategy();
+    }
+
 }

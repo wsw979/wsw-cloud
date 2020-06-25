@@ -4,9 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static org.springframework.context.annotation.ScopedProxyMode.DEFAULT;
 
 /**
  * @program: wsw-cloud-servce
@@ -16,18 +19,19 @@ import java.util.Set;
  **/
 @Setter
 @Getter
-@ConfigurationProperties("wsw.swagger-agg")
-@RefreshScope
+@Component
+@ConfigurationProperties(prefix = "wsw.swagger-agg")
+@RefreshScope(proxyMode = DEFAULT)
 public class SwaggerAggProperties {
     /**
      * Swagger返回JSON文档的接口路径（全局配置）
      */
-    private String apiDocsPath = "/v2/api-docs";
+    private String apiDocsPath;
 
     /**
      * Swagger文档版本（全局配置）
      */
-    private String swaggerVersion = "2.0";
+    private String swaggerVersion;
 
     /**
      * 自动生成文档的路由名称，设置了generateRoutes之后，ignoreRoutes不生效

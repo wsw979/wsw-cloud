@@ -8,7 +8,6 @@ import com.netflix.hystrix.exception.HystrixRuntimeException;
 import feign.FeignException;
 import io.cloud.exception.HytrixException;
 import io.cloud.exception.InternalException;
-import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;

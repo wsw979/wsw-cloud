@@ -29,12 +29,12 @@ public class FunFeignFallback<T> implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         String errorMessage = cause.getMessage();
-        log.error("FunFeignFallback:[{}.{}] serviceId:[{}] message:[{}]",targetType.getName(), method.getName(), targetName, errorMessage);
-        if(!(cause instanceof FeignException)){
+        log.error("FunFeignFallback:[{}.{}] serviceId:[{}] message:[{}]", targetType.getName(), method.getName(), targetName, errorMessage);
+        if (!(cause instanceof FeignException)) {
             if (cause instanceof InternalException) {
                 InternalException exception = (InternalException) cause;
                 throw new InternalException(exception.getCode(), exception.getMessage());
-            }  else {
+            } else {
                 throw new HytrixException(HttpStatus.SERVICE_ERROR.getMsg());
             }
         }
@@ -43,10 +43,10 @@ public class FunFeignFallback<T> implements MethodInterceptor {
 
     @Override
     public boolean equals(Object obj) {
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
-        if(obj == null || getClass() != obj.getClass()){
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
         FunFeignFallback<?> that = (FunFeignFallback<?>) obj;
