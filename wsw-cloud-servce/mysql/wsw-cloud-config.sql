@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : master-8001
+ Source Server         : master
  Source Server Type    : MySQL
  Source Server Version : 80020
  Source Host           : localhost:8001
@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 25/06/2020 16:08:26
+ Date: 27/06/2020 18:59:00
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,11 @@ CREATE TABLE `c_api_message_code`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '发送时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否最新（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_api_message_code
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_api_role
@@ -45,7 +49,7 @@ CREATE TABLE `c_api_role`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_api_role
@@ -72,7 +76,7 @@ CREATE TABLE `c_api_user`  (
   `start_time` datetime(0) NULL DEFAULT NULL COMMENT '会员开始时间',
   `end_time` datetime(0) NULL DEFAULT NULL COMMENT '会员结束时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_api_user
@@ -112,7 +116,11 @@ CREATE TABLE `c_api_user_auth`  (
   `verified_time` datetime(0) NULL DEFAULT NULL COMMENT '验证时间',
   `is_binding` tinyint(0) NULL DEFAULT 1 COMMENT '是否绑定中（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户认证方式' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户认证方式' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_api_user_auth
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_api_user_role
@@ -123,7 +131,11 @@ CREATE TABLE `c_api_user_role`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '关联角色',
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '关联用户表',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_api_user_role
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_gateway_route
@@ -143,14 +155,14 @@ CREATE TABLE `c_gateway_route`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态路由' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态路由' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_gateway_route
 -- ----------------------------
-INSERT INTO `c_gateway_route` VALUES (1272152490133098498, 'gateway', 'lb://wsw-cloud-gateway-api', '[{\"args\":{\"_genkey_0\":\"/config/api/gateway/**\"},\"name\":\"Path\"}]', '[{\"args\":{\"_genkey_0\":\"3\"},\"name\":\"StripPrefix\"},{\"name\":\"SwaggerHeaderFilter\"}]', '1', '网关管理服务', NULL, NULL, '2020-06-14 21:02:44', NULL, 1);
-INSERT INTO `c_gateway_route` VALUES (1272154640808640513, 'auth', 'lb://wsw-cloud-auth-api', '[{\"args\":{\"_genkey_0\":\"/app/api/auth/**\"},\"name\":\"Path\"}]', '[{\"args\":{\"_genkey_0\":\"3\"},\"name\":\"StripPrefix\"},{\"name\":\"SwaggerHeaderFilter\"}]', '2', '权限服务', NULL, NULL, '2020-06-14 21:11:16', '2020-06-17 17:18:14', 1);
-INSERT INTO `c_gateway_route` VALUES (1274383603682705409, 'user', 'lb://wsw-cloud-user-api', '[{\"args\":{\"_genkey_0\":\"/app/api/user/**\"},\"name\":\"Path\"}]', '[{\"args\":{\"_genkey_0\":\"1\"},\"name\":\"StripPrefix\"},{\"name\":\"SwaggerHeaderFilter\"}]', '3', '用户服务', NULL, NULL, '2020-06-21 00:48:23', NULL, 1);
+INSERT INTO `c_gateway_route` VALUES (1272152490133098498, 'gateway', 'lb://wsw-cloud-gateway-api', '[{\"args\":{\"_genkey_0\":\"/gateway/api/**\"},\"name\":\"Path\"}]', '[{\"args\":{\"_genkey_0\":\"2\"},\"name\":\"StripPrefix\"},{\"name\":\"SwaggerHeaderFilter\"}]', '1', '网关管理服务', NULL, NULL, '2020-06-14 21:02:44', NULL, 1);
+INSERT INTO `c_gateway_route` VALUES (1272154640808640513, 'auth', 'lb://wsw-cloud-auth-api', '[{\"args\":{\"_genkey_0\":\"/auth/api/**\"},\"name\":\"Path\"}]', '[{\"args\":{\"_genkey_0\":\"2\"},\"name\":\"StripPrefix\"},{\"name\":\"SwaggerHeaderFilter\"}]', '2', '权限服务', NULL, NULL, '2020-06-14 21:11:16', '2020-06-25 14:42:40', 1);
+INSERT INTO `c_gateway_route` VALUES (1274383603682705409, 'user', 'lb://wsw-cloud-user-api', '[{\"args\":{\"_genkey_0\":\"/app/user/api/**\"},\"name\":\"Path\"}]', '[{\"args\":{\"_genkey_0\":\"3\"},\"name\":\"StripPrefix\"},{\"name\":\"SwaggerHeaderFilter\"}]', '3', '用户服务', NULL, NULL, '2020-06-21 00:48:23', NULL, 1);
 
 -- ----------------------------
 -- Table structure for oauth_client_details
@@ -169,7 +181,7 @@ CREATE TABLE `oauth_client_details`  (
   `additional_information` varchar(4096) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `autoapprove` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`client_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of oauth_client_details
@@ -190,7 +202,7 @@ CREATE TABLE `permission`  (
   `REQUEST_URL` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求地址',
   `PARENT_PERMISSION` bigint(0) NULL DEFAULT NULL COMMENT '父权限',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of permission
@@ -215,7 +227,7 @@ CREATE TABLE `role`  (
   `COMMENT` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注说明',
   `STATUS` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态  1：正常 0 封存',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role
@@ -233,7 +245,7 @@ CREATE TABLE `role_permission_rel`  (
   `ROLE_ID` bigint(0) NULL DEFAULT NULL COMMENT '关联角色',
   `PERMISSION_ID` bigint(0) NULL DEFAULT NULL COMMENT '关联权限',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_permission_rel
@@ -267,7 +279,7 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`ID`) USING BTREE,
   UNIQUE INDEX `AK_uq_telephone`(`TELEPHONE`) USING BTREE,
   UNIQUE INDEX `AK_uq_email`(`EMAIL`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
@@ -286,7 +298,7 @@ CREATE TABLE `user_role_rel`  (
   `ROLE_ID` bigint(0) NULL DEFAULT NULL COMMENT '关联角色',
   `USER_ID` bigint(0) NULL DEFAULT NULL COMMENT '关联用户表',
   PRIMARY KEY (`ID`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_role_rel
