@@ -1,7 +1,6 @@
 package io.cloud.core.config;
 
 import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
-import io.cloud.core.interceptor.RestTemplateInterceptor;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
@@ -54,12 +53,12 @@ public class RestTemplateConfig {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(clientHttpRequestFactory);
         restTemplate.setErrorHandler(new DefaultResponseErrorHandler());
-        //传递token traceid
-        restTemplate.setInterceptors(
-                Collections.singletonList(
-                        new RestTemplateInterceptor()
-                )
-        );
+//        //传递token traceid
+//        restTemplate.setInterceptors(
+//                Collections.singletonList(
+//                        new RestTemplateInterceptor()
+//                )
+//        );
         return restTemplate;
     }
 

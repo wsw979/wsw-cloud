@@ -13,6 +13,8 @@ import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 
+import java.net.URI;
+
 import static org.springframework.cloud.gateway.filter.LoadBalancerClientFilter.LOAD_BALANCER_CLIENT_FILTER_ORDER;
 
 /**

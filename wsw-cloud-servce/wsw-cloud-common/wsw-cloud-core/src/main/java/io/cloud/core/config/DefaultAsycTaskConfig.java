@@ -1,6 +1,6 @@
 package io.cloud.core.config;
 
-import io.cloud.core.async.ContextCopyingDecorator;
+
 import io.cloud.core.executor.CustomThreadPoolTaskExecutor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,7 +49,7 @@ public class DefaultAsycTaskConfig {
         executor.setMaxPoolSize(maxPoolSize);
         executor.setQueueCapacity(queueCapacity);
         executor.setThreadNamePrefix(threadNamePrefix);
-        executor.setTaskDecorator(new ContextCopyingDecorator());
+//        executor.setTaskDecorator(new ContextCopyingDecorator());
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         executor.initialize();
         return executor;

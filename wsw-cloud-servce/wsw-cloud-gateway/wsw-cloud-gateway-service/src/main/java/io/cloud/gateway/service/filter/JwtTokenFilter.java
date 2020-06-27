@@ -8,20 +8,25 @@ import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
 import io.cloud.gateway.service.entity.UrlsEntity;
 import io.cloud.gateway.service.feign.AuthFeign;
+import io.cloud.gateway.service.properties.AuthProperties;
 import io.cloud.gateway.service.swagger.SwaggerAggProperties;
+import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * @program: wsw-cloud-servce
@@ -30,7 +35,9 @@ import java.util.Arrays;
  * @create: 2020-06-03 15:39
  **/
 @Component
-public class JwtTokenFilter implements GlobalFilter, Ordered {
+public class JwtTokenFilter extends AbstractGatewayFilterFactory implements Ordered {
+
+    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     @Resource
     private UrlsEntity urlsEntity;
@@ -41,6 +48,25 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
     @Resource
     private SwaggerAggProperties swaggerAggProperties;
 
+    @Resource
+    private AuthProperties authProperties;
+
+    @Override
+    public GatewayFilter apply(Object config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            String path = request.getURI().getPath();
+            //跳过不需要验证的路径
+            Iterator<String> iterator = authProperties.getPassAuth().iterator();
+            while (iterator.hasNext()){
+                if (antPathMatcher.match(iterator.next(),path)){
+                    return chain.filter(exchange);
+                }
+            }
+            return chain.filter(exchange);
+        };
+    }
+
     /**
      * 过滤器
      *
@@ -48,7 +74,6 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
      * @param chain
      * @return
      */
-    @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
@@ -64,7 +89,7 @@ public class JwtTokenFilter implements GlobalFilter, Ordered {
         }
         String token = request.getHeaders().getFirst(ConfigConstant.TOKEN_HEADER);
         if (StringUtil.isEmpty(token)) {
-            throw new ServiceException(HttpStatus.TOKEN_ERROR);
+            throw new InternalException(HttpStatus.TOKEN_ERROR);
         }
         Result result = authFeign.checkJwt(token);
         if (!result.getCode().equals(HttpStatus.SUCCESS.getCode())) {

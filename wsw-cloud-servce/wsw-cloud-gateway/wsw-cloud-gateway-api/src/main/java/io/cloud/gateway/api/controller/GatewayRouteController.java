@@ -39,7 +39,7 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @Api(tags = "动态路由")
-@WswRestController(path = "/dynamicRoute")
+@WswRestController(path = "/api/dynamicRoute")
 public class GatewayRouteController {
 
     private IGatewayRouteService gatewayRouteService;

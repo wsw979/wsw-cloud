@@ -29,7 +29,7 @@ import javax.validation.Valid;
 @Slf4j
 @AllArgsConstructor
 @Api(tags = "权限鉴定")
-@WswRestController(path = "/checkAuth")
+@WswRestController(path = "/api/checkAuth")
 public class AuthController {
 
     private AuthService authService;
