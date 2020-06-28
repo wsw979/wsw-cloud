@@ -56,11 +56,7 @@ public class CodeAutoGenerator {
     //需要生成的表
     private static final String[] tables =
             {
-                    "c_api_message_code",
-                    "c_api_role",
-                    "c_api_user",
-                    "c_api_user_auth",
-                    "c_api_user_role"
+                    "c_admin_user"
             };
     //父类公共字段
     private static final String[] columns =
@@ -140,7 +136,7 @@ public class CodeAutoGenerator {
                 //时间类型
                 .setDateType(DateType.TIME_PACK)
                 //设置主键生成策略
-                .setIdType(IdType.ID_WORKER)
+                .setIdType(IdType.ASSIGN_ID)
                 //自定义文件命名，注意 %s 会自动填充表实体属性！
                 .setServiceName("I%sService");
     }

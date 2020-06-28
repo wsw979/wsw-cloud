@@ -1,7 +1,7 @@
 //package io.cloud.core.interceptor;
 //
 //import cn.hutool.core.util.StrUtil;
-//import io.cloud.core.constant.ConfigConstant;
+//import io.cloud.data.constant.ConfigConstant;
 //import io.cloud.core.constant.TraceConstant;
 //import org.apache.commons.lang3.StringUtils;
 //import org.slf4j.MDC;

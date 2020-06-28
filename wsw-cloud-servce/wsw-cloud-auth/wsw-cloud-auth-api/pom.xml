@@ -23,6 +23,11 @@
             <artifactId>wsw-cloud-auth-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-user-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- oauth2依赖 解决https://github.com/spring-projects/spring-security-oauth/issues/1230#event-1352041281-->
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>

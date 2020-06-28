@@ -39,6 +39,7 @@
         <okhttp.version>3.10.0</okhttp.version>
         <httpclient.version>4.5.10</httpclient.version>
         <dynamic.datasource.version>2.4.2</dynamic.datasource.version>
+        <java.jwt.version>3.8.1</java.jwt.version>
         <fastjson.version>1.2.39</fastjson.version>
         <jackson.version>2.10.2</jackson.version>
         <jackson.mapper.version>1.9.13</jackson.mapper.version>
@@ -230,6 +231,11 @@
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons.fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${java.jwt.version}</version>
             </dependency>
             <!-- fastjson -->
             <dependency>

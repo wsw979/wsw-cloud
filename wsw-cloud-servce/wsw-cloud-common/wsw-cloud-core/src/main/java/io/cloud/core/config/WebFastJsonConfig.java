@@ -6,10 +6,15 @@ import com.alibaba.fastjson.serializer.ToStringSerializer;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @program: wsw-cloud-servce
@@ -20,13 +25,15 @@ import java.util.ArrayList;
 @Configuration
 public class WebFastJsonConfig extends WebMvcConfigurationSupport {
 
-    /**
-     * fastJson 规定出参入参
-     *
-     * @param converters
-     */
     @Override
-    public void configureMessageConverters(java.util.List<org.springframework.http.converter.HttpMessageConverter<?>> converters) {
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.clear();
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+        converters.add(converter);
+        converters.add(fastJsonHttpMessageConverter());
+    }
+
+    protected FastJsonHttpMessageConverter fastJsonHttpMessageConverter() {
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
         SerializeConfig serializeConfig = SerializeConfig.globalInstance;
@@ -34,7 +41,6 @@ public class WebFastJsonConfig extends WebMvcConfigurationSupport {
         serializeConfig.put(Long.class, ToStringSerializer.instance);
         serializeConfig.put(Long.TYPE, ToStringSerializer.instance);
         config.setSerializeConfig(serializeConfig);
-
         //其他格式
         config.setSerializerFeatures(
                 // 保留 Map 空的字段
@@ -48,16 +54,16 @@ public class WebFastJsonConfig extends WebMvcConfigurationSupport {
                 // 将 Boolean 类型的 null 转成 false
                 SerializerFeature.WriteNullBooleanAsFalse,
                 // 避免循环引用
-                SerializerFeature.DisableCircularReferenceDetect);
-
-        converter.setFastJsonConfig(config);
-        converter.setDefaultCharset(Charset.forName("UTF-8"));
-        java.util.List<org.springframework.http.MediaType> mediaTypeList = new ArrayList<>();
-
+                SerializerFeature.DisableCircularReferenceDetect
+        );
         // 解决中文乱码问题
-        mediaTypeList.add(org.springframework.http.MediaType.APPLICATION_JSON);
+        List<MediaType> mediaTypeList = Arrays.asList(
+                MediaType.APPLICATION_JSON_UTF8
+        );
         converter.setSupportedMediaTypes(mediaTypeList);
-        converters.add(converter);
+        converter.setDefaultCharset(Charset.forName("UTF-8"));
+        converter.setFastJsonConfig(config);
+        return converter;
     }
 
 }

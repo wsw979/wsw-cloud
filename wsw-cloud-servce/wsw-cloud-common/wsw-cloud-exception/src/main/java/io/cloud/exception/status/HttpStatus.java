@@ -25,6 +25,7 @@ public enum HttpStatus {
     /**
      * 权限
      */
+    AUTH_ERROR(403,"认证失败"),
     NOT_AUTH(403, "权限不足"),
     TOKEN_ERROR(400, "登录已失效，请重新登录"),
     ;

@@ -1,5 +1,6 @@
 package io.cloud.core.filter;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
 import javax.servlet.*;

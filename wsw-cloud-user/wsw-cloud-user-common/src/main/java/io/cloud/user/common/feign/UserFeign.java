@@ -3,12 +3,10 @@ package io.cloud.user.common.feign;
 import io.cloud.data.constant.ServiceConstant;
 import io.cloud.exception.ServiceException;
 import io.cloud.exception.result.Result;
-import io.cloud.user.common.entity.ApiUser;
 import io.cloud.user.common.feign.fallback.UserFeignFallbackFactory;
-import io.cloud.user.common.vo.ApiUserVo;
+import io.cloud.user.common.vo.app.ApiUserVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.cloud.user.api.mapper.PermissionMapper">
+
+    <select id="findListByUserId" resultType="io.cloud.user.common.vo.app.PermissionListVo">
+        select
+            A.id,A.auth_name,A.auth_code,A.auth_type,A.request_url
+        from c_permission A
+        left join c_role_permission B on A.id = B.permission_id
+        where A.is_valid = 1 and B.user_id = #{userId,jdbcType=BIGINT}
+    </select>
+</mapper>

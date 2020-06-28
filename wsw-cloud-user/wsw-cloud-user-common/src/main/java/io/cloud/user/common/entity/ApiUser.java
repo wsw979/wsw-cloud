@@ -24,7 +24,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName("c_api_user")
-@ApiModel(value="ApiUser对象", description="用户")
+@ApiModel(value="ApiUser对象", description="APP用户")
 public class ApiUser {
 
     private static final long serialVersionUID = 1L;
@@ -32,6 +32,9 @@ public class ApiUser {
     @ApiModelProperty(value = "主键")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
+
+    @ApiModelProperty(value = "用户名")
+    private String userName;
 
     @ApiModelProperty(value = "手机号")
     private String mobile;

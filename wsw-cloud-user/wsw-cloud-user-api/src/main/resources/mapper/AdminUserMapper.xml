@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.cloud.user.api.mapper.AdminUserMapper">
+
+    <select id="getUserByPhone" resultType="io.cloud.user.common.vo.app.AdminUserVo">
+        select
+            id, mobile, credential, salt, activate
+        from c_admin_user
+        where mobile = #{phone,jdbcType=VARCHAR} and is_valid between 1 and 2
+    </select>
+
+</mapper>

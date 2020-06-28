@@ -2,17 +2,14 @@ package io.cloud.user.api.controller;
 
 
 import io.cloud.data.annotation.WswRestController;
-import io.cloud.data.primary.IdGenerator;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.util.R;
-import io.cloud.user.api.service.IApiRoleService;
 import io.cloud.user.api.service.IApiUserService;
-import io.cloud.user.common.entity.ApiRole;
-import io.cloud.user.common.entity.ApiUser;
+import io.cloud.user.common.vo.app.ApiUserVo;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,41 +22,22 @@ import org.springframework.web.bind.annotation.*;
  */
 @Slf4j
 @AllArgsConstructor
-@Api(tags = "用户")
-@WswRestController(path = "/api/user")
+@Api(tags = "APP用户")
+@WswRestController(path = "/appUser")
 public class ApiUserController {
 
-    @Autowired
     private IApiUserService apiUserService;
 
-    @PostMapping("/add")
-    public Result add(){
-        ApiUser user = new ApiUser();
-        user.setIsVip(1);
-        apiUserService.save(user);
-
-        ApiUser user1 = new ApiUser();
-        long id = IdGenerator.getId();
-        user1.setIsVip(1);
-        user1.setId(id);
-        apiUserService.save(user1);
-
-        return R.success();
+    @GetMapping(value = "/userName")
+    @ApiOperation(value = "获取用户", tags = "根据用户名/邮箱/手机号获取用户")
+    public Result<ApiUserVo> getUserByUserName(@RequestParam("userName") String userName){
+        return R.success(apiUserService.getUserByUserName(userName));
     }
 
-    @Autowired
-    private IApiRoleService apiRoleService;
-
-    @GetMapping("/select")
-    public Result select(@RequestParam Long id){
-
-
-
-        ApiUser byId = apiUserService.getById(id);
-
-        ApiRole byId1 = apiRoleService.getById(id);
-
-
-        return R.success(byId);
+    @GetMapping(value = "/phone/{phone}")
+    @ApiOperation(value = "根据账户名或手机号获取用户", tags = "根据账户名或手机号获取用户")
+    public Result<ApiUserVo> getUserByPhone(@PathVariable("phone") String phone){
+        return R.success(apiUserService.getUserByPhone(phone));
     }
+
 }

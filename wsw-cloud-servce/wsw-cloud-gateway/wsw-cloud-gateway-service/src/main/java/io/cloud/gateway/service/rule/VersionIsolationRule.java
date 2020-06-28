@@ -7,7 +7,7 @@ import com.alibaba.cloud.nacos.ribbon.NacosServer;
 import com.netflix.loadbalancer.ILoadBalancer;
 import com.netflix.loadbalancer.RoundRobinRule;
 import com.netflix.loadbalancer.Server;
-import io.cloud.core.constant.ConfigConstant;
+import io.cloud.data.constant.ConfigConstant;
 import io.cloud.gateway.service.context.LbIsolationContextHolder;
 
 import java.util.List;

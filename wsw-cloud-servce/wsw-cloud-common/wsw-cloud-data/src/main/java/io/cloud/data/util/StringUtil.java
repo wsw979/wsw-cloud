@@ -3,6 +3,7 @@ package io.cloud.data.util;
 import lombok.extern.slf4j.Slf4j;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -290,4 +291,16 @@ public class StringUtil {
         return bankCardNum;
     }
 
+    /**
+     * 拼接 string
+     * @param obj
+     * @return
+     */
+    public static String buffer(Object... obj){
+        StringBuffer buffer = new StringBuffer();
+        Arrays.stream(obj).forEach(str -> {
+            buffer.append(str.toString());
+        });
+        return buffer.toString();
+    }
 }

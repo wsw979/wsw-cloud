@@ -12,6 +12,11 @@
     <artifactId>wsw-cloud-user</artifactId>
     <packaging>pom</packaging>
 
+    <modules>
+        <module>wsw-cloud-user-api</module>
+        <module>wsw-cloud-user-common</module>
+    </modules>
+
     <dependencies>
         <!-- lombok -->
         <dependency>

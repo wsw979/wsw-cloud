@@ -36,6 +36,14 @@
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-swagger</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

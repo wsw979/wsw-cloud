@@ -18,6 +18,11 @@
 
     <dependencies>
         <!-- 所有项目依赖 -->
+        <!--mybatis plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
         <!-- Import dependency Spring Cloud Commons -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

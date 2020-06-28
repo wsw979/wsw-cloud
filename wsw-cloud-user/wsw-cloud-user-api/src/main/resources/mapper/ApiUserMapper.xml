@@ -2,27 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="io.cloud.user.api.mapper.ApiUserMapper">
 
-    <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="io.cloud.user.common.entity.ApiUser">
-        <id column="id" property="id" />
-        <result column="mobile" property="mobile" />
-        <result column="email" property="email" />
-        <result column="sex" property="sex" />
-        <result column="avatar" property="avatar" />
-        <result column="nickname" property="nickname" />
-        <result column="birthday" property="birthday" />
-        <result column="introduction" property="introduction" />
-        <result column="salt" property="salt" />
-        <result column="register" property="register" />
-        <result column="is_valid" property="isValid" />
-        <result column="is_vip" property="isVip" />
-        <result column="start_time" property="startTime" />
-        <result column="end_time" property="endTime" />
-    </resultMap>
+    <select id="getUserByUserName" resultType="io.cloud.user.common.vo.app.ApiUserVo">
+        select
+            A.id,A.user_name,A.mobile,A.email, A.avatar,
+            A.nickname, B.credential, A.salt, A.is_valid
+        from c_api_user A
+        left join c_api_user_auth B on A.id = B.user_id
+        where B.identity_type between 1 and 3 and B.verified = 1 and B.is_binding = 1
+        and B.identifier = #{userName,jdbcType=VARCHAR}
+    </select>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, mobile, email, sex, avatar, nickname, birthday, introduction, salt, register, is_valid, is_vip, start_time, end_time
-    </sql>
+    <select id="getUserByPhone" resultType="io.cloud.user.common.vo.app.ApiUserVo">
+        select
+            A.id,A.user_name,A.mobile,A.email, A.avatar,
+            A.nickname, B.credential, A.salt, A.is_valid
+        from c_api_user A
+        left join c_api_user_auth B on A.id = B.user_id
+        where B.identity_type between 1 and 2 and B.verified = 1 and B.is_binding = 1
+        and ( B.identifier = #{phone,jdbcType=VARCHAR} )
+    </select>
 
 </mapper>

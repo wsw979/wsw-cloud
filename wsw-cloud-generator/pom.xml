@@ -8,7 +8,7 @@
     <version>1.0.0</version>
 
     <properties>
-        <mybatisplus.version>2.2.0</mybatisplus.version>
+        <mybatis.plus.spring.boot.version>3.3.1</mybatis.plus.spring.boot.version>
         <mybatis.plus.generator.version>3.2.0</mybatis.plus.generator.version>
         <velocity.version>2.0</velocity.version>
         <lombock.version>1.18.0</lombock.version>
@@ -18,6 +18,17 @@
     </properties>
 
     <dependencies>
+        <!--mybatis plus -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis.plus.spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>${mybatis.plus.spring.boot.version}</version>
+        </dependency>
         <!-- mybatis generator -->
         <dependency>
             <groupId>com.baomidou</groupId>
