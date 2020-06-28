@@ -67,4 +67,16 @@ public class MD5Util {
         }
         return hexValue.toString();
     }
+
+
+    public static void main(String[] args) {
+
+        String salt = "HyopmV";
+        String username = "1271278964698173442";
+        String password = "wusiwei..";
+        String passwordSalt = salt + MD5Util.encode(StringUtil.buffer(username, password));
+        String md5PasswordSalt = MD5Util.encodeSalt(passwordSalt);
+        System.out.println(md5PasswordSalt);
+
+    }
 }

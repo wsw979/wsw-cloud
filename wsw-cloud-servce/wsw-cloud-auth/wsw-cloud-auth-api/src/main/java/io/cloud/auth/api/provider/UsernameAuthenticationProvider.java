@@ -46,7 +46,8 @@ public class UsernameAuthenticationProvider extends AbstractUserDetailsAuthentic
             log.error("Authentication failed: no credentials provided");
             throw new BadCredentialsException(HttpStatus.AUTH_ERROR.getMsg());
         }
-        String passwordSalt = userDetails.getBaseUser().getSalt() + MD5Util.encode(StringUtil.buffer(username, password));
+        Long id = userDetails.getBaseUser().getId();
+        String passwordSalt = userDetails.getBaseUser().getSalt() + MD5Util.encode(StringUtil.buffer(id, password));
         String md5PasswordSalt = MD5Util.encodeSalt(passwordSalt);
         // 校验不通过 , 和数据库用户 密码比对
         if (!userDetails.getPassword().equals(md5PasswordSalt)) {

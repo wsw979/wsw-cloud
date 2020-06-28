@@ -14,6 +14,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -128,7 +129,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     public KeyPair keyPair(){
         KeyPair keyPair = new KeyStoreKeyFactory(
                 authServerProperties.getKeyPath(),
-                authServerProperties.getSecret().toCharArray()).getKeyPair(authServerProperties.getAlias());
+                authServerProperties.getPassword().toCharArray()).getKeyPair(authServerProperties.getAlias());
         return keyPair;
     }
 

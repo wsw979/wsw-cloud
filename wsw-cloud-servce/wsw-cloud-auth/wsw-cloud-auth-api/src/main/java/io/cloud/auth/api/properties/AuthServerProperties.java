@@ -51,8 +51,11 @@ public class AuthServerProperties implements Serializable {
      */
     private String alias;
     /**
-     * 密码
+     * 签名
      */
     private String secret;
-
+    /**
+     * 密码
+     */
+    private String password;
 }

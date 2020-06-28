@@ -23,11 +23,6 @@
             <artifactId>wsw-cloud-user-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- oauth2 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-security</artifactId>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>

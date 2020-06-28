@@ -1,5 +1,6 @@
 package io.cloud.auth.api.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloud.auth.common.dtl.UsernameDtl;
 import io.cloud.auth.api.token.UsernameAuthenticationToken;
@@ -11,6 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -35,8 +37,10 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
         }
         AbstractAuthenticationToken authRequest;
         ObjectMapper mapper = new ObjectMapper();
-        try (InputStream is = request.getInputStream()){
-            UsernameDtl dtl = mapper.readValue(is, UsernameDtl.class);
+        try {
+            ServletInputStream inputStream = request.getInputStream();
+            InputStream is = inputStream;
+            UsernameDtl dtl = JSON.parseObject(is, UsernameDtl.class);
             dtl.setPassword(dtl.getPassword().trim());
             authRequest = new UsernameAuthenticationToken(dtl.getUsername(), dtl.getPassword());
             setDetails(request, authRequest);

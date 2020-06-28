@@ -1,0 +1,1 @@
+keytool -genkeypair -alias wu979Cloud -keyalg RSA -dname "CN=Web Server,OU=China,O=www.979.cn,L=Chengdu,S=Chengdu,C=China" -keypass wusiweiCloud979 -keystore config-service.jks -storepass wusiweiCloud979
