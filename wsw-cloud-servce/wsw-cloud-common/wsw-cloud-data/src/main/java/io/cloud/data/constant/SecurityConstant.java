@@ -11,7 +11,7 @@ public interface SecurityConstant {
     /**
      * sys_oauth_client_details 表的字段，不包括client_id、client_secret
      */
-    String CLIENT_FIELDS = "client_id, CONCAT('{noop}',client_secret) as client_secret, resource_ids, scope, "
+    String CLIENT_FIELDS = "client_id, resource_ids, CONCAT('{noop}',client_secret) as client_secret, scope, "
             + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
             + "refresh_token_validity, additional_information, autoapprove";
 
@@ -29,11 +29,6 @@ public interface SecurityConstant {
      * 按条件client_id 查询
      */
     String DEFAULT_SELECT_STATEMENT = BASE_FIND_STATEMENT + " where client_id = ?";
-
-    /**
-     * 登录类型 （1APP 2ADMIN）
-     */
-    String LOGIN_TYPE = "login_type";
 
     /**
      * 加密
