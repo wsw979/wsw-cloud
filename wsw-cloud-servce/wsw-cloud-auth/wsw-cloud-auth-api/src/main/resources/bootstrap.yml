@@ -22,3 +22,14 @@ spring:
           sentinel-config.${spring.cloud.nacos.config.file-extension}
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
+
+wsw:
+  auth:
+    server:
+      max-client: 30000
+      token-valid: 14400
+      force: false
+      start-refresh: false
+      key-path: classpath:kevin_key.jks
+      alias: wecode
+      secret: wecodeCloud
