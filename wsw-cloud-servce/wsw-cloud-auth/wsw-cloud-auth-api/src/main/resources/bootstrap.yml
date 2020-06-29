@@ -22,3 +22,16 @@ spring:
           sentinel-config.${spring.cloud.nacos.config.file-extension}
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
+wsw:
+  auth:
+    server:
+      max-client: 3
+      token-valid: 14400
+      force: false
+      start-refresh: false
+      refresh-token-valid: 14400
+      key-path: classpath:/config-service.jks
+      alias: wu979Cloud
+      secret: wusiweiCloud979
+      password: wusiweiCloud979
+      manual-refresh-token-valid: 600
