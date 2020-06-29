@@ -2,7 +2,7 @@ package io.cloud.gateway.service.filter;
 
 import cn.hutool.core.util.StrUtil;
 import io.cloud.data.constant.ConfigConstant;
-import io.cloud.gateway.service.context.LbIsolationContextHolder;
+import io.cloud.gateway.service.holder.LbIsolationContextHolder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.web.filter.OncePerRequestFilter;

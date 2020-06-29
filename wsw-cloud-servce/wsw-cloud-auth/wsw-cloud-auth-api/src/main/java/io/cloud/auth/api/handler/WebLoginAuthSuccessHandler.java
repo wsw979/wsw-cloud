@@ -1,11 +1,9 @@
 package io.cloud.auth.api.handler;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.cloud.auth.api.properties.AuthServerProperties;
+import io.cloud.auth.common.properties.AuthServerProperties;
 import io.cloud.auth.api.token.BaseUserDetail;
 import io.cloud.auth.api.util.ResponseUtil;
-import io.cloud.core.filter.HttpHelper;
 import io.cloud.auth.common.entity.TokenEntity;
 import io.cloud.auth.common.util.TokenUtil;
 import io.cloud.data.constant.CommonConstant;
@@ -131,5 +129,13 @@ public class WebLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationS
             throw new ServiceException("登录限制，同时登录人数过多");
         }
         return result;
+    }
+
+    public static void main(String[] args) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encode = passwordEncoder.encode("wsw-gateway-secret");
+        System.out.println(encode);
+
+
     }
 }

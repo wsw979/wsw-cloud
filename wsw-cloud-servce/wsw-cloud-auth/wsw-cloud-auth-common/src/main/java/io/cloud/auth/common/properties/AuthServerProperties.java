@@ -1,4 +1,4 @@
-package io.cloud.auth.api.properties;
+package io.cloud.auth.common.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -58,4 +58,10 @@ public class AuthServerProperties implements Serializable {
      * 密码
      */
     private String password;
+
+    /**
+     * 手动刷新token，低于秒数，延时
+     * 主要用于web和admin
+     */
+    private Integer manualRefreshTokenValid;
 }

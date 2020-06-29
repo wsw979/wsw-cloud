@@ -19,7 +19,12 @@ public interface KeyConstant {
     String GATEWAY_KEY_PREFIX = "gateway:routes";
 
     /**
-     * oauth 缓存前缀
+     * oauth key
      */
     String PROJECT_OAUTH_ACCESS = "oauth:permission:";
+
+    /**
+     * token key
+     */
+    String USER_TOKEN = "oauth:token:";
 }

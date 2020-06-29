@@ -8,7 +8,7 @@ import com.netflix.loadbalancer.ILoadBalancer;
 import com.netflix.loadbalancer.RoundRobinRule;
 import com.netflix.loadbalancer.Server;
 import io.cloud.data.constant.ConfigConstant;
-import io.cloud.gateway.service.context.LbIsolationContextHolder;
+import io.cloud.gateway.service.holder.LbIsolationContextHolder;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -9,6 +9,7 @@ io.cloud.redis.util.RedisHashUtil,\
 io.cloud.datasource.config.MybatisPlusConfig,\
 io.cloud.core.config.FeignAutoConfig,\
 io.cloud.core.decoder.FeignClientErrorDecoder,\
-io.cloud.core.filter.SecurityCorsFilter
+io.cloud.auth.common.properties.AuthServerProperties,\
+io.cloud.auth.common.util.PermissionUtil
 #¸ºÔØ¾ùºâ
 #io.cloud.gateway.config.RuleConfig

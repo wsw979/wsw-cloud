@@ -10,6 +10,17 @@ public interface AuthConstants {
 
     String TYPE = "POST";
 
+    /**
+     * 登录类型
+     */
+    String LOGIN_TYPE_APP = "app";
+    String LOGIN_TYPE_WEB = "web";
+    String LOGIN_TYPE_WX = "wx";
+    String LOGIN_TYPE_ADMIN = "admin";
+
+    /**
+     * 用户名/邮箱/手机号 密码登录地址
+     */
     String SECURITY_USERNAME_LOGIN_URL = "/username-login";
 
     /**
