@@ -3,8 +3,11 @@ package io.cloud.auth.api.config;
 import io.cloud.auth.api.filter.UsernameAuthenticationFilter;
 import io.cloud.auth.api.handler.WebLoginAuthSuccessHandler;
 import io.cloud.auth.api.handler.WebLoginFailureHandler;
+import io.cloud.auth.api.handler.WebLogoutHandler;
+import io.cloud.auth.api.handler.WebLogoutSuccessHandler;
 import io.cloud.auth.api.provider.UsernameAuthenticationProvider;
 import io.cloud.auth.api.service.UsernameUserDetailService;
+import io.cloud.data.constant.AuthConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +18,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.web.cors.CorsUtils;
 
 import javax.annotation.Resource;
@@ -37,15 +42,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
         http
-            .authorizeRequests().requestMatchers(CorsUtils::isPreFlightRequest).permitAll().and()
-            .addFilterBefore(usernameAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-            .authorizeRequests().antMatchers("/oauth/**").permitAll().and()
-            .authorizeRequests().antMatchers("/logout/**").permitAll().and()
-            .authorizeRequests().antMatchers("/pub-key/jwt.json").permitAll().and()
-            .authorizeRequests().antMatchers("/js/**","/favicon.ico").permitAll().and()
-            .authorizeRequests().antMatchers("/v2/api-docs/**","/webjars/**","/swagger-resources/**","/*.html").permitAll().and()
-            // 其余所有请求全部需要鉴权认证
-            .authorizeRequests().anyRequest().authenticated();
+                .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest)
+                .permitAll();
+        http
+                .logout()
+                .logoutUrl(AuthConstants.SECURITY_LOGOUT_URL)
+                .addLogoutHandler(getLogoutHandler())
+                .logoutSuccessHandler(getLogoutSuccessHandler());
+        http
+                .addFilterBefore(usernameAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http
+                .authorizeRequests()
+                .antMatchers("/oauth/**").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/pub-key/jwt.json").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/js/**","/favicon.ico").permitAll()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/v2/api-docs/**","/webjars/**","/swagger-resources/**","/*.html").permitAll();
+        // 其余所有请求全部需要鉴权认证
+        http.authorizeRequests().anyRequest().authenticated();
     }
 
     /**
@@ -102,5 +122,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public WebLoginFailureHandler loginFailure(){
         WebLoginFailureHandler myLoginFailureHandler = new WebLoginFailureHandler();
         return myLoginFailureHandler;
+    }
+
+    @Bean
+    public LogoutHandler getLogoutHandler(){
+        WebLogoutHandler myLogoutHandler = new WebLogoutHandler();
+        return myLogoutHandler;
+    }
+
+    @Bean
+    public LogoutSuccessHandler getLogoutSuccessHandler(){
+        WebLogoutSuccessHandler logoutSuccessHandler = new WebLogoutSuccessHandler();
+        return logoutSuccessHandler;
     }
 }

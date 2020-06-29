@@ -1,10 +1,15 @@
 package io.cloud.auth.api.filter;
 
-import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloud.core.filter.HttpHelper;
 import io.cloud.auth.common.dtl.UsernameDtl;
 import io.cloud.auth.api.token.UsernameAuthenticationToken;
-import io.cloud.data.constant.LoginConstants;
+import io.cloud.data.constant.ConfigConstant;
+import io.cloud.data.constant.AuthConstants;
+import io.cloud.data.util.ObjectUtil;
+import io.cloud.exception.ServiceException;
+import io.cloud.exception.status.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -12,11 +17,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * @program: wsw-cloud-servce
@@ -24,27 +27,32 @@ import java.io.InputStream;
  * @author: wsw
  * @create: 2020-06-28 15:46
  **/
+@Slf4j
 public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    public UsernameAuthenticationFilter(){
-        super(new AntPathRequestMatcher(LoginConstants.SECURITY_USERNAME_LOGIN_URL,LoginConstants.TYPE));
+    public UsernameAuthenticationFilter() {
+        super(new AntPathRequestMatcher(AuthConstants.SECURITY_USERNAME_LOGIN_URL, AuthConstants.TYPE));
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        if (!request.getMethod().equals(LoginConstants.TYPE)) {
+        if (!request.getMethod().equals(AuthConstants.TYPE)) {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
         AbstractAuthenticationToken authRequest;
         ObjectMapper mapper = new ObjectMapper();
         try {
-            ServletInputStream inputStream = request.getInputStream();
-            InputStream is = inputStream;
-            UsernameDtl dtl = JSON.parseObject(is, UsernameDtl.class);
+            String body = HttpHelper.getBodyString(request);
+            UsernameDtl dtl = mapper.readValue(body, UsernameDtl.class);
+            if (ObjectUtil.checkObjNull(dtl)) {
+                throw new ServiceException(HttpStatus.PASSWORD_ERROR);
+            }
             dtl.setPassword(dtl.getPassword().trim());
             authRequest = new UsernameAuthenticationToken(dtl.getUsername(), dtl.getPassword());
             setDetails(request, authRequest);
-        }catch (IOException e) {
+            request.setAttribute(ConfigConstant.CLIENT_ID, dtl.getClientId());
+            request.setAttribute(ConfigConstant.CLIENT_SECRET, dtl.getClientSecret());
+        } catch (IOException e) {
             e.printStackTrace();
             authRequest = new UsernameAuthenticationToken("", "");
         }

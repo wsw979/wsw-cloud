@@ -26,7 +26,7 @@ spring:
 wsw:
   auth:
     server:
-      max-client: 30000
+      max-client: 3
       token-valid: 14400
       force: false
       start-refresh: false

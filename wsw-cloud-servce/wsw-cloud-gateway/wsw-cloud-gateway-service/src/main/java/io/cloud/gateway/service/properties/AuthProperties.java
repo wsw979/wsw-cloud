@@ -28,11 +28,11 @@ public class AuthProperties {
     /**
      * 不需要鉴权的资源
      */
-    private List<String> passAuth ;
+    private List<String> ignoredList;
 
     /**
      * 微服务前缀
      */
-    private List<String> servicePrefix ;
+    private List<String> servicePrefix;
 
 }

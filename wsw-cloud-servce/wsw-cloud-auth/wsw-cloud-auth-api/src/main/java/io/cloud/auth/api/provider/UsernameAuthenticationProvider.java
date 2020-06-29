@@ -44,14 +44,14 @@ public class UsernameAuthenticationProvider extends AbstractUserDetailsAuthentic
         BaseUserDetail userDetails = (BaseUserDetail) userDetailsService.loadUserByUsername(username);
         if (null == userDetails) {
             log.error("Authentication failed: no credentials provided");
-            throw new BadCredentialsException(HttpStatus.AUTH_ERROR.getMsg());
+            throw new UsernameNotFoundException(HttpStatus.AUTH_ERROR.getMsg());
         }
         Long id = userDetails.getBaseUser().getId();
         String passwordSalt = userDetails.getBaseUser().getSalt() + MD5Util.encode(StringUtil.buffer(id, password));
         String md5PasswordSalt = MD5Util.encodeSalt(passwordSalt);
         // 校验不通过 , 和数据库用户 密码比对
         if (!userDetails.getPassword().equals(md5PasswordSalt)) {
-            throw new UsernameNotFoundException(HttpStatus.AUTH_ERROR.getMsg());
+            throw new BadCredentialsException(HttpStatus.PASSWORD_ERROR.getMsg());
         }
 
     }

@@ -26,9 +26,5 @@ public class TokenEntity implements Serializable {
      * 失效事件
      */
     private LocalDateTime invalidDate;
-    /**
-     * 失效 1 有效  0 无效
-     */
-    private Integer status = 1;
 
 }

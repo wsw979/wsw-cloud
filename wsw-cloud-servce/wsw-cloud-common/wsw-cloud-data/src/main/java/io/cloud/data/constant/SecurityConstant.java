@@ -11,7 +11,7 @@ public interface SecurityConstant {
     /**
      * sys_oauth_client_details 表的字段，不包括client_id、client_secret
      */
-    String CLIENT_FIELDS = "client_id, resource_ids, CONCAT('{noop}',client_secret) as client_secret, scope, "
+    String CLIENT_FIELDS = "client_id, client_secret, resource_ids, scope, "
             + "authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, "
             + "refresh_token_validity, additional_information, autoapprove";
 
@@ -34,4 +34,25 @@ public interface SecurityConstant {
      * 加密
      */
     String MD5 = "MD5";
+
+    /**
+     * access_token
+     */
+    String ACCESS_TOKEN = "access_token";
+
+    /**
+     * access_token
+     */
+    String ACCESS_TOKEN_TIME = "token_time";
+
+    /**
+     * access_token
+     */
+    String REFRESH_TOKEN = "refresh_token";
+
+    /**
+     * access_token
+     */
+    String REFRESH_TOKEN_TIME = "refresh_token_time";
+
 }

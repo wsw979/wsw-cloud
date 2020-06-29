@@ -21,5 +21,8 @@ public class UsernameDtl {
      */
     private String password;
 
+    private String clientId;
+
+    private String clientSecret;
 
 }

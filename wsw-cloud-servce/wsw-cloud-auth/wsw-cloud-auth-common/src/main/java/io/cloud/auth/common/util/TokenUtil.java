@@ -6,6 +6,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.auth.common.entity.TokenEntity;
 import io.cloud.data.constant.ConfigConstant;
+import io.cloud.data.util.StringUtil;
 import io.cloud.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -72,27 +73,28 @@ public class TokenUtil implements Serializable {
      * @param token
      * @return
      */
-    public static Boolean pushToken(String key, RedisTemplate<String, TokenEntity> redisTemplate, String token, Date invalid, Integer max){
-        String id = KEYPER + key;
+    public static Boolean pushToken(String key, String loginType, RedisTemplate<String, TokenEntity> redisTemplate, String token, Date invalid, Integer max){
+        String id = StringUtil.buffer(KEYPER,loginType,key);
         LocalDateTime invalidDate = invalid.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        long size = redisTemplate.opsForList().size(id);
         TokenEntity tokenEntity = new TokenEntity();
         tokenEntity.setInvalidDate(invalidDate);
         tokenEntity.setToken(token);
-        if(size<=0){
-            redisTemplate.opsForList().rightPush(id,tokenEntity);
-        }else{
-            List<TokenEntity> tokenEntities = redisTemplate.opsForList().range(id, 0, size);
-            tokenEntities = tokenEntities.stream().filter(te -> te.getInvalidDate().isAfter(LocalDateTime.now())).collect(Collectors.toList());
-            if(tokenEntities.size()>= max){
-                return false;
-            }
-            tokenEntities.add(tokenEntity);
-            redisTemplate.delete(id);
-            tokenEntities.forEach(te->{
-                redisTemplate.opsForList().rightPush(id,te);
-            });
-        }
+        redisTemplate.opsForValue().set(id,tokenEntity);
+//        long size = redisTemplate.opsForList().size(id);
+//        if(size<=0){
+//            redisTemplate.opsForList().rightPush(id,tokenEntity);
+//        }else{
+//            List<TokenEntity> tokenEntities = redisTemplate.opsForList().range(id, 0, size);
+//            tokenEntities = tokenEntities.stream().filter(te -> te.getInvalidDate().isAfter(LocalDateTime.now())).collect(Collectors.toList());
+//            if(tokenEntities.size()>= max){
+//                return false;
+//            }
+//            tokenEntities.add(tokenEntity);
+//            redisTemplate.delete(id);
+//            tokenEntities.forEach(te-> {
+//                redisTemplate.opsForList().rightPush(id,te);
+//            });
+//        }
         return true;
     }
 
@@ -115,9 +117,9 @@ public class TokenUtil implements Serializable {
                 return false;
             }
             TokenEntity tokenEntity = tokenEntities.get(0);
-            if(tokenEntity.getInvalidDate().isAfter(LocalDateTime.now())&&tokenEntity.getStatus()==1){
-                return true;
-            }
+//            if(tokenEntity.getInvalidDate().isAfter(LocalDateTime.now())&&tokenEntity.getStatus()==1){
+//                return true;
+//            }
         }
         return false;
     }
@@ -128,21 +130,22 @@ public class TokenUtil implements Serializable {
      * @param redisTemplate
      * @param token
      */
-    public static void logout(String key, RedisTemplate<String, TokenEntity> redisTemplate, String token){
-        String id = KEYPER+key;
-        long size = redisTemplate.opsForList().size(id);
-        if(size<=0){
-            redisTemplate.delete(id);
-        }else{
-            List<TokenEntity> tokenEntities = redisTemplate.opsForList().range(id, 0, size);
-            tokenEntities = tokenEntities.stream().filter(te->!te.getToken().equals(token)).collect(Collectors.toList());
-            if(CollectionUtils.isEmpty(tokenEntities)){
-                redisTemplate.delete(id);
-            }
-            redisTemplate.delete(id);
-            tokenEntities.forEach(te->{
-                redisTemplate.opsForList().rightPush(id,te);
-            });
-        }
+    public static void logout(String key, String loginType, RedisTemplate<String, TokenEntity> redisTemplate, String token){
+        String id = StringUtil.buffer(KEYPER,loginType,key);
+        redisTemplate.delete(id);
+//        long size = redisTemplate.opsForList().size(id);
+//        if(size<=0){
+//            redisTemplate.delete(id);
+//        }else{
+//            List<TokenEntity> tokenEntities = redisTemplate.opsForList().range(id, 0, size);
+//            tokenEntities = tokenEntities.stream().filter(te->!te.getToken().equals(token)).collect(Collectors.toList());
+//            if(CollectionUtils.isEmpty(tokenEntities)){
+//                redisTemplate.delete(id);
+//            }
+//            redisTemplate.delete(id);
+//            tokenEntities.forEach(te->{
+//                redisTemplate.opsForList().rightPush(id,te);
+//            });
+//        }
     }
 }

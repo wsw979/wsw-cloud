@@ -1,5 +1,6 @@
 package io.cloud.core.config;
 
+import io.cloud.core.filter.HttpServletRequestReplacedFilter;
 import io.cloud.core.filter.TraceContextFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -20,9 +21,13 @@ public class TraceFilterConfig {
 
     @Bean
     public FilterRegistrationBean requestContextRepositoryFilterRegistrationBean() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
-        filterRegistrationBean.setFilter(new TraceContextFilter());
-        filterRegistrationBean.addUrlPatterns("/*");
-        return filterRegistrationBean;
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(new TraceContextFilter());
+        registration.setFilter(new HttpServletRequestReplacedFilter());
+        registration.addUrlPatterns("/*");
+        registration.addInitParameter("paramName", "paramValue");
+        registration.setName("httpServletRequestReplacedFilter");
+        registration.setOrder(1);
+        return registration;
     }
 }

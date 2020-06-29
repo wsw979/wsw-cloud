@@ -55,7 +55,18 @@ public interface ResponseUtil<T> {
      */
     default  void getResponseWeb(HttpServletResponse response, ObjectMapper objectMapper, T data)throws IOException{
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(R.success(data)));
+        response.getWriter().write(objectMapper.writeValueAsString(data));
     }
 
+    /**
+     * web方式返回
+     * @param response
+     * @param objectMapper
+     * @param data
+     * @throws IOException
+     */
+    default  void getErrorResponseWeb(HttpServletResponse response, ObjectMapper objectMapper, String data)throws IOException{
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(R.error(data)));
+    }
 }

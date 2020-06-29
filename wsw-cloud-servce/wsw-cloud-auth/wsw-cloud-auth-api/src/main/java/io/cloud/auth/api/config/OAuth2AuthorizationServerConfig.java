@@ -2,7 +2,9 @@ package io.cloud.auth.api.config;
 
 import io.cloud.auth.api.properties.AuthServerProperties;
 import io.cloud.auth.api.service.UsernameUserDetailService;
+import io.cloud.auth.api.token.BaseUserDetail;
 import io.cloud.auth.api.token.JwtAccessToken;
+import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.data.constant.ConfigConstant;
 import io.cloud.data.constant.SecurityConstant;
 import io.cloud.redis.constant.KeyConstant;
@@ -149,4 +151,5 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     public TokenStore authTokenStore() {
         return new JwtTokenStore(authJwtAccessTokenConverter());
     }
+
 }

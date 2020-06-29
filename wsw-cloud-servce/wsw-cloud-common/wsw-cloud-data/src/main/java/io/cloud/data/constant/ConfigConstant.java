@@ -19,7 +19,7 @@ public interface ConfigConstant {
     String BEARER_TYPE = "Bearer ";
 
     /**
-     * 登录类型
+     * 登录类型 ( 1 app 2 web 3 小程序 4 admin)
      */
     String LOGIN_TYPE = "x-login-header";
 
@@ -31,7 +31,12 @@ public interface ConfigConstant {
     /**
      * 用户id信息头
      */
-    String USER_ID_HEADER = "x-userid-header";
+    String USER_ID_HEADER = "x-user-id-header";
+
+    /**
+     * 用户名称信息头
+     */
+    String USER_NAME_HEADER = "x-user-name-header";
 
     /**
      * 角色信息头
@@ -53,4 +58,13 @@ public interface ConfigConstant {
      */
     String CONFIG_RIBBON_ISOLATION_ENABLED = "wsw.ribbon.isolation.enabled";
 
+    /**
+     * 授权clientId
+     */
+    String CLIENT_ID = "client_id";
+
+    /**
+     * 授权clientSecret
+     */
+    String CLIENT_SECRET = "client_secret";
 }

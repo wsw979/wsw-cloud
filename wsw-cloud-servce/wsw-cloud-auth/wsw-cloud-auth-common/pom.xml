@@ -13,4 +13,11 @@
     <artifactId>wsw-cloud-auth-common</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-user-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

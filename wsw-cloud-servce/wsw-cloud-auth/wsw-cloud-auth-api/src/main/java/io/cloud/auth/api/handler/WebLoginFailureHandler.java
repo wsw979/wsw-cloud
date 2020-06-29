@@ -25,14 +25,9 @@ public class WebLoginFailureHandler implements AuthenticationFailureHandler, Res
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        String msg = null;
-        if (exception instanceof BadCredentialsException) {
-            msg = "账号或密码错误";
-        } else {
-            msg = exception.getMessage();
-        }
+        String msg = exception.getMessage();
         response.setStatus(500);
-        getResponseWeb(response,objectMapper,msg);
+        getErrorResponseWeb(response,objectMapper,msg);
     }
 
 }

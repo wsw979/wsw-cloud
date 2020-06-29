@@ -61,15 +61,16 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         }
         HttpServletRequest request = attributes.getRequest();
         String clientId = request.getParameter("client_id");
-        String LoginHeader = request.getHeader(ConfigConstant.LOGIN_TYPE);
+        String loginType = request.getHeader(ConfigConstant.LOGIN_TYPE);
         List<GrantedAuthority> authorities = new ArrayList<>();
         Long id;
         String userName;
         String credential;
         List<RoleListVo> roleList;
-        List<PermissionListVo> permissionList;
         BaseUser baseUser = new BaseUser();
-        if (LoginHeader.equals(NumEnum.ONE.getV())) {
+        //登录类型 ( 1 app 2 web 3 小程序 4 admin )
+        if (loginType.equals(NumEnum.ONE.getV()) ||
+                loginType.equals(NumEnum.TWO.getV()) || loginType.equals(NumEnum.THREE.getV())) {
             ApiUserVo apiUser = getUser(username, clientId);
             id = apiUser.getId();
             userName = StringUtils.isBlank(apiUser.getMobile()) ? StringUtils.isBlank(apiUser.getEmail()) ? apiUser.getUserName() : apiUser.getEmail() : apiUser.getMobile();
@@ -89,7 +90,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         }
         //添加角色
         authorities.addAll(roleList.stream().map(r -> new SimpleGrantedAuthority(r.getRoleCode())).collect(Collectors.toList()));
-        permissionList = userServiceFeign.findPermissionList(id).getData();
+        List<PermissionListVo> permissionList = userServiceFeign.findPermissionList(id).getData();
         storePermission(permissionList, id);
         //返回带有用户权限信息的User
         User user = new User(userName, credential, true, true, true, true, authorities);
