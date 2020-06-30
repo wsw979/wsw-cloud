@@ -8,7 +8,7 @@
       {
         "name": "Path",
         "args": {
-          "_genkey_0": "/config/api/**"
+          "_genkey_0": "/gateway/api/**"
         }
       }
     ],
@@ -16,7 +16,7 @@
       {
         "name": "StripPrefix",
         "args": {
-          "_genkey_0": "1"
+          "_genkey_0": "2"
         }
       },
       {
@@ -33,7 +33,7 @@
       {
         "name": "Path",
         "args": {
-          "_genkey_0": "/app/api/auth/**"
+          "_genkey_0": "/auth/api/**"
         }
       }
     ],
@@ -41,7 +41,7 @@
       {
         "name": "StripPrefix",
         "args": {
-          "_genkey_0": "1"
+          "_genkey_0": "2"
         }
       },
       {
@@ -58,7 +58,7 @@
       {
         "name": "Path",
         "args": {
-          "_genkey_0": "/app/api/user/**"
+          "_genkey_0": "/app/user/api/**"
         }
       }
     ],
@@ -66,7 +66,7 @@
       {
         "name": "StripPrefix",
         "args": {
-          "_genkey_0": "1"
+          "_genkey_0": "3"
         }
       },
       {

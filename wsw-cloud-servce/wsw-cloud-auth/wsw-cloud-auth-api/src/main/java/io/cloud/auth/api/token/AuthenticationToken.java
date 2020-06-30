@@ -7,7 +7,7 @@ import java.util.Collection;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 父类token
  * @author: wsw
  * @create: 2020-06-28 15:09
  **/

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 用户名/手机号/邮箱 |密码 实现类
  * @author: wsw
  * @create: 2020-06-28 14:01
  **/

@@ -49,10 +49,12 @@
         <dozer.version>5.5.1</dozer.version>
         <guava.version>26.0-jre</guava.version>
         <jjwt.version>0.9.0</jjwt.version>
+        <nimbus.jose.jwt.version>8.6</nimbus.jose.jwt.version>
         <joda-time.version>2.9.9</joda-time.version>
         <hutool.version>5.1.4</hutool.version>
         <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
         <transmittable.version>2.11.4</transmittable.version>
+        <spring.social.web.version>1.1.6.RELEASE</spring.social.web.version>
         <poi.version>4.1.0</poi.version>
         <easypoi.version>4.1.0</easypoi.version>
     </properties>
@@ -288,6 +290,12 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus.jose.jwt.version}</version>
+                <scope>compile</scope>
+            </dependency>
             <!--- joda-time -->
             <dependency>
                 <groupId>joda-time</groupId>
@@ -312,6 +320,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${transmittable.version}</version>
+            </dependency>
+            <!-- session -->
+            <dependency>
+                <groupId>org.springframework.social</groupId>
+                <artifactId>spring-social-web</artifactId>
+                <version>${spring.social.web.version}</version>
             </dependency>
             <!-- poi -->
             <dependency>

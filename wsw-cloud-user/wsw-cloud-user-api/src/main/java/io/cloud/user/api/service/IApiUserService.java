@@ -1,8 +1,11 @@
 package io.cloud.user.api.service;
 
+import io.cloud.user.common.base.LoginUserInfo;
 import io.cloud.user.common.entity.ApiUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.cloud.user.common.vo.app.ApiUserVo;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -13,6 +16,8 @@ import io.cloud.user.common.vo.app.ApiUserVo;
  * @since 2020-06-10
  */
 public interface IApiUserService extends IService<ApiUser> {
+
+    LoginUserInfo loginApiUser(HttpServletRequest request);
 
     ApiUserVo getUserByUserName(String userName);
 

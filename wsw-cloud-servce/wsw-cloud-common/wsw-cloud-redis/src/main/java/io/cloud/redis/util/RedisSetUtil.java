@@ -98,7 +98,8 @@ public class RedisSetUtil {
             redisTemplate.indexdb.set(dataBase);
             Long count = redisTemplate.opsForSet().add(key, values);
             if (time > 0) {
-                redisCommonUtil.expire(key, time, dataBase);
+                redisCommonUtil.setDataBase(dataBase);
+                redisCommonUtil.expire(key, time);
             }
             return count;
         } catch (Exception e) {

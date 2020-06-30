@@ -20,7 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 用户名/手机号/邮箱 |密码 输入验证
  * @author: wsw
  * @create: 2020-06-28 15:07
  **/
@@ -47,7 +47,7 @@ public class UsernameAuthenticationProvider extends AbstractUserDetailsAuthentic
             throw new UsernameNotFoundException(HttpStatus.AUTH_ERROR.getMsg());
         }
         Long id = userDetails.getBaseUser().getId();
-        String passwordSalt = userDetails.getBaseUser().getSalt() + MD5Util.encode(StringUtil.buffer(id, password));
+        String passwordSalt = userDetails.getSalt() + MD5Util.encode(StringUtil.buffer(id, password));
         String md5PasswordSalt = MD5Util.encodeSalt(passwordSalt);
         // 校验不通过 , 和数据库用户 密码比对
         if (!userDetails.getPassword().equals(md5PasswordSalt)) {
@@ -58,7 +58,7 @@ public class UsernameAuthenticationProvider extends AbstractUserDetailsAuthentic
 
     @Override
     protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, UserDetails user) {
-        UsernameAuthenticationToken result = new UsernameAuthenticationToken(principal, authentication);
+        UsernameAuthenticationToken result = new UsernameAuthenticationToken(principal, authentication, user.getAuthorities());
         result.setDetails(authentication.getDetails());
         return result;
     }

@@ -19,7 +19,12 @@ spring:
           sentinel-config.${spring.cloud.nacos.config.file-extension},
           mybatis-plus.${spring.cloud.nacos.config.file-extension},
           jwt-config.${spring.cloud.nacos.config.file-extension},
+          exclude-url.${spring.cloud.nacos.config.file-extension},
           swagger-config.${spring.cloud.nacos.config.file-extension}
-        refresh-enabled: true
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:1010/pub-key/jwt.json

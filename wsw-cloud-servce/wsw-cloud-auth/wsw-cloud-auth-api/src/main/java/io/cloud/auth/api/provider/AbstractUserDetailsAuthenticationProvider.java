@@ -21,7 +21,7 @@ import org.springframework.util.Assert;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 父类验证
  * @author: wsw
  * @create: 2020-06-28 15:04
  **/

@@ -19,7 +19,7 @@ public interface ConfigConstant {
     String BEARER_TYPE = "Bearer ";
 
     /**
-     * 登录类型 ( 1 app 2 web 3 小程序 4 admin)
+     * 登录类型 ( 1 app 2 web 3 wx 4 admin)
      */
     String LOGIN_TYPE = "x-login-header";
 

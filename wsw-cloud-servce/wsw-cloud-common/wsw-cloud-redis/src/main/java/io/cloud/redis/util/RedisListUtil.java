@@ -43,7 +43,7 @@ public class RedisListUtil {
      * @param end   结束  0 到 -1代表所有值
      * @return
      */
-    public List<Object> lGet(String key, long start, long end) {
+    public List<?> lGet(String key, long start, long end) {
         try {
             redisTemplate.indexdb.set(dataBase);
             return redisTemplate.opsForList().range(key, start, end);
@@ -117,7 +117,8 @@ public class RedisListUtil {
             redisTemplate.indexdb.set(dataBase);
             redisTemplate.opsForList().rightPush(key, value);
             if (time > 0) {
-                redisCommonUtil.expire(key, time, dataBase);
+                redisCommonUtil.setDataBase(dataBase);
+                redisCommonUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -133,7 +134,7 @@ public class RedisListUtil {
      * @param value 值
      * @return
      */
-    public boolean lSet(String key, List<Object> value) {
+    public boolean lSetAll(String key, List<?> value) {
         try {
             redisTemplate.indexdb.set(dataBase);
             redisTemplate.opsForList().rightPushAll(key, value);
@@ -152,12 +153,13 @@ public class RedisListUtil {
      * @param time  时间(秒)
      * @return
      */
-    public boolean lSet(String key, List<Object> value, long time) {
+    public boolean lSetAll(String key, List<?> value, long time) {
         try {
             redisTemplate.indexdb.set(dataBase);
             redisTemplate.opsForList().rightPushAll(key, value);
             if (time > 0) {
-                redisCommonUtil.expire(key, time, dataBase);
+                redisCommonUtil.setDataBase(dataBase);
+                redisCommonUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {

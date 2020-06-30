@@ -8,6 +8,8 @@ package io.cloud.gateway.service.config;/**
 import io.cloud.core.filter.SecurityCorsFilter;
 import io.cloud.gateway.service.filter.CorsFilter;
 import io.cloud.gateway.service.filter.ReactiveRequestContextFilter;
+import io.cloud.gateway.service.handler.OAuthServerAccessDeniedHandler;
+import io.cloud.gateway.service.handler.OAuthServerAuthenticationEntryPoint;
 import io.cloud.gateway.service.manager.WebfluxReactiveAuthorizationManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
@@ -28,9 +30,10 @@ public class OAuth2ResourceServerConfig {
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         http.cors().and().csrf().disable().authorizeExchange().anyExchange().access(reactiveAuthorizationManager());
+        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler()).authenticationEntryPoint(authenticationEntryPoint());
         http.addFilterAt(new CorsFilter(), SecurityWebFiltersOrder.SECURITY_CONTEXT_SERVER_WEB_EXCHANGE);
         http.addFilterAt(new ReactiveRequestContextFilter(), SecurityWebFiltersOrder.SECURITY_CONTEXT_SERVER_WEB_EXCHANGE);
-//        http.oauth2ResourceServer().jwt();
+        http.oauth2ResourceServer().jwt();
         return http.build();
     }
 
@@ -42,6 +45,18 @@ public class OAuth2ResourceServerConfig {
     public ReactiveAuthorizationManager reactiveAuthorizationManager(){
         WebfluxReactiveAuthorizationManager webfluxReactiveAuthorizationManager = new WebfluxReactiveAuthorizationManager();
         return webfluxReactiveAuthorizationManager;
+    }
+
+    @Bean
+    public OAuthServerAccessDeniedHandler accessDeniedHandler(){
+        OAuthServerAccessDeniedHandler accessDeniedHandler = new OAuthServerAccessDeniedHandler();
+        return accessDeniedHandler;
+    }
+
+    @Bean
+    public OAuthServerAuthenticationEntryPoint authenticationEntryPoint(){
+        OAuthServerAuthenticationEntryPoint authenticationEntryPoint = new OAuthServerAuthenticationEntryPoint();
+        return authenticationEntryPoint;
     }
 
 }

@@ -1,5 +1,6 @@
 package io.cloud.auth.api.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloud.core.filter.HttpHelper;
 import io.cloud.auth.common.dtl.UsernameDtl;
@@ -23,7 +24,7 @@ import java.io.IOException;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 用户名/手机号/邮箱 |密码 登录过滤器
  * @author: wsw
  * @create: 2020-06-28 15:46
  **/
@@ -40,10 +41,9 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
         AbstractAuthenticationToken authRequest;
-        ObjectMapper mapper = new ObjectMapper();
         try {
             String body = HttpHelper.getBodyString(request);
-            UsernameDtl dtl = mapper.readValue(body, UsernameDtl.class);
+            UsernameDtl dtl = JSON.parseObject(body, UsernameDtl.class);
             if (ObjectUtil.checkObjNull(dtl)) {
                 throw new ServiceException(HttpStatus.PASSWORD_ERROR);
             }

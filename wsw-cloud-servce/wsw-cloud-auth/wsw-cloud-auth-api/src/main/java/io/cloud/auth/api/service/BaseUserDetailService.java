@@ -2,6 +2,7 @@ package io.cloud.auth.api.service;
 
 import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.auth.api.token.BaseUserDetail;
+import io.cloud.data.constant.AuthConstants;
 import io.cloud.data.constant.ConfigConstant;
 import io.cloud.data.enums.NumEnum;
 import io.cloud.data.util.StringUtil;
@@ -36,7 +37,7 @@ import java.util.stream.Collectors;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 父类 UserDetailService
  * @author: wsw
  * @create: 2020-06-27 23:26
  **/
@@ -67,15 +68,19 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         String userName;
         String credential;
         List<RoleListVo> roleList;
+        String salt;
         BaseUser baseUser = new BaseUser();
-        //登录类型 ( 1 app 2 web 3 小程序 4 admin )
-        if (loginType.equals(NumEnum.ONE.getV()) ||
-                loginType.equals(NumEnum.TWO.getV()) || loginType.equals(NumEnum.THREE.getV())) {
+        //登录类型 ( app , web , wx , admin )
+        if (    loginType.equals(AuthConstants.LOGIN_TYPE_APP) ||
+                loginType.equals(AuthConstants.LOGIN_TYPE_WEB) ||
+                loginType.equals(AuthConstants.LOGIN_TYPE_WX))
+        {
             ApiUserVo apiUser = getUser(username, clientId);
             id = apiUser.getId();
             userName = StringUtils.isBlank(apiUser.getMobile()) ? StringUtils.isBlank(apiUser.getEmail()) ? apiUser.getUserName() : apiUser.getEmail() : apiUser.getMobile();
             credential = apiUser.getCredential();
             roleList = userServiceFeign.findRoleList(id).getData();
+            salt = apiUser.getSalt();
             BeanUtils.copyProperties(apiUser, baseUser);
         } else {
             AdminUserVo adminUser = getAdminUser(username, clientId);
@@ -86,15 +91,17 @@ public abstract class BaseUserDetailService implements UserDetailsService {
             if (roleList.size() < 1) {
                 throw new ServiceException("账号正在审核，请联系管理员");
             }
+            salt = adminUser.getSalt();
             BeanUtils.copyProperties(adminUser, baseUser);
         }
+        baseUser.setLoginType(loginType);
         //添加角色
         authorities.addAll(roleList.stream().map(r -> new SimpleGrantedAuthority(r.getRoleCode())).collect(Collectors.toList()));
         List<PermissionListVo> permissionList = userServiceFeign.findPermissionList(id).getData();
         storePermission(permissionList, id);
         //返回带有用户权限信息的User
         User user = new User(userName, credential, true, true, true, true, authorities);
-        return new BaseUserDetail(baseUser,user);
+        return new BaseUserDetail(baseUser,user,salt);
     }
 
     /**
@@ -124,7 +131,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         //删除之前的权限
         redisCommonUtil.del(key);
         //添加当前权限
-        redisListUtil.lSet(key, permissionList);
+        redisListUtil.lSetAll(key, permissionList);
     }
 
 }

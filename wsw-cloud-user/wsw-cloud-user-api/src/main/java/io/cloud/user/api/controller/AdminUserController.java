@@ -5,6 +5,7 @@ import io.cloud.data.annotation.WswRestController;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.util.R;
 import io.cloud.user.api.service.IAdminUserService;
+import io.cloud.user.common.base.LoginUserInfo;
 import io.cloud.user.common.vo.app.AdminUserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,9 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -31,6 +31,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminUserController {
 
     private IAdminUserService adminUserService;
+
+    private HttpServletRequest request;
+
+    @GetMapping(value = "/loginUser")
+    @ApiOperation(value = "登录用户", tags = "根据ID获取登录用户")
+    public Result<LoginUserInfo> loginAdminUser(){
+        return R.success(adminUserService.loginAdminUser(request));
+    }
 
     @GetMapping("/phone/{phone}")
     @ApiOperation(value = "根据手机号获取用户", tags = "根据手机号获取用户")

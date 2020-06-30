@@ -18,6 +18,11 @@ public interface CommonConstant {
     String SIMPLE_DATETIME_FORMAT = "yyyyMMddHHmmss";
 
     /**
+     * 后缀
+     */
+    String SUFFIX_JPEG = "JPEG";
+
+    /**
      * 动态路由 url前缀
      */
     String URL_PREFIX_HTTP = "http";

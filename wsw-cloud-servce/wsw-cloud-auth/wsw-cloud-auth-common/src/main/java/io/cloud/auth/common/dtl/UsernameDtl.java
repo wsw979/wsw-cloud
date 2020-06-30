@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 登录用户JSON接收对象
  * @author: wsw
  * @create: 2020-06-28 15:50
  **/
@@ -21,8 +21,14 @@ public class UsernameDtl {
      */
     private String password;
 
+    /**
+     * 客户端id
+     */
     private String clientId;
 
+    /**
+     * 客户端秘钥
+     */
     private String clientSecret;
 
 }

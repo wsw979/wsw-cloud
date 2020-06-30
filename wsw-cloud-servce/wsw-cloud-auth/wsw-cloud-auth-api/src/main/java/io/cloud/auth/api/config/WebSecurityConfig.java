@@ -26,7 +26,7 @@ import javax.annotation.Resource;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: web 安全配置
  * @author: wsw
  * @create: 2020-06-27 20:17
  **/

@@ -10,7 +10,7 @@ import java.util.Collection;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 登录用户详情
  * @author: wsw
  * @create: 2020-06-27 23:31
  **/
@@ -24,10 +24,20 @@ public class BaseUserDetail implements UserDetails, CredentialsContainer {
      * security 用户
      */
     private final User user;
+    /**
+     * 盐值
+     */
+    private String salt;
 
     public BaseUserDetail(BaseUser baseUser, User user) {
         this.baseUser = baseUser;
         this.user = user;
+    }
+
+    public BaseUserDetail(BaseUser baseUser, User user, String salt) {
+        this.baseUser = baseUser;
+        this.user = user;
+        this.salt = salt;
     }
 
     @Override
@@ -72,5 +82,13 @@ public class BaseUserDetail implements UserDetails, CredentialsContainer {
 
     public BaseUser getBaseUser() {
         return baseUser;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

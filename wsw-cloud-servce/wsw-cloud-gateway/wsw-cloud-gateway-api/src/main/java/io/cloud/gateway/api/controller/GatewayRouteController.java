@@ -1,6 +1,9 @@
 package io.cloud.gateway.api.controller;
 
-import io.cloud.auth.common.feign.AuthFeign;
+import io.cloud.auth.common.entity.BaseUser;
+import io.cloud.auth.common.feign.UserFeign;
+import io.cloud.auth.common.util.LoginUser;
+import io.cloud.auth.common.util.LoginUtil;
 import io.cloud.data.annotation.WswRestController;
 import io.cloud.data.group.Save;
 import io.cloud.data.group.Update;
@@ -18,6 +21,7 @@ import io.cloud.gateway.common.evt.GatewayRouteListEvt;
 import io.cloud.gateway.common.util.HandleDataUtil;
 import io.cloud.gateway.common.vo.GatewayRouteDtlVo;
 import io.cloud.gateway.common.vo.GatewayRouteListVo;
+import io.cloud.user.common.base.LoginUserInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -39,18 +43,20 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 @Api(tags = "动态路由")
-@WswRestController(path = "/api/dynamicRoute")
+@WswRestController(path = "/dynamicRoute")
 public class GatewayRouteController {
 
     private IGatewayRouteService gatewayRouteService;
 
     private RedisCacheRoute redisCacheRoute;
 
-    private AuthFeign authFeign;
+    private LoginUtil loginUtil;
 
     @GetMapping("/findPageList")
     @ApiOperation(value = "列表", notes = "动态路由列表")
     public Result<List<GatewayRouteListVo>> findPageList(@ApiParam("条件") GatewayRouteListEvt evt) {
+        BaseUser user = LoginUser.getUser();
+        LoginUserInfo apiUser = loginUtil.getApiUser();
         return gatewayRouteService.findPageList(evt);
     }
 
@@ -94,27 +100,6 @@ public class GatewayRouteController {
         }
         RouteDefinition definition = HandleDataUtil.handleData(gateway);
         redisCacheRoute.deleteRoute(Mono.just(definition.getId())).subscribe();
-        return R.success();
-    }
-
-    @GetMapping("/test1")
-    public Result test1() {
-        System.out.println("------------------------------------");
-        Result result = authFeign.test1();
-        return R.success();
-    }
-
-    @GetMapping("/test2")
-    public Result test2() {
-        System.out.println("------------------------------------");
-        Result result = authFeign.test2();
-        return R.success();
-    }
-
-    @GetMapping("/test3")
-    public Result test3() {
-        System.out.println("------------------------------------");
-        Result result = authFeign.test3();
         return R.success();
     }
 }

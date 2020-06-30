@@ -37,11 +37,14 @@ public class Permission extends BaseEntity {
     @ApiModelProperty(value = "权限编码")
     private String authCode;
 
-    @ApiModelProperty(value = "权限类型")
+    @ApiModelProperty(value = "权限类型（SYSTEM，MENU，BUTTON）")
     private String authType;
 
     @ApiModelProperty(value = "请求路径")
     private String requestUrl;
+
+    @ApiModelProperty(value = "父级权限")
+    private Long parentId;
 
     @ApiModelProperty(value = "是否有效（0否1是）")
     private Boolean isValid;

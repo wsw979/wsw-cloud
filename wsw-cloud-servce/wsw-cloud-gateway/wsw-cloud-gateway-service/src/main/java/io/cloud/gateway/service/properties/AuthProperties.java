@@ -12,19 +12,18 @@ import java.util.List;
 import static org.springframework.context.annotation.ScopedProxyMode.DEFAULT;
 
 /**
- * <p>
- *  网关权限配置项
- * </p>
- *
- * @author: Haifeng
- * @date: 2020-05-03
- */
+ * @program: wsw-cloud-servce
+ * @description: 网关权限配置项
+ * @author: wsw
+ * @create: 2020-06-29 21:38
+ **/
 @Slf4j
 @Data
 @Component
 @ConfigurationProperties(prefix = "gateway.oauth")
 @RefreshScope(proxyMode = DEFAULT)
 public class AuthProperties {
+
     /**
      * 不需要鉴权的资源
      */

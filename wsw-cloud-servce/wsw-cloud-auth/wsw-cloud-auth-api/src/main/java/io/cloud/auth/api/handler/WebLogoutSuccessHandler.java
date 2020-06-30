@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 退出成功
  * @author: wsw
  * @create: 2020-06-29 16:39
  **/

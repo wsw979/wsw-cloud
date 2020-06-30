@@ -5,12 +5,15 @@ import io.cloud.data.annotation.WswRestController;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.util.R;
 import io.cloud.user.api.service.IApiUserService;
+import io.cloud.user.common.base.LoginUserInfo;
 import io.cloud.user.common.vo.app.ApiUserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -27,6 +30,14 @@ import org.springframework.web.bind.annotation.*;
 public class ApiUserController {
 
     private IApiUserService apiUserService;
+
+    private HttpServletRequest request;
+
+    @GetMapping(value = "/loginUser")
+    @ApiOperation(value = "登录用户", tags = "根据ID获取登录用户")
+    public Result<LoginUserInfo> loginApiUser(){
+        return R.success(apiUserService.loginApiUser(request));
+    }
 
     @GetMapping(value = "/userName")
     @ApiOperation(value = "获取用户", tags = "根据用户名/邮箱/手机号获取用户")

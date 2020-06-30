@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 退出
  * @author: wsw
  * @create: 2020-06-29 16:39
  **/
@@ -25,8 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class WebLogoutHandler implements LogoutHandler {
 
     @Autowired
-    private RedisTemplate<String, TokenEntity> tokenEntityRedisTemplate;
-
+    private TokenUtil tokenUtil;
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
@@ -39,7 +38,7 @@ public class WebLogoutHandler implements LogoutHandler {
             DecodedJWT jwt = JWT.decode(accessToken);
             id = String.valueOf(jwt.getClaims().get(ConfigConstant.USER_HEADER).asMap().get("id"));
         }
-        TokenUtil.logout(id,loginType,tokenEntityRedisTemplate,accessToken);
+        tokenUtil.logout(id,loginType);
     }
 
 }

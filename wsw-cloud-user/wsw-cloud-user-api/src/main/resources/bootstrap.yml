@@ -10,6 +10,8 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     nacos:
+      discovery:
+        server-addr: ${spring.cloud.client.ip-address}:8848
       config:
         server-addr: ${spring.cloud.client.ip-address}:8848
         file-extension: yml
@@ -18,5 +20,4 @@ spring:
                         redis-config.${spring.cloud.nacos.config.file-extension},
                         datasource-config.${spring.cloud.nacos.config.file-extension},
                         mybatis-plus.${spring.cloud.nacos.config.file-extension}
-      discovery:
-        server-addr: ${spring.cloud.client.ip-address}:8848
+

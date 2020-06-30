@@ -98,7 +98,8 @@ public class RedisHashUtil {
             redisTemplate.indexdb.set(dataBase);
             redisTemplate.opsForHash().putAll(key, map);
             if (time > 0) {
-                redisCommonUtil.expire(key, time, dataBase);
+                redisCommonUtil.setDataBase(dataBase);
+                redisCommonUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -140,7 +141,8 @@ public class RedisHashUtil {
             redisTemplate.indexdb.set(dataBase);
             redisTemplate.opsForHash().put(key, item, value);
             if (time > 0) {
-                redisCommonUtil.expire(key, time, dataBase);
+                redisCommonUtil.setDataBase(dataBase);
+                redisCommonUtil.expire(key, time);
             }
             return true;
         } catch (Exception e) {

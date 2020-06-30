@@ -14,14 +14,17 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.http.server.reactive.ServerHttpRequestDecorator;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.web.server.authorization.AuthorizationContext;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
@@ -32,7 +35,7 @@ import java.util.stream.Collectors;
 
 /**
  * @program: wsw-cloud-servce
- * @description: 核心配置，gateway鉴权
+ * @description: 核心配置，gateway资源服务器鉴权
  * @author: wsw
  * @create: 2020-06-29 17:17
  **/
@@ -47,15 +50,16 @@ public class WebfluxReactiveAuthorizationManager implements ReactiveAuthorizatio
     private AuthProperties authProperties;
 
     @Autowired
-    private RedisTemplate<String, TokenEntity> redisTemplate;
+    private PermissionUtil permissionUtil;
 
     @Autowired
-    private PermissionUtil permissionUtil;
+    private TokenUtil tokenUtil;
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> authentication, AuthorizationContext authorizationContext) {
+        ServerWebExchange exchange = authorizationContext.getExchange();
         //获取请求
-        ServerHttpRequest request = authorizationContext.getExchange().getRequest();
+        ServerHttpRequest request = exchange.getRequest();
         //判断当前是否有接口权限
         String url = request.getPath().value();
         String httpMethod = request.getMethod().name();
@@ -94,14 +98,13 @@ public class WebfluxReactiveAuthorizationManager implements ReactiveAuthorizatio
                     }
                     return authUsers;
                 })
-                //转成成权限名称
-                .any(c-> {//检测权限是否匹配
+                //转成成权限名称，检测权限是否匹配
+                .any(c-> {
                     //获取当前用户
                     BaseUser baseUser = c.getBaseUser();
                     //判断当前携带的Token是否有效
-                    String loginType = request.getHeaders().getFirst(ConfigConstant.LOGIN_TYPE);
                     String token = request.getHeaders().getFirst(ConfigConstant.TOKEN_HEADER).replace("Bearer ","");
-                    if(!TokenUtil.judgeTokenValid(String.valueOf(baseUser.getId()),loginType,redisTemplate,token,authServerProperties)){
+                    if(!tokenUtil.judgeTokenValid(String.valueOf(baseUser.getId()),baseUser.getLoginType(),token,authServerProperties)){
                         return false;
                     }
                     //获取当前权限
@@ -111,6 +114,7 @@ public class WebfluxReactiveAuthorizationManager implements ReactiveAuthorizatio
                     permissions = permissions.stream().filter(permission -> StringUtils.isNotBlank(permission.getRequestUrl())).collect(Collectors.toList());
                     //请求URl匹配，放行
                     if(permissions.stream().anyMatch(permission -> matcher.match(permission.getRequestUrl(),url))){
+                        request.mutate().header(ConfigConstant.USER_ID_HEADER, String.valueOf(baseUser.getId())).build();
                         return true;
                     }
                     return false;

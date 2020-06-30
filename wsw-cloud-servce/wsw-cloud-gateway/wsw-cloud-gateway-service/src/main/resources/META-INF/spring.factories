@@ -10,6 +10,7 @@ io.cloud.datasource.config.MybatisPlusConfig,\
 io.cloud.core.config.FeignAutoConfig,\
 io.cloud.core.decoder.FeignClientErrorDecoder,\
 io.cloud.auth.common.properties.AuthServerProperties,\
-io.cloud.auth.common.util.PermissionUtil
+io.cloud.auth.common.util.PermissionUtil,\
+io.cloud.auth.common.util.TokenUtil
 #¸ºÔØ¾ùºâ
 #io.cloud.gateway.config.RuleConfig

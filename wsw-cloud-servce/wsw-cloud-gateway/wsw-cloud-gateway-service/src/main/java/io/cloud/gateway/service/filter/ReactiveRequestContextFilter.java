@@ -1,9 +1,4 @@
-package io.cloud.gateway.service.filter;/**
- * @program: wsw-cloud-servce
- * @description:
- * @author: wsw
- * @create: 2020-06-29 21:38
- **/
+package io.cloud.gateway.service.filter;
 
 import io.cloud.gateway.service.holder.ReactiveRequestContextHolder;
 import org.springframework.web.server.ServerWebExchange;
@@ -13,7 +8,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 资源服务上下文过滤
  * @author: wsw
  * @create: 2020-06-29 21:38
  **/

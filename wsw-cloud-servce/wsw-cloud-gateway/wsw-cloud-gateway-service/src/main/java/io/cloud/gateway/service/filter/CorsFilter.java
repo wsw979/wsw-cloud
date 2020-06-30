@@ -1,9 +1,4 @@
-package io.cloud.gateway.service.filter;/**
- * @program: wsw-cloud-servce
- * @description:
- * @author: wsw
- * @create: 2020-06-29 21:35
- **/
+package io.cloud.gateway.service.filter;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;

@@ -6,7 +6,7 @@ import java.util.Collection;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 用户名/手机号/邮箱 |密码 token构造
  * @author: wsw
  * @create: 2020-06-28 15:10
  **/

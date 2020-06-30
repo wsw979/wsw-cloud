@@ -7,6 +7,7 @@ package io.cloud.auth.common.util;/**
 
 import io.cloud.data.util.StringUtil;
 import io.cloud.redis.constant.KeyConstant;
+import io.cloud.redis.util.RedisListUtil;
 import io.cloud.user.common.entity.Permission;
 import io.cloud.user.common.vo.app.PermissionListVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.List;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: 权限工具类
  * @author: wsw
  * @create: 2020-06-29 22:36
  **/
@@ -27,14 +28,17 @@ public class PermissionUtil {
     @Autowired
     private RedisTemplate<String, PermissionListVo> permissionRedisTemplate;
 
+    @Autowired
+    private RedisListUtil redisListUtil;
+
     /**
      * 获取当前用户的权限集合
      * @return
      */
     public List<PermissionListVo> getPermissions(Long userId){
         String key = StringUtil.buffer(KeyConstant.PROJECT_OAUTH_ACCESS, userId);
-        long size = permissionRedisTemplate.opsForList().size(key);
-        List<PermissionListVo> permissions = permissionRedisTemplate.opsForList().range(key, 0, size);
+        long l = redisListUtil.lGetListSize(key);
+        List<PermissionListVo> permissions = (List<PermissionListVo>)redisListUtil.lGet(key, 0, l);
         return permissions;
     }
 

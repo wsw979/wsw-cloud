@@ -1,9 +1,4 @@
-package io.cloud.gateway.service.holder;/**
- * @program: wsw-cloud-servce
- * @description:
- * @author: wsw
- * @create: 2020-06-29 21:38
- **/
+package io.cloud.gateway.service.holder;
 
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.server.ServerWebExchange;
@@ -12,7 +7,7 @@ import reactor.util.context.Context;
 
 /**
  * @program: wsw-cloud-servce
- * @description:
+ * @description: RequestContext传递
  * @author: wsw
  * @create: 2020-06-29 21:38
  **/
