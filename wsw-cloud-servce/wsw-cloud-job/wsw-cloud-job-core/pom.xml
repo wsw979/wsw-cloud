@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.cloud</groupId>
+        <artifactId>wsw-cloud-job</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>wsw-cloud-job-core</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <xxl.rpc.core.version>1.5.0</xxl.rpc.core.version>
+        <groovy.version>2.5.9</groovy.version>
+        <spring.context.version>5.2.3.RELEASE</spring.context.version>
+    </properties>
+
+    <dependencies>
+        <!-- xxl-rpc-core -->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-rpc-core</artifactId>
+            <version>${xxl.rpc.core.version}</version>
+        </dependency>
+        <!-- groovy-all -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>${groovy.version}</version>
+        </dependency>
+
+        <!-- spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.context.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

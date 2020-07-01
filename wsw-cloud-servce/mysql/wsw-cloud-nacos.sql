@@ -11,8 +11,10 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 01/07/2020 21:32:07
+ Date: 01/07/2020 23:49:13
 */
+CREATE DATABASE IF NOT EXISTS `wsw-cloud-nacos` default CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+use `wsw-cloud-nacos`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
