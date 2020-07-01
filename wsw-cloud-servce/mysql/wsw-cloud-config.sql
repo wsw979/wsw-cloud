@@ -11,11 +11,32 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 30/06/2020 17:43:21
+ Date: 01/07/2020 17:52:04
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for c_admin_staff
+-- ----------------------------
+DROP TABLE IF EXISTS `c_admin_staff`;
+CREATE TABLE `c_admin_staff`  (
+  `id` bigint(0) NOT NULL COMMENT '主键',
+  `user_id` bigint(0) NULL DEFAULT NULL COMMENT '用户id',
+  `org_id` bigint(0) NULL DEFAULT NULL COMMENT '公司id',
+  `dep_id` bigint(0) NULL DEFAULT NULL COMMENT '部门id',
+  `job_id` bigint(0) NULL DEFAULT NULL COMMENT '职位id',
+  `user_name` varchar(12) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户姓名',
+  `job_number` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '工号',
+  `id_card` varchar(18) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证',
+  `create_id` int(0) NULL DEFAULT NULL COMMENT '创建人id',
+  `update_id` int(0) NULL DEFAULT NULL COMMENT '修改人id',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `is_valid` tinyint(0) NULL DEFAULT NULL COMMENT '是否有效（0否1是）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for c_admin_user
@@ -85,6 +106,21 @@ CREATE TABLE `c_api_user_auth`  (
 INSERT INTO `c_api_user_auth` VALUES (1271323401676873730, 1271278964698173442, 3, '18683789594@163.com', 'lpNBHXz4JOnoPhv0Pt3glw==', 1, '2020-06-27 21:39:30', 1);
 INSERT INTO `c_api_user_auth` VALUES (1271323401676873731, 1271278964698173442, 2, '18683789594', 'lpNBHXz4JOnoPhv0Pt3glw==', 1, '2020-06-27 21:39:30', 1);
 INSERT INTO `c_api_user_auth` VALUES (1271323401676873732, 1271278964698173442, 1, 'wu979', 'lpNBHXz4JOnoPhv0Pt3glw==', 1, '2020-06-27 21:39:30', 1);
+
+-- ----------------------------
+-- Table structure for c_code_message
+-- ----------------------------
+DROP TABLE IF EXISTS `c_code_message`;
+CREATE TABLE `c_code_message`  (
+  `id` bigint(0) NOT NULL COMMENT '主键',
+  `sms_code` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
+  `sms_phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
+  `sms_email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱号',
+  `sms_num_type` tinyint(0) NULL DEFAULT NULL COMMENT '验证号码类型（1手机2邮箱）',
+  `sms_type` tinyint(0) NULL DEFAULT NULL COMMENT '验证码类型（1登录2注册3修改密码）',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信验证码' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for c_gateway_route
@@ -210,7 +246,7 @@ CREATE TABLE `c_user_role`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '关联角色',
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '关联用户表',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1271278965657684931 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of c_user_role
