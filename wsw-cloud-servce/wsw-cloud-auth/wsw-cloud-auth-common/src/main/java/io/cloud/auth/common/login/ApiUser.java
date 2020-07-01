@@ -1,19 +1,16 @@
-package io.cloud.auth.common.entity;
+package io.cloud.auth.common.login;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serializable;
-
 /**
  * @program: wsw-cloud-servce
- * @description: 登录用户
+ * @description:
  * @author: wsw
- * @create: 2020-06-27 23:31
+ * @create: 2020-07-01 09:04
  **/
 @Data
-public class BaseUser implements Serializable {
-    private static final long serialVersionUID = 8651145199613760899L;
+public class ApiUser {
 
     @ApiModelProperty(value = "主键")
     private Long id;
@@ -35,14 +32,5 @@ public class BaseUser implements Serializable {
 
     @ApiModelProperty("登录类型( app , web , wx , admin )")
     private String loginType;
-
-    @ApiModelProperty(value = "公司id")
-    private Long orgId;
-
-    @ApiModelProperty(value = "部门id")
-    private Long depId;
-
-    @ApiModelProperty(value = "职位id")
-    private Long jobId;
 
 }

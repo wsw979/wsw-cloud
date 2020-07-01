@@ -69,6 +69,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         String credential;
         List<RoleListVo> roleList;
         String salt;
+        //接收 admin/app 所有字段 取用户时，拷贝对应字段就ok
         BaseUser baseUser = new BaseUser();
         //登录类型 ( app , web , wx , admin )
         if (    loginType.equals(AuthConstants.LOGIN_TYPE_APP) ||

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @des: 解决跨域
+ * @des: 解决跨域 （下游服务没用，网关有自己的）
  * @author: wsw
  * @email: 18683789594@163.com
  * @date: 2019/7/25 11:33

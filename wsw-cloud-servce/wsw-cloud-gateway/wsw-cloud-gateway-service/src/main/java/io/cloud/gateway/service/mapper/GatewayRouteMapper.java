@@ -15,7 +15,4 @@ import org.apache.ibatis.annotations.Param;
  **/
 public interface GatewayRouteMapper extends BaseMapper<GatewayRoute> {
 
-    IPage<GatewayRouteListVo> findPageList(@Param("pg") Page page,
-                                           @Param("serviceId") String serviceId);
-
 }

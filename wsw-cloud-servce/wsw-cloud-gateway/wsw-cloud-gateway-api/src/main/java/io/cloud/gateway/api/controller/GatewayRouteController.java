@@ -50,13 +50,9 @@ public class GatewayRouteController {
 
     private RedisCacheRoute redisCacheRoute;
 
-    private LoginUtil loginUtil;
-
     @GetMapping("/findPageList")
     @ApiOperation(value = "列表", notes = "动态路由列表")
     public Result<List<GatewayRouteListVo>> findPageList(@ApiParam("条件") GatewayRouteListEvt evt) {
-        BaseUser user = LoginUser.getUser();
-        LoginUserInfo apiUser = loginUtil.getApiUser();
         return gatewayRouteService.findPageList(evt);
     }
 

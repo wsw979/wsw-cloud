@@ -4,9 +4,12 @@
 
     <select id="getUserByPhone" resultType="io.cloud.user.common.vo.app.AdminUserVo">
         select
-            id, mobile, credential, salt, activate
-        from c_admin_user
-        where mobile = #{phone,jdbcType=VARCHAR} and is_valid between 1 and 2
+            A.id, A.mobile, A.credential, A.salt, A.activate,
+            B.org_id, B.dep_id, B.job_id, B.user_name
+        from c_admin_user A
+        left join c_admin_staff B on A.id = B.user_id
+        where A.mobile = #{phone,jdbcType=VARCHAR}
+        and A.is_valid = 1 and B.is_valid = 1
     </select>
 
 </mapper>

@@ -20,5 +20,4 @@ public class AuthApiApplication {
         SpringApplication.run(AuthApiApplication.class);
     }
 
-
 }

@@ -1,28 +1,25 @@
-package io.cloud.user.common.vo.app;
+package io.cloud.auth.common.login;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * @program: wsw-cloud-user
+ * @program: wsw-cloud-servce
  * @description:
  * @author: wsw
- * @create: 2020-06-28 10:40
+ * @create: 2020-07-01 09:05
  **/
 @Data
-public class AdminUserVo {
+public class AdminUser {
 
     @ApiModelProperty(value = "主键")
     private Long id;
 
+    @ApiModelProperty(value = "用户名")
+    private String userName;
+
     @ApiModelProperty(value = "手机号")
     private String mobile;
-
-    @ApiModelProperty(value = "授权凭证")
-    private String credential;
-
-    @ApiModelProperty(value = "盐值")
-    private String salt;
 
     @ApiModelProperty(value = "公司id")
     private Long orgId;
@@ -33,6 +30,7 @@ public class AdminUserVo {
     @ApiModelProperty(value = "职位id")
     private Long jobId;
 
-    @ApiModelProperty(value = "用户姓名")
-    private String userName;
+    @ApiModelProperty("登录类型( app , web , wx , admin )")
+    private String loginType;
+
 }
