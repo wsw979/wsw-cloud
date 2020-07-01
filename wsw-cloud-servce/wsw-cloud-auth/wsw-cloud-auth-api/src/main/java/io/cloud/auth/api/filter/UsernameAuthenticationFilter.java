@@ -1,7 +1,9 @@
 package io.cloud.auth.api.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.ctc.wstx.sw.EncodingXmlWriter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloud.auth.common.dtl.ImageCode;
 import io.cloud.core.filter.HttpHelper;
 import io.cloud.auth.common.dtl.UsernameDtl;
 import io.cloud.auth.api.token.UsernameAuthenticationToken;
@@ -11,12 +13,18 @@ import io.cloud.data.util.ObjectUtil;
 import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.social.connect.web.HttpSessionSessionStrategy;
+import org.springframework.social.connect.web.SessionStrategy;
+import org.springframework.web.bind.ServletRequestBindingException;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +38,11 @@ import java.io.IOException;
  **/
 @Slf4j
 public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+
+    /**
+     * 操作session的工具类
+     */
+    private SessionStrategy sessionStrategy = new HttpSessionSessionStrategy();
 
     public UsernameAuthenticationFilter() {
         super(new AntPathRequestMatcher(AuthConstants.SECURITY_USERNAME_LOGIN_URL, AuthConstants.TYPE));
@@ -45,16 +58,17 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
             String body = HttpHelper.getBodyString(request);
             UsernameDtl dtl = JSON.parseObject(body, UsernameDtl.class);
             if (ObjectUtil.checkObjNull(dtl)) {
-                throw new ServiceException(HttpStatus.PASSWORD_ERROR);
+                throw new AuthenticationServiceException(HttpStatus.PASSWORD_ERROR.getMsg());
             }
+            validate(new ServletWebRequest(request),dtl.getImageCode());
             dtl.setPassword(dtl.getPassword().trim());
             authRequest = new UsernameAuthenticationToken(dtl.getUsername(), dtl.getPassword());
             setDetails(request, authRequest);
             request.setAttribute(ConfigConstant.CLIENT_ID, dtl.getClientId());
             request.setAttribute(ConfigConstant.CLIENT_SECRET, dtl.getClientSecret());
-        } catch (IOException e) {
-            e.printStackTrace();
-            authRequest = new UsernameAuthenticationToken("", "");
+            request.setAttribute(AuthConstants.IMAGE_CODE, dtl.getImageCode());
+        } catch (Exception e) {
+            throw new AuthenticationServiceException(e.getMessage());
         }
         return this.getAuthenticationManager().authenticate(authRequest);
     }
@@ -62,4 +76,26 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
     private void setDetails(HttpServletRequest request, AbstractAuthenticationToken authRequest) {
         authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
     }
+
+    private void validate(ServletWebRequest request, String imageCode) throws AuthenticationException, ServletRequestBindingException {
+        //取出session中的验证码对象
+        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(request, AuthConstants.IMAGE_CODE);
+        //取出表单提交中的验证码信息
+        if (codeInSession == null) {
+            throw new ServletRequestBindingException("验证码必填");
+        }
+        if (StringUtils.isBlank(imageCode)) {
+            throw new ServletRequestBindingException("验证码必填");
+        }
+        if (codeInSession.isExpried()) {
+            sessionStrategy.removeAttribute(request, AuthConstants.IMAGE_CODE);
+            throw new AuthenticationServiceException("验证码失效");
+        }
+        if (!StringUtils.equals(codeInSession.getCode(), imageCode)) {
+            throw new AuthenticationServiceException("验证码不正确");
+        }
+        //验证通过，清除session中的验证码信息
+        sessionStrategy.removeAttribute(request, AuthConstants.IMAGE_CODE);
+    }
+
 }

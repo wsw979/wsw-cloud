@@ -1,14 +1,10 @@
 package io.cloud.auth.api.config;
 
 import io.cloud.auth.api.filter.UsernameAuthenticationFilter;
-import io.cloud.auth.api.handler.WebLoginAuthSuccessHandler;
-import io.cloud.auth.api.handler.WebLoginFailureHandler;
-import io.cloud.auth.api.handler.WebLogoutHandler;
-import io.cloud.auth.api.handler.WebLogoutSuccessHandler;
+import io.cloud.auth.api.handler.*;
 import io.cloud.auth.api.provider.UsernameAuthenticationProvider;
 import io.cloud.auth.api.service.UsernameUserDetailService;
 import io.cloud.data.constant.AuthConstants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -54,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(usernameAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http
                 .authorizeRequests()
-                .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 .and()
                 .authorizeRequests()
                 .antMatchers("/pub-key/jwt.json").permitAll()
@@ -66,6 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs/**","/webjars/**","/swagger-resources/**","/*.html").permitAll();
         // 其余所有请求全部需要鉴权认证
         http.authorizeRequests().anyRequest().authenticated();
+        http.exceptionHandling().accessDeniedHandler(webAccessDeniedHandler());
     }
 
     /**
@@ -135,4 +132,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         WebLogoutSuccessHandler logoutSuccessHandler = new WebLogoutSuccessHandler();
         return logoutSuccessHandler;
     }
+
+    @Bean
+    public WebAccessDeniedHandler webAccessDeniedHandler(){
+        WebAccessDeniedHandler webAccessDeniedHandler = new WebAccessDeniedHandler();
+        return webAccessDeniedHandler;
+    }
+
 }

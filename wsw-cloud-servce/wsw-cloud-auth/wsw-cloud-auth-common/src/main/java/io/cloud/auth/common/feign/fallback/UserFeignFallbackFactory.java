@@ -3,6 +3,7 @@ package io.cloud.auth.common.feign.fallback;
 import feign.hystrix.FallbackFactory;
 import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.auth.common.feign.UserFeign;
+import io.cloud.auth.common.login.ApiUser;
 import io.cloud.auth.common.util.LoginUser;
 import io.cloud.exception.InternalException;
 import io.cloud.exception.result.Result;
@@ -28,25 +29,13 @@ public class UserFeignFallbackFactory implements FallbackFactory<UserFeign> {
         return new UserFeign() {
             @Override
             public Result<LoginUserInfo> loginApiUser() {
-                LoginUserInfo loginUserInfo = loginUserInfo();
-                return R.success(loginUserInfo);
+                return R.error(HttpStatus.LOGIN_USER_ERROR);
             }
 
             @Override
             public Result<LoginUserInfo> loginAdminUser() {
-                LoginUserInfo loginUserInfo = loginUserInfo();
-                return R.success(loginUserInfo);
+                return R.error(HttpStatus.LOGIN_USER_ERROR);
             }
         };
-    }
-
-    private LoginUserInfo loginUserInfo(){
-        LoginUserInfo loginUserInfo = new LoginUserInfo();
-        BaseUser user = LoginUser.getUser();
-        if (user == null) {
-            throw new InternalException(HttpStatus.LOGIN_USER_ERROR);
-        }
-        BeanUtils.copyProperties(user, loginUserInfo);
-        return loginUserInfo;
     }
 }

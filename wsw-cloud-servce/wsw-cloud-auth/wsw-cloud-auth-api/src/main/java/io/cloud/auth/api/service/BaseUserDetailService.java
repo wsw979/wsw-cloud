@@ -58,7 +58,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
         if (attributes == null) {
-            throw new ServiceException(HttpStatus.AUTH_ERROR);
+            throw new UsernameNotFoundException(HttpStatus.AUTH_ERROR.getMsg());
         }
         HttpServletRequest request = attributes.getRequest();
         String clientId = request.getParameter("client_id");
@@ -90,7 +90,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
             credential = adminUser.getCredential();
             roleList = userServiceFeign.findRoleList(id).getData();
             if (roleList.size() < 1) {
-                throw new ServiceException("账号正在审核，请联系管理员");
+                throw new UsernameNotFoundException("账号正在审核，请联系管理员");
             }
             salt = adminUser.getSalt();
             BeanUtils.copyProperties(adminUser, baseUser);

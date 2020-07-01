@@ -16,6 +16,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -95,7 +96,7 @@ public class WebLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationS
         } catch (NoSuchClientException e) {
             throw new NoSuchClientException(HttpStatus.CLIENT_ID.getMsg());
         } catch (Exception e) {
-            throw new ServiceException(HttpStatus.AUTH_ERROR.getMsg());
+            throw new UnapprovedClientAuthenticationException(HttpStatus.AUTH_ERROR.getMsg());
         }
 
         //密码工具 比较secret是否相等
@@ -127,7 +128,7 @@ public class WebLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationS
         //判断token的和方法性
         String id = String.valueOf(((BaseUserDetail) authentication.getPrincipal()).getBaseUser().getId());
         if (!tokenUtil.pushToken(id, loginType, token.getValue(), token.getExpiration())) {
-            throw new ServiceException("登录限制，同时登录人数过多");
+            throw new AuthenticationServiceException("登录限制，同时登录人数过多");
         }
         return result;
     }

@@ -1,8 +1,12 @@
 package io.cloud.auth.common.evt;
 
+import io.cloud.data.enums.NumEnum;
+import io.cloud.data.util.StringUtil;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -15,16 +19,31 @@ import javax.validation.constraints.NotNull;
 @Data
 public class MessageCodeEvt {
 
-    @NotEmpty(message = "手机号必填")
-    @ApiModelProperty(value = "手机号", required = true)
-    private String phone;
+    @ApiModelProperty(value = "手机号码")
+    private String smsPhone;
 
-    @NotEmpty(message = "图形验证码必填")
-    @ApiModelProperty(value = "图形验证码", required = true)
-    private String verificationCode;
+    @ApiModelProperty(value = "邮箱号码")
+    private String smsEmail;
 
-    @NotNull(message = "来源必填")
-    @ApiModelProperty(value = "来源（1登录2注册3修改密码）", required = true)
-    private Integer codeType;
+    @ApiModelProperty(value = "验证号码类型（1手机2邮箱）", required = true)
+    private Integer smsNumType;
 
+    @ApiModelProperty(value = "验证码类型（1登录2注册3修改密码）", required = true)
+    private Integer smsType;
+
+    @AssertTrue(message = "手机号必填")
+    private boolean isSmsPhone(){
+        if(this.smsNumType.equals(NumEnum.ONE.getK())){
+            return StringUtils.isNotEmpty(this.smsPhone);
+        }
+        return true;
+    }
+
+    @AssertTrue(message = "邮箱号必填")
+    private boolean isSmsEmail(){
+        if(this.smsNumType.equals(NumEnum.TWO.getK())){
+            return StringUtils.isNotEmpty(this.smsEmail);
+        }
+        return true;
+    }
 }

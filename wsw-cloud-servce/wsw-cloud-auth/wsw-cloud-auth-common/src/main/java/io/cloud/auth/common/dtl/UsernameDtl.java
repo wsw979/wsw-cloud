@@ -22,6 +22,11 @@ public class UsernameDtl {
     private String password;
 
     /**
+     * 图形验证码
+     */
+    private String imageCode;
+
+    /**
      * 客户端id
      */
     private String clientId;

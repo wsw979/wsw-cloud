@@ -41,6 +41,10 @@
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-sms</artifactId>
+        </dependency>
     </dependencies>
 
 

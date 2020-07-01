@@ -21,6 +21,7 @@
         <module>wsw-cloud-jar</module>
         <module>wsw-cloud-core</module>
         <module>wsw-cloud-exception</module>
+        <module>wsw-cloud-sms</module>
     </modules>
 
     <properties>
@@ -124,6 +125,11 @@
             <dependency>
                 <groupId>io.cloud</groupId>
                 <artifactId>wsw-cloud-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-sms</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- 服务必要依赖 end  -->
