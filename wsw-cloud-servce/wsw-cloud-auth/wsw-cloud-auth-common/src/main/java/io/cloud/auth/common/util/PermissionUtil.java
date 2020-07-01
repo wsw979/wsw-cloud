@@ -8,7 +8,6 @@ package io.cloud.auth.common.util;/**
 import io.cloud.data.util.StringUtil;
 import io.cloud.redis.constant.KeyConstant;
 import io.cloud.redis.util.RedisListUtil;
-import io.cloud.user.common.entity.Permission;
 import io.cloud.user.common.vo.app.PermissionListVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,12 +32,13 @@ public class PermissionUtil {
 
     /**
      * 获取当前用户的权限集合
+     *
      * @return
      */
-    public List<PermissionListVo> getPermissions(Long userId){
+    public List<PermissionListVo> getPermissions(Long userId) {
         String key = StringUtil.buffer(KeyConstant.PROJECT_OAUTH_ACCESS, userId);
         long l = redisListUtil.lGetListSize(key);
-        List<PermissionListVo> permissions = (List<PermissionListVo>)redisListUtil.lGet(key, 0, l);
+        List<PermissionListVo> permissions = (List<PermissionListVo>) redisListUtil.lGet(key, 0, l);
         return permissions;
     }
 

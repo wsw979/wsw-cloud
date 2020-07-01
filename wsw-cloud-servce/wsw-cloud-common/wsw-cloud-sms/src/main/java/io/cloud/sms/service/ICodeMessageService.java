@@ -3,6 +3,7 @@ package io.cloud.sms.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.cloud.sms.entity.CodeMessage;
 import io.cloud.sms.evt.CodeMessageEvt;
+import io.cloud.sms.properties.CodeProperties;
 
 /**
  * @program: wsw-cloud-servce
@@ -12,5 +13,5 @@ import io.cloud.sms.evt.CodeMessageEvt;
  **/
 public interface ICodeMessageService extends IService<CodeMessage> {
 
-    String save(CodeMessageEvt evt);
+    boolean save(CodeMessageEvt evt, CodeProperties codeProperties, String type);
 }

@@ -1,12 +1,10 @@
 package io.cloud.auth.api.service;
 
-import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.auth.api.token.BaseUserDetail;
+import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.data.constant.AuthConstants;
 import io.cloud.data.constant.ConfigConstant;
-import io.cloud.data.enums.NumEnum;
 import io.cloud.data.util.StringUtil;
-import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import io.cloud.redis.constant.KeyConstant;
 import io.cloud.redis.util.RedisCommonUtil;
@@ -72,10 +70,9 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         //接收 admin/app 所有字段 取用户时，拷贝对应字段就ok
         BaseUser baseUser = new BaseUser();
         //登录类型 ( app , web , wx , admin )
-        if (    loginType.equals(AuthConstants.LOGIN_TYPE_APP) ||
+        if (loginType.equals(AuthConstants.LOGIN_TYPE_APP) ||
                 loginType.equals(AuthConstants.LOGIN_TYPE_WEB) ||
-                loginType.equals(AuthConstants.LOGIN_TYPE_WX))
-        {
+                loginType.equals(AuthConstants.LOGIN_TYPE_WX)) {
             ApiUserVo apiUser = getUser(username, clientId);
             id = apiUser.getId();
             userName = StringUtils.isBlank(apiUser.getMobile()) ? StringUtils.isBlank(apiUser.getEmail()) ? apiUser.getUserName() : apiUser.getEmail() : apiUser.getMobile();
@@ -102,7 +99,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
         storePermission(permissionList, id);
         //返回带有用户权限信息的User
         User user = new User(userName, credential, true, true, true, true, authorities);
-        return new BaseUserDetail(baseUser,user,salt);
+        return new BaseUserDetail(baseUser, user, salt);
     }
 
     /**

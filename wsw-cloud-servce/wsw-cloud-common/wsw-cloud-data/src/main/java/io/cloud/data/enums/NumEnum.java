@@ -22,7 +22,7 @@ public enum NumEnum {
     /**
      * 2
      */
-    TWO(1, "2"),
+    TWO(2, "2"),
     /**
      * 3
      */

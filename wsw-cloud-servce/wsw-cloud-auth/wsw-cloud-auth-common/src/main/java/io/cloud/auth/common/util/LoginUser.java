@@ -6,11 +6,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.auth.common.login.AdminUser;
 import io.cloud.auth.common.login.ApiUser;
-import io.cloud.data.constant.AuthConstants;
 import io.cloud.data.constant.ConfigConstant;
 import io.cloud.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -37,7 +35,7 @@ public class LoginUser implements Serializable {
     public static AdminUser adminUser() {
         AdminUser adminUser = new AdminUser();
         BaseUser user = getUser();
-        BeanUtils.copyProperties(user,adminUser);
+        BeanUtils.copyProperties(user, adminUser);
         return adminUser;
     }
 
@@ -49,7 +47,7 @@ public class LoginUser implements Serializable {
     public static ApiUser apiUser() {
         ApiUser apiUser = new ApiUser();
         BaseUser user = getUser();
-        BeanUtils.copyProperties(user,apiUser);
+        BeanUtils.copyProperties(user, apiUser);
         return apiUser;
     }
 
@@ -70,7 +68,7 @@ public class LoginUser implements Serializable {
         }
     }
 
-    private static BaseUser getUser(){
+    private static BaseUser getUser() {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder
                 .getRequestAttributes();
         if (attributes == null) {

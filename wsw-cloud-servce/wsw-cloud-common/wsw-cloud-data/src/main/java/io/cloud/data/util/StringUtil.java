@@ -293,10 +293,11 @@ public class StringUtil {
 
     /**
      * 拼接 string
+     *
      * @param obj
      * @return
      */
-    public static String buffer(Object... obj){
+    public static String buffer(Object... obj) {
         StringBuffer buffer = new StringBuffer();
         Arrays.stream(obj).forEach(str -> {
             buffer.append(str.toString());

@@ -29,6 +29,14 @@
             <version>${aliyun.java.sdk.dysmsapi.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-exception</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-context</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>

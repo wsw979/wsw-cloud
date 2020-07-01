@@ -28,7 +28,7 @@ public class OAuthServerAuthenticationEntryPoint implements ServerAuthentication
         ServerHttpResponse response = exchange.getResponse();
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         Result error = R.error(HttpStatus.UNAUTHORIZED.value(), "无权限访问！");
-        return getErrorResponse(exchange,objectMapper,error);
+        return getErrorResponse(exchange, objectMapper, error);
     }
 
 }

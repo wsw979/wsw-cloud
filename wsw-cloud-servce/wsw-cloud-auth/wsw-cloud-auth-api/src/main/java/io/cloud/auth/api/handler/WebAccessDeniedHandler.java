@@ -29,7 +29,7 @@ public class WebAccessDeniedHandler implements AccessDeniedHandler, ResponseUtil
         log.info("权限不足，访问失败！");
         String msg = e.getMessage();
         response.setStatus(500);
-        getErrorResponseWeb(response,objectMapper,msg);
+        getErrorResponseWeb(response, objectMapper, msg);
     }
 
 }

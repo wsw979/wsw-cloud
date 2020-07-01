@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : master-8001
+ Source Server         : master
  Source Server Type    : MySQL
  Source Server Version : 80020
  Source Host           : localhost:8001
@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 01/07/2020 17:52:04
+ Date: 01/07/2020 21:32:00
 */
 
 SET NAMES utf8mb4;
@@ -36,7 +36,11 @@ CREATE TABLE `c_admin_staff`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT NULL COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_admin_staff
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_admin_user
@@ -54,7 +58,11 @@ CREATE TABLE `c_admin_user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效（0未激活1已激活2已禁用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'ADMIN用户' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'ADMIN用户' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_admin_user
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_api_user
@@ -77,7 +85,7 @@ CREATE TABLE `c_api_user`  (
   `start_time` datetime(0) NULL DEFAULT NULL COMMENT '会员开始时间',
   `end_time` datetime(0) NULL DEFAULT NULL COMMENT '会员结束时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'APP用户' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'APP用户' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_api_user
@@ -98,7 +106,7 @@ CREATE TABLE `c_api_user_auth`  (
   `verified_time` datetime(0) NULL DEFAULT NULL COMMENT '验证时间',
   `is_binding` tinyint(0) NULL DEFAULT 1 COMMENT '是否绑定中（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户认证方式' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户认证方式' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_api_user_auth
@@ -118,9 +126,15 @@ CREATE TABLE `c_code_message`  (
   `sms_email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱号',
   `sms_num_type` tinyint(0) NULL DEFAULT NULL COMMENT '验证号码类型（1手机2邮箱）',
   `sms_type` tinyint(0) NULL DEFAULT NULL COMMENT '验证码类型（1登录2注册3修改密码）',
+  `sms_source` tinyint(0) NULL DEFAULT NULL COMMENT '来源（app,web,wx,admin）',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信验证码' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信验证码' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_code_message
+-- ----------------------------
+INSERT INTO `c_code_message` VALUES (1278318321985486849, '096504', '18683789594', NULL, 1, 1, 1, '2020-07-01 13:23:32');
 
 -- ----------------------------
 -- Table structure for c_gateway_route
@@ -140,7 +154,7 @@ CREATE TABLE `c_gateway_route`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态路由' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态路由' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_gateway_route
@@ -166,7 +180,7 @@ CREATE TABLE `c_oauth_client_details`  (
   `additional_information` varchar(4096) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `autoapprove` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`client_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_oauth_client_details
@@ -190,7 +204,7 @@ CREATE TABLE `c_permission`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(1) NULL DEFAULT 1 COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_permission
@@ -212,7 +226,7 @@ CREATE TABLE `c_role`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_role
@@ -229,7 +243,7 @@ CREATE TABLE `c_role_permission`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(0) NULL DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_role_permission
@@ -246,7 +260,7 @@ CREATE TABLE `c_user_role`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '关联角色',
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '关联用户表',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1271278965657684931 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1271278965657684931 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_user_role

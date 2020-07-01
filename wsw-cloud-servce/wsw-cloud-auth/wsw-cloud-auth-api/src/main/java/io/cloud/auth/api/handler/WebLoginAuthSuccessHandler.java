@@ -1,31 +1,25 @@
 package io.cloud.auth.api.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.cloud.auth.common.properties.AuthServerProperties;
 import io.cloud.auth.api.token.BaseUserDetail;
 import io.cloud.auth.api.util.ResponseUtil;
-import io.cloud.auth.common.entity.TokenEntity;
+import io.cloud.auth.common.properties.AuthServerProperties;
 import io.cloud.auth.common.util.TokenUtil;
 import io.cloud.data.constant.CommonConstant;
 import io.cloud.data.constant.ConfigConstant;
 import io.cloud.data.constant.SecurityConstant;
-import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultExpiringOAuth2RefreshToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
@@ -33,8 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 

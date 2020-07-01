@@ -3,7 +3,6 @@ package io.cloud.auth.api.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloud.auth.api.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -27,7 +26,7 @@ public class WebLoginFailureHandler implements AuthenticationFailureHandler, Res
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         String msg = exception.getMessage();
         response.setStatus(500);
-        getErrorResponseWeb(response,objectMapper,msg);
+        getErrorResponseWeb(response, objectMapper, msg);
     }
 
 }

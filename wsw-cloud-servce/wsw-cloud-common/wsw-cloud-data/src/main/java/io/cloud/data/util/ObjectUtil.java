@@ -12,6 +12,7 @@ public class ObjectUtil extends cn.hutool.core.util.ObjectUtil {
 
     /**
      * obj check not null
+     *
      * @param obj
      * @return
      */
@@ -25,6 +26,7 @@ public class ObjectUtil extends cn.hutool.core.util.ObjectUtil {
 
     /**
      * obj check not null
+     *
      * @param obj
      * @return
      */

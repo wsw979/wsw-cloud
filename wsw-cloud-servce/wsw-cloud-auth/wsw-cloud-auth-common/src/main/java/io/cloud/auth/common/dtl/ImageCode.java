@@ -22,7 +22,7 @@ public class ImageCode {
     /**
      * 验证码
      */
-    private  String code;
+    private String code;
 
     /**
      * 过期时间

@@ -21,6 +21,7 @@ public class JwtAccessToken extends JwtAccessTokenConverter {
 
     /**
      * 生成token
+     *
      * @param accessToken
      * @param authentication
      * @return
@@ -29,7 +30,7 @@ public class JwtAccessToken extends JwtAccessTokenConverter {
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         DefaultOAuth2AccessToken defaultOAuth2AccessToken = new DefaultOAuth2AccessToken(accessToken);
         // 设置额外用户信息
-        if(authentication.getPrincipal() instanceof BaseUserDetail) {
+        if (authentication.getPrincipal() instanceof BaseUserDetail) {
             BaseUser baseUser = ((BaseUserDetail) authentication.getPrincipal()).getBaseUser();
             // 将用户信息添加到token额外信息中
             defaultOAuth2AccessToken.getAdditionalInformation().put(ConfigConstant.USER_HEADER, JSONObject.parseObject(JSONObject.toJSONString(baseUser)));
@@ -39,19 +40,20 @@ public class JwtAccessToken extends JwtAccessTokenConverter {
 
     /**
      * 解析token
+     *
      * @param value
      * @param map
      * @return
      */
     @Override
-    public OAuth2AccessToken extractAccessToken(String value, Map<String, ?> map){
+    public OAuth2AccessToken extractAccessToken(String value, Map<String, ?> map) {
         OAuth2AccessToken oauth2AccessToken = super.extractAccessToken(value, map);
         convertData(oauth2AccessToken, oauth2AccessToken.getAdditionalInformation());
         return oauth2AccessToken;
     }
 
-    private void convertData(OAuth2AccessToken accessToken,  Map<String, ?> map) {
-        accessToken.getAdditionalInformation().put(ConfigConstant.USER_HEADER,convertUserData(map.get(ConfigConstant.USER_HEADER)));
+    private void convertData(OAuth2AccessToken accessToken, Map<String, ?> map) {
+        accessToken.getAdditionalInformation().put(ConfigConstant.USER_HEADER, convertUserData(map.get(ConfigConstant.USER_HEADER)));
     }
 
     private BaseUser convertUserData(Object map) {

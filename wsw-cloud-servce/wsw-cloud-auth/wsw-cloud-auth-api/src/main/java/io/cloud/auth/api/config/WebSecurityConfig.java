@@ -56,10 +56,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pub-key/jwt.json").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/js/**","/favicon.ico").permitAll()
+                .antMatchers("/js/**", "/favicon.ico").permitAll()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/v2/api-docs/**","/webjars/**","/swagger-resources/**","/*.html").permitAll();
+                .antMatchers("/v2/api-docs/**", "/webjars/**", "/swagger-resources/**", "/*.html").permitAll();
         // 其余所有请求全部需要鉴权认证
         http.authorizeRequests().anyRequest().authenticated();
         http.exceptionHandling().accessDeniedHandler(webAccessDeniedHandler());
@@ -74,7 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public UsernameAuthenticationProvider usernameAuthenticationProvider(){
+    public UsernameAuthenticationProvider usernameAuthenticationProvider() {
         UsernameAuthenticationProvider provider = new UsernameAuthenticationProvider();
         // 设置userDetailsService
         provider.setUserDetailsService(usernameUserDetailService);
@@ -85,10 +85,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 用户名/手机/邮箱 密码登录
+     *
      * @return
      */
     @Bean
-    public UsernameAuthenticationFilter usernameAuthenticationFilter(){
+    public UsernameAuthenticationFilter usernameAuthenticationFilter() {
         UsernameAuthenticationFilter filter = new UsernameAuthenticationFilter();
         try {
             filter.setAuthenticationManager(this.authenticationManagerBean());
@@ -110,31 +111,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public WebLoginAuthSuccessHandler loginSuccessAuth(){
+    public WebLoginAuthSuccessHandler loginSuccessAuth() {
         WebLoginAuthSuccessHandler myLoginAuthSuccessHandler = new WebLoginAuthSuccessHandler();
         return myLoginAuthSuccessHandler;
     }
 
     @Bean
-    public WebLoginFailureHandler loginFailure(){
+    public WebLoginFailureHandler loginFailure() {
         WebLoginFailureHandler myLoginFailureHandler = new WebLoginFailureHandler();
         return myLoginFailureHandler;
     }
 
     @Bean
-    public LogoutHandler getLogoutHandler(){
+    public LogoutHandler getLogoutHandler() {
         WebLogoutHandler myLogoutHandler = new WebLogoutHandler();
         return myLogoutHandler;
     }
 
     @Bean
-    public LogoutSuccessHandler getLogoutSuccessHandler(){
+    public LogoutSuccessHandler getLogoutSuccessHandler() {
         WebLogoutSuccessHandler logoutSuccessHandler = new WebLogoutSuccessHandler();
         return logoutSuccessHandler;
     }
 
     @Bean
-    public WebAccessDeniedHandler webAccessDeniedHandler(){
+    public WebAccessDeniedHandler webAccessDeniedHandler() {
         WebAccessDeniedHandler webAccessDeniedHandler = new WebAccessDeniedHandler();
         return webAccessDeniedHandler;
     }

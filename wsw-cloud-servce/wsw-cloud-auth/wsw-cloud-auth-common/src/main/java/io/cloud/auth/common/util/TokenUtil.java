@@ -1,36 +1,22 @@
 package io.cloud.auth.common.util;
 
-import com.alibaba.fastjson.JSONObject;
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import io.cloud.auth.common.entity.BaseUser;
 import io.cloud.auth.common.entity.TokenEntity;
 import io.cloud.auth.common.properties.AuthServerProperties;
 import io.cloud.data.constant.AuthConstants;
-import io.cloud.data.constant.ConfigConstant;
 import io.cloud.data.util.StringUtil;
-import io.cloud.exception.ServiceException;
 import io.cloud.redis.constant.KeyConstant;
 import io.cloud.redis.util.RedisCommonUtil;
 import io.cloud.redis.util.RedisStringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * @program: wsw-cloud-servce
@@ -97,7 +83,7 @@ public class TokenUtil implements Serializable {
             if (diffTime < properties.getManualRefreshTokenValid()) {
                 LocalDateTime localDateTime = now.plusSeconds(properties.getTokenValid());
                 tokenEntity.setInvalidDate(localDateTime);
-                redisCommonUtil.expire(id, localDateTime.getSecond(),TimeUnit.SECONDS);
+                redisCommonUtil.expire(id, localDateTime.getSecond(), TimeUnit.SECONDS);
             }
         }
         return true;

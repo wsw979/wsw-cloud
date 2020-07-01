@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @TableName("c_code_message")
-@ApiModel(value="CodeMessage对象", description="短信验证码")
+@ApiModel(value = "CodeMessage对象", description = "短信验证码")
 public class CodeMessage {
 
     @ApiModelProperty(value = "主键")
@@ -37,6 +37,9 @@ public class CodeMessage {
 
     @ApiModelProperty(value = "验证码类型（1登录2注册3修改密码）")
     private Integer smsType;
+
+    @ApiModelProperty(value = "来源（1app2web3wx4admin）")
+    private Integer smsSource;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;

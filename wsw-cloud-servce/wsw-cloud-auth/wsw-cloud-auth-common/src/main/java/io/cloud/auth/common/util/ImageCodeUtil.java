@@ -17,11 +17,12 @@ public class ImageCodeUtil {
 
     /**
      * 生成验证码
+     *
      * @return
      */
     public static ImageCode createImageCode() {
-        int width=80;
-        int height=30;
+        int width = 80;
+        int height = 30;
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics g = image.getGraphics();
         Random random = new Random();
@@ -50,6 +51,7 @@ public class ImageCodeUtil {
 
         return new ImageCode(image, code, AuthConstants.IMAGE_TIME);
     }
+
     /**
      * 生成随机背景条纹
      *

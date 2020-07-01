@@ -25,12 +25,17 @@ public enum HttpStatus {
     /**
      * 权限
      */
-    CLIENT_ID(403,"No client with requested id null"),
-    PASSWORD_ERROR(400,"账号不存在或密码错误"),
-    AUTH_ERROR(403,"认证失败"),
+    CLIENT_ID(403, "No client with requested id null"),
+    PASSWORD_ERROR(400, "账号不存在或密码错误"),
+    AUTH_ERROR(403, "认证失败"),
     NOT_AUTH(403, "权限不足"),
-    LOGIN_USER_ERROR(500,"用户获取失败，请重新登录或稍后再试"),
+    LOGIN_USER_ERROR(500, "用户获取失败，请重新登录或稍后再试"),
     TOKEN_ERROR(400, "登录已失效，请重新登录"),
+
+    /**
+     * 业务
+     */
+    MESSAGE_CODE_ERROR(1001, "短信发送失败"),
     ;
 
     private Integer code;

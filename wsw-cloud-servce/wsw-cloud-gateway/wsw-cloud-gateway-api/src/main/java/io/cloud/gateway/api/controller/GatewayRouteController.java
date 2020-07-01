@@ -1,9 +1,5 @@
 package io.cloud.gateway.api.controller;
 
-import io.cloud.auth.common.entity.BaseUser;
-import io.cloud.auth.common.feign.UserFeign;
-import io.cloud.auth.common.util.LoginUser;
-import io.cloud.auth.common.util.LoginUtil;
 import io.cloud.data.annotation.WswRestController;
 import io.cloud.data.group.Save;
 import io.cloud.data.group.Update;
@@ -21,7 +17,6 @@ import io.cloud.gateway.common.evt.GatewayRouteListEvt;
 import io.cloud.gateway.common.util.HandleDataUtil;
 import io.cloud.gateway.common.vo.GatewayRouteDtlVo;
 import io.cloud.gateway.common.vo.GatewayRouteListVo;
-import io.cloud.user.common.base.LoginUserInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

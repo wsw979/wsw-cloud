@@ -24,12 +24,13 @@ public interface ResponseUtil<T> {
 
     /**
      * webflux方式返回
+     *
      * @param webFilterExchange
      * @param objectMapper
      * @param data
      * @return
      */
-    default Mono<Void> getResponse(WebFilterExchange webFilterExchange, ObjectMapper objectMapper, T data){
+    default Mono<Void> getResponse(WebFilterExchange webFilterExchange, ObjectMapper objectMapper, T data) {
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpResponse response = exchange.getResponse();
         //设置headers
@@ -48,24 +49,26 @@ public interface ResponseUtil<T> {
 
     /**
      * web方式返回
+     *
      * @param response
      * @param objectMapper
      * @param data
      * @throws IOException
      */
-    default  void getResponseWeb(HttpServletResponse response, ObjectMapper objectMapper, T data)throws IOException{
+    default void getResponseWeb(HttpServletResponse response, ObjectMapper objectMapper, T data) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(data));
     }
 
     /**
      * web方式返回
+     *
      * @param response
      * @param objectMapper
      * @param data
      * @throws IOException
      */
-    default  void getErrorResponseWeb(HttpServletResponse response, ObjectMapper objectMapper, String data)throws IOException{
+    default void getErrorResponseWeb(HttpServletResponse response, ObjectMapper objectMapper, String data) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(R.error(data)));
     }

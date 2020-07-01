@@ -3,8 +3,6 @@ package io.cloud.sms.evt;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-
 /**
  * @program: wsw-cloud-servce
  * @description:
@@ -29,4 +27,6 @@ public class CodeMessageEvt {
     @ApiModelProperty(value = "验证码类型（1登录2注册3修改密码）")
     private Integer smsType;
 
+    @ApiModelProperty(value = "来源（1app2web3wx4admin）")
+    private Integer smsSource;
 }

@@ -5,7 +5,6 @@ package io.cloud.gateway.service.config;/**
  * @create: 2020-06-29 21:33
  **/
 
-import io.cloud.core.filter.SecurityCorsFilter;
 import io.cloud.gateway.service.filter.CorsFilter;
 import io.cloud.gateway.service.filter.ReactiveRequestContextFilter;
 import io.cloud.gateway.service.handler.OAuthServerAccessDeniedHandler;
@@ -39,22 +38,23 @@ public class OAuth2ResourceServerConfig {
 
     /**
      * 注入授权管理器
+     *
      * @return
      */
     @Bean
-    public ReactiveAuthorizationManager reactiveAuthorizationManager(){
+    public ReactiveAuthorizationManager reactiveAuthorizationManager() {
         WebfluxReactiveAuthorizationManager webfluxReactiveAuthorizationManager = new WebfluxReactiveAuthorizationManager();
         return webfluxReactiveAuthorizationManager;
     }
 
     @Bean
-    public OAuthServerAccessDeniedHandler accessDeniedHandler(){
+    public OAuthServerAccessDeniedHandler accessDeniedHandler() {
         OAuthServerAccessDeniedHandler accessDeniedHandler = new OAuthServerAccessDeniedHandler();
         return accessDeniedHandler;
     }
 
     @Bean
-    public OAuthServerAuthenticationEntryPoint authenticationEntryPoint(){
+    public OAuthServerAuthenticationEntryPoint authenticationEntryPoint() {
         OAuthServerAuthenticationEntryPoint authenticationEntryPoint = new OAuthServerAuthenticationEntryPoint();
         return authenticationEntryPoint;
     }

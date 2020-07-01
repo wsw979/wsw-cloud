@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author: wsw
  * @create: 2020-06-18 14:13
  **/
-@FeignClient(value = ServiceConstant.USER_API_PATH,fallbackFactory = UserFeignFallbackFactory.class, decode404 = true)
+@FeignClient(value = ServiceConstant.USER_API_PATH, fallbackFactory = UserFeignFallbackFactory.class, decode404 = true)
 public interface UserFeign {
 
     @GetMapping(value = "/appUser/loginUser")

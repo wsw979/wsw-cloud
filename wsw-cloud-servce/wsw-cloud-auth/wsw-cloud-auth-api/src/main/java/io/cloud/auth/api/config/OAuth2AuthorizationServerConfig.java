@@ -1,8 +1,8 @@
 package io.cloud.auth.api.config;
 
-import io.cloud.auth.common.properties.AuthServerProperties;
 import io.cloud.auth.api.service.UsernameUserDetailService;
 import io.cloud.auth.api.token.JwtAccessToken;
+import io.cloud.auth.common.properties.AuthServerProperties;
 import io.cloud.data.constant.SecurityConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +62,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     private AuthServerProperties authServerProperties;
 
     @Bean("jdbcClientDetailsService")
-    public ClientDetailsService clientDetailsService(){
+    public ClientDetailsService clientDetailsService() {
         JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
         clientDetailsService.setSelectClientDetailsSql(SecurityConstant.DEFAULT_SELECT_STATEMENT);
         clientDetailsService.setFindClientDetailsSql(SecurityConstant.DEFAULT_FIND_STATEMENT);
@@ -71,6 +71,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     /**
      * 配置client通过jdbc从数据库查询
+     *
      * @param clients
      * @throws Exception
      */
@@ -81,7 +82,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints)  {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .authenticationManager(authenticationManager)
                 .userDetailsService(userDetailService)
@@ -100,7 +101,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Bean
     public DefaultTokenServices defaultTokenServices() {
         Collection<TokenEnhancer> tokenEnhancers = applicationContext.getBeansOfType(TokenEnhancer.class).values();
-        TokenEnhancerChain tokenEnhancerChain=new TokenEnhancerChain();
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(new ArrayList<>(tokenEnhancers));
         DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
         defaultTokenServices.setTokenStore(authTokenStore);
@@ -113,10 +114,11 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     /**
      * key
+     *
      * @return
      */
     @Bean
-    public KeyPair keyPair(){
+    public KeyPair keyPair() {
         KeyPair keyPair = new KeyStoreKeyFactory(
                 authServerProperties.getKeyPath(),
                 authServerProperties.getPassword().toCharArray()).getKeyPair(authServerProperties.getAlias());
@@ -125,6 +127,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     /**
      * jwt构造
+     *
      * @return
      */
     @Bean("jwtAccessTokenConverter")

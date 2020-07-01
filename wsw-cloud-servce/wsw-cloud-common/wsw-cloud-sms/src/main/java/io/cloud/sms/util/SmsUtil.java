@@ -27,11 +27,12 @@ public class SmsUtil {
 
     /**
      * 发送验证码
+     *
      * @param phone 手机号/验证码
      * @param sms   短信签名，提前在阿里云申请/模板代码，提前在阿里云申请
      * @return
      */
-    public SendSmsResponse sendSms(Phone phone, Sms sms) {
+    public static SendSmsResponse sendSms(Phone phone, Sms sms) {
         //初始化阿里云短信配置
         IAcsClient acsClient = initIAcsClient(sms);
         //使用验证码配置模板
@@ -49,16 +50,18 @@ public class SmsUtil {
         SendSmsResponse sendSmsResponse = null;
         try {
             sendSmsResponse = acsClient.getAcsResponse(request);
-        } catch (ClientException e) {}
+        } catch (ClientException e) {
+        }
 
         return sendSmsResponse;
     }
 
     /**
      * 初始化配置
+     *
      * @return
      */
-    private static IAcsClient initIAcsClient(Sms sms){
+    private static IAcsClient initIAcsClient(Sms sms) {
         IAcsClient acsClient;
         System.setProperty("sun.net.client.defaultConnectTimeout", CONNECT_TIME_OUT);
         System.setProperty("sun.net.client.defaultReadTimeout", READ_TIME_OUT);

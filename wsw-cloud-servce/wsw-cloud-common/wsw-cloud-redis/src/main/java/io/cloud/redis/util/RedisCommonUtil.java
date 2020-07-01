@@ -47,8 +47,8 @@ public class RedisCommonUtil {
     /**
      * 指定缓存失效时间
      *
-     * @param key     键
-     * @param time    时间(秒)
+     * @param key  键
+     * @param time 时间(秒)
      * @return
      */
     public boolean expire(String key, long time, TimeUnit timeUnit) {
@@ -67,7 +67,7 @@ public class RedisCommonUtil {
     /**
      * 根据key 获取过期时间
      *
-     * @param key     键 不能为null
+     * @param key 键 不能为null
      * @return 时间(秒) 返回0代表为永久有效
      */
     public long getExpire(String key) {
@@ -78,7 +78,7 @@ public class RedisCommonUtil {
     /**
      * 判断key是否存在
      *
-     * @param key     键
+     * @param key 键
      * @return true 存在 false不存在
      */
     public boolean hasKey(String key) {
@@ -94,7 +94,7 @@ public class RedisCommonUtil {
     /**
      * 删除缓存
      *
-     * @param key     可以传一个值 或多个
+     * @param key 可以传一个值 或多个
      */
     @SuppressWarnings("unchecked")
     public void del(String... key) {

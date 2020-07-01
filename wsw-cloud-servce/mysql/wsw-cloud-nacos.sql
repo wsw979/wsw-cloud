@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : master-8001
+ Source Server         : master
  Source Server Type    : MySQL
  Source Server Version : 80020
  Source Host           : localhost:8001
@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 01/07/2020 17:52:11
+ Date: 01/07/2020 21:32:07
 */
 
 SET NAMES utf8mb4;
@@ -40,7 +40,7 @@ CREATE TABLE `config_info`  (
   `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of config_info
@@ -53,10 +53,11 @@ INSERT INTO `config_info` VALUES (5, 'sentinel-config.yml', 'DEFAULT_GROUP', 'sp
 INSERT INTO `config_info` VALUES (6, 'jwt-config.yml', 'DEFAULT_GROUP', 'wsw:\r\n  auth:\r\n    server:\r\n      max-client: 3\r\n      token-valid: 14400\r\n      force: false\r\n      start-refresh: false\r\n      refresh-token-valid: 14400\r\n      key-path: classpath:/config-service.jks\r\n      alias: wu979Cloud\r\n      secret: wusiweiCloud979\r\n      password: wusiweiCloud979\r\n      manual-refresh-token-valid: 600', '7ad9b0ed4f69345a7938caddbef0f58d', '2020-06-13 02:47:28', '2020-06-30 00:53:01', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
 INSERT INTO `config_info` VALUES (7, 'swagger-config.yml', 'DEFAULT_GROUP', 'wsw:\r\n  swagger-agg:\r\n    api-docs-path: \"/v2/api-docs\"\r\n    swagger-version: \"2.0\"\r\n    generate-routes: user,gateway', 'fac328f3acd997d815bb720d92b7ff70', '2020-06-14 11:17:52', '2020-06-30 08:49:56', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
 INSERT INTO `config_info` VALUES (8, 'exclude-url.yml', 'DEFAULT_GROUP', 'gateway:\r\n  oauth: \r\n    ignored-list:\r\n      - \"/auth/**\"\r\n      - \"/webjars/**\"\r\n      - \"/swagger-resources/**\"\r\n      - \"/**/v2/api-docs\"\r\n      - \"/**/v2/api-docs-ext\"\r\n      - \"/**/doc.html\"\r\n    service-prefix:\r\n      - \"/auth\"\r\n      - \"/gateway\"\r\n      - \"/app\"\r\n      - \"/admin\"', 'b413aa45af393b5df64959fae4c6abb7', '2020-06-25 10:34:49', '2020-06-30 08:47:11', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
-INSERT INTO `config_info` VALUES (9, 'wsw-cloud-gateway-service-dev.yml', 'DEV_GROUP', 'spring:\r\n  redis:\r\n    database: 0\r\n  skip:\r\n    urls: /app/api/auth/checkAuth/getJwt\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: false\r\n          lower-case-service-id: true\r\n    sentinel:\r\n      transport:\r\n        port: 8731\r\n    # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8', 'ed9ba1194e5f4631a645084a683d4e3c', '2020-06-25 10:35:53', '2020-06-25 10:45:35', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
-INSERT INTO `config_info` VALUES (10, 'wsw-cloud-gateway-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8732\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n', 'a09497b80358511934cea545a2ebd65a', '2020-06-25 10:36:33', '2020-06-25 10:36:33', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, 'yaml', NULL);
-INSERT INTO `config_info` VALUES (11, 'wsw-cloud-auth-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8733\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', '1d960200e5a17f66c1d12f532feda717', '2020-06-25 10:37:16', '2020-06-28 09:28:08', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
-INSERT INTO `config_info` VALUES (12, 'wsw-cloud-user-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8734\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n', '34bde6e28b358fb13f9b2f8c09ed7f35', '2020-06-30 08:12:27', '2020-06-30 08:12:27', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (9, 'aliyun-code.yml', 'DEFAULT_GROUP', 'ali:\r\n  message:\r\n    overdue-time: 300\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - {\"type\":\"LOGIN\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610875\"}\r\n      - {\"type\":\"REGISTER\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610896\"}\r\n      - {\"type\":\"MODIFY\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194885016\"}\r\n', 'dc1fd5b4e68b3df39f22bc3917704cb6', '2020-07-01 11:14:13', '2020-07-01 13:10:31', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
+INSERT INTO `config_info` VALUES (10, 'wsw-cloud-gateway-service-dev.yml', 'DEV_GROUP', 'spring:\r\n  redis:\r\n    database: 0\r\n  skip:\r\n    urls: /app/api/auth/checkAuth/getJwt\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: false\r\n          lower-case-service-id: true\r\n    sentinel:\r\n      transport:\r\n        port: 8731\r\n    # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8', 'ed9ba1194e5f4631a645084a683d4e3c', '2020-06-25 10:35:53', '2020-06-25 10:45:35', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
+INSERT INTO `config_info` VALUES (11, 'wsw-cloud-gateway-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8732\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n', 'a09497b80358511934cea545a2ebd65a', '2020-06-25 10:36:33', '2020-06-25 10:36:33', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (12, 'wsw-cloud-auth-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8733\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', '1d960200e5a17f66c1d12f532feda717', '2020-06-25 10:37:16', '2020-06-28 09:28:08', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
+INSERT INTO `config_info` VALUES (13, 'wsw-cloud-user-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8734\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n', '34bde6e28b358fb13f9b2f8c09ed7f35', '2020-06-30 08:12:27', '2020-06-30 08:12:27', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, 'yaml', NULL);
 
 -- ----------------------------
 -- Table structure for config_info_aggr
@@ -73,7 +74,11 @@ CREATE TABLE `config_info_aggr`  (
   `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_info_aggr
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for config_info_beta
@@ -94,7 +99,11 @@ CREATE TABLE `config_info_beta`  (
   `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_info_beta
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for config_info_tag
@@ -115,7 +124,11 @@ CREATE TABLE `config_info_tag`  (
   `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_info_tag
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for config_tags_relation
@@ -132,7 +145,11 @@ CREATE TABLE `config_tags_relation`  (
   PRIMARY KEY (`nid`) USING BTREE,
   UNIQUE INDEX `uk_configtagrelation_configidtag`(`id`, `tag_name`, `tag_type`) USING BTREE,
   INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_tag_relation' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_tag_relation' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_tags_relation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for group_capacity
@@ -151,7 +168,11 @@ CREATE TABLE `group_capacity`  (
   `gmt_modified` datetime(0) NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_group_id`(`group_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of group_capacity
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for his_config_info
@@ -175,7 +196,7 @@ CREATE TABLE `his_config_info`  (
   INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
   INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
   INDEX `idx_did`(`data_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of his_config_info
@@ -185,6 +206,20 @@ INSERT INTO `his_config_info` VALUES (8, 2, 'exclude-url.yml', 'DEFAULT_GROUP', 
 INSERT INTO `his_config_info` VALUES (8, 3, 'exclude-url.yml', 'DEFAULT_GROUP', '', 'gateway:\r\n  oauth: \r\n    ignored-list:\r\n      - \"/auth/**\"\r\n      - \"/webjars/**\"\r\n      - \"/**/v2/api-docs\"\r\n      - \"/**/v2/api-docs-ext\"\r\n      - \"/**/doc.html\"\r\n    service-prefix:\r\n      - \"/auth\"\r\n      - \"/gateway\"\r\n      - \"/app\"\r\n      - \"/admin\"', 'e14a8f4ad92bf9415070b43b725c0969', '2010-05-05 00:00:00', '2020-06-30 08:47:00', NULL, '0:0:0:0:0:0:0:1', 'U', '');
 INSERT INTO `his_config_info` VALUES (8, 4, 'exclude-url.yml', 'DEFAULT_GROUP', '', 'gateway:\r\n  oauth: \r\n    ignored-list:\r\n      - \"/auth/**\"\r\n      - \"/webjars/**\"\r\n      - \"/**/v2/api-docs\"\r\n      - \"/**/v2/api-docs-ext\"\r\n      - \"/**/doc.html\"\r\n      - \"/swagger-resources/**\"\r\n    service-prefix:\r\n      - \"/auth\"\r\n      - \"/gateway\"\r\n      - \"/app\"\r\n      - \"/admin\"', 'bb868ac72293fbeea27253d3452dd9e0', '2010-05-05 00:00:00', '2020-06-30 08:47:11', NULL, '0:0:0:0:0:0:0:1', 'U', '');
 INSERT INTO `his_config_info` VALUES (7, 5, 'swagger-config.yml', 'DEFAULT_GROUP', '', 'wsw:\r\n  swagger-agg:\r\n    api-docs-path: \"/v2/api-docs\"\r\n    swagger-version: \"2.0\"\r\n    generate-routes: auth,gateway', '9b3803d176c36aa2cd8f44f8b5c16a7f', '2010-05-05 00:00:00', '2020-06-30 08:49:56', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (0, 6, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key:\r\n    access-secret:\r\n    login:\r\n        sign-name:\r\n        template-code:\r\n    register:\r\n        sign-name:\r\n        template-code:\r\n    modify-password:\r\n        sign-name:\r\n        template-code:', '2637144ed19a803024ae1d4ad7376b23', '2010-05-05 00:00:00', '2020-07-01 11:14:13', NULL, '0:0:0:0:0:0:0:1', 'I', '');
+INSERT INTO `his_config_info` VALUES (9, 7, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key:\r\n    access-secret:\r\n    login:\r\n        sign-name:\r\n        template-code:\r\n    register:\r\n        sign-name:\r\n        template-code:\r\n    modify-password:\r\n        sign-name:\r\n        template-code:', '2637144ed19a803024ae1d4ad7376b23', '2010-05-05 00:00:00', '2020-07-01 11:26:21', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 8, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    login:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code: SMS_194610875\r\n    register:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code:\r\n    modify-password:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code:', '198c9ecfea913d40f2d09634c30d3aa1', '2010-05-05 00:00:00', '2020-07-01 11:45:47', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 9, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    login: {\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610875\"}\r\n    register:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code:\r\n    modify-password:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code:', 'cee64e056aae8f49c6ef69128ab06197', '2010-05-05 00:00:00', '2020-07-01 11:51:30', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 10, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    login: \"signName:吴刮墨刀商城,templateCode:SMS_194610875\"\r\n    register:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code:\r\n    modify-password:\r\n        sign-name: \"吴刮墨刀商城\"\r\n        template-code:', 'f7f07d3484d4cf54036481ba4ae0192d', '2010-05-05 00:00:00', '2020-07-01 11:51:36', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 11, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    login: \"signName:吴刮墨刀商城,templateCode:SMS_194610875\"', 'debedc3dcd3ab14d871fe444d6052030', '2010-05-05 00:00:00', '2020-07-01 11:56:04', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 12, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    login: \"signName:吴刮墨刀商城,templateCode:SMS_194610875\"\r\n    register: \"signName:吴刮墨刀商城,templateCode:SMS_194610896\"\r\n    modifyPassword: \"signName:吴刮墨刀商城,templateCode:SMS_194885016\"', '764476f5d5b64c04995528b4c7adbc75', '2010-05-05 00:00:00', '2020-07-01 11:58:11', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 13, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'aliyun:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - \"type:login,signName:吴刮墨刀商城,templateCode:SMS_194610875\"\r\n      - \"type:register,signName:吴刮墨刀商城,templateCode:SMS_194610896\"\r\n      - \"type:modify,signName:吴刮墨刀商城,templateCode:SMS_194885016\"', 'bc7845df8d386bd494fcb1d58c9bfe33', '2010-05-05 00:00:00', '2020-07-01 12:00:13', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 14, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'ali:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - \"type:login,signName:吴刮墨刀商城,templateCode:SMS_194610875\"\r\n      - \"type:register,signName:吴刮墨刀商城,templateCode:SMS_194610896\"\r\n      - \"type:modify,signName:吴刮墨刀商城,templateCode:SMS_194885016\"', '150d7060914b65c8ead53acb6808626a', '2010-05-05 00:00:00', '2020-07-01 12:02:39', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 15, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'ali:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - \"type:LOGIN,signName:吴刮墨刀商城,templateCode:SMS_194610875\"\r\n      - \"type:REGISTER,signName:吴刮墨刀商城,templateCode:SMS_194610896\"\r\n      - \"type:MODIFY,signName:吴刮墨刀商城,templateCode:SMS_194885016\"', 'b4b83ef88dccbef4f3a757fe71bf847f', '2010-05-05 00:00:00', '2020-07-01 12:34:15', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 16, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'ali:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - \"{\"type\":\"LOGIN\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610875\"}\"\r\n', 'c350cf48f9ee7489f444241f17fbfcf0', '2010-05-05 00:00:00', '2020-07-01 12:36:08', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 17, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'ali:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - {\"type\":\"LOGIN\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610875\"}\r\n', 'f101bff01db0d95ada8752dea78232cc', '2010-05-05 00:00:00', '2020-07-01 12:36:15', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 18, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'ali:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - {\"type\":\"LOGIN\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610875\"}\r\n', 'f101bff01db0d95ada8752dea78232cc', '2010-05-05 00:00:00', '2020-07-01 12:39:59', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (9, 19, 'aliyun-code.yml', 'DEFAULT_GROUP', '', 'ali:\r\n  message:\r\n    access-key: LTAI4GBnbf8tXiHgmjuCNnNc\r\n    access-secret: rTZzoDN0mPUrEZtXkttWgoIWps6R4y\r\n    template-list:\r\n      - {\"type\":\"LOGIN\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610875\"}\r\n      - {\"type\":\"REGISTER\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194610896\"}\r\n      - {\"type\":\"MODIFY\",\"signName\":\"吴刮墨刀商城\",\"templateCode\":\"SMS_194885016\"}\r\n', 'dd8c0e97689b6bcb78bcae596adc8eee', '2010-05-05 00:00:00', '2020-07-01 13:10:31', NULL, '0:0:0:0:0:0:0:1', 'U', '');
 
 -- ----------------------------
 -- Table structure for roles
@@ -193,7 +228,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles`  (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of roles
@@ -217,7 +252,11 @@ CREATE TABLE `tenant_capacity`  (
   `gmt_modified` datetime(0) NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tenant_capacity
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tenant_info
@@ -235,7 +274,11 @@ CREATE TABLE `tenant_info`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_tenant_info_kptenantid`(`kp`, `tenant_id`) USING BTREE,
   INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'tenant_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'tenant_info' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tenant_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for users
@@ -246,7 +289,7 @@ CREATE TABLE `users`  (
   `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users

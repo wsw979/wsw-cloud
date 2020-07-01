@@ -1,16 +1,13 @@
 package io.cloud.auth.api.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.ctc.wstx.sw.EncodingXmlWriter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.cloud.auth.common.dtl.ImageCode;
-import io.cloud.core.filter.HttpHelper;
-import io.cloud.auth.common.dtl.UsernameDtl;
 import io.cloud.auth.api.token.UsernameAuthenticationToken;
-import io.cloud.data.constant.ConfigConstant;
+import io.cloud.auth.common.dtl.ImageCode;
+import io.cloud.auth.common.dtl.UsernameDtl;
+import io.cloud.core.filter.HttpHelper;
 import io.cloud.data.constant.AuthConstants;
+import io.cloud.data.constant.ConfigConstant;
 import io.cloud.data.util.ObjectUtil;
-import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -23,12 +20,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.bind.ServletRequestBindingException;
-import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @program: wsw-cloud-servce
@@ -60,7 +55,7 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
             if (ObjectUtil.checkObjNull(dtl)) {
                 throw new AuthenticationServiceException(HttpStatus.PASSWORD_ERROR.getMsg());
             }
-            validate(new ServletWebRequest(request),dtl.getImageCode());
+            validate(new ServletWebRequest(request), dtl.getImageCode());
             dtl.setPassword(dtl.getPassword().trim());
             authRequest = new UsernameAuthenticationToken(dtl.getUsername(), dtl.getPassword());
             setDetails(request, authRequest);

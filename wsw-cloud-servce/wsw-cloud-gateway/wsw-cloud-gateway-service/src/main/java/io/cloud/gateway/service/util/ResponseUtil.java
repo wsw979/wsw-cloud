@@ -9,12 +9,8 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.security.web.server.WebFilterExchange;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @program: wsw-cloud-servce
@@ -26,12 +22,13 @@ public interface ResponseUtil<T> {
 
     /**
      * webflux方式返回
+     *
      * @param exchange
      * @param objectMapper
      * @param data
      * @return
      */
-    default Mono<Void> getResponse(ServerWebExchange exchange, ObjectMapper objectMapper, T data){
+    default Mono<Void> getResponse(ServerWebExchange exchange, ObjectMapper objectMapper, T data) {
         ServerHttpResponse response = exchange.getResponse();
         //设置headers
         HttpHeaders httpHeaders = response.getHeaders();
@@ -49,12 +46,13 @@ public interface ResponseUtil<T> {
 
     /**
      * webflux方式返回
+     *
      * @param exchange
      * @param objectMapper
      * @param data
      * @return
      */
-    default Mono<Void> getErrorResponse(ServerWebExchange exchange, ObjectMapper objectMapper, Result data){
+    default Mono<Void> getErrorResponse(ServerWebExchange exchange, ObjectMapper objectMapper, Result data) {
         ServerHttpResponse response = exchange.getResponse();
         //设置headers
         HttpHeaders httpHeaders = response.getHeaders();
@@ -72,15 +70,16 @@ public interface ResponseUtil<T> {
 
     /**
      * webflux方式返回
+     *
      * @param exchange
      * @param objectMapper
      * @param data
      * @return
      */
-    default Mono<Void> getErrorResponse(ServerWebExchange exchange, ObjectMapper objectMapper, String data){
+    default Mono<Void> getErrorResponse(ServerWebExchange exchange, ObjectMapper objectMapper, String data) {
         Result result = new Result();
         result.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         result.setMsg(data);
-        return getErrorResponse(exchange,objectMapper,result);
+        return getErrorResponse(exchange, objectMapper, result);
     }
 }

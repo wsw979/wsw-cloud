@@ -1,8 +1,7 @@
-package io.cloud.auth.api.service;
+package io.cloud.auth.api.code;
 
 import io.cloud.auth.common.evt.MessageCodeEvt;
 import io.cloud.exception.result.Result;
-import io.cloud.sms.evt.CodeMessageEvt;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,7 @@ import java.io.IOException;
  **/
 public interface CodeService {
 
-    void imageCode(HttpServletRequest request , HttpServletResponse response) throws IOException;
+    void imageCode(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
     Result getMessageCode(MessageCodeEvt evt);
 

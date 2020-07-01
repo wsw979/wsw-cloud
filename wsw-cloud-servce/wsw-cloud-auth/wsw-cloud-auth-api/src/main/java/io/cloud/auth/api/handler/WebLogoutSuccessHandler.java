@@ -27,7 +27,7 @@ public class WebLogoutSuccessHandler implements LogoutSuccessHandler, ResponseUt
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("退出成功");
-        getResponseWeb(response,objectMapper,"退出成功");
+        getResponseWeb(response, objectMapper, "退出成功");
     }
 
 }

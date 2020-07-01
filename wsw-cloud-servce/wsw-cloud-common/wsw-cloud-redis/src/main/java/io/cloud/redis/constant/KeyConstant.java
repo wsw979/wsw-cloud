@@ -27,4 +27,9 @@ public interface KeyConstant {
      * token key
      */
     String USER_TOKEN = "oauth:token:";
+
+    /**
+     * message
+     */
+    String CODE_MESSAGE = "message:";
 }

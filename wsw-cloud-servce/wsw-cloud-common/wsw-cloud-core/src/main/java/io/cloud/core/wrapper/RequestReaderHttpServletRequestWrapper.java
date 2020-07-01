@@ -7,7 +7,10 @@ import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 
 /**
@@ -16,7 +19,7 @@ import java.nio.charset.Charset;
  * @author: wsw
  * @create: 2020-06-29 11:08
  **/
-public class RequestReaderHttpServletRequestWrapper extends HttpServletRequestWrapper  {
+public class RequestReaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     private final byte[] body;
 
