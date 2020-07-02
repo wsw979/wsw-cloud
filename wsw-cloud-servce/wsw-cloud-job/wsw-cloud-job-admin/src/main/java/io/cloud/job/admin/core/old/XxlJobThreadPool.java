@@ -1,4 +1,4 @@
-package io.cloud.job.admin.core.old;//package com.xxl.job.admin.core.quartz;
+package io.cloud.job.admin.core.old;//package io.cloud.job.admin.core.quartz;
 //
 //import org.quartz.SchedulerConfigException;
 //import org.quartz.spi.ThreadPool;

@@ -16,10 +16,12 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.client.reactive.ClientHttpResponse;
+import org.springframework.http.server.RequestPath;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserter;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -40,9 +42,9 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.O
  **/
 @Component
 public class ResponseGlobalFilter implements GlobalFilter, Ordered {
-
-    private static final String SUCCESS_PREFIX = "{\"code\":200,\"msg\":\"success\",\"data\":";
-    private static final String SUCCESS_SUFFIX = "}";
+    private final AntPathMatcher matcher = new AntPathMatcher();
+    private static final String AUTH_IMAGE = "/auth/api/auth/imageCode";
+    private static final String SUCCESS_PREFIX = "{\"code\":200,\"msg\":\"success\",\"data\":}";
 
     @Resource
     private SwaggerAggProperties swaggerAggProperties;
@@ -55,29 +57,32 @@ public class ResponseGlobalFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        ServerHttpResponse originalResponse = exchange.getResponse();
+        ServerHttpResponse response = exchange.getResponse();
         ServerHttpRequest request = exchange.getRequest();
-        ServerHttpResponseDecorator responseDecorator =
-                new ServerHttpResponseDecorator(exchange.getResponse()) {
+        String path = request.getPath().toString();
+        if(matcher.match(path, AUTH_IMAGE)){
+            return chain.filter(exchange.mutate().response(response).build());
+        }
+        ServerHttpResponseDecorator responseDecorator = new ServerHttpResponseDecorator(exchange.getResponse()) {
 
                     @Override
                     @SuppressWarnings("unchecked")
                     public Mono<Void> writeWith(@NonNull Publisher<? extends DataBuffer> body) {
 
-                        String originalResponseContentType = exchange
+                        String responseContentType = exchange
                                 .getAttribute(ORIGINAL_RESPONSE_CONTENT_TYPE_ATTR);
                         HttpHeaders httpHeaders = new HttpHeaders();
-                        //explicitly add it in this way instead of 'httpHeaders.setContentType(originalResponseContentType)'
+                        //explicitly add it in this way instead of 'httpHeaders.setContentType(responseContentType)'
                         //this will prevent exception in case of using non-standard media types like "Content-Type: image"
-                        httpHeaders.add(HttpHeaders.CONTENT_TYPE, originalResponseContentType);
+                        httpHeaders.add(HttpHeaders.CONTENT_TYPE, responseContentType);
                         ResponseAdapter responseAdapter = new ResponseAdapter(body, httpHeaders);
                         DefaultClientResponse clientResponse = new DefaultClientResponse(responseAdapter,
                                 ExchangeStrategies
                                         .withDefaults());
 
                         Mono modifiedBody = clientResponse.bodyToMono(String.class).flatMap(originalBody -> {
-                            if (originalResponse.getStatusCode() != null) {
-                                if (originalResponse.getStatusCode().is2xxSuccessful()) {
+                            if (response.getStatusCode() != null) {
+                                if (response.getStatusCode().is2xxSuccessful()) {
                                     // 自定义 Response 实体不做包装
                                     // Swagger 请求不做包装
                                     String path = request.getURI().getPath();
@@ -120,7 +125,6 @@ public class ResponseGlobalFilter implements GlobalFilter, Ordered {
                                 .flatMapSequential(p -> p));
                     }
                 };
-
         return chain.filter(exchange.mutate().response(responseDecorator).build());
     }
 

@@ -24,7 +24,7 @@ public enum ExecutorBlockStrategyEnum {
 
     public static ExecutorBlockStrategyEnum match(String name, ExecutorBlockStrategyEnum defaultItem) {
         if (name != null) {
-            for (ExecutorBlockStrategyEnum item: ExecutorBlockStrategyEnum.values()) {
+            for (ExecutorBlockStrategyEnum item:ExecutorBlockStrategyEnum.values()) {
                 if (item.name().equals(name)) {
                     return item;
                 }

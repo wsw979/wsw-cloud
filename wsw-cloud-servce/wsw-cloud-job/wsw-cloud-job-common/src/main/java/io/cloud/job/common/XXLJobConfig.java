@@ -1,30 +1,42 @@
 package io.cloud.job.common;
 
 import io.cloud.job.core.executor.impl.XxlJobSpringExecutor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.net.InetAddress;
 
 @Slf4j
+@Configuration
 public class XXLJobConfig {
 
-    @Value("${xxl.job.admin.addresses}")
+    @Value("${xxl.job.accessToken:#{null}}")
+    private String accessToken;
+
+    @Value("${xxl.job.admin.addresses:#{null}}")
     private String adminAddresses;
 
-    @Value("${xxl.job.executor.appname}")
+    @Value("${xxl.job.executor.appname:#{null}}")
     private String appName;
 
-    @Value("${xxl.job.executor.ip}")
+    @Value("${xxl.job.executor.ip:#{null}}")
     private String ip;
 
     @Value("${xxl.job.executor.port}")
-    private int port;
+    private Integer port;
 
-    @Value("${xxl.job.accessToken}")
-    private String accessToken;
+    @Value("${xxl.job.executor.logPath}")
+    private String logPath;
+
+    @Value("${xxl.job.executor.logRetentionDays}")
+    private Integer logRetentionDays;
 
 
     @Bean
@@ -32,14 +44,15 @@ public class XXLJobConfig {
         log.info(">>>>>>>>>>> xxl-job config init.");
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
         xxlJobSpringExecutor.setAdminAddresses(adminAddresses);
-        xxlJobSpringExecutor.setAppName(appName);
-        if(StringUtils.isBlank(ip)){
+        xxlJobSpringExecutor.setAppname(appName);
+        if(StringUtils.isEmpty(ip)){
             ip = getServerIp();
         }
         xxlJobSpringExecutor.setIp(ip);
         xxlJobSpringExecutor.setPort(port);
         xxlJobSpringExecutor.setAccessToken(accessToken);
-
+        xxlJobSpringExecutor.setLogPath(logPath);
+        xxlJobSpringExecutor.setLogRetentionDays(logRetentionDays);
         return xxlJobSpringExecutor;
     }
 

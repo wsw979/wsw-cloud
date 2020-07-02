@@ -22,3 +22,9 @@ spring:
           sentinel-config.${spring.cloud.nacos.config.file-extension}
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
+xxl:
+  job:
+    #xxl-job 与本地交互ip:port 集群端口需要改变
+    executor:
+      ip:
+      port: 7010

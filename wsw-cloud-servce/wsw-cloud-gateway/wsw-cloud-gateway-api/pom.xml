@@ -21,7 +21,12 @@
         <dependency>
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-auth-common</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-job-common</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- openfeign -->
         <dependency>

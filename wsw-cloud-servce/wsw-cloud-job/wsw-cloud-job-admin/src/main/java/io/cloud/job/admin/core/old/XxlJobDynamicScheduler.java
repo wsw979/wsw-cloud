@@ -1,4 +1,4 @@
-package io.cloud.job.admin.core.old;//package com.xxl.job.admin.core.schedule;
+package io.cloud.job.admin.core.old;//package io.cloud.job.admin.core.schedule;
 //
 //import io.cloud.job.admin.core.conf.XxlJobAdminConfig;
 //import io.cloud.job.admin.core.jobbean.RemoteHttpJobBean;
@@ -10,14 +10,14 @@ package io.cloud.job.admin.core.old;//package com.xxl.job.admin.core.schedule;
 //import io.cloud.job.core.biz.AdminBiz;
 //import io.cloud.job.core.biz.ExecutorBiz;
 //import io.cloud.job.core.enums.ExecutorBlockStrategyEnum;
-//import io.cloud.rpc.remoting.invoker.XxlRpcInvokerFactory;
-//import io.cloud.rpc.remoting.invoker.call.CallType;
-//import io.cloud.rpc.remoting.invoker.reference.XxlRpcReferenceBean;
-//import io.cloud.rpc.remoting.invoker.route.LoadBalance;
-//import io.cloud.rpc.remoting.net.NetEnum;
-//import io.cloud.rpc.remoting.net.impl.servlet.server.ServletServerHandler;
-//import io.cloud.rpc.remoting.provider.XxlRpcProviderFactory;
-//import io.cloud.rpc.serialize.Serializer;
+//import com.xxl.rpc.remoting.invoker.XxlRpcInvokerFactory;
+//import com.xxl.rpc.remoting.invoker.call.CallType;
+//import com.xxl.rpc.remoting.invoker.reference.XxlRpcReferenceBean;
+//import com.xxl.rpc.remoting.invoker.route.LoadBalance;
+//import com.xxl.rpc.remoting.net.NetEnum;
+//import com.xxl.rpc.remoting.net.impl.servlet.server.ServletServerHandler;
+//import com.xxl.rpc.remoting.provider.XxlRpcProviderFactory;
+//import com.xxl.rpc.serialize.Serializer;
 //import org.quartz.*;
 //import org.quartz.Trigger.TriggerState;
 //import org.quartz.impl.triggers.CronTriggerImpl;

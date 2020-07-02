@@ -11,8 +11,8 @@ import io.cloud.job.core.biz.ExecutorBiz;
 import io.cloud.job.core.biz.model.ReturnT;
 import io.cloud.job.core.biz.model.TriggerParam;
 import io.cloud.job.core.enums.ExecutorBlockStrategyEnum;
-import com.xxl.rpc.util.IpUtil;
-import com.xxl.rpc.util.ThrowableUtil;
+import io.cloud.job.core.util.IpUtil;
+import io.cloud.job.core.util.ThrowableUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +37,17 @@ public class XxlJobTrigger {
      * @param executorParam
      *          null: use job param
      *          not null: cover job param
+     * @param addressList
+     *          null: use executor addressList
+     *          not null: cover
      */
-    public static void trigger(int jobId, TriggerTypeEnum triggerType, int failRetryCount, String executorShardingParam, String executorParam) {
+    public static void trigger(int jobId,
+                               TriggerTypeEnum triggerType,
+                               int failRetryCount,
+                               String executorShardingParam,
+                               String executorParam,
+                               String addressList) {
+
         // load data
         XxlJobInfo jobInfo = XxlJobAdminConfig.getAdminConfig().getXxlJobInfoDao().loadById(jobId);
         if (jobInfo == null) {
@@ -50,6 +59,12 @@ public class XxlJobTrigger {
         }
         int finalFailRetryCount = failRetryCount>=0?failRetryCount:jobInfo.getExecutorFailRetryCount();
         XxlJobGroup group = XxlJobAdminConfig.getAdminConfig().getXxlJobGroupDao().load(jobInfo.getJobGroup());
+
+        // cover addressList
+        if (addressList!=null && addressList.trim().length()>0) {
+            group.setAddressType(1);
+            group.setAddressList(addressList.trim());
+        }
 
         // sharding param
         int[] shardingParam = null;
@@ -156,7 +171,7 @@ public class XxlJobTrigger {
         triggerMsgSb.append(I18nUtil.getString("jobconf_trigger_type")).append("：").append(triggerType.getTitle());
         triggerMsgSb.append("<br>").append(I18nUtil.getString("jobconf_trigger_admin_adress")).append("：").append(IpUtil.getIp());
         triggerMsgSb.append("<br>").append(I18nUtil.getString("jobconf_trigger_exe_regtype")).append("：")
-                .append( (group.getAddressType() == 0)? I18nUtil.getString("jobgroup_field_addressType_0"): I18nUtil.getString("jobgroup_field_addressType_1") );
+                .append( (group.getAddressType() == 0)?I18nUtil.getString("jobgroup_field_addressType_0"):I18nUtil.getString("jobgroup_field_addressType_1") );
         triggerMsgSb.append("<br>").append(I18nUtil.getString("jobconf_trigger_exe_regaddress")).append("：").append(group.getRegistryList());
         triggerMsgSb.append("<br>").append(I18nUtil.getString("jobinfo_field_executorRouteStrategy")).append("：").append(executorRouteStrategyEnum.getTitle());
         if (shardingParam != null) {

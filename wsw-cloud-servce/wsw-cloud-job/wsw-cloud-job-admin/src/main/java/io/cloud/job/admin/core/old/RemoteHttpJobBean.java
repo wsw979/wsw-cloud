@@ -1,4 +1,4 @@
-package io.cloud.job.admin.core.old;//package com.xxl.job.admin.core.jobbean;
+package io.cloud.job.admin.core.old;//package io.cloud.job.admin.core.jobbean;
 //
 //import io.cloud.job.admin.core.thread.JobTriggerPoolHelper;
 //import io.cloud.job.admin.core.trigger.TriggerTypeEnum;

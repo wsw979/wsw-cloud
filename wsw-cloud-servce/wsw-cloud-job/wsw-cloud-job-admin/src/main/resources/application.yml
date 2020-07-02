@@ -9,7 +9,7 @@ management:
       context-path: /actuator
   health:
     mail:
-      enabled=false:
+      enabled: false
 
 spring:
   datasource:
@@ -42,9 +42,9 @@ spring:
       number_format: 0.##########
   mail:
     host: smtp.qq.com
-    port: 994
+    port: 25
     username: 455618871@qq.com
-    password: wusiwei979
+    password: derjzlpgbunicbdf
     properties:
       mail:
         smtp:
