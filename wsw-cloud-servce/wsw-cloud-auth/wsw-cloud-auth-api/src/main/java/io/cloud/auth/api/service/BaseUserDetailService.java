@@ -59,7 +59,7 @@ public abstract class BaseUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException(HttpStatus.AUTH_ERROR.getMsg());
         }
         HttpServletRequest request = attributes.getRequest();
-        String clientId = request.getParameter("client_id");
+        String clientId = request.getParameter(ConfigConstant.CLIENT_ID);
         String loginType = request.getHeader(ConfigConstant.LOGIN_TYPE);
         List<GrantedAuthority> authorities = new ArrayList<>();
         Long id;

@@ -22,6 +22,7 @@
         <module>wsw-cloud-core</module>
         <module>wsw-cloud-exception</module>
         <module>wsw-cloud-sms</module>
+        <module>wsw-cloud-mq</module>
     </modules>
 
     <properties>

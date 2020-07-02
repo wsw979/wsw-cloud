@@ -34,6 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private UsernameUserDetailService usernameUserDetailService;
 
+    /**
+     * http 过滤
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
@@ -62,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs/**", "/webjars/**", "/swagger-resources/**", "/*.html").permitAll();
         // 其余所有请求全部需要鉴权认证
         http.authorizeRequests().anyRequest().authenticated();
+        // 无权限返回
         http.exceptionHandling().accessDeniedHandler(webAccessDeniedHandler());
     }
 
@@ -73,6 +79,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(usernameAuthenticationProvider());
     }
 
+    /**
+     * 用户名/邮箱/手机号 密码登录 校验器
+     * @return
+     */
     @Bean
     public UsernameAuthenticationProvider usernameAuthenticationProvider() {
         UsernameAuthenticationProvider provider = new UsernameAuthenticationProvider();
@@ -84,7 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 用户名/手机/邮箱 密码登录
+     * 用户名/手机/邮箱 密码登录  构造器
      *
      * @return
      */

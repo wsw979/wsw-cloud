@@ -96,6 +96,8 @@ public class WebLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationS
         if (!passwordEncoder.matches(clientSecret, clientDetails.getClientSecret())) {
             throw new UnapprovedClientAuthenticationException("clientSecret不匹配" + clientId);
         }
+
+        //密码方式
         TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "password");
         OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
         OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
@@ -117,19 +119,11 @@ public class WebLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationS
             result.put(SecurityConstant.REFRESH_TOKEN, ConfigConstant.BEARER_TYPE + refreshToken.getValue());
             result.put(SecurityConstant.REFRESH_TOKEN_TIME, sdf.format(refreshToken.getExpiration()));
         }
-        //判断token的和方法性
+        //判断token
         String id = String.valueOf(((BaseUserDetail) authentication.getPrincipal()).getBaseUser().getId());
         if (!tokenUtil.pushToken(id, loginType, token.getValue(), token.getExpiration())) {
-            throw new AuthenticationServiceException("登录限制，同时登录人数过多");
+            throw new AuthenticationServiceException("登录异常！");
         }
         return result;
-    }
-
-    public static void main(String[] args) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encode = passwordEncoder.encode("wsw-app-secret");
-        System.out.println(encode);
-
-
     }
 }

@@ -61,6 +61,10 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Resource
     private AuthServerProperties authServerProperties;
 
+    /**
+     * jdbc方式
+     * @return
+     */
     @Bean("jdbcClientDetailsService")
     public ClientDetailsService clientDetailsService() {
         JdbcClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);

@@ -21,7 +21,7 @@ public class BaseUserDetail implements UserDetails, CredentialsContainer {
      */
     private final BaseUser baseUser;
     /**
-     * security 用户
+     * security 对象
      */
     private final User user;
     /**

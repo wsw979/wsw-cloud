@@ -59,6 +59,8 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
             dtl.setPassword(dtl.getPassword().trim());
             authRequest = new UsernameAuthenticationToken(dtl.getUsername(), dtl.getPassword());
             setDetails(request, authRequest);
+
+            //request io 只能消费一次，所以存入request 供后面过滤器使用
             request.setAttribute(ConfigConstant.CLIENT_ID, dtl.getClientId());
             request.setAttribute(ConfigConstant.CLIENT_SECRET, dtl.getClientSecret());
             request.setAttribute(AuthConstants.IMAGE_CODE, dtl.getImageCode());
