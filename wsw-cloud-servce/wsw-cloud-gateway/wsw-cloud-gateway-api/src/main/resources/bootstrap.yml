@@ -24,17 +24,30 @@ spring:
         server-addr: ${spring.cloud.client.ip-address}:8848
   rabbitmq:
     host: 127.0.0.1
-    port: 15672
-    username: quest
-    password: quest
+    port: 5672
+    username: wu979
+    password: wusiwei979
     virtual-host: wecode_sas
     # 开启发送确认
     publisher-confirms: true
     # 开启发送失败退回
     publisher-returns: true
+    listener:
+      simple:
+        retry:
+          enabled: false #消费者端的重试
+        acknowledge-mode: manual         # 开启ACK
+        auto-startup: true  #启动时自动启动容器	true
 xxl:
   job:
+    enable: false
+    access-token:
+    admin:
+      add-resses: http://127.0.0.1:8899/xxl-job-admin
     #xxl-job 与本地交互ip:port 集群端口需要改变
     executor:
+      app-name: xxl-job-executor-sample
       ip:
       port: 7010
+      logPath: /home/xxl-job/logs
+      logRetentionDays: 30

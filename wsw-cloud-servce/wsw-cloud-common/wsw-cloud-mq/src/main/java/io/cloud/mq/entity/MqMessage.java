@@ -17,7 +17,7 @@ public class MqMessage implements Serializable {
     /**
      * 消息ID
      */
-    protected String id = UUID.randomUUID().toString();
+    protected String key = UUID.randomUUID().toString();
     /**
      * 单个消息过期时间
      */

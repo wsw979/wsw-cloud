@@ -73,7 +73,7 @@ public abstract class DefaultListener<T extends MqMessage> {
                 channel.basicAck(message.getMessageProperties().getDeliveryTag(),false);
                 //消费成功删除key
                 //单个消息控制
-                String redisCountKey = "retry" + message.getMessageProperties().getConsumerQueue() + content.getId();
+                String redisCountKey = "retry" + message.getMessageProperties().getConsumerQueue() + content.getKey();
                 //队列控制
                 String queueKey = "retry" + message.getMessageProperties().getConsumerQueue();
                 redisTemplate.delete(redisCountKey);
@@ -155,7 +155,7 @@ public abstract class DefaultListener<T extends MqMessage> {
     private Boolean  dealFailAck(Message message,Channel channel) throws IOException, InterruptedException{
         T content = getContent(message);
         //单个消息控制
-        String redisCountKey = "retry"+message.getMessageProperties().getConsumerQueue()+content.getId();
+        String redisCountKey = "retry"+message.getMessageProperties().getConsumerQueue()+content.getKey();
         String retryCount = redisTemplate.opsForValue().get(redisCountKey);
         long basic = 1000L;
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
@@ -204,11 +204,11 @@ public abstract class DefaultListener<T extends MqMessage> {
      * @return
      */
     private Boolean canConsume(T content,String queueName) {
-        if(redisTemplate.opsForValue().get(queueName+":"+content.getId())==null){
+        if(redisTemplate.opsForValue().get(queueName+":"+content.getKey())==null){
             return false;
         }else{
             //存储消费标志
-            redisTemplate.opsForValue().set(queueName+":"+content.getId(),"lock",30, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(queueName+":"+content.getKey(),"lock",30, TimeUnit.SECONDS);
             return true;
         }
     }

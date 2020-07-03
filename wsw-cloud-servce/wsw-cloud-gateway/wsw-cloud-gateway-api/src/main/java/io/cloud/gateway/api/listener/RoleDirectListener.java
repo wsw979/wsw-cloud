@@ -1,12 +1,16 @@
 package io.cloud.gateway.api.listener;
 
+import com.alibaba.fastjson.JSON;
 import com.rabbitmq.client.Channel;
+import io.cloud.datasource.primary.IdGenerator;
+import io.cloud.exception.util.R;
 import io.cloud.gateway.api.cache.Role;
 import io.cloud.mq.config.RabbitConfig;
 import io.cloud.mq.listener.DefaultListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
@@ -17,6 +21,7 @@ import java.io.IOException;
  * @create: 2020-07-03 11:20
  **/
 @Slf4j
+@Component
 public class RoleDirectListener extends DefaultListener<Role> {
 
     @Override

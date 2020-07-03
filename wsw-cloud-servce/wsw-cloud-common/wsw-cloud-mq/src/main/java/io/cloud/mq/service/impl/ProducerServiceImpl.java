@@ -30,12 +30,12 @@ public class ProducerServiceImpl implements ProducerService {
     public void sendMsg (MqMessage content, String exchangeName, String routingKey){
         Message message = MessageBuilder.withBody(JSONObject.toJSONString(content).getBytes())
                 .setContentType(MessageProperties.CONTENT_TYPE_JSON)
-                .setCorrelationId(content.getId())
+                .setCorrelationId(content.getKey())
                 .build();
         if(StringUtils.isNotBlank(content.getExpiration())){
             message = MessageBuilder.fromMessage(message).setExpiration(content.getExpiration()).build();
         }
-        CorrelationData data = new CorrelationData(content.getId());
+        CorrelationData data = new CorrelationData(content.getKey());
         //存储到redis
         redisTemplate.opsForValue().set(data.getId(),JSONObject.toJSONString(content));
         rabbitTemplate.convertAndSend(exchangeName,routingKey,message,data);
