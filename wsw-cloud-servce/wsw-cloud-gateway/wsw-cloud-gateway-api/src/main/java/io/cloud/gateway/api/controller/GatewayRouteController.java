@@ -1,5 +1,6 @@
 package io.cloud.gateway.api.controller;
 
+import com.alibaba.nacos.client.config.impl.ClientWorker;
 import io.cloud.auth.common.util.LoginUtil;
 import io.cloud.data.annotation.WswRestController;
 import io.cloud.data.group.Save;
@@ -10,6 +11,7 @@ import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
 import io.cloud.exception.util.R;
 import io.cloud.gateway.api.cache.RedisCacheRoute;
+import io.cloud.gateway.api.cache.Role;
 import io.cloud.gateway.api.service.IGatewayRouteService;
 import io.cloud.gateway.common.dtl.RouteDefinition;
 import io.cloud.gateway.common.entity.GatewayRoute;
@@ -18,7 +20,8 @@ import io.cloud.gateway.common.evt.GatewayRouteListEvt;
 import io.cloud.gateway.common.util.HandleDataUtil;
 import io.cloud.gateway.common.vo.GatewayRouteDtlVo;
 import io.cloud.gateway.common.vo.GatewayRouteListVo;
-import io.cloud.user.common.base.LoginUserInfo;
+import io.cloud.mq.config.RabbitConfig;
+import io.cloud.mq.service.ProducerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -26,6 +29,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
@@ -49,11 +53,16 @@ public class GatewayRouteController {
 
     private LoginUtil loginUtil;
 
+    private ProducerService producerService;
+
 
     @GetMapping("/findPageList")
     @ApiOperation(value = "列表", notes = "动态路由列表")
     public Result<List<GatewayRouteListVo>> findPageList(@ApiParam("条件") GatewayRouteListEvt evt) {
-        LoginUserInfo apiUser = loginUtil.getApiUser();
+        Role role = new Role();
+        role.setRoleName("33");
+        role.setRoleCode("eeee");
+        producerService.sendMsg(role, RabbitConfig.EXCHANGE, RabbitConfig.ROUTINGKEY);
         return gatewayRouteService.findPageList(evt);
     }
 

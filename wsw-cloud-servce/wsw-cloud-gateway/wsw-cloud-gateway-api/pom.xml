@@ -28,6 +28,11 @@
             <artifactId>wsw-cloud-job-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-mq</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- openfeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -73,6 +78,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.xml</include>
+                    <include>*.xml</include>
                     <include>*.yml</include>
                     <include>*.properties</include>
                     <include>/mapper/*.xml</include>

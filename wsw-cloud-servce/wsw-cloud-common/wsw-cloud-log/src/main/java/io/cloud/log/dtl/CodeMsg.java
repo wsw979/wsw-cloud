@@ -15,4 +15,9 @@ public class CodeMsg {
 
     private String msg;
 
+
+    public CodeMsg(Integer code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
 }

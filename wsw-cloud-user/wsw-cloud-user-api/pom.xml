@@ -23,6 +23,11 @@
             <artifactId>wsw-cloud-user-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-mq</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

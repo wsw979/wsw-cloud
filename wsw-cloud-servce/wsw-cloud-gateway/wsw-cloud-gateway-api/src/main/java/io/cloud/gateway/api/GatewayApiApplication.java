@@ -2,6 +2,7 @@ package io.cloud.gateway.api;
 
 import io.cloud.core.annotation.EnableFeignInterceptor;
 import io.cloud.data.annotation.WswSpringCloud;
+import io.cloud.mq.annotation.EnableRabbitMq;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 
@@ -12,6 +13,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
  * @create: 2020-05-12 17:37
  **/
 @WswSpringCloud
+@EnableRabbitMq
 @EnableFeignInterceptor
 @SpringCloudApplication
 public class GatewayApiApplication {

@@ -1,13 +1,11 @@
 package io.cloud.gateway.api.handler;
 
 import io.cloud.job.core.biz.model.ReturnT;
-import io.cloud.job.core.handler.IJobHandler;
 import io.cloud.job.core.handler.annotation.XxlJob;
 import io.cloud.job.core.log.XxlJobLogger;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.TimeUnit;
 
 /**
  * @program: wsw-cloud-servce
@@ -21,6 +19,7 @@ public class JobHandler {
 
     @XxlJob("demoJobHandler")
     public ReturnT<String> demoJobHandler(String param) throws Exception {
+
         XxlJobLogger.log("Fuck !!!!!!!!!!!!!");
         log.info("Fuck !!!!!!!!!!!!!");
         return ReturnT.SUCCESS;

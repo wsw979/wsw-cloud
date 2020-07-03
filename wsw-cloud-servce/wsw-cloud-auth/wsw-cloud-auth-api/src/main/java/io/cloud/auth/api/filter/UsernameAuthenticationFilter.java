@@ -1,16 +1,17 @@
 package io.cloud.auth.api.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cloud.auth.api.token.UsernameAuthenticationToken;
 import io.cloud.auth.common.dtl.ImageCode;
 import io.cloud.auth.common.dtl.UsernameDtl;
-import io.cloud.core.filter.HttpHelper;
 import io.cloud.data.constant.AuthConstants;
 import io.cloud.data.constant.ConfigConstant;
 import io.cloud.data.util.ObjectUtil;
 import io.cloud.exception.status.HttpStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -22,8 +23,10 @@ import org.springframework.social.connect.web.SessionStrategy;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.context.request.ServletWebRequest;
 
+import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.InputStream;
 
 /**
  * @program: wsw-cloud-servce
@@ -33,6 +36,9 @@ import javax.servlet.http.HttpServletResponse;
  **/
 @Slf4j
 public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     /**
      * 操作session的工具类
@@ -50,8 +56,8 @@ public class UsernameAuthenticationFilter extends AbstractAuthenticationProcessi
         }
         AbstractAuthenticationToken authRequest;
         try {
-            String body = HttpHelper.getBodyString(request);
-            UsernameDtl dtl = JSON.parseObject(body, UsernameDtl.class);
+            InputStream is = request.getInputStream();
+            UsernameDtl dtl = objectMapper.readValue(is, UsernameDtl.class);
             if (ObjectUtil.checkObjNull(dtl)) {
                 throw new AuthenticationServiceException(HttpStatus.PASSWORD_ERROR.getMsg());
             }

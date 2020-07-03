@@ -22,6 +22,16 @@ spring:
           sentinel-config.${spring.cloud.nacos.config.file-extension}
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
+  rabbitmq:
+    host: 127.0.0.1
+    port: 15672
+    username: quest
+    password: quest
+    virtual-host: wecode_sas
+    # 开启发送确认
+    publisher-confirms: true
+    # 开启发送失败退回
+    publisher-returns: true
 xxl:
   job:
     #xxl-job 与本地交互ip:port 集群端口需要改变
