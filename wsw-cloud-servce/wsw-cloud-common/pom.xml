@@ -23,6 +23,7 @@
         <module>wsw-cloud-exception</module>
         <module>wsw-cloud-sms</module>
         <module>wsw-cloud-mq</module>
+        <module>wsw-cloud-seata</module>
     </modules>
 
     <properties>
@@ -90,22 +91,7 @@
             <!-- 服务必要依赖 start  -->
             <dependency>
                 <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-datasource</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-swagger</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-log</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-redis</artifactId>
+                <artifactId>wsw-cloud-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -115,12 +101,7 @@
             </dependency>
             <dependency>
                 <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-jar</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.cloud</groupId>
-                <artifactId>wsw-cloud-core</artifactId>
+                <artifactId>wsw-cloud-datasource</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -130,7 +111,37 @@
             </dependency>
             <dependency>
                 <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-jar</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-seata</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
                 <artifactId>wsw-cloud-sms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.cloud</groupId>
+                <artifactId>wsw-cloud-swagger</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!-- 服务必要依赖 end  -->

@@ -12,9 +12,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 
     private static volatile DynamicDataSource dynamicDataSource;
 
-    private DynamicDataSource() {
+    public DynamicDataSource() {
     }
-
 
     @Override
     protected Object determineCurrentLookupKey() {

@@ -28,8 +28,8 @@ public class MessageCodeEvt {
     private Integer smsNumType;
 
     @NotNull(message = "来源必填")
-    @ApiModelProperty(value = "来源（1app2web3wx4admin）")
-    private Integer smsSource;
+    @ApiModelProperty(value = "来源（1app2web3wx4admin）", required = true)
+    private String smsSource;
 
     @AssertTrue(message = "手机号必填")
     private boolean isSmsPhone() {

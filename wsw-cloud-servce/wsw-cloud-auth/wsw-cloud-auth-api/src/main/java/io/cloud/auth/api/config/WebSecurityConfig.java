@@ -1,8 +1,11 @@
 package io.cloud.auth.api.config;
 
+import io.cloud.auth.api.filter.PhoneCodeAuthenticationFilter;
 import io.cloud.auth.api.filter.UsernameAuthenticationFilter;
 import io.cloud.auth.api.handler.*;
+import io.cloud.auth.api.provider.PhoneCodeAuthenticationProvider;
 import io.cloud.auth.api.provider.UsernameAuthenticationProvider;
+import io.cloud.auth.api.service.PhoneCodeUserDetailService;
 import io.cloud.auth.api.service.UsernameUserDetailService;
 import io.cloud.data.constant.AuthConstants;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private UsernameUserDetailService usernameUserDetailService;
 
+    @Resource
+    private PhoneCodeUserDetailService phoneCodeUserDetailService;
+
     /**
      * http 过滤
      * @param http
@@ -52,7 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addLogoutHandler(getLogoutHandler())
                 .logoutSuccessHandler(getLogoutSuccessHandler());
         http
-                .addFilterBefore(usernameAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(usernameAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(phoneCodeAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
@@ -77,6 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(usernameAuthenticationProvider());
+        auth.authenticationProvider(phoneCodeAuthenticationProvider());
     }
 
     /**
@@ -94,6 +102,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 手机验证码
+     * @return
+     */
+    @Bean
+    public PhoneCodeAuthenticationProvider phoneCodeAuthenticationProvider(){
+        PhoneCodeAuthenticationProvider provider = new PhoneCodeAuthenticationProvider();
+        // 设置userDetailsService
+        provider.setUserDetailsService(phoneCodeUserDetailService);
+        // 禁止隐藏用户未找到异常
+        provider.setHideUserNotFoundExceptions(false);
+        return provider;
+    }
+
+    /**
      * 用户名/手机/邮箱 密码登录  构造器
      *
      * @return
@@ -101,6 +123,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UsernameAuthenticationFilter usernameAuthenticationFilter() {
         UsernameAuthenticationFilter filter = new UsernameAuthenticationFilter();
+        try {
+            filter.setAuthenticationManager(this.authenticationManagerBean());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        filter.setAuthenticationSuccessHandler(loginSuccessAuth());
+        filter.setAuthenticationFailureHandler(loginFailure());
+        return filter;
+    }
+
+    /**
+     * 手机验证码  构造器
+     *
+     * @return
+     */
+    @Bean
+    public PhoneCodeAuthenticationFilter phoneCodeAuthenticationFilter(){
+        PhoneCodeAuthenticationFilter filter = new PhoneCodeAuthenticationFilter();
         try {
             filter.setAuthenticationManager(this.authenticationManagerBean());
         } catch (Exception e) {

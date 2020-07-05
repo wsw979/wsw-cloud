@@ -38,6 +38,10 @@
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-seata</artifactId>
+        </dependency>
         <!-- configuration -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -9,7 +9,7 @@ import lombok.Data;
  * @create: 2020-06-28 15:50
  **/
 @Data
-public class UsernameDtl {
+public class UsernameDtl extends BaseClient {
 
     /**
      * 用户名/手机号/邮箱
@@ -25,15 +25,5 @@ public class UsernameDtl {
      * 图形验证码
      */
     private String imageCode;
-
-    /**
-     * 客户端id
-     */
-    private String clientId;
-
-    /**
-     * 客户端秘钥
-     */
-    private String clientSecret;
 
 }

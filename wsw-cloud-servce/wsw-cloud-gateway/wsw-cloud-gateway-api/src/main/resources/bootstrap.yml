@@ -51,3 +51,26 @@ xxl:
       port: 7010
       logPath: /home/xxl-job/logs
       logRetentionDays: 30
+      
+seata:
+  application-id: ${spring.application.name}
+  enabled: true
+  tx-service-group:
+  client:
+    support:
+      spring:
+        datasource-autoproxy: false
+  service:
+    vgroupMapping:
+      default: default
+    disable-global-transaction: false
+    grouplist:
+      default: ${spring.cloud.client.ip-address}:8091
+  registry:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.client.ip-address}:8848
+  config:
+    type: nacos
+    nacos:
+      server-addr: ${spring.cloud.client.ip-address}:8848

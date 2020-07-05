@@ -66,14 +66,16 @@ public class CodeServiceImpl implements CodeService {
             BeanUtils.copyProperties(evt, codeMessageEvt);
             codeMessageEvt.setSmsCode(code);
             codeMessageEvt.setSmsType(NumEnum.ONE.getK());
-            boolean save = codeMessageService.save(codeMessageEvt, codeProperties, CodeEnum.LOGIN);
-            if (!save) {
+            //测试不发送
+            //boolean save = codeMessageService.save(codeMessageEvt, codeProperties, CodeEnum.LOGIN);
+            if (true) {
                 CodeMessage codeMessage = new CodeMessage();
                 BeanUtils.copyProperties(evt, codeMessage);
                 codeMessageService.save(codeMessage);
             }
-            String key = KeyConstant.CODE_MESSAGE + CodeEnum.LOGIN + ":" + evt.getSmsPhone() + ":" + evt.getSmsSource();
+            String key = KeyConstant.CODE_MESSAGE + CodeEnum.LOGIN + ":" + evt.getSmsSource() + ":" + evt.getSmsPhone();
             flag = redisStringUtil.set(key, code, codeProperties.getOverdueTime(), TimeUnit.SECONDS);
+            log.info(code);
         } else {
             //邮箱
         }

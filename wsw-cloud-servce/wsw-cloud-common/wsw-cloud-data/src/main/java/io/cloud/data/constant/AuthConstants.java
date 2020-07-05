@@ -31,6 +31,11 @@ public interface AuthConstants {
     String SECURITY_USERNAME_LOGIN_URL = "/username-login";
 
     /**
+     * 用户名/邮箱/手机号 密码登录地址
+     */
+    String SECURITY_PHONE_CODE_LOGIN_URL = "/phone-login";
+
+    /**
      * 登出URL
      */
     String SECURITY_LOGOUT_URL = "/oauth/remove/token";
