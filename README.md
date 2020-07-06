@@ -13,20 +13,17 @@
 
 |项目|模块|名称|说明|
 |---|---|---|---|
-|wsw-cloud-servce|wsw-cloud-auth|认证鉴权模块|提供认证、鉴权|
 |wsw-cloud-auth|wsw-cloud-auth-api|接口调用模块|获取和效验认证|
 |wsw-cloud-auth|wsw-cloud-auth-common|公共模块|提供认证、鉴权实现类|
 
 |项目|模块|名称|说明|
 |---|---|---|---|
-|wsw-cloud-servce|wsw-cloud-gateway|网关|提供服务代理，请求拦截等功能|
 |wsw-cloud-gateway|wsw-cloud-gateway-api|网关动态路由|提供动态路由的增删查改|
 |wsw-cloud-gateway|wsw-cloud-gateway-service|网关核心模块|提供服务转发、限流、熔断、拦截功能|
 |wsw-cloud-gateway|wsw-cloud-gateway-common|网关公共模块|提供实现类|
 
 |项目|模块|名称|说明|
 |---|---|---|---|
-|wsw-cloud-servce|wsw-cloud-common|公共模块|提供一系列初始化公共行为|
 |wsw-cloud-common|wsw-cloud-core|配置文件模块|提供配置能力|
 |wsw-cloud-common|wsw-cloud-data|通用属性模块|提供常用的工具类或者其他能力|
 |wsw-cloud-common|wsw-cloud-datasource|数据源模块|提供数据源配置|
@@ -39,6 +36,11 @@
 |wsw-cloud-common|wsw-cloud-swagger|文档模块|提供文档|
 
 ## 2.开发
-nacos|sentinel|job
+nacos
+sentinel
+job
+seata
 都是采用源码开发,方便修改配置文件信息和打包
 参考 wsw-cloud-servce -> README.md
+
+## 3.各项目说明在各项目包
