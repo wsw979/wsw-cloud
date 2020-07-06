@@ -9,7 +9,7 @@
         <version>1.8.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>sentinel-dashboard</artifactId>
+    <artifactId>wsw-cloud-sentinel</artifactId>
     <packaging>jar</packaging>
 
     <properties>
