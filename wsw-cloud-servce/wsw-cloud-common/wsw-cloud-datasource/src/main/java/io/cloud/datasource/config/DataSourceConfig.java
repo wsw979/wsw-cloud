@@ -1,5 +1,7 @@
 package io.cloud.datasource.config;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.proxy.jdbc.DataSourceProxy;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;

@@ -19,58 +19,26 @@ spring:
           datasource-config.${spring.cloud.nacos.config.file-extension},
           mybatis-plus.${spring.cloud.nacos.config.file-extension},
           swagger-config.${spring.cloud.nacos.config.file-extension},
-          sentinel-config.${spring.cloud.nacos.config.file-extension}
+          sentinel-config.${spring.cloud.nacos.config.file-extension},
+          job-config.${spring.cloud.nacos.config.file-extension},
+          seata-config.${spring.cloud.nacos.config.file-extension}
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: wu979
-    password: wusiwei979
-    virtual-host: wecode_sas
-    # 开启发送确认
-    publisher-confirms: true
-    # 开启发送失败退回
-    publisher-returns: true
-    listener:
-      simple:
-        retry:
-          enabled: false #消费者端的重试
-        acknowledge-mode: manual         # 开启ACK
-        auto-startup: true  #启动时自动启动容器	true
+
 xxl:
   job:
-    enable: false
-    access-token:
-    admin:
-      add-resses: http://127.0.0.1:8899/xxl-job-admin
     #xxl-job 与本地交互ip:port 集群端口需要改变
     executor:
       app-name: xxl-job-executor-sample
       ip:
       port: 7010
-      logPath: /home/xxl-job/logs
-      logRetentionDays: 30
-      
+
 seata:
-  application-id: ${spring.application.name}
-  enabled: true
-  tx-service-group:
-  client:
-    support:
-      spring:
-        datasource-autoproxy: false
+  tx-service-group: gateway-serivce-group
   service:
     vgroupMapping:
-      default: default
-    disable-global-transaction: false
-    grouplist:
-      default: ${spring.cloud.client.ip-address}:8091
-  registry:
-    type: nacos
-    nacos:
-      server-addr: ${spring.cloud.client.ip-address}:8848
-  config:
-    type: nacos
-    nacos:
-      server-addr: ${spring.cloud.client.ip-address}:8848
+      #default：seata-servce -> registry.conf -> cluster = "default"
+      gateway-serivce-group: "default"
+    #对应上面default
+    default:
+      grouplist: 127.0.0.1:8091
