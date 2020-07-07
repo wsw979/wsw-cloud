@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-swagger</artifactId>
+    <description>文档</description>
     <packaging>jar</packaging>
 
     <dependencies>

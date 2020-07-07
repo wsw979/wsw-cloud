@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-log</artifactId>
+    <description>日志</description>
     <packaging>jar</packaging>
 
     <dependencies>

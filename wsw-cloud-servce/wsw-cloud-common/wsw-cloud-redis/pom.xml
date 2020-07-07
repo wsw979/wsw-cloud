@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-redis</artifactId>
+    <description>缓存</description>
     <packaging>jar</packaging>
 
     <properties>

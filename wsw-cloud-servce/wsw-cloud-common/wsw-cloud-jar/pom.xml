@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>wsw-cloud-jar</artifactId>
+    <description>子项目引用</description>
+    <packaging>jar</packaging>
 
     <properties>
         <spring.boot.maven.plugin.version>2.1.6.RELEASE</spring.boot.maven.plugin.version>

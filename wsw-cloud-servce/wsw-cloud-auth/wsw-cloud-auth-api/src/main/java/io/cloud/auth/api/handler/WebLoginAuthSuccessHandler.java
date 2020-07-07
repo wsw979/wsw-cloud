@@ -23,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -51,10 +52,10 @@ public class WebLoginAuthSuccessHandler extends SavedRequestAwareAuthenticationS
     @Autowired
     private TokenStore authTokenStore;
 
-    @Autowired
+    @Resource
     private AuthServerProperties authServerProperties;
 
-    @Autowired
+    @Resource
     private TokenUtil tokenUtil;
 
     @Override

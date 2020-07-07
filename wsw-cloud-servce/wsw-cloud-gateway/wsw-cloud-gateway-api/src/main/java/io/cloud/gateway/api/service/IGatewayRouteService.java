@@ -25,4 +25,11 @@ public interface IGatewayRouteService extends IService<GatewayRoute> {
     GatewayRoute saveOrUpdate(GatewayRouteEvt evt);
 
     GatewayRoute delete(Long id);
+
+    Result testSuccess(GatewayRouteEvt evt);
+
+    Result testError(GatewayRouteEvt evt);
+
+    Result testLocal(GatewayRouteEvt evt);
+
 }

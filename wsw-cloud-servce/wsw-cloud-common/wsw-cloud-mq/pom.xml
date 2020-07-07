@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-mq</artifactId>
+    <description>队列</description>
     <packaging>jar</packaging>
 
     <dependencies>

@@ -2,14 +2,13 @@ package io.cloud.user.common.feign;
 
 import io.cloud.data.constant.ServiceConstant;
 import io.cloud.exception.result.Result;
+import io.cloud.user.common.evt.admin.RoleEvt;
 import io.cloud.user.common.vo.app.AdminUserVo;
 import io.cloud.user.common.vo.app.ApiUserVo;
 import io.cloud.user.common.vo.app.PermissionListVo;
 import io.cloud.user.common.vo.app.RoleListVo;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,4 +36,9 @@ public interface UserServiceFeign {
     @GetMapping("/permission/findListByUserId/{userId}")
     Result<List<PermissionListVo>> findPermissionList(@PathVariable("userId") Long userId);
 
+    @PostMapping("/role/testSuccess")
+    Result testSuccess(@RequestBody RoleEvt evt);
+
+    @PostMapping("/role/testError")
+    Result testError(@RequestBody RoleEvt evt);
 }

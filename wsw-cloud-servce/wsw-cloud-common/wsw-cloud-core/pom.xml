@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>wsw-cloud-core</artifactId>
+    <description>配置</description>
     <packaging>jar</packaging>
 
     <dependencies>

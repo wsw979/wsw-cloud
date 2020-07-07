@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-exception</artifactId>
+    <description>异常和返回</description>
     <packaging>jar</packaging>
 
     <properties>

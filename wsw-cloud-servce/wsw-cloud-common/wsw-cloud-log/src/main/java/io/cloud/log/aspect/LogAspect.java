@@ -2,6 +2,8 @@ package io.cloud.log.aspect;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cloud.exception.InternalException;
+import io.cloud.exception.ServiceException;
 import io.cloud.exception.status.HttpStatus;
 import io.cloud.exception.util.R;
 import io.cloud.log.dtl.CodeMsg;
@@ -92,7 +94,7 @@ public class LogAspect {
         try {
             Object result = proceedingJoinPoint.proceed();
             long time = (System.currentTimeMillis() - start) / 1000;
-            CodeMsg codeMsg = new CodeMsg(200,"无返回值");
+            CodeMsg codeMsg = new CodeMsg(200, "无返回值");
             if (result != null) {
                 BeanUtils.copyProperties(result, codeMsg);
             }
@@ -110,8 +112,16 @@ public class LogAspect {
             return result;
         } catch (Throwable throwable) {
             log.error("收集日志--异常", throwable);
+            if (throwable instanceof ServiceException) {
+                ServiceException error = (ServiceException) throwable;
+                throw new ServiceException(error.getCode(), error.getMsg());
+            }
+            if(throwable instanceof InternalException){
+                InternalException error = (InternalException) throwable;
+                throw new InternalException(error.getCode(), error.getMsg());
+            }
+            throw new ServiceException(HttpStatus.ERROR.getCode(),throwable.getMessage());
         }
-        return R.error(HttpStatus.ERROR);
     }
 
     private StringBuffer checkType(Object obj, StringBuffer buffer) {

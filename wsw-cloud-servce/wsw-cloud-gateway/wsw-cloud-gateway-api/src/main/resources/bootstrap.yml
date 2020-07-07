@@ -24,21 +24,3 @@ spring:
           seata-config.${spring.cloud.nacos.config.file-extension}
       discovery:
         server-addr: ${spring.cloud.client.ip-address}:8848
-
-xxl:
-  job:
-    #xxl-job 与本地交互ip:port 集群端口需要改变
-    executor:
-      app-name: xxl-job-executor-sample
-      ip:
-      port: 7010
-
-seata:
-  tx-service-group: gateway-serivce-group
-  service:
-    vgroupMapping:
-      #default：seata-servce -> registry.conf -> cluster = "default"
-      gateway-serivce-group: "default"
-    #对应上面default
-    default:
-      grouplist: 127.0.0.1:8091

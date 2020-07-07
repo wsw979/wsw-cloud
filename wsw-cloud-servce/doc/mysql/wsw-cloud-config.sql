@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : master-8001
+ Source Server         : master
  Source Server Type    : MySQL
  Source Server Version : 80020
  Source Host           : localhost:8001
@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 06/07/2020 17:37:39
+ Date: 07/07/2020 16:17:05
 */
 
 SET NAMES utf8mb4;
@@ -35,7 +35,11 @@ CREATE TABLE `branch_table`  (
   `gmt_modified` datetime(6) NULL DEFAULT NULL,
   PRIMARY KEY (`branch_id`) USING BTREE,
   INDEX `idx_xid`(`xid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分支事务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分支事务表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of branch_table
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_admin_staff
@@ -56,7 +60,11 @@ CREATE TABLE `c_admin_staff`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT NULL COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_admin_staff
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_admin_user
@@ -74,7 +82,11 @@ CREATE TABLE `c_admin_user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效（0未激活1已激活2已禁用）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'ADMIN用户' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'ADMIN用户' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of c_admin_user
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for c_api_user
@@ -97,7 +109,7 @@ CREATE TABLE `c_api_user`  (
   `start_time` datetime(0) NULL DEFAULT NULL COMMENT '会员开始时间',
   `end_time` datetime(0) NULL DEFAULT NULL COMMENT '会员结束时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'APP用户' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'APP用户' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_api_user
@@ -118,7 +130,7 @@ CREATE TABLE `c_api_user_auth`  (
   `verified_time` datetime(0) NULL DEFAULT NULL COMMENT '验证时间',
   `is_binding` tinyint(0) NULL DEFAULT 1 COMMENT '是否绑定中（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户认证方式' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户认证方式' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_api_user_auth
@@ -141,7 +153,7 @@ CREATE TABLE `c_code_message`  (
   `sms_source` tinyint(0) NULL DEFAULT NULL COMMENT '来源（app,web,wx,admin）',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信验证码' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '短信验证码' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_code_message
@@ -167,7 +179,7 @@ CREATE TABLE `c_gateway_route`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态路由' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '动态路由' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_gateway_route
@@ -193,7 +205,7 @@ CREATE TABLE `c_oauth_client_details`  (
   `additional_information` varchar(4096) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `autoapprove` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`client_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_oauth_client_details
@@ -217,13 +229,16 @@ CREATE TABLE `c_permission`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(1) NULL DEFAULT 1 COMMENT '是否有效（0否1是）',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_permission
 -- ----------------------------
 INSERT INTO `c_permission` VALUES (1271278564298171307, '中台系统', 'CENTER', 'SYSTEM', NULL, -1, 1, 1, '2020-06-30 10:10:23', NULL, 1);
 INSERT INTO `c_permission` VALUES (1271278564298171308, '中台-网关列表', 'CENTER_GATEWAY_LIST', 'MENU', '/gateway/api/dynamicRoute/findPageList', 1271278564298171307, 1, 1, '2020-06-30 10:12:24', NULL, 1);
+INSERT INTO `c_permission` VALUES (1271278564298171309, '中台-测试成功', 'CENTER_GATEWAY_TEST1', 'BUTTON', '/gateway/api/seataTest/testSuccess', 1271278564298171307, 1, 1, '2020-06-30 10:12:24', NULL, 1);
+INSERT INTO `c_permission` VALUES (1271278564298171310, '中台-测试失败', 'CENTER_GATEWAY_TEST2', 'BUTTON', '/gateway/api/seataTest/testError', 1271278564298171307, 1, 1, '2020-06-30 10:12:24', NULL, 1);
+INSERT INTO `c_permission` VALUES (1271278564298171311, '中台-本地失败', 'CENTER_GATEWAY_TEST3', 'BUTTON', '/gateway/api/seataTest/testLocal', 1271278564298171307, 1, 1, '2020-06-30 10:12:24', NULL, 1);
 
 -- ----------------------------
 -- Table structure for c_role
@@ -239,7 +254,7 @@ CREATE TABLE `c_role`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_valid` tinyint(0) NULL DEFAULT 1 COMMENT '是否有效',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '权限' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_role
@@ -256,13 +271,16 @@ CREATE TABLE `c_role_permission`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '角色id',
   `permission_id` bigint(0) NULL DEFAULT NULL COMMENT '权限id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_role_permission
 -- ----------------------------
 INSERT INTO `c_role_permission` VALUES (1271278965678295687, 1271278964698173442, 1271278965678291039, 1271278564298171307);
 INSERT INTO `c_role_permission` VALUES (1271278965678295688, 1271278964698173442, 1271278965678291039, 1271278564298171308);
+INSERT INTO `c_role_permission` VALUES (1271278965678295689, 1271278964698173442, 1271278965678291039, 1271278564298171309);
+INSERT INTO `c_role_permission` VALUES (1271278965678295690, 1271278964698173442, 1271278965678291039, 1271278564298171310);
+INSERT INTO `c_role_permission` VALUES (1271278965678295691, 1271278964698173442, 1271278965678291039, 1271278564298171311);
 
 -- ----------------------------
 -- Table structure for c_user_role
@@ -273,7 +291,7 @@ CREATE TABLE `c_user_role`  (
   `role_id` bigint(0) NULL DEFAULT NULL COMMENT '关联角色',
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '关联用户表',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1271278965657684931 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1271278965657684931 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户角色关联' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of c_user_role
@@ -299,7 +317,11 @@ CREATE TABLE `global_table`  (
   PRIMARY KEY (`xid`) USING BTREE,
   INDEX `idx_gmt_modified_status`(`gmt_modified`, `status`) USING BTREE,
   INDEX `idx_transaction_id`(`transaction_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '全局事务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '全局事务表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of global_table
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for lock_table
@@ -317,7 +339,11 @@ CREATE TABLE `lock_table`  (
   `gmt_modified` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`row_key`) USING BTREE,
   INDEX `idx_branch_id`(`branch_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '全局锁表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '全局锁表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of lock_table
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for undo_log
@@ -335,7 +361,30 @@ CREATE TABLE `undo_log`  (
   `ext` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'seata业务XID日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'seata业务XID日志表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of undo_log
+-- ----------------------------
+INSERT INTO `undo_log` VALUES (5, 2016294033, '192.168.1.6:8091:2016294031', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:17:04', '2020-07-07 15:17:04', NULL);
+INSERT INTO `undo_log` VALUES (10, 2016294054, '192.168.1.6:8091:2016294052', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:23:15', '2020-07-07 15:23:15', NULL);
+INSERT INTO `undo_log` VALUES (13, 2016294064, '192.168.1.6:8091:2016294062', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:26:20', '2020-07-07 15:26:20', NULL);
+INSERT INTO `undo_log` VALUES (16, 2016294075, '192.168.1.6:8091:2016294073', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:27:04', '2020-07-07 15:27:04', NULL);
+INSERT INTO `undo_log` VALUES (19, 2016294084, '192.168.1.6:8091:2016294082', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:29:32', '2020-07-07 15:29:32', NULL);
+INSERT INTO `undo_log` VALUES (22, 2016294093, '192.168.1.6:8091:2016294091', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:30:07', '2020-07-07 15:30:07', NULL);
+INSERT INTO `undo_log` VALUES (25, 2016294106, '192.168.1.6:8091:2016294104', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:31:14', '2020-07-07 15:31:14', NULL);
+INSERT INTO `undo_log` VALUES (28, 2016294117, '192.168.1.6:8091:2016294115', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:31:27', '2020-07-07 15:31:27', NULL);
+INSERT INTO `undo_log` VALUES (31, 2016294139, '192.168.1.6:8091:2016294124', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:46:16', '2020-07-07 15:46:16', NULL);
+INSERT INTO `undo_log` VALUES (33, 2016294136, '192.168.1.6:8091:2016294124', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:46:16', '2020-07-07 15:46:16', NULL);
+INSERT INTO `undo_log` VALUES (36, 2016294155, '192.168.1.6:8091:2016294153', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:47:10', '2020-07-07 15:47:10', NULL);
+INSERT INTO `undo_log` VALUES (39, 2016294165, '192.168.1.6:8091:2016294163', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 15:48:32', '2020-07-07 15:48:32', NULL);
+INSERT INTO `undo_log` VALUES (42, 2016294175, '192.168.1.6:8091:2016294172', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:05:30', '2020-07-07 16:05:30', NULL);
+INSERT INTO `undo_log` VALUES (45, 2016294184, '192.168.1.6:8091:2016294182', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:05:45', '2020-07-07 16:05:45', NULL);
+INSERT INTO `undo_log` VALUES (48, 2016294192, '192.168.1.6:8091:2016294190', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:06:10', '2020-07-07 16:06:10', NULL);
+INSERT INTO `undo_log` VALUES (53, 2016294205, '192.168.1.6:8091:2016294198', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:06:44', '2020-07-07 16:06:44', NULL);
+INSERT INTO `undo_log` VALUES (54, 2016294200, '192.168.1.6:8091:2016294198', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:06:45', '2020-07-07 16:06:45', NULL);
+INSERT INTO `undo_log` VALUES (59, 2016294223, '192.168.1.6:8091:2016294221', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:09:51', '2020-07-07 16:09:51', NULL);
+INSERT INTO `undo_log` VALUES (60, 2016294216, '192.168.1.6:8091:2016294214', 'serializer=jackson', 0x7B7D, 1, '2020-07-07 16:09:52', '2020-07-07 16:09:52', NULL);
 
 -- ----------------------------
 -- Table structure for xxl_job_group
@@ -348,7 +397,7 @@ CREATE TABLE `xxl_job_group`  (
   `address_type` tinyint(0) NOT NULL DEFAULT 0 COMMENT '执行器地址类型：0=自动注册、1=手动录入',
   `address_list` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '执行器地址列表，多地址逗号分隔',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of xxl_job_group
@@ -383,7 +432,7 @@ CREATE TABLE `xxl_job_info`  (
   `trigger_last_time` bigint(0) NOT NULL DEFAULT 0 COMMENT '上次调度时间',
   `trigger_next_time` bigint(0) NOT NULL DEFAULT 0 COMMENT '下次调度时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of xxl_job_info
@@ -397,7 +446,7 @@ DROP TABLE IF EXISTS `xxl_job_lock`;
 CREATE TABLE `xxl_job_lock`  (
   `lock_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '锁名称',
   PRIMARY KEY (`lock_name`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of xxl_job_lock
@@ -427,7 +476,7 @@ CREATE TABLE `xxl_job_log`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `I_trigger_time`(`trigger_time`) USING BTREE,
   INDEX `I_handle_code`(`handle_code`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 223 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 224 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of xxl_job_log
@@ -668,7 +717,7 @@ CREATE TABLE `xxl_job_log_report`  (
   `fail_count` int(0) NOT NULL DEFAULT 0 COMMENT '执行失败-日志数量',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `i_trigger_day`(`trigger_day`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of xxl_job_log_report
@@ -681,6 +730,7 @@ INSERT INTO `xxl_job_log_report` VALUES (5, '2020-07-03 00:00:00', 0, 0, 0);
 INSERT INTO `xxl_job_log_report` VALUES (6, '2020-07-06 00:00:00', 0, 0, 0);
 INSERT INTO `xxl_job_log_report` VALUES (7, '2020-07-05 00:00:00', 0, 0, 0);
 INSERT INTO `xxl_job_log_report` VALUES (8, '2020-07-04 00:00:00', 0, 0, 0);
+INSERT INTO `xxl_job_log_report` VALUES (9, '2020-07-07 00:00:00', 0, 0, 0);
 
 -- ----------------------------
 -- Table structure for xxl_job_logglue
@@ -695,7 +745,11 @@ CREATE TABLE `xxl_job_logglue`  (
   `add_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of xxl_job_logglue
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for xxl_job_registry
@@ -709,7 +763,11 @@ CREATE TABLE `xxl_job_registry`  (
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `i_g_k_v`(`registry_group`, `registry_key`, `registry_value`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of xxl_job_registry
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for xxl_job_user
@@ -723,7 +781,7 @@ CREATE TABLE `xxl_job_user`  (
   `permission` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '权限：执行器ID列表，多个逗号分割',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `i_username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of xxl_job_user

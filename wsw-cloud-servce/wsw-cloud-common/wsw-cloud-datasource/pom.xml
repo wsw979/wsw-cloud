@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-datasource</artifactId>
+    <description>数据源</description>
     <packaging>jar</packaging>
 
     <dependencies>

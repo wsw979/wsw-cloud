@@ -22,4 +22,5 @@ spring:
           mybatis-plus.${spring.cloud.nacos.config.file-extension},
           jwt-config.${spring.cloud.nacos.config.file-extension},
           aliyun-code.${spring.cloud.nacos.config.file-extension},
-          sentinel-config.${spring.cloud.nacos.config.file-extension}
+          sentinel-config.${spring.cloud.nacos.config.file-extension},
+          seata-config.${spring.cloud.nacos.config.file-extension}

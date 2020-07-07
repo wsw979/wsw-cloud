@@ -19,5 +19,5 @@ spring:
         shared-configs: application.${spring.cloud.nacos.config.file-extension},
                         redis-config.${spring.cloud.nacos.config.file-extension},
                         datasource-config.${spring.cloud.nacos.config.file-extension},
-                        mybatis-plus.${spring.cloud.nacos.config.file-extension}
-
+                        mybatis-plus.${spring.cloud.nacos.config.file-extension},
+                        seata-config.${spring.cloud.nacos.config.file-extension}

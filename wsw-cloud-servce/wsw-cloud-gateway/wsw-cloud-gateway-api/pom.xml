@@ -38,6 +38,11 @@
             <artifactId>wsw-cloud-seata</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.cloud</groupId>
+            <artifactId>wsw-cloud-user-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- openfeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

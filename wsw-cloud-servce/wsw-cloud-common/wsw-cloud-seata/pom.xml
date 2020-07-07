@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-seata</artifactId>
+    <description>事务</description>
     <packaging>jar</packaging>
 
     <dependencies>

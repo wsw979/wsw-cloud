@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-sms</artifactId>
+    <description>短信</description>
     <packaging>jar</packaging>
 
     <properties>

@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : master-8001
+ Source Server         : master
  Source Server Type    : MySQL
  Source Server Version : 80020
  Source Host           : localhost:8001
@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 06/07/2020 17:37:45
+ Date: 07/07/2020 16:17:13
 */
 
 SET NAMES utf8mb4;
@@ -40,7 +40,7 @@ CREATE TABLE `config_info`  (
   `c_schema` text CHARACTER SET utf8 COLLATE utf8_bin NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfo_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 258 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of config_info
@@ -58,9 +58,9 @@ INSERT INTO `config_info` VALUES (10, 'mq-config.yml', 'DEFAULT_GROUP', 'spring:
 INSERT INTO `config_info` VALUES (11, 'job-config.yml', 'DEFAULT_GROUP', 'xxl:\r\n  job:\r\n    accessToken:\r\n    admin:\r\n      addresses: http://127.0.0.1:8899/xxl-job-admin\r\n    executor:\r\n      logPath: /home/xxl-job/log\r\n      logRetentionDays: 30', '9a1ba1bcf80fdee7d14ccc539b6cdf06', '2020-07-06 00:36:48', '2020-07-06 00:36:48', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, 'yaml', NULL);
 INSERT INTO `config_info` VALUES (12, 'seata-config.yml', 'DEFAULT_GROUP', 'seata:\r\n  enabled: true\r\n  application-id: ${spring.application.name}\r\n  enable-auto-data-source-proxy: false\r\n  use-jdk-proxy: false\r\n  excludes-for-auto-proxying: firstClassNameForExclude,secondClassNameForExclude\r\n  client:\r\n    rm:\r\n      async-commit-buffer-limit: 1000\r\n      report-retry-count: 5\r\n      table-meta-check-enable: false\r\n      report-success-enable: false\r\n      saga-branch-register-enable: false\r\n      lock:\r\n        retry-interval: 10\r\n        retry-times: 30\r\n        retry-policy-branch-rollback-on-conflict: true\r\n    tm:\r\n      degrade-check: false\r\n      degrade-check-period: 2000\r\n      degrade-check-allow-times: 10\r\n      commit-retry-count: 5\r\n      rollback-retry-count: 5\r\n    undo:\r\n      data-validation: true\r\n      log-serialization: jackson\r\n      log-table: undo_log\r\n      only-care-update-columns: true\r\n    log:\r\n      exceptionRate: 100\r\n  service:\r\n    enable-degrade: false\r\n    disable-global-transaction: false\r\n  transport:\r\n    shutdown:\r\n      wait: 3\r\n    thread-factory:\r\n      boss-thread-prefix: NettyBoss\r\n      worker-thread-prefix: NettyServerNIOWorker\r\n      server-executor-thread-prefix: NettyServerBizHandler\r\n      share-boss-worker: false\r\n      client-selector-thread-prefix: NettyClientSelector\r\n      client-selector-thread-size: 1\r\n      client-worker-thread-prefix: NettyClientWorkerThread\r\n      worker-thread-size: default\r\n      boss-thread-size: 1\r\n    type: TCP\r\n    server: NIO\r\n    heartbeat: true\r\n    serialization: seata\r\n    compressor: none\r\n    enable-client-batch-send-request: true', '866c740c2a489c43d579d6014c73660b', '2020-07-06 00:38:50', '2020-07-06 09:26:13', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
 INSERT INTO `config_info` VALUES (13, 'wsw-cloud-gateway-service-dev.yml', 'DEV_GROUP', 'spring:\r\n  redis:\r\n    database: 0\r\n  skip:\r\n    urls: /app/api/auth/checkAuth/getJwt\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: false\r\n          lower-case-service-id: true\r\n    sentinel:\r\n      transport:\r\n        port: 8731\r\n    # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', 'ced3e1a4b597e6b4088033ad33cc807c', '2020-06-25 10:35:53', '2020-07-06 06:57:04', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
-INSERT INTO `config_info` VALUES (14, 'wsw-cloud-gateway-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8732\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', '9d3dfb22b11474c4c12c6fc1b92c2a3a', '2020-06-25 10:36:33', '2020-07-06 00:36:12', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
-INSERT INTO `config_info` VALUES (15, 'wsw-cloud-auth-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8733\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', '1d960200e5a17f66c1d12f532feda717', '2020-06-25 10:37:16', '2020-06-28 09:28:08', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
-INSERT INTO `config_info` VALUES (16, 'wsw-cloud-user-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8734\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n', '34bde6e28b358fb13f9b2f8c09ed7f35', '2020-06-30 08:12:27', '2020-06-30 08:12:27', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, 'yaml', NULL);
+INSERT INTO `config_info` VALUES (14, 'wsw-cloud-gateway-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8732\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n\r\n\r\nxxl:\r\n  job:\r\n    #xxl-job 与本地交互ip:port 集群端口需要改变\r\n    executor:\r\n      app-name: xxl-job-executor-sample\r\n      ip:\r\n      port: 7010\r\n\r\nseata:\r\n  tx-service-group: gateway-serivce-group\r\n  service:\r\n    vgroupMapping:\r\n      #default：seata-servce -> registry.conf -> cluster = \"default\"\r\n      gateway-serivce-group: \"default\"\r\n    #对应上面default\r\n    default:\r\n      grouplist: ${spring.cloud.client.ip-address}:8091', '4523b6eaeef821f53f07492be4933a89', '2020-06-25 10:36:33', '2020-07-07 08:13:58', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
+INSERT INTO `config_info` VALUES (15, 'wsw-cloud-auth-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8733\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n\r\nseata:\r\n  tx-service-group: auth-serivce-group\r\n  service:\r\n    vgroupMapping:\r\n      #default：seata-servce -> registry.conf -> cluster = \"default\"\r\n      auth-serivce-group: \"default\"\r\n    #对应上面default\r\n    default:\r\n      grouplist: ${spring.cloud.client.ip-address}:8091', 'dd8dad0fdebaa0606b883b46cfb45325', '2020-06-25 10:37:16', '2020-07-07 08:12:46', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
+INSERT INTO `config_info` VALUES (16, 'wsw-cloud-user-api-dev.yml', 'DEV_GROUP', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8734\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n\r\nseata:\r\n  tx-service-group: user-serivce-group\r\n  service:\r\n    vgroupMapping:\r\n      #default：seata-servce -> registry.conf -> cluster = \"default\"\r\n      user-serivce-group: \"default\"\r\n    #对应上面default\r\n    default:\r\n      grouplist: ${spring.cloud.client.ip-address}:8091', 'f3e940fe030627313415cacce8821d19', '2020-06-30 08:12:27', '2020-07-07 08:12:30', NULL, '0:0:0:0:0:0:0:1', '', '', 'null', 'null', 'null', 'yaml', 'null');
 INSERT INTO `config_info` VALUES (218, 'service.vgroupMapping.auth-serivce-group', 'SEATA_GROUP', 'default', 'c21f969b5f03d33d43e04f8f136e7682', '2020-07-06 01:56:14', '2020-07-06 01:56:14', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `config_info` VALUES (219, 'service.vgroupMapping.user-serivce-group', 'SEATA_GROUP', 'default', 'c21f969b5f03d33d43e04f8f136e7682', '2020-07-06 01:56:14', '2020-07-06 01:56:14', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `config_info` VALUES (220, 'service.vgroupMapping.gateway-serivce-group', 'SEATA_GROUP', 'default', 'c21f969b5f03d33d43e04f8f136e7682', '2020-07-06 01:56:14', '2020-07-06 01:56:14', NULL, '0:0:0:0:0:0:0:1', '', '', NULL, NULL, NULL, NULL, NULL);
@@ -94,7 +94,11 @@ CREATE TABLE `config_info_aggr`  (
   `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfoaggr_datagrouptenantdatum`(`data_id`, `group_id`, `tenant_id`, `datum_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '增加租户字段' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_info_aggr
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for config_info_beta
@@ -115,7 +119,11 @@ CREATE TABLE `config_info_beta`  (
   `tenant_id` varchar(128) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '租户字段',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfobeta_datagrouptenant`(`data_id`, `group_id`, `tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_beta' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_info_beta
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for config_info_tag
@@ -136,7 +144,11 @@ CREATE TABLE `config_info_tag`  (
   `src_ip` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'source ip',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_configinfotag_datagrouptenanttag`(`data_id`, `group_id`, `tenant_id`, `tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_info_tag' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_info_tag
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for config_tags_relation
@@ -153,7 +165,11 @@ CREATE TABLE `config_tags_relation`  (
   PRIMARY KEY (`nid`) USING BTREE,
   UNIQUE INDEX `uk_configtagrelation_configidtag`(`id`, `tag_name`, `tag_type`) USING BTREE,
   INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_tag_relation' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'config_tag_relation' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of config_tags_relation
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for group_capacity
@@ -172,7 +188,11 @@ CREATE TABLE `group_capacity`  (
   `gmt_modified` datetime(0) NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_group_id`(`group_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '集群、各Group容量信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of group_capacity
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for his_config_info
@@ -196,7 +216,7 @@ CREATE TABLE `his_config_info`  (
   INDEX `idx_gmt_create`(`gmt_create`) USING BTREE,
   INDEX `idx_gmt_modified`(`gmt_modified`) USING BTREE,
   INDEX `idx_did`(`data_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 354 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '多租户改造' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of his_config_info
@@ -554,6 +574,11 @@ INSERT INTO `his_config_info` VALUES (223, 350, 'service.disableGlobalTransactio
 INSERT INTO `his_config_info` VALUES (13, 351, 'wsw-cloud-gateway-service-dev.yml', 'DEV_GROUP', '', 'spring:\r\n  redis:\r\n    database: 0\r\n  skip:\r\n    urls: /app/api/auth/checkAuth/getJwt\r\n  cloud:\r\n    gateway:\r\n      discovery:\r\n        locator:\r\n          enabled: false\r\n          lower-case-service-id: true\r\n    sentinel:\r\n      transport:\r\n        port: 8731\r\n    # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8', 'ed9ba1194e5f4631a645084a683d4e3c', '2010-05-05 00:00:00', '2020-07-06 06:57:04', NULL, '0:0:0:0:0:0:0:1', 'U', '');
 INSERT INTO `his_config_info` VALUES (248, 352, 'store.db.url', 'SEATA_GROUP', '', 'jdbc:mysql://localhost:8001/wsw-cloud-config?characterEncoding=utf8', '6bbc6195ab062e667e5ae31df087a177', '2010-05-05 00:00:00', '2020-07-06 06:58:05', NULL, '0:0:0:0:0:0:0:1', 'U', '');
 INSERT INTO `his_config_info` VALUES (12, 353, 'seata_config.yml', 'DEFAULT_GROUP', '', 'wsw: 0', '336220456f4533d42f49cdad490e2412', '2010-05-05 00:00:00', '2020-07-06 09:26:13', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (15, 354, 'wsw-cloud-auth-api-dev.yml', 'DEV_GROUP', '', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8733\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', '1d960200e5a17f66c1d12f532feda717', '2010-05-05 00:00:00', '2020-07-07 08:11:54', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (16, 355, 'wsw-cloud-user-api-dev.yml', 'DEV_GROUP', '', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8734\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n', '34bde6e28b358fb13f9b2f8c09ed7f35', '2010-05-05 00:00:00', '2020-07-07 08:12:14', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (16, 356, 'wsw-cloud-user-api-dev.yml', 'DEV_GROUP', '', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8734\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n\r\nseata:\r\n  tx-service-group: user-serivce-group\r\n  service:\r\n    vgroupMapping:\r\n      #default：seata-servce -> registry.conf -> cluster = \"default\"\r\n      user-serivce-group: \"default\"\r\n    #对应上面default\r\n    default:\r\n      grouplist: 127.0.0.1:8091', 'da5be90e0d6a06562009e3ba2be7d0a9', '2010-05-05 00:00:00', '2020-07-07 08:12:30', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (15, 357, 'wsw-cloud-auth-api-dev.yml', 'DEV_GROUP', '', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8733\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n\r\nseata:\r\n  tx-service-group: auth-serivce-group\r\n  service:\r\n    vgroupMapping:\r\n      #default：seata-servce -> registry.conf -> cluster = \"default\"\r\n      auth-serivce-group: \"default\"\r\n    #对应上面default\r\n    default:\r\n      grouplist: 127.0.0.1:8091', '86e90884bec98c15007a9210c4b96d99', '2010-05-05 00:00:00', '2020-07-07 08:12:46', NULL, '0:0:0:0:0:0:0:1', 'U', '');
+INSERT INTO `his_config_info` VALUES (14, 358, 'wsw-cloud-gateway-api-dev.yml', 'DEV_GROUP', '', 'spring:\r\n  cloud:\r\n    sentinel:\r\n      transport:\r\n        port: 8732\r\n  redis:\r\n    database: 0\r\n  # 数据源\r\n  datasource:\r\n    dynamic:\r\n      primary: master\r\n      datasource:\r\n        master:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC\r\n        slaver:\r\n          username: root\r\n          password: root\r\n          driver-class-name: com.mysql.cj.jdbc.Driver\r\n          url: jdbc:mysql://${spring.cloud.client.ip-address}:8002/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=UTC', '9d3dfb22b11474c4c12c6fc1b92c2a3a', '2010-05-05 00:00:00', '2020-07-07 08:13:58', NULL, '0:0:0:0:0:0:0:1', 'U', '');
 
 -- ----------------------------
 -- Table structure for roles
@@ -562,7 +587,7 @@ DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles`  (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of roles
@@ -586,7 +611,11 @@ CREATE TABLE `tenant_capacity`  (
   `gmt_modified` datetime(0) NOT NULL DEFAULT '2010-05-05 00:00:00' COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '租户容量信息表' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tenant_capacity
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tenant_info
@@ -604,7 +633,11 @@ CREATE TABLE `tenant_info`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uk_tenant_info_kptenantid`(`kp`, `tenant_id`) USING BTREE,
   INDEX `idx_tenant_id`(`tenant_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'tenant_info' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = 'tenant_info' ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of tenant_info
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for users
@@ -615,7 +648,7 @@ CREATE TABLE `users`  (
   `password` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `enabled` tinyint(1) NOT NULL,
   PRIMARY KEY (`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users

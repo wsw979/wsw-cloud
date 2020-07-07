@@ -1,7 +1,9 @@
 package io.cloud.user.api.service;
 
+import io.cloud.exception.result.Result;
 import io.cloud.user.common.entity.Role;
 import com.baomidou.mybatisplus.extension.service.IService;
+import io.cloud.user.common.evt.admin.RoleEvt;
 import io.cloud.user.common.vo.app.RoleListVo;
 
 import java.util.List;
@@ -17,4 +19,8 @@ import java.util.List;
 public interface IRoleService extends IService<Role> {
 
     List<RoleListVo> findListByUserId(Long userId);
+
+    Result testSuccess(RoleEvt evt);
+
+    Result testError(RoleEvt evt);
 }

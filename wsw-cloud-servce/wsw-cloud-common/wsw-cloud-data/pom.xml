@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>wsw-cloud-data</artifactId>
+    <description>常用</description>
     <packaging>jar</packaging>
 
     <properties>
