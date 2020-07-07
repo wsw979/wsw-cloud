@@ -32,15 +32,21 @@
 |wsw-cloud-common|wsw-cloud-log|日志模块|提供日志能力|
 |wsw-cloud-common|wsw-cloud-mq|队列模块|提供消息队列|
 |wsw-cloud-common|wsw-cloud-redis|缓存模块|提供NoSql缓存|
+|wsw-cloud-common|wsw-cloud-seata|分布式事务模块|提供at模式，TCC未集成|
 |wsw-cloud-common|wsw-cloud-sms|短信模块|提供阿里短信业务|
 |wsw-cloud-common|wsw-cloud-swagger|文档模块|提供文档|
+|wsw-cloud-common|wsw-cloud-es|es模块|提供日志的快速搜索（尚未集成）|
 
 ## 2.开发
 nacos
-sentinel
+sentinel （修改了源码，后台增删改配置文件，同步nacos持久化）
 job
-seata
-都是采用源码开发,方便修改配置文件信息和打包
+seata   （wsw-cloud-service -> doc -> .bat 可以启动）
+源码开发,方便修改配置文件信息和打包
 参考 wsw-cloud-servce -> README.md
 
-## 3.各项目说明在各项目包
+## 3.demo
+分布式事务
+分布式定时任务调用
+分布式队列
+wsw-cloud-gateway-api 模块有示例
