@@ -17,12 +17,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,8 +30,6 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Map;
 
 /**
  * @program: wsw-cloud-servce
@@ -48,10 +43,7 @@ import java.util.Map;
 @Component
 public class LogAspect {
 
-    private static final String BUFFER = "|#|";
-
-    @Autowired
-    private ObjectMapper objectMapper;
+    private static final String BUFFER = "&";
 
     /**
      * controller切入点
@@ -93,21 +85,20 @@ public class LogAspect {
         long start = System.currentTimeMillis();
         try {
             Object result = proceedingJoinPoint.proceed();
-            long time = (System.currentTimeMillis() - start) / 1000;
+            long end = System.currentTimeMillis();
+            long time = end - start;
             CodeMsg codeMsg = new CodeMsg(200, "无返回值");
             if (result != null) {
                 BeanUtils.copyProperties(result, codeMsg);
             }
             // 记录下请求内容
-            StringBuffer resultBuffer = new StringBuffer("aopLogDqap agentArgs:");
-            resultBuffer.append("请求类名 : ").append(className).append(",");
-            resultBuffer.append("请求方法 : ").append(methodName).append(",");
-            resultBuffer.append("请求协议 : ").append(request.getMethod()).append(",");
-            resultBuffer.append("耗时(秒) : ").append(time).append(",");
-            resultBuffer.append("请求参数 : ").append(buffer.toString()).append(",");
-            resultBuffer.append("返回编码 : ").append(codeMsg.getCode()).append(",");
-            resultBuffer.append("返回信息 : ").append(codeMsg.getMsg()).append(",");
-            log.info(resultBuffer.toString());
+            log.info("请求路径: " + request.getRequestURI());
+            log.info("请求类名: " + className);
+            log.info("请求方法: " + methodName);
+            log.info("耗时(秒): " + time);
+            log.info("请求参数: " + buffer.toString());
+            log.info("返回编码: " + codeMsg.getCode());
+            log.info("返回信息: " + codeMsg.getMsg());
             log.info("收集日志--结束");
             return result;
         } catch (Throwable throwable) {
