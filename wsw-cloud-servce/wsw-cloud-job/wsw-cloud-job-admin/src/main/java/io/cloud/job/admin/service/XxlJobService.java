@@ -28,6 +28,14 @@ public interface XxlJobService {
 	public Map<String, Object> pageList(int start, int length, int jobGroup, int triggerStatus, String jobDesc, String executorHandler, String author);
 
 	/**
+	 * add job api
+	 *
+	 * @param jobInfo
+	 * @return
+	 */
+	public ReturnT<String> addApi(XxlJobInfo jobInfo);
+
+	/**
 	 * add job
 	 *
 	 * @param jobInfo
