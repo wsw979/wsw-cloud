@@ -1,26 +1,24 @@
-package io.cloud.user.api;
+package io.cloud.system.log.api;
 
-import com.alibaba.csp.sentinel.annotation.aspectj.SentinelResourceAspect;
 import io.cloud.core.annotation.EnableFeignInterceptor;
 import io.cloud.data.annotation.WswSpringCloud;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
-import org.springframework.context.annotation.Bean;
 
 /**
  * @program: wsw-cloud-servce
- * @description: 用户
+ * @description: 系统日志
  * @author: wsw
- * @create: 2020-05-12 17:37
+ * @create: 2020-07-15 17:37
  **/
 @WswSpringCloud
 @EnableFeignInterceptor
 @SpringCloudApplication
-public class UserApiApplication {
+public class SystemLogApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserApiApplication.class, args);
+        SpringApplication.run(SystemLogApiApplication.class, args);
     }
 
 }

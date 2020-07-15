@@ -15,7 +15,7 @@ public class TraceConstant {
     /**
      *
      */
-    public static final String LOG_B3_TRACEID = "X-B3-TraceId";
+    public static final String LOG_TENANT_ID_HEADER = "x-tenant_id-header";
 
     /**
      * 请求头跟踪id名。

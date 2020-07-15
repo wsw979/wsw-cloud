@@ -5,68 +5,37 @@
 
     <parent>
         <groupId>io.cloud</groupId>
-        <artifactId>wsw-cloud-auth</artifactId>
+        <artifactId>wsw-cloud-system-log</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>wsw-cloud-auth-api</artifactId>
+    <artifactId>wsw-cloud-system-log-api</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- 所有必要依赖 -->
+        <!-- 基础依赖包 -->
         <dependency>
             <groupId>io.cloud</groupId>
             <artifactId>wsw-cloud-jar</artifactId>
         </dependency>
         <dependency>
             <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-auth-common</artifactId>
+            <artifactId>wsw-cloud-system-log-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- oauth2依赖 解决https://github.com/spring-projects/spring-security-oauth/issues/1230#event-1352041281-->
-        <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.cloud</groupId>
-            <artifactId>wsw-cloud-sms</artifactId>
-        </dependency>
     </dependencies>
-
 
     <build>
         <finalName>${project.artifactId}</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <excludes>
-                    <exclude>**/*.jks</exclude>
-                </excludes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.xml</include>
                     <include>*.yml</include>
                     <include>*.properties</include>
-                    <include>**/*.jks</include>
                 </includes>
-                <filtering>false</filtering>
+                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>
@@ -75,7 +44,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.maven.plugin.version}</version>
                 <configuration>
-                    <mainClass>io.cloud.auth.api.AuthApiApplication</mainClass>
+                    <mainClass>io.cloud.user.api.UserApiApplication</mainClass>
                     <layout>ZIP</layout>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
@@ -86,22 +55,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.plugin.version}</version>
-                <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>src/main/docker</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
             </plugin>
             <!-- 资源插件 -->
             <plugin>

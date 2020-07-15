@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.cloud.system.log.api.mapper.SystemLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="io.cloud.system.log.common.entity.SystemLog">
+        <id column="id" property="id" />
+    <result column="create_time" property="createTime" />
+        <result column="trace_id" property="traceId" />
+        <result column="is_entrance" property="isEntrance" />
+        <result column="application_name" property="applicationName" />
+        <result column="class_name" property="className" />
+        <result column="method_name" property="methodName" />
+        <result column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="operation" property="operation" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        create_time,
+        id, trace_id, is_entrance, application_name, class_name, method_name, user_id, user_name, operation
+    </sql>
+
+</mapper>

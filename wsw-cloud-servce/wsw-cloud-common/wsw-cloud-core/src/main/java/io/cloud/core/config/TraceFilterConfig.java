@@ -1,6 +1,6 @@
 package io.cloud.core.config;
 
-import io.cloud.core.filter.TraceContextFilter;
+import io.cloud.core.filter.TenantFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +21,7 @@ public class TraceFilterConfig {
     @Bean
     public FilterRegistrationBean requestContextRepositoryFilterRegistrationBean() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new TraceContextFilter());
+        registration.setFilter(new TenantFilter());
         registration.addUrlPatterns("/*");
         return registration;
     }

@@ -1,6 +1,8 @@
 package io.cloud.core.filter;
 
+import cn.hutool.core.util.StrUtil;
 import io.cloud.core.constant.TraceConstant;
+import io.cloud.core.context.TenantContextHolder;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -9,6 +11,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,22 +25,27 @@ import java.io.IOException;
  * @create: 2020-06-08 09:18
  **/
 @Order(Ordered.HIGHEST_PRECEDENCE + 8)
-@ConditionalOnClass(WebMvcConfigurer.class)
-public class TraceContextFilter extends OncePerRequestFilter {
+@ConditionalOnClass(Filter.class)
+public class TenantFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        //请求头传入存在以请求头传入的为准，不然以X-B3-TraceId为
-        String app_trace_id = StringUtils.defaultString(request.getHeader(TraceConstant.HTTP_HEADER_TRACE_ID), MDC.get(TraceConstant.LOG_B3_TRACEID));
-        //未经过HandlerInterceptor的设置
-        if (StringUtils.isBlank(MDC.get(TraceConstant.LOG_TRACE_ID))) {
-            //但是有请求头，重新设置
-            if (StringUtils.isNotEmpty(app_trace_id)) {
-                MDC.put(TraceConstant.LOG_TRACE_ID, app_trace_id);
+        try {
+            //优先获取请求参数中的tenantId值
+            String tenantId = request.getParameter(TraceConstant.LOG_TRACE_ID);
+            if (StrUtil.isEmpty(tenantId)) {
+                tenantId = request.getHeader(TraceConstant.LOG_TENANT_ID_HEADER);
             }
+            //保存租户id
+            if (StrUtil.isNotEmpty(tenantId)) {
+                TenantContextHolder.setTenant(tenantId);
+            }
+
+            filterChain.doFilter(request, response);
+        } finally {
+            TenantContextHolder.clear();
         }
-        filterChain.doFilter(request, response);
     }
 }
 

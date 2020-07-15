@@ -21,6 +21,8 @@
         <spring.boot.maven.plugin.version>2.1.6.RELEASE</spring.boot.maven.plugin.version>
         <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
         <maven.compiler.plugin.version>3.1</maven.compiler.plugin.version>
+        <docker.plugin.version>0.4.3</docker.plugin.version>
+        <docker.image.prefix>wsw.979</docker.image.prefix>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
