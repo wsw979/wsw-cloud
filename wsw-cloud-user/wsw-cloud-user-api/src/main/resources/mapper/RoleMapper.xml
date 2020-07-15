@@ -4,7 +4,7 @@
 
     <select id="findListByUserId" resultType="io.cloud.user.common.vo.app.RoleListVo">
         select
-            A.id, A.role_name, A.role_code
+        A.id, A.role_name, A.role_code
         from c_role A
         left join c_user_role B on A.id = B.role_id
         where A.is_valid = 1 and B.user_id = #{userId,jdbcType=BIGINT}

@@ -4,8 +4,8 @@
 
     <select id="getUserByUserName" resultType="io.cloud.user.common.vo.app.ApiUserVo">
         select
-            A.id,A.user_name,A.mobile,A.email, A.avatar,
-            A.nickname, B.credential, A.salt, A.is_valid
+        A.id,A.user_name,A.mobile,A.email, A.avatar,
+        A.nickname, B.credential, A.salt, A.is_valid
         from c_api_user A
         left join c_api_user_auth B on A.id = B.user_id
         where B.identity_type between 1 and 3 and B.verified = 1 and B.is_binding = 1
@@ -14,8 +14,8 @@
 
     <select id="getUserByPhone" resultType="io.cloud.user.common.vo.app.ApiUserVo">
         select
-            A.id,A.user_name,A.mobile,A.email, A.avatar,
-            A.nickname, B.credential, A.salt, A.is_valid
+        A.id,A.user_name,A.mobile,A.email, A.avatar,
+        A.nickname, B.credential, A.salt, A.is_valid
         from c_api_user A
         left join c_api_user_auth B on A.id = B.user_id
         where B.identity_type between 1 and 2 and B.verified = 1 and B.is_binding = 1

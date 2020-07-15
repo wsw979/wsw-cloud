@@ -1,9 +1,9 @@
 package io.cloud.user.api.service.impl;
 
-import io.cloud.user.common.entity.Permission;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.cloud.user.api.mapper.PermissionMapper;
 import io.cloud.user.api.service.IPermissionService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.cloud.user.common.entity.Permission;
 import io.cloud.user.common.vo.app.PermissionListVo;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author wsw

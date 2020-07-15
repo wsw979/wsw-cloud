@@ -4,8 +4,8 @@
 
     <select id="getUserByPhone" resultType="io.cloud.user.common.vo.app.AdminUserVo">
         select
-            A.id, A.mobile, A.credential, A.salt, A.activate,
-            B.org_id, B.dep_id, B.job_id, B.user_name
+        A.id, A.mobile, A.credential, A.salt, A.activate,
+        B.org_id, B.dep_id, B.job_id, B.user_name
         from c_admin_user A
         left join c_admin_staff B on A.id = B.user_id
         where A.mobile = #{phone,jdbcType=VARCHAR}

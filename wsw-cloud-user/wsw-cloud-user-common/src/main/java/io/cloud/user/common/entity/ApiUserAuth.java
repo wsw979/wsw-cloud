@@ -1,15 +1,16 @@
 package io.cloud.user.common.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.cloud.data.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -23,7 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("c_api_user_auth")
-@ApiModel(value="ApiUserAuth对象", description="用户认证方式")
+@ApiModel(value = "ApiUserAuth对象", description = "用户认证方式")
 public class ApiUserAuth extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

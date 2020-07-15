@@ -1,7 +1,7 @@
 package io.cloud.user.api.mapper;
 
-import io.cloud.user.common.entity.ApiUserAuth;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.cloud.user.common.entity.ApiUserAuth;
 
 /**
  * <p>

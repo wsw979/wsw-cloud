@@ -1,11 +1,11 @@
 package io.cloud.user.api.mapper;
 
-import io.cloud.user.common.entity.RolePermission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.cloud.user.common.entity.RolePermission;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author wsw

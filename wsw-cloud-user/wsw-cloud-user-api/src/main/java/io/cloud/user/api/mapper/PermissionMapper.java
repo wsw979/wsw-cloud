@@ -1,7 +1,7 @@
 package io.cloud.user.api.mapper;
 
-import io.cloud.user.common.entity.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.cloud.user.common.entity.Permission;
 import io.cloud.user.common.vo.app.PermissionListVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author wsw

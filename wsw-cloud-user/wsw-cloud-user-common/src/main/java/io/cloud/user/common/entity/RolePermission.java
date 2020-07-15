@@ -1,8 +1,8 @@
 package io.cloud.user.common.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.cloud.data.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +12,7 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author wsw
@@ -22,7 +22,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("c_role_permission")
-@ApiModel(value="RolePermission对象", description="")
+@ApiModel(value = "RolePermission对象", description = "")
 public class RolePermission extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

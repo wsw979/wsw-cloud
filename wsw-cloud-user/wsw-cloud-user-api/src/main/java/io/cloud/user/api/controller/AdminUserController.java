@@ -36,13 +36,13 @@ public class AdminUserController {
 
     @GetMapping(value = "/loginUser")
     @ApiOperation(value = "登录用户", tags = "根据ID获取登录用户")
-    public Result<LoginUserInfo> loginAdminUser(){
+    public Result<LoginUserInfo> loginAdminUser() {
         return R.success(adminUserService.loginAdminUser(request));
     }
 
     @GetMapping("/phone/{phone}")
     @ApiOperation(value = "根据手机号获取用户", tags = "根据手机号获取用户")
-    public Result<AdminUserVo> getUserByPhone(@PathVariable("phone") String phone){
+    public Result<AdminUserVo> getUserByPhone(@PathVariable("phone") String phone) {
         return R.success(adminUserService.getUserByPhone(phone));
     }
 

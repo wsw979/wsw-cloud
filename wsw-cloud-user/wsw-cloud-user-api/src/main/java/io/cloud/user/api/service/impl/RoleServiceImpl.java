@@ -1,15 +1,15 @@
 package io.cloud.user.api.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.cloud.auth.common.login.ApiUser;
 import io.cloud.auth.common.util.LoginUser;
 import io.cloud.exception.ServiceException;
 import io.cloud.exception.result.Result;
 import io.cloud.exception.status.HttpStatus;
 import io.cloud.exception.util.R;
-import io.cloud.user.common.entity.Role;
 import io.cloud.user.api.mapper.RoleMapper;
 import io.cloud.user.api.service.IRoleService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.cloud.user.common.entity.Role;
 import io.cloud.user.common.evt.admin.RoleEvt;
 import io.cloud.user.common.vo.app.RoleListVo;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -40,7 +40,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     public Result testSuccess(RoleEvt evt) {
         ApiUser apiUser = LoginUser.apiUser();
         Role role = new Role();
-        BeanUtils.copyProperties(evt,role);
+        BeanUtils.copyProperties(evt, role);
         role.setCreateId(apiUser.getId());
         role.setCreateTime(LocalDateTime.now());
         return this.save(role) ? R.success() : R.error();
@@ -51,7 +51,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     public Result testError(RoleEvt evt) {
         ApiUser apiUser = LoginUser.apiUser();
         Role role = new Role();
-        BeanUtils.copyProperties(evt,role);
+        BeanUtils.copyProperties(evt, role);
         role.setCreateId(apiUser.getId());
         role.setCreateTime(LocalDateTime.now());
         this.save(role);

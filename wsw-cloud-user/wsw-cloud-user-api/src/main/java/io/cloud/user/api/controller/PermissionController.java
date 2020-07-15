@@ -12,15 +12,12 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author wsw
@@ -36,7 +33,7 @@ public class PermissionController {
 
     @GetMapping("/findListByUserId/{userId}")
     @ApiOperation(value = "获取用户权限", tags = "根据用户ID获取全部权限")
-    public Result<List<PermissionListVo>> findListByUserId(@PathVariable("userId") Long userId){
+    public Result<List<PermissionListVo>> findListByUserId(@PathVariable("userId") Long userId) {
         return R.success(permissionService.findListByUserId(userId));
     }
 

@@ -1,7 +1,7 @@
 package io.cloud.user.api.mapper;
 
-import io.cloud.user.common.entity.ApiUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import io.cloud.user.common.entity.ApiUser;
 import io.cloud.user.common.vo.app.ApiUserVo;
 import org.apache.ibatis.annotations.Param;
 

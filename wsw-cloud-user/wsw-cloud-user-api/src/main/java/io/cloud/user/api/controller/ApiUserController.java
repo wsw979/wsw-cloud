@@ -11,7 +11,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,19 +37,19 @@ public class ApiUserController {
 
     @GetMapping(value = "/loginUser")
     @ApiOperation(value = "登录用户", tags = "根据ID获取登录用户")
-    public Result<LoginUserInfo> loginApiUser(){
+    public Result<LoginUserInfo> loginApiUser() {
         return R.success(apiUserService.loginApiUser(request));
     }
 
     @GetMapping(value = "/userName")
     @ApiOperation(value = "获取用户", tags = "根据用户名/邮箱/手机号获取用户")
-    public Result<ApiUserVo> getUserByUserName(@RequestParam("userName") String userName){
+    public Result<ApiUserVo> getUserByUserName(@RequestParam("userName") String userName) {
         return R.success(apiUserService.getUserByUserName(userName));
     }
 
     @GetMapping(value = "/phone/{phone}")
     @ApiOperation(value = "根据账户名或手机号获取用户", tags = "根据账户名或手机号获取用户")
-    public Result<ApiUserVo> getUserByPhone(@PathVariable("phone") String phone){
+    public Result<ApiUserVo> getUserByPhone(@PathVariable("phone") String phone) {
         return R.success(apiUserService.getUserByPhone(phone));
     }
 

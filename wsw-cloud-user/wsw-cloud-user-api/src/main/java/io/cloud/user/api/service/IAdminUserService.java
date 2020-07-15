@@ -1,8 +1,8 @@
 package io.cloud.user.api.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import io.cloud.user.common.base.LoginUserInfo;
 import io.cloud.user.common.entity.AdminUser;
-import com.baomidou.mybatisplus.extension.service.IService;
 import io.cloud.user.common.vo.app.AdminUserVo;
 
 import javax.servlet.http.HttpServletRequest;

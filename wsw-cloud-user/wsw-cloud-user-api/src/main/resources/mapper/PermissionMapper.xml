@@ -4,7 +4,7 @@
 
     <select id="findListByUserId" resultType="io.cloud.user.common.vo.app.PermissionListVo">
         select
-            A.id,A.auth_name,A.auth_code,A.auth_type,A.request_url
+        A.id,A.auth_name,A.auth_code,A.auth_type,A.request_url
         from c_permission A
         left join c_role_permission B on A.id = B.permission_id
         where A.is_valid = 1 and B.user_id = #{userId,jdbcType=BIGINT}

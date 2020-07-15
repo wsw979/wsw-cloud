@@ -1,17 +1,15 @@
 package io.cloud.user.common.entity;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.cloud.data.base.BaseEntity;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -24,7 +22,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @TableName("c_api_user")
-@ApiModel(value="ApiUser对象", description="APP用户")
+@ApiModel(value = "ApiUser对象", description = "APP用户")
 public class ApiUser {
 
     private static final long serialVersionUID = 1L;
