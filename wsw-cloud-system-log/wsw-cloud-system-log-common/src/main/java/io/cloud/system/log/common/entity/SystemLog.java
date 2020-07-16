@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>
  * 
@@ -19,11 +21,10 @@ import lombok.experimental.Accessors;
  * @since 2020-07-15
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @TableName("c_system_log")
 @ApiModel(value="SystemLog对象", description="")
-public class SystemLog extends BaseEntity {
+public class SystemLog {
 
     private static final long serialVersionUID = 1L;
 
@@ -55,5 +56,7 @@ public class SystemLog extends BaseEntity {
     @ApiModelProperty(value = "操作信息")
     private String operation;
 
+    @ApiModelProperty("创建时间")
+    private LocalDateTime createTime;
 
 }
