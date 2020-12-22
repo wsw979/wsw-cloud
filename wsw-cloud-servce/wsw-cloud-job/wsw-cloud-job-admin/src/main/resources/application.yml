@@ -13,7 +13,7 @@ management:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:8001/wsw-cloud-config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&serverTimezone=GMT%2B8
+    url: jdbc:mysql://127.0.0.1:8001/wsw-cloud-config?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&serverTimezone=GMT%2B8
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -62,7 +62,7 @@ xxl:
   job:
     login:
       username: admin
-      password: 123456
+      password: admin
     accessToken: R7yqa1unJU8dDeb0QxjA2EWAM4lIlMTu
     i18n: zh_CN
     #触发池

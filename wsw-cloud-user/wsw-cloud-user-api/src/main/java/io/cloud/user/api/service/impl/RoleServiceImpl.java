@@ -36,7 +36,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    @GlobalTransactional
     public Result testSuccess(RoleEvt evt) {
         ApiUser apiUser = LoginUser.apiUser();
         Role role = new Role();
@@ -47,7 +46,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
-    @GlobalTransactional
     public Result testError(RoleEvt evt) {
         ApiUser apiUser = LoginUser.apiUser();
         Role role = new Role();
