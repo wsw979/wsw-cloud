@@ -29,7 +29,7 @@
     <properties>
         <commons.lang3.version>3.4</commons.lang3.version>
         <commons.io.version>2.4</commons.io.version>
-        <commons.fileupload.version>1.2.2</commons.fileupload.version>
+        <commons.fileupload.version>1.3.3</commons.fileupload.version>
         <lombock.version>1.18.0</lombock.version>
         <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
         <oauth2.autoconfigure.version>2.1.2.RELEASE</oauth2.autoconfigure.version>
