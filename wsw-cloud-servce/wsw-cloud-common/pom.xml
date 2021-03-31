@@ -50,7 +50,7 @@
         <velocity.version>1.7</velocity.version>
         <reflections.version>0.9.10</reflections.version>
         <dozer.version>5.5.1</dozer.version>
-        <guava.version>26.0-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
         <jjwt.version>0.9.0</jjwt.version>
         <nimbus.jose.jwt.version>8.6</nimbus.jose.jwt.version>
         <joda-time.version>2.9.9</joda-time.version>
