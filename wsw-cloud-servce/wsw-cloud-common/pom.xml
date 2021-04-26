@@ -28,7 +28,7 @@
 
     <properties>
         <commons.lang3.version>3.4</commons.lang3.version>
-        <commons.io.version>2.4</commons.io.version>
+        <commons.io.version>2.7</commons.io.version>
         <commons.fileupload.version>1.2.2</commons.fileupload.version>
         <lombock.version>1.18.0</lombock.version>
         <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
