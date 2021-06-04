@@ -40,7 +40,7 @@
         <mybatis.plus.spring.boot.version>3.3.1</mybatis.plus.spring.boot.version>
         <redisson-starter.version>3.11.5</redisson-starter.version>
         <okhttp.version>3.10.0</okhttp.version>
-        <httpclient.version>4.5.10</httpclient.version>
+        <httpclient.version>4.5.13</httpclient.version>
         <dynamic.datasource.version>2.4.2</dynamic.datasource.version>
         <java.jwt.version>3.8.1</java.jwt.version>
         <fastjson.version>1.2.39</fastjson.version>
