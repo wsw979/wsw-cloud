@@ -44,7 +44,7 @@
         <dynamic.datasource.version>2.4.2</dynamic.datasource.version>
         <java.jwt.version>3.8.1</java.jwt.version>
         <fastjson.version>1.2.39</fastjson.version>
-        <jackson.version>2.10.2</jackson.version>
+        <jackson.version>2.12.6.1</jackson.version>
         <jackson.mapper.version>1.9.13</jackson.mapper.version>
         <jedis.version>2.9.0</jedis.version>
         <velocity.version>1.7</velocity.version>
